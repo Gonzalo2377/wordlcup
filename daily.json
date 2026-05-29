@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "updatedAt": "2026-05-29T21:52:05.826Z",
+    "source": "the-odds-api",
+    "sport": "upcoming",
+    "regions": "eu",
+    "market": "h2h",
+    "matches": 1,
+    "valuePicks": 0,
+    "books": 18
+  },
+  "TEAMS": {
+    "cobres": {
+      "id": "cobres",
+      "name": "Cobresal",
+      "code": "COB",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "nublen": {
+      "id": "nublen",
+      "name": "Ñublense",
+      "code": "UBL",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    }
+  },
+  "BOOKS": {
+    "unibet": {
+      "name": "Unibet",
+      "abbr": "UNIB",
+      "color": "#0aa05a",
+      "url": "#"
+    },
+    "leovegas": {
+      "name": "LeoVegas",
+      "abbr": "LEOV",
+      "color": "#e5a000",
+      "url": "#"
+    },
+    "gtbets": {
+      "name": "GTbets",
+      "abbr": "GTBE",
+      "color": "#5a6b8c",
+      "url": "#"
+    },
+    "winamax": {
+      "name": "Winamax",
+      "abbr": "WINA",
+      "color": "#e5484d",
+      "url": "#"
+    },
+    "onexbet": {
+      "name": "1xBet",
+      "abbr": "1XBE",
+      "color": "#1f5fd6",
+      "url": "#"
+    },
+    "nordicbet": {
+      "name": "Nordic Bet",
+      "abbr": "NORD",
+      "color": "#1f3a93",
+      "url": "#"
+    },
+    "betsson": {
+      "name": "Betsson",
+      "abbr": "BETS",
+      "color": "#ff8a1e",
+      "url": "#"
+    },
+    "marathonbet": {
+      "name": "Marathon Bet",
+      "abbr": "MARA",
+      "color": "#1f5fd6",
+      "url": "#"
+    },
+    "coolbet": {
+      "name": "Coolbet",
+      "abbr": "COOL",
+      "color": "#0aa05a",
+      "url": "#"
+    },
+    "pinnacle": {
+      "name": "Pinnacle",
+      "abbr": "PINN",
+      "color": "#3a4660",
+      "url": "#"
+    },
+    "sport888": {
+      "name": "888sport",
+      "abbr": "888S",
+      "color": "#ff8a1e",
+      "url": "#"
+    },
+    "betonlineag": {
+      "name": "BetOnline.ag",
+      "abbr": "BETO",
+      "color": "#1a1a1a",
+      "url": "#"
+    },
+    "tipico": {
+      "name": "Tipico",
+      "abbr": "TIPI",
+      "color": "#c8102e",
+      "url": "#"
+    },
+    "everygame": {
+      "name": "Everygame",
+      "abbr": "EVER",
+      "color": "#5a6b8c",
+      "url": "#"
+    },
+    "betfair": {
+      "name": "Betfair",
+      "abbr": "BETF",
+      "color": "#ffb01f",
+      "url": "#"
+    },
+    "codere": {
+      "name": "Codere",
+      "abbr": "CODE",
+      "color": "#0aa05a",
+      "url": "#"
+    },
+    "matchbook": {
+      "name": "Matchbook",
+      "abbr": "MATC",
+      "color": "#5a6b8c",
+      "url": "#"
+    },
+    "betanysports": {
+      "name": "BetAnything",
+      "abbr": "BETA",
+      "color": "#5a6b8c",
+      "url": "#"
+    }
+  },
+  "MATCHES": [
+    {
+      "id": "df8b2a2a2612c9dad60f95ba771e1e7e",
+      "group": "sáb, 30 may",
+      "time": "00:00",
+      "home": "cobres",
+      "away": "nublen",
+      "odds": {
+        "home": {
+          "unibet": 2.75,
+          "leovegas": 2.75,
+          "gtbets": 2.75,
+          "winamax": 2.5,
+          "onexbet": 2.83,
+          "nordicbet": 2.62,
+          "betsson": 2.62,
+          "marathonbet": 2.62,
+          "coolbet": 2.7,
+          "pinnacle": 2.71,
+          "sport888": 2.6,
+          "betonlineag": 2.56,
+          "tipico": 2.7,
+          "everygame": 2.55,
+          "betfair": 2.8,
+          "codere": 2.55,
+          "matchbook": 2.8,
+          "betanysports": 2.56
+        },
+        "draw": {
+          "unibet": 3.3,
+          "leovegas": 3.3,
+          "gtbets": 3.51,
+          "winamax": 3.35,
+          "onexbet": 3.48,
+          "nordicbet": 3.35,
+          "betsson": 3.35,
+          "marathonbet": 3.3,
+          "coolbet": 3.4,
+          "pinnacle": 3.44,
+          "sport888": 3.1,
+          "betonlineag": 3.3,
+          "tipico": 3.2,
+          "everygame": 3.25,
+          "betfair": 3.4,
+          "codere": 3.25,
+          "matchbook": 3.4,
+          "betanysports": 3.3
+        },
+        "away": {
+          "unibet": 2.43,
+          "leovegas": 2.43,
+          "gtbets": 2.57,
+          "winamax": 2.5,
+          "onexbet": 2.49,
+          "nordicbet": 2.58,
+          "betsson": 2.58,
+          "marathonbet": 2.54,
+          "coolbet": 2.62,
+          "pinnacle": 2.64,
+          "sport888": 2.45,
+          "betonlineag": 2.7,
+          "tipico": 2.35,
+          "everygame": 2.5,
+          "betfair": 2.8,
+          "codere": 2.55,
+          "matchbook": 2.8,
+          "betanysports": 2.7
+        }
+      },
+      "model": {
+        "home": 0.35237723215754135,
+        "draw": 0.281674404914792,
+        "away": 0.36594836292766675,
+        "fromMarket": true
+      }
+    }
+  ],
+  "COMBOS": [],
+  "RECORD": []
+}
