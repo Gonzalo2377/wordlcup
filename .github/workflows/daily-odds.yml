@@ -1,8 +1,15 @@
 name: Daily odds robot
 
+# Refresca daily.json cada mañana con cuotas de The Odds API.
+# Requiere el secret ODDS_API_KEY (Settings → Secrets and variables → Actions).
+# NOTA: este workflow asume que el contenido de la carpeta "mundial/" está en la
+# RAÍZ del repositorio (robot/fetch-daily.js, daily.json, index.html en la raíz).
+# Si en cambio subes el proyecto con la carpeta "mundial/" dentro, usa el workflow
+# de ../../.github/workflows/daily-odds.yml (rutas con prefijo mundial/).
+
 on:
   schedule:
-    - cron: '0 7 * * *'
+    - cron: '0 7 * * *'   # 07:00 UTC diario (≈09:00 Madrid)
   workflow_dispatch: {}
 
 permissions:
@@ -19,12 +26,15 @@ jobs:
       - name: Generar daily.json
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-          ODDS_SPORT: upcoming
+          # ODDS_SPORT vacío = usa la lista de competiciones por defecto del robot
+          # (Champions, Europa League, LaLiga, Premier, Serie A, Bundesliga, Ligue 1, Mundial).
+          # Para una sola competición, pon p.ej.  ODDS_SPORT: soccer_uefa_champs_league
           ODDS_REGIONS: eu
         run: node robot/fetch-daily.js
       - name: Commit si hay cambios
         run: |
-          git config user.name  "golvalue-bot"
+          git config user.name  "mundial-value-bot"
           git config user.email "bot@users.noreply.github.com"
           git add daily.json
+          # NOTA: sin [skip ci] a propósito, para que Cloudflare Pages republique con los datos nuevos.
           if git diff --staged --quiet; then echo "Sin cambios."; else git commit -m "chore: refresh daily odds" && git push; fi
