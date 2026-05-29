@@ -70,7 +70,7 @@ function applyDaily(d) {
     if (d.BOOKS)   window.BOOKS   = d.BOOKS;
     if (d.MATCHES) window.MATCHES = d.MATCHES;
     if (d.COMBOS)  window.COMBOS  = d.COMBOS;
-    if (d.RECORD)  window.RECORD  = d.RECORD;
+    if (d.RECORD && d.RECORD.length)  window.RECORD  = d.RECORD;   // keep sample record until real picks are settled
     if (d.meta)    window.DAILY.meta = d.meta;
     // Trust the model the robot already computed (single source of truth).
     // Only (re)compute for matches that arrive without one — e.g. older feeds.

@@ -21,7 +21,19 @@ const API_KEY = process.env.ODDS_API_KEY;
 // Out of season, test with any in-season football key, e.g.:
 //   soccer_uefa_champs_league · soccer_spain_la_liga · soccer_conmebol_copa_america
 //   soccer_china_superleague  · or 'upcoming' to scan everything (we filter football).
-const SPORT   = process.env.ODDS_SPORT   || 'soccer_fifa_world_cup';
+// Football competitions to pull. Comma-separated list of The Odds API sport keys.
+// You can override from the workflow with the ODDS_SPORT env var.
+// Default = the big competitions so finals/derbies always show up.
+const SPORT   = process.env.ODDS_SPORT   || [
+    'soccer_uefa_champs_league',     // Champions League (incl. la final)
+    'soccer_uefa_europa_league',     // Europa League
+    'soccer_spain_la_liga',          // LaLiga
+    'soccer_epl',                    // Premier League
+    'soccer_italy_serie_a',          // Serie A
+    'soccer_germany_bundesliga',     // Bundesliga
+    'soccer_france_ligue_one',       // Ligue 1
+    'soccer_fifa_world_cup',         // Mundial (cuando esté en temporada)
+].join(',');
 const REGIONS = process.env.ODDS_REGIONS || 'eu';   // eu|uk|us|au (comma-sep). Each region = 1 credit.
 const MARKET  = 'h2h';                               // match winner (1X2)
 // Optional whitelist of bookmakers (base ids, comma-sep), e.g. "bet365,betfair,winamax,williamhill,pinnacle".
@@ -193,15 +205,69 @@ function marketProbs(m){ const avg=o=>{const v=Object.values(o);return v.reduce(
 function matchValue(m){ const mk=marketProbs(m); const outs=['home','draw','away'].map(k=>{ const best=bestPrice(m.odds[k]); return {k,modelP:m.model[k],mktP:mk[k],best,edge:(m.model[k]-mk[k])*100}; }); outs.sort((a,b)=>b.edge-a.edge); const top=outs[0]; return {pick:top,edge:top.edge,positive:top.edge>=2}; }
 
 /* ---------------- API ---------------------------------------- */
-async function fetchOdds(){
-    const url = `https://api.the-odds-api.com/v4/sports/${SPORT}/odds/?apiKey=${API_KEY}&regions=${REGIONS}&markets=${MARKET}&oddsFormat=decimal`;
+// Pull one sport key. A 422/404 (competition out of season) is not fatal:
+// we just skip it and keep the others.
+async function fetchOne(sportKey){
+    const url = `https://api.the-odds-api.com/v4/sports/${sportKey}/odds/?apiKey=${API_KEY}&regions=${REGIONS}&markets=${MARKET}&oddsFormat=decimal`;
     const res = await fetch(url);
-    if (!res.ok) throw new Error(`API ${res.status}: ${await res.text()}`);
-    console.log('· credits used:', res.headers.get('x-requests-last'), '· remaining:', res.headers.get('x-requests-remaining'));
+    if (res.status === 422 || res.status === 404) { console.log(`  - ${sportKey}: sin eventos (fuera de temporada)`); return []; }
+    if (!res.ok) { console.log(`  - ${sportKey}: API ${res.status} (omitido)`); return []; }
+    console.log(`  - ${sportKey}: ok · creditos restantes ${res.headers.get('x-requests-remaining')}`);
     return res.json();
+}
+async function fetchOdds(){
+    const keys = SPORT.split(',').map(s => s.trim()).filter(Boolean);
+    let all = [];
+    for (const k of keys) {
+        try { const part = await fetchOne(k); if (Array.isArray(part)) all = all.concat(part); }
+        catch (e) { console.log(`  - ${k}: error ${e.message} (omitido)`); }
+    }
+    return all;
 }
 const fmtGroup = (iso)=> new Date(iso).toLocaleDateString('es-ES',{weekday:'short',day:'2-digit',month:'short',timeZone:'Europe/Madrid'});
 const fmtTime  = (iso)=> new Date(iso).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'});
+const fmtDay   = (iso)=> new Date(iso||Date.now()).toLocaleDateString('es-ES',{day:'2-digit',month:'short',timeZone:'Europe/Madrid'}).toUpperCase();
+
+/* ---------------- SCORES (auto-settlement) -------------------
+   The Odds API /scores returns finished games with their score, so
+   the robot can mark each tracked pick as WON/LOST by itself. */
+async function fetchScoresOne(sportKey){
+    const url = `https://api.the-odds-api.com/v4/sports/${sportKey}/scores/?apiKey=${API_KEY}&daysFrom=3`;
+    const res = await fetch(url);
+    if (!res.ok) { console.log(`  scores ${sportKey}: API ${res.status} (omitido)`); return []; }
+    return res.json();
+}
+async function fetchScores(keys){
+    let all = [];
+    for (const k of keys) { try { const p = await fetchScoresOne(k); if (Array.isArray(p)) all = all.concat(p); } catch(e){} }
+    return all;
+}
+/* winner from a finished score event → 'home' | 'draw' | 'away' | null */
+function winnerOf(ev){
+    if (!ev || !ev.completed || !Array.isArray(ev.scores)) return null;
+    const h = ev.scores.find(s => s.name === ev.home_team);
+    const a = ev.scores.find(s => s.name === ev.away_team);
+    if (!h || !a) return null;
+    const hs = +h.score, as = +a.score;
+    if (Number.isNaN(hs) || Number.isNaN(as)) return null;
+    return hs > as ? 'home' : (hs < as ? 'away' : 'draw');
+}
+/* settle PENDING picks against finished scores → append results to RECORD */
+function settle(pending, scores, RECORD){
+    const byId = {}; scores.forEach(s => { if (s && s.id) byId[s.id] = s; });
+    const stillPending = [];
+    let settled = 0;
+    for (const p of pending) {
+        const ev = byId[p.id];
+        const w = winnerOf(ev);
+        if (!w) { stillPending.push(p); continue; }    // not finished yet → keep waiting
+        const result = (w === p.pickKey) ? 'W' : 'L';
+        RECORD.unshift({ id: p.id, date: p.date, pick: p.pickLabel, match: p.match, odd: p.odd, book: p.book, stake: 1, result });
+        settled++;
+    }
+    if (settled) console.log(`· liquidados ${settled} picks (resultado real)`);
+    return { stillPending, RECORD };
+}
 
 /* ---------------- build daily.json --------------------------- */
 async function main(){
@@ -211,7 +277,7 @@ async function main(){
     const TEAMS = {}, BOOKS = {}, MATCHES = [];
 
     for (const ev of events) {
-        if (!/^soccer/.test(ev.sport_key || SPORT)) continue;   // FOOTBALL only
+        if (!/^soccer/.test(ev.sport_key || '')) continue;   // FOOTBALL only
 
         const homeId = resolveTeam(ev.home_team, TEAMS);
         const awayId = resolveTeam(ev.away_team, TEAMS);
@@ -235,7 +301,7 @@ async function main(){
         }
         if (!Object.keys(odds.home).length || !Object.keys(odds.draw).length || !Object.keys(odds.away).length) continue;
 
-        MATCHES.push({ id: ev.id || `${homeId}-${awayId}`, group: fmtGroup(ev.commence_time), time: fmtTime(ev.commence_time), home: homeId, away: awayId, odds });
+        MATCHES.push({ id: ev.id || `${homeId}-${awayId}`, group: fmtGroup(ev.commence_time), time: fmtTime(ev.commence_time), home: homeId, away: awayId, odds, _commence: ev.commence_time, _sport: ev.sport_key });
     }
 
     // Attach probabilities:
@@ -260,16 +326,46 @@ async function main(){
     if (byEdge.length >= 2) COMBOS.push({ id:'c2', tier:'all', conf:confOf(byEdge.slice(0,3)), name:'Combinada Valor', legs:byEdge.slice(0,3).map(legOf) });
     if (valued.length >= 4) COMBOS.push({ id:'c3', tier:'all', conf:confOf(valued.slice(0,4)), name:'Combinada Alto Valor', legs:valued.slice(0,4).map(legOf) });
 
-    // ---- preserve the existing track record (auto-settling = Scores API; see SETUP) ----
-    let RECORD = [];
-    try { RECORD = JSON.parse(fs.readFileSync(OUT,'utf8')).RECORD || []; } catch (e) {}
+    // ---- track record: read previous state, settle finished picks ----
+    let RECORD = [], PENDING = [];
+    try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; } catch (e) {}
+    try {
+        // only query scores for competitions that actually have a pending pick (saves credits)
+        const need = [...new Set(PENDING.map(p => p.sport).filter(Boolean))];
+        if (need.length) {
+            const scores = await fetchScores(need);
+            const out = settle(PENDING, scores, RECORD);
+            PENDING = out.stillPending; RECORD = out.RECORD;
+        }
+    } catch (e) { console.log('· scores no disponibles:', e.message); }
+
+    // ---- register today's headline value picks as PENDING (to settle later) ----
+    // Track up to the top 3 value picks of the day; never duplicate by event id.
+    const haveId = new Set([...PENDING.map(p=>p.id), ...RECORD.map(r=>r.id).filter(Boolean)]);
+    valued.slice(0,3).forEach(x => {
+        if (haveId.has(x.m.id)) return;
+        PENDING.push({
+            id: x.m.id,
+            sport: x.m._sport,
+            date: fmtDay(x.m._commence),
+            match: `${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`,
+            pickKey: x.v.pick.k,
+            pickLabel: label(x.m, x.v.pick.k),
+            odd: +x.v.pick.best.price.toFixed(2),
+            book: x.v.pick.best.book,
+        });
+        haveId.add(x.m.id);
+    });
+    RECORD = RECORD.slice(0, 60);   // keep the ledger tidy
+    // strip internal fields from matches before writing
+    MATCHES.forEach(m => { delete m._commence; delete m._sport; });
 
     const daily = {
         meta: { updatedAt:new Date().toISOString(), source:'the-odds-api', sport:SPORT, regions:REGIONS, market:MARKET, matches:MATCHES.length, valuePicks:valued.length, books:Object.keys(BOOKS).length },
-        TEAMS, BOOKS, MATCHES, COMBOS, RECORD,
+        TEAMS, BOOKS, MATCHES, COMBOS, RECORD, PENDING,
     };
     fs.writeFileSync(OUT, JSON.stringify(daily, null, 2));
-    console.log(`✓ wrote ${OUT}\n  ${MATCHES.length} football matches · ${valued.length} value picks · ${Object.keys(BOOKS).length} books · ${COMBOS.length} accas`);
+    console.log(`✓ wrote ${OUT}\n  ${MATCHES.length} football matches · ${valued.length} value picks · ${Object.keys(BOOKS).length} books · ${COMBOS.length} accas · ${RECORD.length} en récord · ${PENDING.length} pendientes`);
     if (!MATCHES.length) console.log('  (no football matches for this sport key right now — see SETUP to test with an in-season league)');
 }
 

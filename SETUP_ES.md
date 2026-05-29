@@ -143,11 +143,17 @@ lee esa cookie y decide qué desbloquear.
 
 ---
 
-## 7) Liquidación automática del récord (opcional, siguiente nivel)
-Ahora el histórico (`RECORD`) se conserva entre días, pero marcar **GANADA/FALLADA** es manual.
-Para automatizarlo se usa el **Scores API** de The Odds API:
-`/v4/sports/{sport}/scores/?daysFrom=2&apiKey=...` → devuelve el resultado final de cada partido.
-El robot puede comparar cada pick con el resultado y marcarlo solo. Te lo añado cuando lo quieras.
+## 7) Liquidación automática del récord (¡YA INCLUIDA!)
+El robot **marca solo** cada pick como GANADA/FALLADA usando los resultados reales:
+- Cada día guarda el/los pick(s) de valor destacados como **pendientes** (campo `PENDING` en `daily.json`).
+- En las siguientes ejecuciones consulta el endpoint **`/scores`** de The Odds API **solo de las
+  competiciones que tienen un pick pendiente** (para no gastar créditos de más) y, cuando el partido
+  termina, lo pasa al **récord** con su resultado y beneficio. El récord de la web se actualiza solo.
+- No tienes que hacer **nada**.
+
+> 💳 Créditos: el endpoint de resultados (`/scores` con `daysFrom`) gasta créditos aparte. Por eso solo se
+> consulta para las competiciones con picks pendientes (normalmente 1–3 al día). Si algún mes te acercas al
+> límite de 500, reduce la lista de competiciones en el workflow (`ODDS_SPORT`).
 
 ---
 
