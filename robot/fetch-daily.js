@@ -220,7 +220,27 @@ async function fetchOne(sportKey){
     return res.json();
 }
 async function fetchOdds(){
-    const keys = SPORT.split(',').map(s => s.trim()).filter(Boolean);
+    let keys = SPORT.split(',').map(s => s.trim()).filter(Boolean);
+
+    // AUTO mode: discover which soccer leagues are in season right now.
+    // The /sports list is FREE (0 credits). We then pull odds only for active
+    // soccer competitions, capped at ODDS_MAX to protect your credit budget.
+    if (keys.length === 1 && keys[0].toLowerCase() === 'auto') {
+        try {
+            const res = await fetch(`https://api.the-odds-api.com/v4/sports/?apiKey=${API_KEY}`);
+            const list = res.ok ? await res.json() : [];
+            const MAX = parseInt(process.env.ODDS_MAX || '12', 10);
+            keys = list
+                .filter(s => s.active && !s.has_outrights && /^soccer_/.test(s.key))
+                .map(s => s.key)
+                .slice(0, MAX);
+            console.log(`· AUTO: ${keys.length} ligas de fútbol activas → ${keys.join(', ')}`);
+        } catch (e) {
+            console.log('· AUTO falló, uso lista por defecto:', e.message);
+            keys = ['soccer_uefa_champs_league','soccer_uefa_europa_league'];
+        }
+    }
+
     let all = [];
     for (const k of keys) {
         try { const part = await fetchOne(k); if (Array.isArray(part)) all = all.concat(part); }
