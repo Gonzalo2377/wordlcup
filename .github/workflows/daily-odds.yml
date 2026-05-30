@@ -32,7 +32,7 @@ jobs:
           # selecciones, Sudamérica...). Cambia ODDS_MAX para coger más o menos.
           # Para fijar competiciones a mano: ODDS_SPORT: soccer_uefa_champs_league,soccer_brazil_campeonato
           ODDS_SPORT: auto
-          ODDS_MAX: '16'
+          ODDS_MAX: '12'
           ODDS_REGIONS: eu
           ODDS_WINDOW_HOURS: '48'
         run: node robot/fetch-daily.js
