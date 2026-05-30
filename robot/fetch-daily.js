@@ -283,10 +283,6 @@ async function fetchOdds(){
             keys = ['soccer_uefa_champs_league','soccer_uefa_europa_league'];
         }
     }
-            console.log('· AUTO falló, uso lista por defecto:', e.message);
-            keys = ['soccer_uefa_champs_league','soccer_uefa_europa_league'];
-        }
-    }
 
     let all = [];
     for (const k of keys) {
