@@ -38,6 +38,10 @@ const REGIONS = process.env.ODDS_REGIONS || 'eu';   // eu|uk|us|au (comma-sep). 
 const MARKET  = 'h2h';                               // match winner (1X2)
 // Optional whitelist of bookmakers (base ids, comma-sep), e.g. "bet365,betfair,winamax,williamhill,pinnacle".
 const BOOK_WHITELIST = (process.env.ODDS_BOOKS || '').split(',').map(s => s.trim()).filter(Boolean);
+// Only include matches kicking off within this many hours (today + tomorrow).
+// Keeps the board focused on imminent fixtures and excludes far-future events
+// like the World Cup until it's actually here. Override with ODDS_WINDOW_HOURS.
+const WINDOW_HOURS = parseInt(process.env.ODDS_WINDOW_HOURS || '48', 10);
 const OUT = path.join(__dirname, '..', 'daily.json');
 
 if (!API_KEY) { console.error('✗ Missing ODDS_API_KEY env var'); process.exit(1); }
@@ -278,6 +282,11 @@ async function main(){
 
     for (const ev of events) {
         if (!/^soccer/.test(ev.sport_key || '')) continue;   // FOOTBALL only
+        // time window: only matches kicking off from ~3h ago up to WINDOW_HOURS ahead
+        const ko = new Date(ev.commence_time).getTime();
+        if (Number.isNaN(ko)) continue;
+        if (ko < Date.now() - 3*3600*1000) continue;                 // already finished/old
+        if (ko > Date.now() + WINDOW_HOURS*3600*1000) continue;       // too far away (e.g. World Cup)
 
         const homeId = resolveTeam(ev.home_team, TEAMS);
         const awayId = resolveTeam(ev.away_team, TEAMS);
