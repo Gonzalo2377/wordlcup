@@ -424,6 +424,7 @@ async function main(){
         PENDING.push({
             id: x.m.id,
             sport: x.m._sport,
+            ts: new Date(x.m._commence).getTime(),
             date: fmtDay(x.m._commence),
             match: `${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`,
             pickKey: x.v.pick.k,
@@ -433,6 +434,13 @@ async function main(){
         });
         haveId.add(x.m.id);
     });
+    // Clean the pending list:
+    //  · drop legacy entries with no timestamp (old junk),
+    //  · drop picks registered too far in the future (odds not final yet — e.g. World Cup weeks away),
+    //  · drop stale picks >4 days past kickoff that never settled.
+    const EXPIRY = 4*24*3600*1000;
+    const AHEAD  = WINDOW_HOURS*3600*1000 + 6*3600*1000;
+    PENDING = PENDING.filter(p => p.ts && (p.ts - Date.now()) < AHEAD && (Date.now() - p.ts) < EXPIRY);
     RECORD = RECORD.slice(0, 60);   // keep the ledger tidy
     // strip internal fields from matches before writing
     MATCHES.forEach(m => { delete m._commence; delete m._sport; });

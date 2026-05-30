@@ -133,7 +133,9 @@ function Home({ t, go, lang }) {
 
 /* ---------- VALUE BOARD ---------- */
 function ValueBoard({ t, go, lang }) {
-    const list = window.MATCHES.map(m => ({ m, v: window.matchValue(m) })).sort((a,b)=>b.v.edge - a.v.edge);
+    const all = window.MATCHES.map(m => ({ m, v: window.matchValue(m) }));
+    const withValue = all.filter(x => x.v.positive).sort((a,b)=>b.v.edge - a.v.edge);
+    const rest = all.filter(x => !x.v.positive).sort((a,b)=>b.v.pick.modelP - a.v.pick.modelP);
     return (
         <main>
             <section className="section">
@@ -145,9 +147,25 @@ function ValueBoard({ t, go, lang }) {
                             </div>
                             <h2 className="section__title">{t.boardTitle}</h2>
                         </div>
+                        <span className="tag tag--lime">{withValue.length} {t.withValueCount}</span>
                     </div>
                     <p style={{ color:'var(--text-2)', maxWidth:660, margin:'-8px 0 22px', lineHeight:1.6 }}>{t.boardLead}</p>
 
+                    {withValue.length > 0 ? (
+                        <div className="grid grid--3">
+                            {withValue.map(({m}) => <ValueCard key={m.id} m={m} t={t} go={go} lang={lang} />)}
+                        </div>
+                    ) : (
+                        <div className="panel panel--pad" style={{ textAlign:'center', padding:'42px 22px' }}>
+                            <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.2rem', marginBottom:6 }}>{t.noValueTitle}</div>
+                            <div style={{ color:'var(--text-2)', fontSize:'.92rem' }}>{t.noValueLead}</div>
+                        </div>
+                    )}
+
+                    {/* secondary: all analysed matches (transparency) */}
+                    <div className="section__head" style={{ marginTop:38 }}>
+                        <div><span className="eyebrow muted"><span className="dot" />{t.allAnalysed}</span></div>
+                    </div>
                     <div className="panel">
                         <div className="vboard-scroll">
                         <table className="vboard">
@@ -156,7 +174,7 @@ function ValueBoard({ t, go, lang }) {
                                 <th>{t.thPick}</th><th>{t.thModel}</th><th>{t.thBest}</th><th>{t.thBook}</th><th>{t.thEdge}</th>
                             </tr></thead>
                             <tbody>
-                                {list.map(({m,v}) => {
+                                {[...withValue, ...rest].map(({m,v}) => {
                                     const home=teamById(m.home), away=teamById(m.away);
                                     const pickLabel = window.outcomeLabel(v.pick.k, m, lang);
                                     return (
@@ -165,19 +183,15 @@ function ValueBoard({ t, go, lang }) {
                                             <td><span className="vb-time">{m.time}</span></td>
                                             <td className="l">{v.positive ? <b style={{ fontFamily:'var(--font-head)' }}>{pickLabel}</b> : <span style={{ color:'var(--muted)' }}>—</span>}</td>
                                             <td style={{ color: v.positive ? 'var(--lime)' : 'var(--muted)' }}>{Math.round(v.pick.modelP*100)}%</td>
-                                            <td><b style={{ color:'var(--text)' }}>{v.pick.best.price.toFixed(2)}</b></td>
-                                            <td><Book id={v.pick.best.book} showName={false} size={22} /></td>
-                                            <td>{v.positive ? <ValueTag edge={v.edge} hot={v.hot} small /> : <span style={{ color:'var(--muted)', fontFamily:'var(--font-mono)', fontSize:'.8rem' }}>—</span>}</td>
+                                            <td><b style={{ color: v.positive ? 'var(--text)' : 'var(--muted)' }}>{v.pick.best.price.toFixed(2)}</b></td>
+                                            <td>{v.positive ? <Book id={v.pick.best.book} showName={false} size={22} /> : <span style={{ color:'var(--muted)' }}>—</span>}</td>
+                                            <td>{v.positive ? <ValueTag edge={v.edge} hot={v.hot} small /> : <span style={{ color:'var(--faint)', fontFamily:'var(--font-mono)', fontSize:'.8rem' }}>—</span>}</td>
                                         </tr>
                                     );
                                 })}
                             </tbody>
                         </table>
                         </div>
-                    </div>
-
-                    <div className="grid grid--3" style={{ marginTop:22 }}>
-                        {list.slice(0,3).map(({m}) => <ValueCard key={m.id} m={m} t={t} go={go} lang={lang} />)}
                     </div>
                 </div>
             </section>
