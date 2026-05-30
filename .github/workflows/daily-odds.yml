@@ -9,7 +9,8 @@ name: Daily odds robot
 
 on:
   schedule:
-    - cron: '0 7 * * *'   # 07:00 UTC diario (≈09:00 Madrid)
+    - cron: '23 6 * * *'   # 06:23 UTC (~08:23 Madrid). Minuto "raro" a propósito:
+                            # las horas en punto van saturadas y GitHub retrasa más.
   workflow_dispatch: {}
 
 permissions:
@@ -26,10 +27,13 @@ jobs:
       - name: Generar daily.json
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-          # ODDS_SPORT vacío = usa la lista de competiciones por defecto del robot
-          # (Champions, Europa League, LaLiga, Premier, Serie A, Bundesliga, Ligue 1, Mundial).
-          # Para una sola competición, pon p.ej.  ODDS_SPORT: soccer_uefa_champs_league
+          # auto = el robot detecta solo las ligas de fútbol activas hoy (recomendado).
+          # Para fijar competiciones concretas, pon p.ej.:
+          #   ODDS_SPORT: soccer_uefa_champs_league,soccer_brazil_campeonato
+          ODDS_SPORT: auto
+          ODDS_MAX: '12'
           ODDS_REGIONS: eu
+          ODDS_WINDOW_HOURS: '48'
         run: node robot/fetch-daily.js
       - name: Commit si hay cambios
         run: |
