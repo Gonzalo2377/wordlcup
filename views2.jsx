@@ -87,6 +87,12 @@ function Premium({ t, go }) {
                 <div className="wrap">
                     <span className="eyebrow"><span className="dot" />{t.comboOfDay}</span>
                     <h2 className="section__title" style={{ marginBottom:8 }}>{t.pricingTitle}</h2>
+                    {window.MV_OWNER && (
+                        <div style={{ display:'flex', alignItems:'center', gap:10, background:'rgba(246,196,67,.1)', border:'1px solid rgba(246,196,67,.4)', borderRadius:10, padding:'10px 14px', marginBottom:16 }}>
+                            <span style={{ fontFamily:'var(--font-head)', fontWeight:800, color:'var(--lime)', fontSize:'.85rem' }}>👑 MODO DUEÑO</span>
+                            <span style={{ color:'var(--text-2)', fontSize:'.85rem' }}>Estás viendo todas las combinadas desbloqueadas. Para salir: <code style={{ color:'var(--lime)' }}>?dueno=salir</code></span>
+                        </div>
+                    )}
                     <p style={{ color:'var(--text-2)', maxWidth:620, lineHeight:1.6, marginBottom:26 }}>{t.pricingLead}</p>
 
                     <div className="pricing">

@@ -38,4 +38,11 @@ window.MV_CONFIG = {
 
     /* Idioma por defecto */
     defaultLang: 'es',
+
+    /* MODO DUEÑO — para verte TÚ todas las combinadas premium sin pagar.
+       Entra en tu web con:  https://golvalue.online/?dueno=TU_CLAVE
+       y se desbloquea todo SOLO en tu navegador (queda guardado).
+       Para salir del modo dueño:  https://golvalue.online/?dueno=salir
+       Cambia esta clave por una tuya secreta (no la compartas). */
+    ownerKey: 'cambia-esta-clave-secreta',
 };

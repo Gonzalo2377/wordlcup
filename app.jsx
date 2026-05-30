@@ -113,6 +113,15 @@ function handleUnlockRedirect() {
             localStorage.setItem('mv_plan', u);
             history.replaceState({}, '', location.pathname + location.hash);
         }
+        // OWNER MODE: ?dueno=CLAVE unlocks everything locally; ?dueno=salir exits.
+        const owner = p.get('dueno') || p.get('owner');
+        const key = (window.MV_CONFIG && window.MV_CONFIG.ownerKey) || '';
+        if (owner) {
+            if (owner === 'salir' || owner === 'exit') { localStorage.removeItem('mv_owner'); localStorage.removeItem('mv_plan'); }
+            else if (key && owner === key) { localStorage.setItem('mv_owner', '1'); localStorage.setItem('mv_plan', 'all'); }
+            history.replaceState({}, '', location.pathname + location.hash);
+        }
+        if (localStorage.getItem('mv_owner') === '1') { window.MV_OWNER = true; window.MV_PLAN = 'all'; localStorage.setItem('mv_plan', 'all'); }
     } catch (e) {}
 }
 
@@ -124,7 +133,7 @@ async function boot() {
         if (r.ok) {
             const j = await r.json();
             window.MV_BACKEND = !!j.backend;
-            if (j.plan) window.MV_PLAN = j.plan;   // server is the source of truth
+            if (j.plan && !window.MV_OWNER) window.MV_PLAN = j.plan;   // server is the source of truth (unless owner)
         }
     } catch (e) {}
     const d = await loadDaily();

@@ -398,10 +398,24 @@ async function main(){
     const legOf = (x) => ({ match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
     const confOf = (arr) => Math.round(arr.reduce((p,x)=>p*x.v.pick.modelP,1)*100);
     const COMBOS = [];
-    if (valued.length >= 2) COMBOS.push({ id:'c1', tier:'single', conf:confOf(valued.slice(0,3)), name:'Combinada del Día', legs:valued.slice(0,3).map(legOf) });
+    // Safe pool: each match's most-likely pick (favourite), credible odds. Used as
+    // fallback so there is ALWAYS a combo, even on days with little/no "value".
+    const safePool = MATCHES.map(m => ({ m, v: matchValue(m) }))
+        .filter(x => x.v.pick && x.v.pick.best && x.v.pick.best.price >= 1.20 && x.v.pick.best.price <= 3.60 && x.v.pick.modelP >= 0.38)
+        .sort((a,b)=> b.v.pick.modelP - a.v.pick.modelP);
+    const seen = (arr) => { const s=new Set(); return arr.filter(x=>{ if(s.has(x.m.id)) return false; s.add(x.m.id); return true; }); };
+    const merge = (...pools) => seen([].concat(...pools));
     const byEdge = [...valued].sort((a,b)=>b.v.edge-a.v.edge);
-    if (byEdge.length >= 2) COMBOS.push({ id:'c2', tier:'all', conf:confOf(byEdge.slice(0,3)), name:'Combinada Valor', legs:byEdge.slice(0,3).map(legOf) });
-    if (valued.length >= 4) COMBOS.push({ id:'c3', tier:'all', conf:confOf(valued.slice(0,4)), name:'Combinada Alto Valor', legs:valued.slice(0,4).map(legOf) });
+
+    // c1 — Combinada del Día (taster + 3,99€): the MOST LIKELY one (value first, fill with favourites)
+    const dayPool = merge(valued, safePool);
+    if (dayPool.length >= 2) COMBOS.push({ id:'c1', tier:'single', conf: confOf(dayPool.slice(0,3)), name:'Combinada del Día', legs: dayPool.slice(0,3).map(legOf) });
+    // c2 — Combinada Valor (14,99€): value by edge, fallback to safe
+    const valPool = merge(byEdge, safePool);
+    if (valPool.length >= 2) COMBOS.push({ id:'c2', tier:'all', conf: confOf(valPool.slice(0,3)), name: valued.length>=2 ? 'Combinada Valor' : 'Combinada Segura', legs: valPool.slice(0,3).map(legOf) });
+    // c3 — Combinada Larga (14,99€): 4 legs when possible
+    const bigPool = merge(byEdge, safePool);
+    if (bigPool.length >= 4) COMBOS.push({ id:'c3', tier:'all', conf: confOf(bigPool.slice(0,4)), name:'Combinada Larga', legs: bigPool.slice(0,4).map(legOf) });
 
     // ---- track record: read previous state, settle finished picks ----
     let RECORD = [], PENDING = [];
