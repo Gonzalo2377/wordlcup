@@ -127,14 +127,18 @@ window.marketProbs = function (m) {
     const s = h + d + a;
     return { home: h/s, draw: d/s, away: a/s };
 };
-/* value per outcome = model prob − market prob; pick the outcome with the best positive edge */
+/* Value per outcome. Two complementary signals:
+   · rated match (we know both teams)  → model edge = model prob − market prob
+   · unrated match (lower leagues etc.) → market-outlier edge: how much the BEST
+     available price beats the no-vig consensus (legit line-shopping value, needs
+     no team ratings, so it works in ANY competition). */
 window.matchValue = function (m) {
     const mk = window.marketProbs(m);
+    const fromMarket = m.model && m.model.fromMarket;
     const outs = ['home','draw','away'].map(k => {
         const best = window.bestPrice(m.odds[k]);
-        const edge = (m.model[k] - mk[k]) * 100;
-        // edge vs the BEST available price (recompute market for fair comparison is fine as consensus)
-        const evPct = (m.model[k] * best.price - 1) * 100; // expected value % at best price
+        const evPct = (mk[k] * best.price - 1) * 100;          // EV% of best price vs fair consensus
+        const edge = fromMarket ? evPct : (m.model[k] - mk[k]) * 100;
         return { k, modelP: m.model[k], mktP: mk[k], best, edge, ev: evPct };
     });
     outs.sort((a,b)=>b.edge - a.edge);
@@ -146,6 +150,7 @@ window.matchValue = function (m) {
         ev: top.ev,
         positive: top.edge >= 2,
         hot: top.edge >= 6,
+        source: fromMarket ? 'market' : 'model',
         mk,
     };
 };

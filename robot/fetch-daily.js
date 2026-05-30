@@ -154,6 +154,24 @@ const CLUBS_DB = [
     club('gal','Galatasaray','GAL','#e5a000',1820,'WWWDW',['galatasaray']),
     club('fnb','Fenerbahce','FEN','#1f3a93',1820,'WWDWL',['fenerbahce','fenerbahçe']),
     club('cel','Celtic','CEL','#0aa05a',1785,'WWDWW',['celtic']),
+    // Brasil — Série A (ratings aproximados)
+    club('pal','Palmeiras','PAL','#0aa05a',1870,'WWDWW',['palmeiras','se palmeiras']),
+    club('fla','Flamengo','FLA','#e5484d',1875,'WWWDW',['flamengo','cr flamengo']),
+    club('bot','Botafogo','BOT','#1a1a1a',1840,'WDWWL',['botafogo']),
+    club('fluf','Fluminense','FLU','#0a7d3c',1790,'DWLWD',['fluminense']),
+    club('cor','Corinthians','COR','#1a1a1a',1795,'WDLWW',['corinthians']),
+    club('spa','São Paulo','SAO','#e5484d',1810,'WWDLW',['sao paulo','são paulo','sao paulo fc']),
+    club('intbr','Internacional','INT-BR','#e5484d',1805,'WDWWL',['internacional','sc internacional']),
+    club('grem','Grêmio','GRE','#1f5fd6',1785,'LWDWL',['gremio','grêmio']),
+    club('atmg','Atlético Mineiro','CAM','#1a1a1a',1820,'WWLWD',['atletico mineiro','atlético mineiro','atletico-mg']),
+    club('cru','Cruzeiro','CRU','#1f5fd6',1795,'WDWLW',['cruzeiro']),
+    club('bah','Bahia','BAH','#1f5fd6',1770,'DWLDW',['bahia','ec bahia']),
+    club('vasco','Vasco da Gama','VAS','#1a1a1a',1745,'LWDLW',['vasco da gama','vasco']),
+    club('forta','Fortaleza','FOR','#1f5fd6',1775,'WLWDW',['fortaleza','fortaleza ec']),
+    // Argentina (Libertadores / liga)
+    club('riv','River Plate','RIV','#e5484d',1880,'WWDWW',['river plate','ca river plate']),
+    club('boca','Boca Juniors','BOC','#1f3a93',1850,'WDWWL',['boca juniors','ca boca juniors']),
+    club('raci','Racing Club','RAC','#6cabdd',1800,'WDLWW',['racing club','racing']),
 ];
 const BOOK_COLORS = {
     bet365:'#0a7d3c', bwin:'#1a1a1a', williamhill:'#1f5fd6', betfair:'#ffb01f', winamax:'#e5484d',
@@ -206,9 +224,33 @@ function computeModel(homeId, awayId, teams, opts){
 /* ---------------- value helpers ------------------------------ */
 function bestPrice(map){ let best=null; for(const b in map) if(!best||map[b]>best.price) best={book:b,price:map[b]}; return best; }
 function marketProbs(m){ const avg=o=>{const v=Object.values(o);return v.reduce((s,x)=>s+1/x,0)/v.length;}; const h=avg(m.odds.home),d=avg(m.odds.draw),a=avg(m.odds.away),s=h+d+a; return {home:h/s,draw:d/s,away:a/s}; }
-function matchValue(m){ const mk=marketProbs(m); const outs=['home','draw','away'].map(k=>{ const best=bestPrice(m.odds[k]); return {k,modelP:m.model[k],mktP:mk[k],best,edge:(m.model[k]-mk[k])*100}; }); outs.sort((a,b)=>b.edge-a.edge); const top=outs[0]; return {pick:top,edge:top.edge,positive:top.edge>=2}; }
+function matchValue(m){ const mk=marketProbs(m); const fromMarket=m.model&&m.model.fromMarket; const outs=['home','draw','away'].map(k=>{ const best=bestPrice(m.odds[k]); const ev=(mk[k]*best.price-1)*100; const edge=fromMarket?ev:(m.model[k]-mk[k])*100; return {k,modelP:m.model[k],mktP:mk[k],best,edge,ev}; }); outs.sort((a,b)=>b.edge-a.edge); const top=outs[0]; return {pick:top,edge:top.edge,positive:top.edge>=2,source:fromMarket?'market':'model'}; }
 
 /* ---------------- API ---------------------------------------- */
+// Priority ranking of competitions by visibility/popularity. In AUTO mode we keep
+// the active soccer leagues that rank highest here (up to ODDS_MAX). Edit the order
+// to taste. Anything not listed still counts, but after every ranked league.
+const SPORT_PRIORITY = [
+    // European club elite
+    'soccer_uefa_champs_league', 'soccer_uefa_europa_league', 'soccer_uefa_europa_conference_league',
+    // Big-5 domestic leagues
+    'soccer_epl', 'soccer_spain_la_liga', 'soccer_italy_serie_a', 'soccer_germany_bundesliga', 'soccer_france_ligue_one',
+    // National teams
+    'soccer_fifa_world_cup', 'soccer_uefa_nations_league', 'soccer_uefa_european_championship',
+    'soccer_conmebol_copa_america', 'soccer_fifa_world_cup_qualifiers_europe',
+    // South America clubs
+    'soccer_conmebol_copa_libertadores', 'soccer_conmebol_copa_sudamericana',
+    'soccer_brazil_campeonato', 'soccer_argentina_primera_division',
+    // Other popular domestic leagues
+    'soccer_netherlands_eredivisie', 'soccer_portugal_primeira_liga', 'soccer_usa_mls',
+    'soccer_mexico_ligamx', 'soccer_turkey_super_league', 'soccer_england_efl_champ',
+    'soccer_spain_segunda_division', 'soccer_italy_serie_b', 'soccer_germany_bundesliga2',
+    'soccer_france_ligue_two', 'soccer_brazil_serie_b', 'soccer_belgium_first_div',
+    'soccer_japan_j_league', 'soccer_australia_aleague', 'soccer_sweden_allsvenskan',
+    'soccer_norway_eliteserien', 'soccer_denmark_superliga', 'soccer_switzerland_superleague',
+    'soccer_austria_bundesliga', 'soccer_greece_super_league', 'soccer_poland_ekstraklasa',
+];
+
 // Pull one sport key. A 422/404 (competition out of season) is not fatal:
 // we just skip it and keep the others.
 async function fetchOne(sportKey){
@@ -222,20 +264,25 @@ async function fetchOne(sportKey){
 async function fetchOdds(){
     let keys = SPORT.split(',').map(s => s.trim()).filter(Boolean);
 
-    // AUTO mode: discover which soccer leagues are in season right now.
-    // The /sports list is FREE (0 credits). We then pull odds only for active
-    // soccer competitions, capped at ODDS_MAX to protect your credit budget.
+    // AUTO mode: discover which soccer leagues are in season right now and keep the
+    // most relevant ones by SPORT_PRIORITY (not just the first ones the API returns).
+    // The /sports list is FREE (0 credits); odds are pulled only for the chosen leagues.
     if (keys.length === 1 && keys[0].toLowerCase() === 'auto') {
         try {
             const res = await fetch(`https://api.the-odds-api.com/v4/sports/?apiKey=${API_KEY}`);
             const list = res.ok ? await res.json() : [];
             const MAX = parseInt(process.env.ODDS_MAX || '12', 10);
-            keys = list
+            const active = list
                 .filter(s => s.active && !s.has_outrights && /^soccer_/.test(s.key))
-                .map(s => s.key)
-                .slice(0, MAX);
-            console.log(`· AUTO: ${keys.length} ligas de fútbol activas → ${keys.join(', ')}`);
+                .map(s => s.key);
+            const rank = (k) => { const i = SPORT_PRIORITY.indexOf(k); return i === -1 ? 999 : i; };
+            keys = active.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)).slice(0, MAX);
+            console.log(`· AUTO: ${active.length} ligas activas → elijo top ${keys.length} por relevancia:\n  ${keys.join(', ')}`);
         } catch (e) {
+            console.log('· AUTO falló, uso lista por defecto:', e.message);
+            keys = ['soccer_uefa_champs_league','soccer_uefa_europa_league'];
+        }
+    }
             console.log('· AUTO falló, uso lista por defecto:', e.message);
             keys = ['soccer_uefa_champs_league','soccer_uefa_europa_league'];
         }
