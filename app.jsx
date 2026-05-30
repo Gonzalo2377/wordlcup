@@ -86,18 +86,20 @@ function applyDaily(d) {
 
 async function loadDaily() {
     // 1) fresh browser cache → no network at all
+    // 1) network FIRST — daily.json is a tiny static file and costs 0 API credits,
+    //    so always grab the freshest version. (Fixes returning visitors seeing old data.)
     try {
-        const c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
-        if (c && c.data && (Date.now() - c.ts) < CACHE_MS) return c.data;
-    } catch (e) {}
-    // 2) fetch the static file (this is NOT an API call — costs 0 credits)
-    try {
-        const r = await fetch(DATA_URL, { cache: 'no-store' });
+        const r = await fetch(DATA_URL + '?t=' + Date.now(), { cache: 'no-store' });
         if (r.ok) {
             const d = await r.json();
             try { localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: d })); } catch (e) {}
             return d;
         }
+    } catch (e) {}
+    // 2) offline fallback only: last good copy from this browser
+    try {
+        const c = JSON.parse(localStorage.getItem(CACHE_KEY) || 'null');
+        if (c && c.data) return c.data;
     } catch (e) {}
     return null;
 }
