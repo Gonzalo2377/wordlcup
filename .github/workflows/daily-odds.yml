@@ -27,11 +27,12 @@ jobs:
       - name: Generar daily.json
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-          # auto = el robot detecta solo las ligas de fútbol activas hoy (recomendado).
-          # Para fijar competiciones concretas, pon p.ej.:
-          #   ODDS_SPORT: soccer_uefa_champs_league,soccer_brazil_campeonato
+          # auto = el robot coge las 12 competiciones ACTIVAS más relevantes
+          # (según el ranking SPORT_PRIORITY del robot: Champions, grandes ligas,
+          # selecciones, Sudamérica...). Cambia ODDS_MAX para coger más o menos.
+          # Para fijar competiciones a mano: ODDS_SPORT: soccer_uefa_champs_league,soccer_brazil_campeonato
           ODDS_SPORT: auto
-          ODDS_MAX: '12'
+          ODDS_MAX: '16'
           ODDS_REGIONS: eu
           ODDS_WINDOW_HOURS: '48'
         run: node robot/fetch-daily.js
