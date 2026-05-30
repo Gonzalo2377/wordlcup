@@ -223,8 +223,12 @@ function computeModel(homeId, awayId, teams, opts){
 
 /* ---------------- value helpers ------------------------------ */
 function bestPrice(map){ let best=null; for(const b in map) if(!best||map[b]>best.price) best={book:b,price:map[b]}; return best; }
+/* median price across books (to detect a single stale/erroneous outlier) */
+function medianPrice(map){ const v=Object.values(map).sort((a,b)=>a-b); const n=v.length; return n ? (n%2 ? v[(n-1)/2] : (v[n/2-1]+v[n/2])/2) : 0; }
+/* best price IGNORING an absurd outlier (> 1.5× the median = likely stale/in-play) */
+function saneBest(map){ const med=medianPrice(map); let best=null; for(const b in map){ const p=map[b]; if(med && p>med*1.5) continue; if(!best||p>best.price) best={book:b,price:p}; } return best || bestPrice(map); }
 function marketProbs(m){ const avg=o=>{const v=Object.values(o);return v.reduce((s,x)=>s+1/x,0)/v.length;}; const h=avg(m.odds.home),d=avg(m.odds.draw),a=avg(m.odds.away),s=h+d+a; return {home:h/s,draw:d/s,away:a/s}; }
-function matchValue(m){ const mk=marketProbs(m); const fromMarket=m.model&&m.model.fromMarket; const outs=['home','draw','away'].map(k=>{ const best=bestPrice(m.odds[k]); const ev=(mk[k]*best.price-1)*100; const edge=fromMarket?ev:(m.model[k]-mk[k])*100; return {k,modelP:m.model[k],mktP:mk[k],best,edge,ev}; }); outs.sort((a,b)=>b.edge-a.edge); const top=outs[0]; return {pick:top,edge:top.edge,positive:top.edge>=2,source:fromMarket?'market':'model'}; }
+function matchValue(m){ const mk=marketProbs(m); const fromMarket=m.model&&m.model.fromMarket; const outs=['home','draw','away'].map(k=>{ const best=saneBest(m.odds[k]); const ev=(mk[k]*best.price-1)*100; const edge=fromMarket?ev:(m.model[k]-mk[k])*100; return {k,modelP:m.model[k],mktP:mk[k],best,edge,ev}; }); outs.sort((a,b)=>b.edge-a.edge); const top=outs[0]; return {pick:top,edge:top.edge,positive:top.edge>=2,source:fromMarket?'market':'model'}; }
 
 /* ---------------- API ---------------------------------------- */
 // Priority ranking of competitions by visibility/popularity. In AUTO mode we keep
@@ -345,10 +349,11 @@ async function main(){
 
     for (const ev of events) {
         if (!/^soccer/.test(ev.sport_key || '')) continue;   // FOOTBALL only
-        // time window: only matches kicking off from ~3h ago up to WINDOW_HOURS ahead
+        // time window: only PRE-MATCH fixtures within the next WINDOW_HOURS.
+        // Skipping already-started games avoids stale/in-play odds being read as value.
         const ko = new Date(ev.commence_time).getTime();
         if (Number.isNaN(ko)) continue;
-        if (ko < Date.now() - 3*3600*1000) continue;                 // already finished/old
+        if (ko <= Date.now() + 5*60*1000) continue;                  // ya empezado o a punto (≤5 min) → fuera
         if (ko > Date.now() + WINDOW_HOURS*3600*1000) continue;       // too far away (e.g. World Cup)
 
         const homeId = resolveTeam(ev.home_team, TEAMS);
