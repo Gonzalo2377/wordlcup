@@ -71,6 +71,7 @@ function applyDaily(d) {
     if (d.MATCHES) window.MATCHES = d.MATCHES;
     if (d.COMBOS)  window.COMBOS  = d.COMBOS;
     if (d.RECORD && d.RECORD.length)  window.RECORD  = d.RECORD;   // keep sample record until real picks are settled
+    window.PENDING = Array.isArray(d.PENDING) ? d.PENDING : [];    // our live selections awaiting result
     if (d.meta)    window.DAILY.meta = d.meta;
     // Trust the model the robot already computed (single source of truth).
     // Only (re)compute for matches that arrive without one — e.g. older feeds.

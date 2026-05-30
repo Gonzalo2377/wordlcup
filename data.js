@@ -146,27 +146,28 @@ window.matchValue = function (m) {
     const fromMarket = m.model && m.model.fromMarket;
     // Eligibility: a value pick must be CREDIBLE, not just a high-variance longshot.
     //  · real probability ≥ 33%   · best odds ≤ 3.40
-    // This kills the favorite-longshot bias (backing improbable underdogs).
     const MIN_P = 0.33, MAX_ODD = 3.40;
     const all = ['home','draw','away'].map(k => {
         const best = window.saneBest(m.odds[k]);
-        const p = fromMarket ? mk[k] : m.model[k];             // probability we trust for this match
+        const p = fromMarket ? mk[k] : m.model[k];
         const evPct = (mk[k] * best.price - 1) * 100;
         const rawEdge = fromMarket ? evPct : (m.model[k] - mk[k]) * 100;
         const eligible = p >= MIN_P && best.price <= MAX_ODD;
         return { k, modelP: m.model[k], mktP: mk[k], best, edge: rawEdge, ev: evPct, p, eligible };
     });
-    // rank: eligible first, then by edge
-    const outs = [...all].sort((a,b) => (b.eligible - a.eligible) || (b.edge - a.edge));
-    const top = outs[0];
-    const valid = top.eligible;
+    const eligibles = all.filter(o => o.eligible).sort((a,b)=>b.edge - a.edge);
+    // pick = best edge AMONG eligible; if none eligible, fall back to the favourite
+    // (highest probability) just for display — never a longshot.
+    const pick = eligibles.length ? eligibles[0] : [...all].sort((a,b)=>b.p - a.p)[0];
+    const positive = pick.eligible && pick.edge >= 2;
+    const outs = [...all].sort((a,b)=> (b.eligible - a.eligible) || (b.edge - a.edge));
     return {
         outcomes: outs,
-        pick: top,
-        edge: top.edge,
-        ev: top.ev,
-        positive: valid && top.edge >= 2,
-        hot: valid && top.edge >= 6,
+        pick,
+        edge: pick.edge,
+        ev: pick.ev,
+        positive,
+        hot: positive && pick.edge >= 6,
         source: fromMarket ? 'market' : 'model',
         mk,
     };
@@ -223,6 +224,10 @@ window.RECORD = [
     { date:'22 JUN', pick:'Over 2.5', match:'Inglaterra – Irán', odd:1.70, book:'sport888', stake:1, result:'L' },
     { date:'23 JUN', pick:'Gana Croacia', match:'Croacia – Canadá', odd:1.75, book:'williamh', stake:1, result:'W' },
     { date:'23 JUN', pick:'Empate', match:'Uruguay – Corea', odd:3.10, book:'betfair', stake:1, result:'W' },
+];
+/* selections published and awaiting the result (the robot fills this in production) */
+window.PENDING = [
+    { id:'demo1', date:'31 MAY', match:'PSG – Arsenal', pickLabel:'Gana Arsenal', odd:3.25, book:'unibet' },
 ];
 window.recordSummary = function () {
     const r = window.RECORD;
@@ -308,6 +313,7 @@ window.I18N = {
         recordTitle:'Nuestro récord', recordEyebrow:'TRANSPARENCIA · RESULTADOS REALES',
         recordLead:'Cada pick que publicamos queda registrado, gane o pierda. Apuesta plana de 1 unidad. Así puedes ver nuestro rendimiento real frente a las casas.',
         roi:'ROI', profit:'Beneficio', winRate:'% Acierto', totalPicks:'Picks totales', avgOdd:'Cuota media', units:'u',
+        pendingTitle:'Nuestras selecciones · en juego', pendingLead:'Picks que ya hemos publicado y están a la espera de resultado. Quedan registrados aquí con su cuota antes de empezar el partido — transparencia total.', pendingEmpty:'Ahora mismo no hay selecciones pendientes. Vuelve cuando publiquemos el próximo pick.', statusPending:'EN JUEGO',
         colDate:'Fecha', colPick:'Pick', colMatch:'Partido', colOdd:'Cuota', colBook:'Casa', colResult:'Resultado', colProfit:'Beneficio',
         resW:'GANADA', resL:'FALLADA', resP:'NULA',
         howTitle:'Cómo funciona', howLead:'Sin humo. Esto es lo que hace el modelo cada mañana, de forma automática.',
@@ -363,6 +369,7 @@ window.I18N = {
         recordTitle:'Our record', recordEyebrow:'TRANSPARENCY · REAL RESULTS',
         recordLead:'Every pick we publish is logged, win or lose. Flat 1-unit stakes. So you can see our real performance against the books.',
         roi:'ROI', profit:'Profit', winRate:'Win %', totalPicks:'Total picks', avgOdd:'Avg odds', units:'u',
+        pendingTitle:'Our selections · live', pendingLead:'Picks we have already published and are awaiting the result. Logged here with their pre-match odds — full transparency.', pendingEmpty:'No pending selections right now. Check back when we post the next pick.', statusPending:'LIVE',
         colDate:'Date', colPick:'Pick', colMatch:'Match', colOdd:'Odds', colBook:'Book', colResult:'Result', colProfit:'Profit',
         resW:'WON', resL:'LOST', resP:'VOID',
         howTitle:'How it works', howLead:'No smoke. Here\u2019s what the model does every morning, automatically.',

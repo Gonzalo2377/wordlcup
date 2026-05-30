@@ -49,7 +49,7 @@ function ValueCard({ m, t, go, lang }) {
                         ? <React.Fragment>{t.pick}: <b>{pickLabel}</b> · {t.bestAt} {bookById(v.pick.best.book).name}</React.Fragment>
                         : t.noValue}
                 </span>
-                <ValueTag edge={v.edge} hot={v.hot} />
+                {v.positive ? <ValueTag edge={v.edge} hot={v.hot} /> : <span className="value value--neg">{t.noValue}</span>}
             </div>
         </div>
     );
@@ -164,10 +164,10 @@ function ValueBoard({ t, go, lang }) {
                                             <td className="l"><span className="vb-match">{home.code} <span className="vs">{t.vs}</span> {away.code}</span><div className="vb-time" style={{ marginTop:2 }}>{m.group}</div></td>
                                             <td><span className="vb-time">{m.time}</span></td>
                                             <td className="l">{v.positive ? <b style={{ fontFamily:'var(--font-head)' }}>{pickLabel}</b> : <span style={{ color:'var(--muted)' }}>—</span>}</td>
-                                            <td style={{ color:'var(--lime)' }}>{Math.round(v.pick.modelP*100)}%</td>
+                                            <td style={{ color: v.positive ? 'var(--lime)' : 'var(--muted)' }}>{Math.round(v.pick.modelP*100)}%</td>
                                             <td><b style={{ color:'var(--text)' }}>{v.pick.best.price.toFixed(2)}</b></td>
                                             <td><Book id={v.pick.best.book} showName={false} size={22} /></td>
-                                            <td><ValueTag edge={v.edge} hot={v.hot} small /></td>
+                                            <td>{v.positive ? <ValueTag edge={v.edge} hot={v.hot} small /> : <span style={{ color:'var(--muted)', fontFamily:'var(--font-mono)', fontSize:'.8rem' }}>—</span>}</td>
                                         </tr>
                                     );
                                 })}

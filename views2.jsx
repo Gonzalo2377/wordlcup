@@ -169,6 +169,25 @@ function Record({ t, go }) {
                         <div style={{ marginTop:14 }}><EquityCurve /></div>
                     </div>
 
+                    {Array.isArray(window.PENDING) && window.PENDING.length > 0 && (
+                        <div className="panel panel--pad" style={{ marginBottom:22, borderColor:'rgba(246,196,67,.3)' }}>
+                            <span className="eyebrow"><span className="dot" />{t.pendingTitle}</span>
+                            <p style={{ color:'var(--text-2)', fontSize:'.9rem', lineHeight:1.55, margin:'10px 0 16px', maxWidth:660 }}>{t.pendingLead}</p>
+                            {window.PENDING.map((p,i)=>(
+                                <div className="oc-row" key={i} style={{ alignItems:'center' }}>
+                                    <div>
+                                        <div className="oc-name">{p.pickLabel} <span style={{ color:'var(--muted)', fontWeight:400, fontFamily:'var(--font-mono)', fontSize:'.8rem' }}>· {p.match}</span></div>
+                                        <div className="oc-sub">{p.date} · {bookById(p.book) ? bookById(p.book).name : p.book}</div>
+                                    </div>
+                                    <div style={{ display:'flex', alignItems:'center', gap:14 }}>
+                                        <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'1.1rem' }}>{(+p.odd).toFixed(2)}</span>
+                                        <span className="res-pill p" style={{ background:'rgba(246,196,67,.14)', color:'var(--lime)' }}>{t.statusPending}</span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
                     <div className="panel">
                         <div className="ptable-scroll">
                         <table className="ledger">
