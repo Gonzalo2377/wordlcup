@@ -120,6 +120,15 @@ window.bestPrice = function (oddsMap) {
     for (const b in oddsMap) if (!best || oddsMap[b] > best.price) best = { book: b, price: oddsMap[b] };
     return best;
 };
+/* best price ignoring an absurd outlier (> 1.5× the median = likely stale/erroneous) */
+window.saneBest = function (oddsMap) {
+    const v = Object.values(oddsMap).sort((a,b)=>a-b);
+    const n = v.length;
+    const med = n ? (n%2 ? v[(n-1)/2] : (v[n/2-1]+v[n/2])/2) : 0;
+    let best = null;
+    for (const b in oddsMap) { const p = oddsMap[b]; if (med && p > med*1.5) continue; if (!best || p > best.price) best = { book: b, price: p }; }
+    return best || window.bestPrice(oddsMap);
+};
 /* consensus implied prob (avg of 1/odds) per outcome, then de-vig across the 3 outcomes */
 window.marketProbs = function (m) {
     const avg = (o) => { const v = Object.values(o); return v.reduce((s,x)=>s+1/x,0) / v.length; };
@@ -135,21 +144,29 @@ window.marketProbs = function (m) {
 window.matchValue = function (m) {
     const mk = window.marketProbs(m);
     const fromMarket = m.model && m.model.fromMarket;
-    const outs = ['home','draw','away'].map(k => {
-        const best = window.bestPrice(m.odds[k]);
-        const evPct = (mk[k] * best.price - 1) * 100;          // EV% of best price vs fair consensus
-        const edge = fromMarket ? evPct : (m.model[k] - mk[k]) * 100;
-        return { k, modelP: m.model[k], mktP: mk[k], best, edge, ev: evPct };
+    // Eligibility: a value pick must be CREDIBLE, not just a high-variance longshot.
+    //  · real probability ≥ 33%   · best odds ≤ 3.40
+    // This kills the favorite-longshot bias (backing improbable underdogs).
+    const MIN_P = 0.33, MAX_ODD = 3.40;
+    const all = ['home','draw','away'].map(k => {
+        const best = window.saneBest(m.odds[k]);
+        const p = fromMarket ? mk[k] : m.model[k];             // probability we trust for this match
+        const evPct = (mk[k] * best.price - 1) * 100;
+        const rawEdge = fromMarket ? evPct : (m.model[k] - mk[k]) * 100;
+        const eligible = p >= MIN_P && best.price <= MAX_ODD;
+        return { k, modelP: m.model[k], mktP: mk[k], best, edge: rawEdge, ev: evPct, p, eligible };
     });
-    outs.sort((a,b)=>b.edge - a.edge);
+    // rank: eligible first, then by edge
+    const outs = [...all].sort((a,b) => (b.eligible - a.eligible) || (b.edge - a.edge));
     const top = outs[0];
+    const valid = top.eligible;
     return {
         outcomes: outs,
         pick: top,
         edge: top.edge,
         ev: top.ev,
-        positive: top.edge >= 2,
-        hot: top.edge >= 6,
+        positive: valid && top.edge >= 2,
+        hot: valid && top.edge >= 6,
         source: fromMarket ? 'market' : 'model',
         mk,
     };
