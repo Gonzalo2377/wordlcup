@@ -9,6 +9,26 @@ function parseHash() {
     return { view: parts[0] || 'home', id: parts[1] };
 }
 
+/* Catches any render error in a page so a single bad match never blanks the
+   whole site — shows a friendly notice + a way back instead of a black screen. */
+class ErrorBoundary extends React.Component {
+    constructor(p){ super(p); this.state = { err:null }; }
+    static getDerivedStateFromError(err){ return { err }; }
+    componentDidUpdate(prev){ if (prev.routeKey !== this.props.routeKey && this.state.err) this.setState({ err:null }); }
+    render(){
+        if (this.state.err) {
+            return (
+                <div style={{ maxWidth:560, margin:'80px auto', padding:'0 22px', textAlign:'center' }}>
+                    <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.4rem', marginBottom:8 }}>Vaya, ese partido no se pudo mostrar</div>
+                    <p style={{ color:'var(--text-2)', lineHeight:1.6, marginBottom:20 }}>Faltan datos para analizarlo. Prueba con otro o vuelve al inicio.</p>
+                    <a href="#/value" onClick={()=>this.setState({ err:null })} style={{ display:'inline-block', background:'var(--lime)', color:'#0b0e17', fontFamily:'var(--font-head)', fontWeight:800, textDecoration:'none', padding:'12px 22px', borderRadius:11 }}>← Ver todas las cuotas</a>
+                </div>
+            );
+        }
+        return this.props.children;
+    }
+}
+
 function App() {
     const [lang, setLangState] = useState(() => localStorage.getItem('mv_lang') || 'es');
     const [route, setRoute] = useState(() => parseHash());
@@ -44,7 +64,7 @@ function App() {
         <React.Fragment>
             <Ticker />
             <Nav t={t} lang={lang} setLang={setLang} route={route} go={go} />
-            {view}
+            <ErrorBoundary routeKey={route.view + (route.id||'')}>{view}</ErrorBoundary>
             <MobileNav t={t} route={route} go={go} />
         </React.Fragment>
     );

@@ -143,17 +143,22 @@ window.marketProbs = function (m) {
      no team ratings, so it works in ANY competition). */
 window.matchValue = function (m) {
     const mk = window.marketProbs(m);
-    const fromMarket = m.model && m.model.fromMarket;
+    // Robust model: if the feed didn't attach one (unknown teams / older feed),
+    // fall back to the de-vig market probabilities so nothing ever crashes.
+    const model = (m.model && typeof m.model.home === 'number')
+        ? m.model
+        : Object.assign({}, mk, { fromMarket: true });
+    const fromMarket = model.fromMarket;
     // Eligibility: a value pick must be CREDIBLE, not just a high-variance longshot.
     //  · real probability ≥ 33%   · best odds ≤ 3.40
     const MIN_P = 0.33, MAX_ODD = 3.40;
     const all = ['home','draw','away'].map(k => {
         const best = window.saneBest(m.odds[k]);
-        const p = fromMarket ? mk[k] : m.model[k];
+        const p = fromMarket ? mk[k] : model[k];
         const evPct = (mk[k] * best.price - 1) * 100;
-        const rawEdge = fromMarket ? evPct : (m.model[k] - mk[k]) * 100;
+        const rawEdge = fromMarket ? evPct : (model[k] - mk[k]) * 100;
         const eligible = p >= MIN_P && best.price <= MAX_ODD;
-        return { k, modelP: m.model[k], mktP: mk[k], best, edge: rawEdge, ev: evPct, p, eligible };
+        return { k, modelP: model[k], mktP: mk[k], best, edge: rawEdge, ev: evPct, p, eligible };
     });
     const eligibles = all.filter(o => o.eligible).sort((a,b)=>b.edge - a.edge);
     // pick = best edge AMONG eligible; if none eligible, fall back to the favourite
@@ -173,9 +178,10 @@ window.matchValue = function (m) {
     };
 };
 window.outcomeLabel = function (k, m, lang) {
-    const T = window.TEAMS;
     if (k === 'draw') return lang === 'en' ? 'Draw' : 'Empate';
-    return (k === 'home' ? T[m.home] : T[m.away]).name;
+    const id = k === 'home' ? m.home : m.away;
+    const tm = window.teamById ? window.teamById(id) : window.TEAMS[id];
+    return (tm && tm.name) || (typeof id === 'string' ? id : 'Equipo');
 };
 
 /* ---- COMBINADAS (accumulators) ----------------------------- */

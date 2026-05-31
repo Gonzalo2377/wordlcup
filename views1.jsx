@@ -205,7 +205,11 @@ function MatchPage({ t, go, id, lang }) {
     const m = window.MATCHES.find(x=>x.id===id) || window.MATCHES[0];
     const home=teamById(m.home), away=teamById(m.away);
     const v = window.matchValue(m);
-    const books = Object.keys(window.BOOKS);
+    const mdl = (m.model && typeof m.model.home === 'number') ? m.model : window.marketProbs(m);
+    // only the books that actually quote THIS match (a feed match may carry a subset)
+    const books = Array.from(new Set([
+        ...Object.keys(m.odds.home||{}), ...Object.keys(m.odds.draw||{}), ...Object.keys(m.odds.away||{})
+    ]));
 
     return (
         <main>
@@ -219,8 +223,8 @@ function MatchPage({ t, go, id, lang }) {
                         </div>
                         <div className="mh-center">
                             <div className="mh-center__lbl">{t.winProb}</div>
-                            <div className="mh-center__proj">{Math.round(m.model.home*100)}<span className="mh-vs"> · </span>{Math.round(m.model.away*100)}</div>
-                            <div className="mh-center__lbl" style={{ marginTop:8 }}>{t.drawL} {Math.round(m.model.draw*100)}%</div>
+                            <div className="mh-center__proj">{Math.round(mdl.home*100)}<span className="mh-vs"> · </span>{Math.round(mdl.away*100)}</div>
+                            <div className="mh-center__lbl" style={{ marginTop:8 }}>{t.drawL} {Math.round(mdl.draw*100)}%</div>
                         </div>
                         <div className="mh-team">
                             <span className="mh-team__crest" style={{ background:away.color, color:pickInk(away.color), border: away.color==='#ffffff'?'1px solid var(--line)':'none' }}>{away.code}</span>
@@ -257,7 +261,7 @@ function MatchPage({ t, go, id, lang }) {
                             </div>
                             <div className="panel panel--pad" style={{ marginTop:16 }}>
                                 <span className="eyebrow muted"><span className="dot" />{t.modelBreakdown}</span>
-                                {m.model.fromMarket ? (
+                                {(!m.model || m.model.fromMarket) ? (
                                     <p style={{ color:'var(--text-2)', fontSize:'.88rem', lineHeight:1.55, margin:'12px 0 4px' }}>{t.mdMarketOnly}</p>
                                 ) : (
                                 <div className="grid grid--2" style={{ marginTop:14, marginBottom:6 }}>
@@ -280,7 +284,7 @@ function MatchPage({ t, go, id, lang }) {
                                     })}
                                 </div>
                                 )}
-                                <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', letterSpacing:'.04em', marginTop:8 }}>{m.model.fromMarket ? t.mdMethodMarket : t.mdMethod}</div>
+                                <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', letterSpacing:'.04em', marginTop:8 }}>{(!m.model || m.model.fromMarket) ? t.mdMethodMarket : t.mdMethod}</div>
                             </div>
                             <div className="disclaimer" style={{ marginTop:18 }}><b>{t.discTitle}</b> {t.disc}</div>
                         </div>
@@ -306,9 +310,9 @@ function MatchPage({ t, go, id, lang }) {
                                         return (
                                             <tr key={bk}>
                                                 <td className="l"><Book id={bk} size={20} /></td>
-                                                <td><span className={'pcell' + (bk===bestH?' best':'')}>{m.odds.home[bk].toFixed(2)}</span></td>
-                                                <td><span className={'pcell' + (bk===bestD?' best':'')}>{m.odds.draw[bk].toFixed(2)}</span></td>
-                                                <td><span className={'pcell' + (bk===bestA?' best':'')}>{m.odds.away[bk].toFixed(2)}</span></td>
+                                                <td><span className={'pcell' + (bk===bestH?' best':'')}>{m.odds.home[bk]!=null?m.odds.home[bk].toFixed(2):'—'}</span></td>
+                                                <td><span className={'pcell' + (bk===bestD?' best':'')}>{m.odds.draw[bk]!=null?m.odds.draw[bk].toFixed(2):'—'}</span></td>
+                                                <td><span className={'pcell' + (bk===bestA?' best':'')}>{m.odds.away[bk]!=null?m.odds.away[bk].toFixed(2):'—'}</span></td>
                                             </tr>
                                         );
                                     })}

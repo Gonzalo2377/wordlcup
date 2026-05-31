@@ -3,8 +3,8 @@
    ============================================================ */
 const { useState, useEffect, useRef } = React;
 
-const teamById = (id) => window.TEAMS[id];
-const bookById = (id) => window.BOOKS[id];
+const teamById = (id) => window.TEAMS[id] || { id, name: (typeof id==='string'? id : 'Equipo'), code: (typeof id==='string'? id.slice(0,3).toUpperCase() : '?'), color: '#3a4768', known: false, elo: null, conf: null, form: '-----' };
+const bookById = (id) => window.BOOKS[id] || { id, name: (typeof id==='string'? id : 'Casa') };
 
 const MV_BRAND = (window.MV_CONFIG && window.MV_CONFIG.brand) || { name:'GOL', accent:'VALUE', tagline:'VALOR · FÚTBOL' };
 
