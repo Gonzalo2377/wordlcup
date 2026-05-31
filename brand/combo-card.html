@@ -135,10 +135,12 @@ function draw(){
       y+=rh;
     });
     x.textBaseline='alphabetic';
-    // total odds strip
-    x.textAlign='center';x.font='700 22px "Space Mono"';x.fillStyle=golddim;x.fillText('CUOTA TOTAL',540,y+34);
-    x.font='900 96px "Big Shoulders Display"';x.fillStyle=gold;x.textBaseline='middle';x.fillText(($('odd').value||''),540,y+96);
-    x.textBaseline='alphabetic';
+    // total odds + confidence strip
+    x.textAlign='center';
+    x.font='900 90px "Big Shoulders Display"';x.fillStyle=gold;x.textBaseline='middle';x.fillText(($('odd').value||''),370,y+72);
+    x.font='700 20px "Space Mono"';x.fillStyle=golddim;x.textBaseline='alphabetic';x.fillText('CUOTA TOTAL',370,y+118);
+    x.font='900 90px "Big Shoulders Display"';x.fillStyle=green;x.textBaseline='middle';x.fillText(($('conf').value||'')+'%',720,y+72);
+    x.font='700 20px "Space Mono"';x.fillStyle=gray;x.textBaseline='alphabetic';x.fillText('CONFIANZA',720,y+118);
   } else {
     // ---- hidden picks (paid teaser) ----
     const bx=140,by=360,bw=800,bh=270;

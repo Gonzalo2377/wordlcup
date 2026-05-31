@@ -44,6 +44,9 @@ const BOOK_WHITELIST = (process.env.ODDS_BOOKS || '').split(',').map(s => s.trim
 const WINDOW_HOURS = parseInt(process.env.ODDS_WINDOW_HOURS || '48', 10);
 const OUT = path.join(__dirname, '..', 'daily.json');
 
+// running tally of API credits (filled from response headers on every odds/scores call)
+const CREDITS = { remaining:null, used:null, lastCall:null };
+
 if (!API_KEY) { console.error('✗ Missing ODDS_API_KEY env var'); process.exit(1); }
 
 /* ---------------- national-team database ----------------
@@ -262,7 +265,11 @@ async function fetchOne(sportKey){
     const res = await fetch(url);
     if (res.status === 422 || res.status === 404) { console.log(`  - ${sportKey}: sin eventos (fuera de temporada)`); return []; }
     if (!res.ok) { console.log(`  - ${sportKey}: API ${res.status} (omitido)`); return []; }
-    console.log(`  - ${sportKey}: ok · creditos restantes ${res.headers.get('x-requests-remaining')}`);
+    const rem = res.headers.get('x-requests-remaining'), used = res.headers.get('x-requests-used');
+    if (rem != null)  CREDITS.remaining = +rem;
+    if (used != null) CREDITS.used = +used;
+    CREDITS.lastCall = sportKey;
+    console.log(`  - ${sportKey}: ok · creditos restantes ${rem} · usados ${used}`);
     return res.json();
 }
 async function fetchOdds(){
@@ -306,6 +313,9 @@ async function fetchScoresOne(sportKey){
     const url = `https://api.the-odds-api.com/v4/sports/${sportKey}/scores/?apiKey=${API_KEY}&daysFrom=3`;
     const res = await fetch(url);
     if (!res.ok) { console.log(`  scores ${sportKey}: API ${res.status} (omitido)`); return []; }
+    const rem = res.headers.get('x-requests-remaining'), used = res.headers.get('x-requests-used');
+    if (rem != null)  CREDITS.remaining = +rem;
+    if (used != null) CREDITS.used = +used;
     return res.json();
 }
 async function fetchScores(keys){
@@ -338,6 +348,24 @@ function settle(pending, scores, RECORD){
     }
     if (settled) console.log(`· liquidados ${settled} picks (resultado real)`);
     return { stillPending, RECORD };
+}
+
+/* settle pending COMBOS: a combo wins only if ALL its legs win. Once every leg
+   has a final score, move it from COMBO_PENDING to COMBO_RECORD (W/L). */
+function settleCombos(pending, scores, RECORD){
+    const byId = {}; scores.forEach(s => { if (s && s.id) byId[s.id] = s; });
+    const still = [];
+    let settled = 0;
+    for (const c of pending) {
+        const results = c.legs.map(l => winnerOf(byId[l.id]));   // null until that match is final
+        if (results.some(r => !r)) { still.push(c); continue; }  // at least one leg unfinished
+        const won = c.legs.every((l,i) => results[i] === l.side);
+        const totalOdd = +c.legs.reduce((p,l)=>p*l.odd,1).toFixed(2);
+        RECORD.unshift({ dayId:c.dayId, date:c.date, name:c.name, tier:c.tier, legs:c.legs.map(l=>({ match:l.match, pick:l.pick, odd:l.odd, win:(null) })).map((o,i)=>({ ...o, win: results[i]===c.legs[i].side })), totalOdd, result: won ? 'W' : 'L' });
+        settled++;
+    }
+    if (settled) console.log(`· liquidadas ${settled} combinadas (resultado real)`);
+    return { still, RECORD };
 }
 
 /* ---------------- build daily.json --------------------------- */
@@ -395,7 +423,7 @@ async function main(){
 
     // ---- auto-build the day's accumulators ----
     const label = (m,k) => k==='draw' ? 'Empate' : (k==='home' ? `Gana ${TEAMS[m.home].name}` : `Gana ${TEAMS[m.away].name}`);
-    const legOf = (x) => ({ match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
+    const legOf = (x) => ({ id:x.m.id, sport:x.m._sport, ts:new Date(x.m._commence).getTime(), side:x.v.pick.k, match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
     const confOf = (arr) => Math.round(arr.reduce((p,x)=>p*x.v.pick.modelP,1)*100);
     const COMBOS = [];
     // Safe pool: each match's most-likely pick (favourite), credible odds. Used as
@@ -417,18 +445,35 @@ async function main(){
     const bigPool = merge(byEdge, safePool);
     if (bigPool.length >= 4) COMBOS.push({ id:'c3', tier:'all', conf: confOf(bigPool.slice(0,4)), name:'Combinada Larga', legs: bigPool.slice(0,4).map(legOf) });
 
-    // ---- track record: read previous state, settle finished picks ----
-    let RECORD = [], PENDING = [];
-    try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; } catch (e) {}
+    // ---- track record: read previous state, settle finished picks + combos ----
+    let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [];
+    try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; COMBO_PENDING = prev.COMBO_PENDING || []; COMBO_RECORD = prev.COMBO_RECORD || []; } catch (e) {}
     try {
-        // only query scores for competitions that actually have a pending pick (saves credits)
-        const need = [...new Set(PENDING.map(p => p.sport).filter(Boolean))];
+        // query scores for any competition with a pending single pick OR combo leg (saves credits)
+        const need = [...new Set([
+            ...PENDING.map(p => p.sport),
+            ...COMBO_PENDING.flatMap(c => c.legs.map(l => l.sport)),
+        ].filter(Boolean))];
         if (need.length) {
             const scores = await fetchScores(need);
             const out = settle(PENDING, scores, RECORD);
             PENDING = out.stillPending; RECORD = out.RECORD;
+            const cout = settleCombos(COMBO_PENDING, scores, COMBO_RECORD);
+            COMBO_PENDING = cout.still; COMBO_RECORD = cout.RECORD;
         }
     } catch (e) { console.log('· scores no disponibles:', e.message); }
+
+    // ---- snapshot TODAY's combos so we can settle them later (once per day per combo) ----
+    const today = fmtDay(new Date().toISOString());
+    const haveCombo = new Set(COMBO_PENDING.map(c=>c.dayId).concat(COMBO_RECORD.map(c=>c.dayId)));
+    COMBOS.forEach(c => {
+        const dayId = today + '·' + c.id;
+        // only snapshot combos whose legs are all near-term (real, settle-able) matches
+        const settleable = c.legs.every(l => l.id && l.sport);
+        if (!settleable || haveCombo.has(dayId)) return;
+        COMBO_PENDING.push({ dayId, date: today, name: c.name, tier: c.tier, legs: c.legs.map(l=>({ id:l.id, sport:l.sport, side:l.side, match:l.match, pick:l.pick, odd:l.odd })) });
+        haveCombo.add(dayId);
+    });
 
     // ---- register today's headline value picks as PENDING (to settle later) ----
     // Track up to the top 3 value picks of the day; never duplicate by event id.
@@ -456,15 +501,24 @@ async function main(){
     const AHEAD  = WINDOW_HOURS*3600*1000 + 6*3600*1000;
     PENDING = PENDING.filter(p => p.ts && (p.ts - Date.now()) < AHEAD && (Date.now() - p.ts) < EXPIRY);
     RECORD = RECORD.slice(0, 60);   // keep the ledger tidy
+    // same housekeeping for combos: drop ones whose last leg is >5 days past and never settled
+    const COMBO_EXPIRY = 5*24*3600*1000;
+    COMBO_PENDING = COMBO_PENDING.filter(c => c.legs.some(l => l.ts && (Date.now() - l.ts) < COMBO_EXPIRY) || c.legs.every(l => !l.ts));
+    COMBO_RECORD = COMBO_RECORD.slice(0, 40);
     // strip internal fields from matches before writing
     MATCHES.forEach(m => { delete m._commence; delete m._sport; });
 
     const daily = {
-        meta: { updatedAt:new Date().toISOString(), source:'the-odds-api', sport:SPORT, regions:REGIONS, market:MARKET, matches:MATCHES.length, valuePicks:valued.length, books:Object.keys(BOOKS).length },
-        TEAMS, BOOKS, MATCHES, COMBOS, RECORD, PENDING,
+        meta: {
+            updatedAt:new Date().toISOString(), source:'the-odds-api', sport:SPORT, regions:REGIONS, market:MARKET,
+            matches:MATCHES.length, valuePicks:valued.length, books:Object.keys(BOOKS).length,
+            credits: { remaining: CREDITS.remaining, used: CREDITS.used },
+        },
+        TEAMS, BOOKS, MATCHES, COMBOS, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD,
     };
     fs.writeFileSync(OUT, JSON.stringify(daily, null, 2));
-    console.log(`✓ wrote ${OUT}\n  ${MATCHES.length} football matches · ${valued.length} value picks · ${Object.keys(BOOKS).length} books · ${COMBOS.length} accas · ${RECORD.length} en récord · ${PENDING.length} pendientes`);
+    console.log(`✓ wrote ${OUT}\n  ${MATCHES.length} football matches · ${valued.length} value picks · ${Object.keys(BOOKS).length} books · ${COMBOS.length} accas · ${RECORD.length} en récord · ${PENDING.length} pendientes · ${COMBO_RECORD.length} combis resueltas · ${COMBO_PENDING.length} combis en juego`);
+    console.log(`  créditos API → usados ${CREDITS.used} · restantes ${CREDITS.remaining}`);
     if (!MATCHES.length) console.log('  (no football matches for this sport key right now — see SETUP to test with an in-season league)');
 }
 

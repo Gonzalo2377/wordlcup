@@ -235,6 +235,21 @@ window.RECORD = [
 window.PENDING = [
     { id:'demo1', date:'31 MAY', match:'PSG – Arsenal', pickLabel:'Gana Arsenal', odd:3.25, book:'unibet' },
 ];
+/* resolved accumulators — won only if EVERY leg won (the robot settles these automatically) */
+window.COMBO_RECORD = [
+    { dayId:'30may·c1', date:'30 MAY', name:'Combinada del Día', tier:'single', totalOdd:2.63, result:'W',
+      legs:[ {match:'Palmeiras – Chapecoense', pick:'Gana Palmeiras', odd:1.33, win:true},
+             {match:'R. Santander – Cádiz', pick:'Gana R. Santander', odd:1.39, win:true},
+             {match:'Almería – Valladolid', pick:'Gana Almería', odd:1.42, win:true} ] },
+    { dayId:'29may·c2', date:'29 MAY', name:'Combinada Valor', tier:'all', totalOdd:4.90, result:'L',
+      legs:[ {match:'Francia – EE. UU.', pick:'Gana Francia', odd:1.50, win:true},
+             {match:'España – Croacia', pick:'Gana España', odd:1.70, win:true},
+             {match:'P. Bajos – Japón', pick:'Gana P. Bajos', odd:1.92, win:false} ] },
+    { dayId:'28may·c1', date:'28 MAY', name:'Combinada del Día', tier:'single', totalOdd:3.10, result:'W',
+      legs:[ {match:'Portugal – Marruecos', pick:'Gana Portugal', odd:1.75, win:true},
+             {match:'Argentina – México', pick:'Gana Argentina', odd:1.77, win:true} ] },
+];
+window.COMBO_PENDING = window.COMBO_PENDING || [];
 window.recordSummary = function () {
     const r = window.RECORD;
     let staked = 0, ret = 0, w = 0, l = 0, p = 0;
@@ -322,6 +337,7 @@ window.I18N = {
         roi:'ROI', profit:'Beneficio', winRate:'% Acierto', totalPicks:'Picks totales', avgOdd:'Cuota media', units:'u',
         pendingTitle:'Nuestras selecciones · en juego', pendingLead:'Picks que ya hemos publicado y están a la espera de resultado. Quedan registrados aquí con su cuota antes de empezar el partido — transparencia total.', pendingEmpty:'Ahora mismo no hay selecciones pendientes. Vuelve cuando publiquemos el próximo pick.', statusPending:'EN JUEGO',
         colDate:'Fecha', colPick:'Pick', colMatch:'Partido', colOdd:'Cuota', colBook:'Casa', colResult:'Resultado', colProfit:'Beneficio',
+        comboRecTitle:'Combinadas resueltas', comboRecLead:'Cada combinada que publicamos queda registrada cuando se juegan todos sus partidos. Solo gana si aciertan TODAS las selecciones.',
         resW:'GANADA', resL:'FALLADA', resP:'NULA',
         howTitle:'Cómo funciona', howLead:'Sin humo. Esto es lo que hace el modelo cada mañana, de forma automática.',
         step1T:'Cuotas del mercado', step1D:'Cada mañana descargamos las cuotas de ganador (1X2) de 8 casas para todos los partidos del día.',
@@ -379,6 +395,7 @@ window.I18N = {
         roi:'ROI', profit:'Profit', winRate:'Win %', totalPicks:'Total picks', avgOdd:'Avg odds', units:'u',
         pendingTitle:'Our selections · live', pendingLead:'Picks we have already published and are awaiting the result. Logged here with their pre-match odds — full transparency.', pendingEmpty:'No pending selections right now. Check back when we post the next pick.', statusPending:'LIVE',
         colDate:'Date', colPick:'Pick', colMatch:'Match', colOdd:'Odds', colBook:'Book', colResult:'Result', colProfit:'Profit',
+        comboRecTitle:'Settled accumulators', comboRecLead:'Every acca we publish is logged once all its matches are played. It only wins if ALL legs come in.',
         resW:'WON', resL:'LOST', resP:'VOID',
         howTitle:'How it works', howLead:'No smoke. Here\u2019s what the model does every morning, automatically.',
         step1T:'Market odds', step1D:'Every morning we pull match-winner (1X2) odds from 8 books for all of the day\u2019s matches.',

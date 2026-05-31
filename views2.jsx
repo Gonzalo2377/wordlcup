@@ -167,6 +167,15 @@ function Record({ t, go }) {
                     <h2 className="section__title" style={{ marginBottom:8 }}>{t.recordTitle}</h2>
                     <p style={{ color:'var(--text-2)', maxWidth:660, lineHeight:1.6, marginBottom:26 }}>{t.recordLead}</p>
 
+                    {window.MV_OWNER && window.DAILY && window.DAILY.meta && window.DAILY.meta.credits && (window.DAILY.meta.credits.used != null || window.DAILY.meta.credits.remaining != null) && (
+                        <div style={{ display:'flex', alignItems:'center', gap:18, flexWrap:'wrap', background:'rgba(246,196,67,.08)', border:'1px solid rgba(246,196,67,.32)', borderRadius:12, padding:'12px 18px', marginBottom:22 }}>
+                            <span style={{ fontFamily:'var(--font-head)', fontWeight:800, color:'var(--lime)', fontSize:'.85rem' }}>👑 API · The Odds API</span>
+                            <span style={{ fontFamily:'var(--font-mono)', fontSize:'.82rem', color:'var(--text-2)' }}>Créditos usados: <b style={{ color:'var(--text)' }}>{window.DAILY.meta.credits.used ?? '—'}</b></span>
+                            <span style={{ fontFamily:'var(--font-mono)', fontSize:'.82rem', color:'var(--text-2)' }}>Restantes: <b style={{ color:'var(--green)' }}>{window.DAILY.meta.credits.remaining ?? '—'}</b></span>
+                            <span style={{ fontFamily:'var(--font-mono)', fontSize:'.7rem', color:'var(--muted)' }}>actualizado {window.DAILY.meta.updatedAt ? new Date(window.DAILY.meta.updatedAt).toLocaleString('es-ES') : ''}</span>
+                        </div>
+                    )}
+
                     <div className="rec-stats">
                         <div className="rec-stat"><div className="rec-stat__l">{t.roi}</div><div className="rec-stat__v pos">+{rec.roi}%</div><div className="rec-stat__s">{rec.staked}{t.units} {t.profit.toLowerCase()}</div></div>
                         <div className="rec-stat"><div className="rec-stat__l">{t.profit}</div><div className="rec-stat__v pos">+{rec.profit}{t.units}</div><div className="rec-stat__s">{t.avgOdd} {rec.avgOdd}</div></div>
@@ -227,6 +236,45 @@ function Record({ t, go }) {
                         </table>
                         </div>
                     </div>
+
+                    {Array.isArray(window.COMBO_RECORD) && window.COMBO_RECORD.length > 0 && (
+                        <div style={{ marginTop:30 }}>
+                            <span className="eyebrow"><span className="dot" />{t.comboRecTitle}</span>
+                            <p style={{ color:'var(--text-2)', fontSize:'.9rem', lineHeight:1.55, margin:'10px 0 16px', maxWidth:660 }}>{t.comboRecLead}</p>
+                            <div className="grid grid--3">
+                                {window.COMBO_RECORD.map((c,i)=>{
+                                    const won = c.result==='W';
+                                    return (
+                                        <div className="panel" key={i} style={{ borderColor: won?'rgba(39,215,150,.4)':'rgba(255,107,94,.4)' }}>
+                                            <div className="combo__head" style={{ borderBottom:'1px solid var(--line)' }}>
+                                                <div>
+                                                    <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', letterSpacing:'.1em' }}>{c.date}</div>
+                                                    <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem' }}>{c.name}</div>
+                                                </div>
+                                                <span className={'res-pill ' + (won?'w':'l')}>{won?t.resW:t.resL}</span>
+                                            </div>
+                                            <div style={{ padding:'4px 16px' }}>
+                                                {c.legs.map((l,j)=>(
+                                                    <div key={j} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'9px 0', borderBottom: j<c.legs.length-1?'1px solid var(--line)':'none' }}>
+                                                        <div style={{ minWidth:0 }}>
+                                                            <div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.88rem', color: l.win?'var(--text)':'var(--muted)', textDecoration: l.win?'none':'line-through' }}>{l.pick}</div>
+                                                            <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{l.match}</div>
+                                                        </div>
+                                                        <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.82rem', color: l.win?'var(--green)':'var(--red)' }}>{l.win?'✓':'✗'} {l.odd.toFixed(2)}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <div className="combo__foot">
+                                                <span style={{ fontFamily:'var(--font-mono)', fontSize:'.72rem', color:'var(--muted)' }}>{t.comboTotal}</span>
+                                                <span style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.1rem', color: won?'var(--green)':'var(--red)' }}>{c.totalOdd.toFixed(2)}</span>
+                                            </div>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    )}
+
                     <div className="disclaimer" style={{ marginTop:22 }}><b>{t.discTitle}</b> {t.disc}</div>
                 </div>
             </section>
