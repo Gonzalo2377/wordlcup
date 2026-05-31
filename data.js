@@ -235,12 +235,16 @@ window.RECORD = [
 window.PENDING = [
     { id:'demo1', date:'31 MAY', match:'PSG – Arsenal', pickLabel:'Gana Arsenal', odd:3.25, book:'unibet' },
 ];
+/* PINNED combos — always shown on the Record page, even before the robot settles
+   real ones. Edit this array to feature your own resolved accas. */
+window.COMBO_PINNED = [
+    { dayId:'31may·win', date:'31 MAY', name:'Combinada GRATIS', tier:'free', totalOdd:2.63, result:'W',
+      legs:[ {match:'Palmeiras – Ceará', pick:'Gana Palmeiras', odd:1.33, win:true},
+             {match:'R. Santander – Cádiz', pick:'Gana R. Santander', odd:1.39, win:true},
+             {match:'Almería – Castellón', pick:'Gana Almería', odd:1.42, win:true} ] },
+];
 /* resolved accumulators — won only if EVERY leg won (the robot settles these automatically) */
 window.COMBO_RECORD = [
-    { dayId:'30may·c1', date:'30 MAY', name:'Combinada del Día', tier:'single', totalOdd:2.63, result:'W',
-      legs:[ {match:'Palmeiras – Chapecoense', pick:'Gana Palmeiras', odd:1.33, win:true},
-             {match:'R. Santander – Cádiz', pick:'Gana R. Santander', odd:1.39, win:true},
-             {match:'Almería – Valladolid', pick:'Gana Almería', odd:1.42, win:true} ] },
     { dayId:'29may·c2', date:'29 MAY', name:'Combinada Valor', tier:'all', totalOdd:4.90, result:'L',
       legs:[ {match:'Francia – EE. UU.', pick:'Gana Francia', odd:1.50, win:true},
              {match:'España – Croacia', pick:'Gana España', odd:1.70, win:true},
@@ -250,6 +254,8 @@ window.COMBO_RECORD = [
              {match:'Argentina – México', pick:'Gana Argentina', odd:1.77, win:true} ] },
 ];
 window.COMBO_PENDING = window.COMBO_PENDING || [];
+// pinned combos always lead, deduped by dayId
+window.COMBO_RECORD = [...window.COMBO_PINNED, ...window.COMBO_RECORD.filter(c => !window.COMBO_PINNED.some(p => p.dayId === c.dayId))];
 window.recordSummary = function () {
     const r = window.RECORD;
     let staked = 0, ret = 0, w = 0, l = 0, p = 0;

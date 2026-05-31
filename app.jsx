@@ -92,7 +92,11 @@ function applyDaily(d) {
     if (d.COMBOS)  window.COMBOS  = d.COMBOS;
     if (d.RECORD && d.RECORD.length)  window.RECORD  = d.RECORD;   // keep sample record until real picks are settled
     window.PENDING = Array.isArray(d.PENDING) ? d.PENDING : [];    // our live selections awaiting result
-    window.COMBO_RECORD = Array.isArray(d.COMBO_RECORD) ? d.COMBO_RECORD : (window.COMBO_RECORD || []);
+    // Combos we hand-pin (always shown) take priority; the robot's settled combos follow, deduped by dayId.
+    const feedCombos = Array.isArray(d.COMBO_RECORD) ? d.COMBO_RECORD : [];
+    const pinned = Array.isArray(window.COMBO_PINNED) ? window.COMBO_PINNED : [];
+    const seen = new Set(pinned.map(c => c.dayId));
+    window.COMBO_RECORD = [...pinned, ...feedCombos.filter(c => !seen.has(c.dayId))];
     window.COMBO_PENDING = Array.isArray(d.COMBO_PENDING) ? d.COMBO_PENDING : (window.COMBO_PENDING || []);
     if (d.meta)    window.DAILY.meta = d.meta;
     // Trust the model the robot already computed (single source of truth).
