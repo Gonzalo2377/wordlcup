@@ -54,6 +54,13 @@ canvas{width:100%;max-width:540px;height:auto;border-radius:18px;border:1px soli
       <div><label>Fecha</label><input id="date" value="Sáb 31 May"></div>
     </div>
 
+    <label>Estado <span style="color:#caa033;text-transform:none;letter-spacing:0">(para mostrar resultados ya jugados)</span></label>
+    <div class="seg" id="state">
+      <button data-s="open" class="on">Propuesta</button>
+      <button data-s="won">✅ GANADA</button>
+      <button data-s="lost">❌ FALLADA</button>
+    </div>
+
     <label>Selecciones <span style="color:#caa033;text-transform:none;letter-spacing:0">(una por línea — vacío = ocultas 🔒)</span></label>
     <textarea id="picks" rows="4" style="width:100%;background:#141a28;border:1px solid rgba(150,170,210,.18);color:#eef2fb;border-radius:9px;padding:10px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem;resize:vertical">Gana Francia @1.50
 Gana España @1.70
@@ -83,6 +90,7 @@ function ball(c,cx,cy,R,col){c.save();c.strokeStyle=col;c.fillStyle=col;c.lineWi
 function fit(c,t,maxW,start,fam){let s=start;do{c.font='900 '+s+'px '+fam;if(c.measureText(t).width<=maxW)break;s-=4;}while(s>26);return s;}
 
 let tier='free';
+let state='open';   // open | won | lost
 
 function parsePicks(){
   return ($('picks').value||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
@@ -92,6 +100,9 @@ function parsePicks(){
 }
 
 function draw(){
+  const ACC = state==='won' ? green : state==='lost' ? '#ff6b5e' : gold;
+  const accSoft = state==='won' ? 'rgba(39,215,150,0.07)' : state==='lost' ? 'rgba(255,107,94,0.07)' : 'rgba(246,196,67,0.06)';
+  const accLine = state==='won' ? 'rgba(39,215,150,0.4)' : state==='lost' ? 'rgba(255,107,94,0.4)' : 'rgba(246,196,67,0.28)';
   x.fillStyle=navy;x.fillRect(0,0,1080,1080);
   let g=x.createRadialGradient(820,40,0,820,40,760);g.addColorStop(0,'rgba(246,196,67,0.16)');g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,1080,1080);
   x.save();x.globalAlpha=0.06;x.strokeStyle=gold;x.lineWidth=3;x.beginPath();x.arc(980,1000,180,0,7);x.stroke();x.beginPath();x.moveTo(1060,820);x.lineTo(1060,1080);x.stroke();x.restore();
@@ -101,8 +112,9 @@ function draw(){
   x.textBaseline='middle';x.textAlign='left';
   x.font='900 46px "Big Shoulders Display"';x.fillStyle=white;x.fillText('GOL',158,103);
   const wg=x.measureText('GOL').width;x.fillStyle=gold;x.fillText('VALUE',158+wg,103);
-  const badge = tier==='free' ? 'GRATIS' : tier==='single' ? 'COMBINADA · 3,99€' : 'PREMIUM · 14,99€';
-  x.textAlign='right';x.font='700 22px "Space Mono"';x.fillStyle=tier==='free'?green:golddim;x.fillText(badge, 1010, 100);
+  const badge = state==='won' ? '✅ GANADA' : state==='lost' ? '❌ FALLADA'
+              : tier==='free' ? 'GRATIS' : tier==='single' ? 'COMBINADA · 3,99€' : 'PREMIUM · 14,99€';
+  x.textAlign='right';x.font='700 22px "Space Mono"';x.fillStyle=(state==='won')?green:(state==='lost')?'#ff6b5e':(tier==='free'?green:golddim);x.fillText(badge, 1010, 100);
 
   // date + name
   x.textAlign='center';x.font='700 24px "Space Mono"';x.fillStyle=gray;
@@ -121,26 +133,27 @@ function draw(){
     let y=320;
     const rh=Math.max(72, Math.min(104, 470/Math.max(picks.length,1)));
     picks.slice(0,5).forEach((p,i)=>{
-      rr(x,lx,y,lw,rh-12,16);x.fillStyle='rgba(246,196,67,0.06)';x.fill();
-      rr(x,lx,y,lw,rh-12,16);x.lineWidth=1.5;x.strokeStyle='rgba(246,196,67,0.28)';x.stroke();
-      // num
-      x.beginPath();x.arc(lx+44,y+(rh-12)/2,20,0,7);x.fillStyle=gold;x.fill();
-      x.fillStyle=navy;x.font='900 24px "Big Shoulders Display"';x.textAlign='center';x.textBaseline='middle';x.fillText(String(i+1),lx+44,y+(rh-12)/2+1);
+      rr(x,lx,y,lw,rh-12,16);x.fillStyle=accSoft;x.fill();
+      rr(x,lx,y,lw,rh-12,16);x.lineWidth=1.5;x.strokeStyle=accLine;x.stroke();
+      // num / result mark
+      x.beginPath();x.arc(lx+44,y+(rh-12)/2,20,0,7);x.fillStyle=ACC;x.fill();
+      x.fillStyle=navy;x.font='900 24px "Big Shoulders Display"';x.textAlign='center';x.textBaseline='middle';
+      x.fillText(state==='won'?'✓':state==='lost'?'✗':String(i+1),lx+44,y+(rh-12)/2+1);
       // sel
       x.textAlign='left';x.fillStyle=white;
-      const ss=fit(x,p.sel,560,38,'"Big Shoulders Display"');
+      const ss=fit(x,p.sel,540,38,'"Big Shoulders Display"');
       x.font='800 '+ss+'px "Big Shoulders Display"';x.fillText(p.sel,lx+84,y+(rh-12)/2+1);
       // odd
-      if(p.odd){x.textAlign='right';x.fillStyle=gold;x.font='900 38px "Big Shoulders Display"';x.fillText(p.odd,lx+lw-26,y+(rh-12)/2+1);}
+      if(p.odd){x.textAlign='right';x.fillStyle=ACC;x.font='900 38px "Big Shoulders Display"';x.fillText(p.odd,lx+lw-26,y+(rh-12)/2+1);}
       y+=rh;
     });
     x.textBaseline='alphabetic';
     // total odds + confidence strip
     x.textAlign='center';
-    x.font='900 90px "Big Shoulders Display"';x.fillStyle=gold;x.textBaseline='middle';x.fillText(($('odd').value||''),370,y+72);
+    x.font='900 90px "Big Shoulders Display"';x.fillStyle=ACC;x.textBaseline='middle';x.fillText(($('odd').value||''),370,y+72);
     x.font='700 20px "Space Mono"';x.fillStyle=golddim;x.textBaseline='alphabetic';x.fillText('CUOTA TOTAL',370,y+118);
     x.font='900 90px "Big Shoulders Display"';x.fillStyle=green;x.textBaseline='middle';x.fillText(($('conf').value||'')+'%',720,y+72);
-    x.font='700 20px "Space Mono"';x.fillStyle=gray;x.textBaseline='alphabetic';x.fillText('CONFIANZA',720,y+118);
+    x.font='700 20px "Space Mono"';x.fillStyle=gray;x.textBaseline='alphabetic';x.fillText(state==='won'?'¡PLENO!':state==='lost'?'NO ENTRÓ':'CONFIANZA',720,y+118);
   } else {
     // ---- hidden picks (paid teaser) ----
     const bx=140,by=360,bw=800,bh=270;
@@ -161,7 +174,7 @@ function draw(){
   const cta=($('cta').value||'').toUpperCase();
   x.font='800 34px "Big Shoulders Display"';
   const cw=x.measureText(cta).width+80, cx0=540-cw/2, cyy=890;
-  rr(x,cx0,cyy,cw,68,34);x.fillStyle=gold;x.fill();
+  rr(x,cx0,cyy,cw,68,34);x.fillStyle=ACC;x.fill();
   x.fillStyle=navy;x.textAlign='center';x.textBaseline='middle';x.fillText(cta,540,cyy+36);
   x.textBaseline='alphabetic';
 
@@ -184,6 +197,14 @@ document.querySelectorAll('#tier button').forEach(b=>b.addEventListener('click',
   draw();
 }));
 ['name','legs','odd','conf','date','cta','picks'].forEach(id=>$(id).addEventListener('input',draw));
+document.querySelectorAll('#state button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('#state button').forEach(z=>z.classList.remove('on'));
+  b.classList.add('on'); state=b.dataset.s;
+  if(state==='won'){ $('name').value='¡Combinada GANADA!'; $('cta').value='¡Pleno! ✅'; }
+  else if(state==='lost'){ $('name').value='No pudo ser'; $('cta').value='Mañana, más 👇'; }
+  else { $('cta').value = tier==='free' ? 'Cópiala gratis 👇' : tier==='single' ? 'Desbloquéala por 3,99€' : 'Todas por 14,99€/mes'; }
+  draw();
+}));
 if(document.fonts&&document.fonts.ready){document.fonts.ready.then(draw);}
 draw(); setTimeout(draw,400);
 </script>

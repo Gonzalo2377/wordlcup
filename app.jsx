@@ -133,19 +133,26 @@ async function loadDaily() {
 
 function handleUnlockRedirect() {
     try {
+        // Read query params from BOTH the normal search AND the hash — a hash-router
+        // URL like  /#/record?dueno=KEY  hides the query from location.search.
+        const fromHash = (location.hash.split('?')[1]) || '';
         const p = new URLSearchParams(location.search);
-        const u = p.get('unlocked');
+        const ph = new URLSearchParams(fromHash);
+        const get = (k) => p.get(k) || ph.get(k);
+        const u = get('unlocked');
         if (u === 'single' || u === 'all') {
             localStorage.setItem('mv_plan', u);
-            history.replaceState({}, '', location.pathname + location.hash);
         }
         // OWNER MODE: ?dueno=CLAVE unlocks everything locally; ?dueno=salir exits.
-        const owner = p.get('dueno') || p.get('owner');
-        const key = (window.MV_CONFIG && window.MV_CONFIG.ownerKey) || '';
+        const owner = (get('dueno') || get('owner') || '').trim();
+        const key = ((window.MV_CONFIG && window.MV_CONFIG.ownerKey) || '').trim();
         if (owner) {
             if (owner === 'salir' || owner === 'exit') { localStorage.removeItem('mv_owner'); localStorage.removeItem('mv_plan'); }
             else if (key && owner === key) { localStorage.setItem('mv_owner', '1'); localStorage.setItem('mv_plan', 'all'); }
-            history.replaceState({}, '', location.pathname + location.hash);
+            else { console.warn('[GOLVALUE] modo dueño: la clave no coincide con MV_CONFIG.ownerKey en config.js'); }
+            // strip the query but keep the hash route
+            const cleanHash = location.hash.split('?')[0];
+            history.replaceState({}, '', location.pathname + cleanHash);
         }
         if (localStorage.getItem('mv_owner') === '1') { window.MV_OWNER = true; window.MV_PLAN = 'all'; localStorage.setItem('mv_plan', 'all'); }
     } catch (e) {}

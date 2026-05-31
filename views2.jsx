@@ -245,7 +245,7 @@ function Record({ t, go }) {
                                 {window.COMBO_RECORD.map((c,i)=>{
                                     const won = c.result==='W';
                                     return (
-                                        <div className="panel" key={i} style={{ borderColor: won?'rgba(39,215,150,.4)':'rgba(255,107,94,.4)' }}>
+                                        <div className="panel" key={i} style={{ borderColor: won?'rgba(39,215,150,.4)':'rgba(255,107,94,.4)', overflow:'hidden' }}>
                                             <div className="combo__head" style={{ borderBottom:'1px solid var(--line)' }}>
                                                 <div>
                                                     <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', letterSpacing:'.1em' }}>{c.date}</div>
