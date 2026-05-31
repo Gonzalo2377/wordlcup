@@ -40,7 +40,11 @@ function ComboCard({ c, t, locked, onUnlock }) {
                         <span className="combo-leg__num">{i+1}</span>
                         <div className="combo-leg__main">
                             <div className="combo-leg__match">{l.match}</div>
-                            <div className="combo-leg__pick">{l.pick} · {bookById(l.book).name}</div>
+                            <div className="combo-leg__pick">
+                                <span className="combo-leg__pickbadge">{t.pick}</span>
+                                <b className="combo-leg__picksel">{l.pick}</b>
+                                <span className="combo-leg__book">· {bookById(l.book).name}</span>
+                            </div>
                         </div>
                         <span className="combo-leg__odd">{l.odd.toFixed(2)}</span>
                     </div>

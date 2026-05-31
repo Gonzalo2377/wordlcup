@@ -394,7 +394,7 @@ async function main(){
     const valued = MATCHES.map(m => ({ m, v: matchValue(m) })).filter(x => x.v.positive).sort((a,b)=>b.v.pick.modelP - a.v.pick.modelP);
 
     // ---- auto-build the day's accumulators ----
-    const label = (m,k) => k==='draw' ? 'Empate' : (k==='home' ? TEAMS[m.home].name : TEAMS[m.away].name);
+    const label = (m,k) => k==='draw' ? 'Empate' : (k==='home' ? `Gana ${TEAMS[m.home].name}` : `Gana ${TEAMS[m.away].name}`);
     const legOf = (x) => ({ match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
     const confOf = (arr) => Math.round(arr.reduce((p,x)=>p*x.v.pick.modelP,1)*100);
     const COMBOS = [];

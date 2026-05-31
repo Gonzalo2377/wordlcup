@@ -55,13 +55,13 @@ function Book({ id, showName = true, size = 24 }) {
 }
 
 /* ---------- value tag ---------- */
-function ValueTag({ edge, hot, small }) {
+function ValueTag({ edge, hot, small, muted }) {
     const positive = edge >= 2;
-    const cls = hot ? 'value value--hot' : positive ? 'value value--pos' : 'value value--neg';
+    const cls = muted ? 'value value--muted' : hot ? 'value value--hot' : positive ? 'value value--pos' : 'value value--neg';
     const sign = edge >= 0 ? '+' : '';
     return (
         <span className={cls} style={small ? { fontSize:'.72rem', padding:'4px 9px' } : null}>
-            {positive && <span className="value__arrow">▲</span>}{sign}{edge.toFixed(1)}%
+            {positive && !muted && <span className="value__arrow">▲</span>}{sign}{edge.toFixed(1)}%
         </span>
     );
 }

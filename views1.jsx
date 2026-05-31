@@ -178,14 +178,14 @@ function ValueBoard({ t, go, lang }) {
                                     const home=teamById(m.home), away=teamById(m.away);
                                     const pickLabel = window.outcomeLabel(v.pick.k, m, lang);
                                     return (
-                                        <tr key={m.id} onClick={()=>go({view:'match', id:m.id})}>
+                                        <tr key={m.id} onClick={()=>go({view:'match', id:m.id})} style={v.positive ? { background:'rgba(246,196,67,.05)' } : null}>
                                             <td className="l"><span className="vb-match">{home.code} <span className="vs">{t.vs}</span> {away.code}</span><div className="vb-time" style={{ marginTop:2 }}>{m.group}</div></td>
                                             <td><span className="vb-time">{m.time}</span></td>
-                                            <td className="l">{v.positive ? <b style={{ fontFamily:'var(--font-head)' }}>{pickLabel}</b> : <span style={{ color:'var(--muted)' }}>—</span>}</td>
+                                            <td className="l"><span style={{ fontFamily:'var(--font-head)', fontWeight: v.positive?700:500, color: v.positive ? 'var(--lime)' : 'var(--text-2)' }}>{pickLabel}</span></td>
                                             <td style={{ color: v.positive ? 'var(--lime)' : 'var(--muted)' }}>{Math.round(v.pick.modelP*100)}%</td>
-                                            <td><b style={{ color: v.positive ? 'var(--text)' : 'var(--muted)' }}>{v.pick.best.price.toFixed(2)}</b></td>
-                                            <td>{v.positive ? <Book id={v.pick.best.book} showName={false} size={22} /> : <span style={{ color:'var(--muted)' }}>—</span>}</td>
-                                            <td>{v.positive ? <ValueTag edge={v.edge} hot={v.hot} small /> : <span style={{ color:'var(--faint)', fontFamily:'var(--font-mono)', fontSize:'.8rem' }}>—</span>}</td>
+                                            <td><b style={{ color: v.positive ? 'var(--text)' : 'var(--text-2)' }}>{v.pick.best.price.toFixed(2)}</b></td>
+                                            <td><Book id={v.pick.best.book} showName={false} size={22} /></td>
+                                            <td><ValueTag edge={v.edge} hot={v.hot} small muted={!v.positive} /></td>
                                         </tr>
                                     );
                                 })}

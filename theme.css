@@ -282,6 +282,7 @@ button { font-family: inherit; cursor: pointer; }
 }
 .value--pos { background: rgba(246,196,67,.13); color: var(--lime); border: 1px solid rgba(246,196,67,.35); }
 .value--neg { background: rgba(255,255,255,.03); color: var(--muted); border: 1px solid var(--line); }
+.value--muted { background: rgba(255,255,255,.02); color: var(--muted); border: 1px solid var(--line); opacity: .65; }
 .value--hot { background: var(--lime); color: #0b0e17; box-shadow: 0 0 22px -8px var(--lime-glow); }
 .value__arrow { font-size: .9em; }
 
@@ -574,8 +575,11 @@ button { font-family: inherit; cursor: pointer; }
 .combo-leg:last-child { border-bottom: none; }
 .combo-leg__num { width: 24px; height: 24px; border-radius: 7px; background: var(--surface-3); display: grid; place-items: center; font-family: var(--font-mono); font-weight: 700; font-size: .72rem; color: var(--muted); flex-shrink: 0; }
 .combo-leg__main { flex: 1; }
-.combo-leg__match { font-family: var(--font-head); font-weight: 600; font-size: .92rem; }
-.combo-leg__pick { font-family: var(--font-mono); font-size: .72rem; color: var(--lime); margin-top: 2px; }
+.combo-leg__match { font-family: var(--font-head); font-weight: 600; font-size: .92rem; color: var(--text-2); }
+.combo-leg__pick { display: flex; align-items: center; gap: 7px; margin-top: 4px; flex-wrap: wrap; }
+.combo-leg__pickbadge { font-family: var(--font-mono); font-size: .58rem; letter-spacing: .12em; text-transform: uppercase; color: #0b0e17; background: var(--lime); padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+.combo-leg__picksel { font-family: var(--font-head); font-weight: 800; font-size: .95rem; color: var(--lime); }
+.combo-leg__book { font-family: var(--font-mono); font-size: .7rem; color: var(--muted); }
 .combo-leg__odd { font-family: var(--font-mono); font-weight: 700; }
 .combo__foot { display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; border-top: 1px solid var(--line); background: var(--surface-2); }
 .combo__conf { font-family: var(--font-mono); font-size: .72rem; color: var(--text-2); }
