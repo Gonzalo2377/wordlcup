@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-01T09:58:41.613Z",
+    "updatedAt": "2026-06-01T12:13:20.830Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -9,8 +9,8 @@
     "valuePicks": 0,
     "books": 15,
     "credits": {
-      "remaining": 486,
-      "used": 14
+      "remaining": 476,
+      "used": 24
     }
   },
   "TEAMS": {
@@ -139,64 +139,74 @@
           "nordicbet": 2.68,
           "betsson": 2.68,
           "onexbet": 2.71,
-          "sport888": 2.62,
-          "williamhill": 2.62,
+          "sport888": 2.7,
+          "williamhill": 2.7,
           "marathonbet": 2.71,
           "coolbet": 2.65,
-          "leovegas": 2.6,
+          "leovegas": 2.63,
           "unibet": 2.7,
           "betonlineag": 2.82,
-          "pinnacle": 2.92,
-          "codere": 2.6,
-          "matchbook": 2.9,
-          "betfair": 2.9,
-          "tipico": 2.8
+          "pinnacle": 2.95,
+          "codere": 2.65,
+          "matchbook": 2.94,
+          "betfair": 2.94,
+          "tipico": 2.85
         },
         "draw": {
           "nordicbet": 2.82,
           "betsson": 2.82,
           "onexbet": 2.81,
-          "sport888": 2.75,
-          "williamhill": 2.75,
+          "sport888": 2.8,
+          "williamhill": 2.8,
           "marathonbet": 2.81,
           "coolbet": 2.95,
-          "leovegas": 3,
-          "unibet": 3.05,
-          "betonlineag": 2.7,
-          "pinnacle": 2.75,
-          "codere": 2.75,
-          "matchbook": 3,
-          "betfair": 3,
-          "tipico": 2.8
+          "leovegas": 2.95,
+          "unibet": 3,
+          "betonlineag": 2.74,
+          "pinnacle": 2.76,
+          "codere": 2.8,
+          "matchbook": 2.98,
+          "betfair": 2.98,
+          "tipico": 2.75
         },
         "away": {
           "nordicbet": 2.82,
           "betsson": 2.82,
           "onexbet": 2.82,
-          "sport888": 2.9,
-          "williamhill": 2.9,
+          "sport888": 2.75,
+          "williamhill": 2.75,
           "marathonbet": 2.82,
           "coolbet": 2.8,
           "leovegas": 2.7,
-          "unibet": 2.75,
-          "betonlineag": 2.96,
+          "unibet": 2.8,
+          "betonlineag": 2.94,
           "pinnacle": 2.97,
-          "codere": 2.75,
-          "matchbook": 2.98,
-          "betfair": 2.96,
+          "codere": 2.8,
+          "matchbook": 3,
+          "betfair": 3,
           "tipico": 2.55
         }
       },
       "model": {
-        "home": 0.3425381691280875,
-        "draw": 0.32770146141233836,
-        "away": 0.3297603694595742,
+        "home": 0.3400072002493625,
+        "draw": 0.3282069448814606,
+        "away": 0.33178585486917694,
         "fromMarket": true
       }
     }
   ],
   "COMBOS": [],
   "RECORD": [
+    {
+      "id": "ea30e9681a6618720cae67524b78b985",
+      "date": "31 MAY",
+      "pick": "Gana Genk",
+      "match": "Gent – Genk",
+      "odd": 2.94,
+      "book": "betfair",
+      "stake": 1,
+      "result": "L"
+    },
     {
       "id": "6e7dbb756b26aca56c81577545755e71",
       "date": "31 MAY",
@@ -248,19 +258,7 @@
       "result": "L"
     }
   ],
-  "PENDING": [
-    {
-      "id": "ea30e9681a6618720cae67524b78b985",
-      "sport": "soccer_belgium_first_div",
-      "ts": 1780245000000,
-      "date": "31 MAY",
-      "match": "Gent – Genk",
-      "pickKey": "away",
-      "pickLabel": "Gana Genk",
-      "odd": 2.94,
-      "book": "betfair"
-    }
-  ],
+  "PENDING": [],
   "COMBO_PENDING": [],
   "COMBO_RECORD": [
     {
