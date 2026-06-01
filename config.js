@@ -44,5 +44,5 @@ window.MV_CONFIG = {
        y se desbloquea todo SOLO en tu navegador (queda guardado para siempre).
        Para salir del modo dueño:  https://golvalue.online/?dueno=salir
        👉 CAMBIA esta clave por una tuya y vuelve a subir config.js. */
-    ownerKey: 'golvalue2026',
+    ownerKey:'golv-2026-xK9p',
 };
