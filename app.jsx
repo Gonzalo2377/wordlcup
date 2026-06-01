@@ -92,12 +92,16 @@ function applyDaily(d) {
     if (d.COMBOS)  window.COMBOS  = d.COMBOS;
     if (d.RECORD && d.RECORD.length)  window.RECORD  = d.RECORD;   // keep sample record until real picks are settled
     window.PENDING = Array.isArray(d.PENDING) ? d.PENDING : [];    // our live selections awaiting result
-    // Combos we hand-pin (always shown) take priority; the robot's settled combos follow, deduped by dayId.
-    const feedCombos = Array.isArray(d.COMBO_RECORD) ? d.COMBO_RECORD : [];
+    // de-dup helper: drop entries sharing the same key (first wins)
+    const dedupBy = (arr, keyFn) => { const s = new Set(); return (arr||[]).filter(o => { const k = keyFn(o); if (s.has(k)) return false; s.add(k); return true; }); };
+    const comboKey = (c) => `${c.date||''}|${(c.legs||[]).map(l=>`${l.match}|${l.pick}`).sort().join(' + ')}`;
+    window.PENDING = dedupBy(window.PENDING, p => `${p.date||''}|${p.match||''}|${p.pickLabel||''}`);
+    // Combos we hand-pin (always shown) take priority; the robot's settled combos follow, deduped by dayId AND by content.
+    const feedCombos = dedupBy(Array.isArray(d.COMBO_RECORD) ? d.COMBO_RECORD : [], comboKey);
     const pinned = Array.isArray(window.COMBO_PINNED) ? window.COMBO_PINNED : [];
-    const seen = new Set(pinned.map(c => c.dayId));
-    window.COMBO_RECORD = [...pinned, ...feedCombos.filter(c => !seen.has(c.dayId))];
-    window.COMBO_PENDING = Array.isArray(d.COMBO_PENDING) ? d.COMBO_PENDING : (window.COMBO_PENDING || []);
+    const seen = new Set([...pinned.map(c => c.dayId), ...pinned.map(comboKey)]);
+    window.COMBO_RECORD = [...pinned, ...feedCombos.filter(c => !seen.has(c.dayId) && !seen.has(comboKey(c)))];
+    window.COMBO_PENDING = dedupBy(Array.isArray(d.COMBO_PENDING) ? d.COMBO_PENDING : (window.COMBO_PENDING || []), comboKey);
     if (d.meta)    window.DAILY.meta = d.meta;
     // Trust the model the robot already computed (single source of truth).
     // Only (re)compute for matches that arrive without one — e.g. older feeds.
