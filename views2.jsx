@@ -3,7 +3,8 @@
    ============================================================ */
 
 /* ---- premium plan helpers (server-verified if backend present; else Stripe link / demo) ---- */
-function getPlan(){ if (window.MV_PLAN) return window.MV_PLAN; try { return localStorage.getItem('mv_plan') || 'free'; } catch(e){ return 'free'; } }
+function isOwner(){ try { return window.MV_OWNER === true || localStorage.getItem('mv_owner') === '1'; } catch(e){ return false; } }
+function getPlan(){ if (isOwner()) return 'all'; if (window.MV_PLAN) return window.MV_PLAN; try { return localStorage.getItem('mv_plan') || 'free'; } catch(e){ return 'free'; } }
 function setPlanLS(p){ try { localStorage.setItem('mv_plan', p); } catch(e){} }
 function stripeUrl(tier){ const s=(window.MV_CONFIG&&window.MV_CONFIG.stripe)||{}; return tier==='single'?s.single:(tier==='all'?s.all:null); }
 async function startCheckout(tier, setPlan){
@@ -91,7 +92,7 @@ function Premium({ t, go }) {
                 <div className="wrap">
                     <span className="eyebrow"><span className="dot" />{t.comboOfDay}</span>
                     <h2 className="section__title" style={{ marginBottom:8 }}>{t.pricingTitle}</h2>
-                    {window.MV_OWNER && (
+                    {isOwner() && (
                         <div style={{ display:'flex', alignItems:'center', gap:10, background:'rgba(246,196,67,.1)', border:'1px solid rgba(246,196,67,.4)', borderRadius:10, padding:'10px 14px', marginBottom:16 }}>
                             <span style={{ fontFamily:'var(--font-head)', fontWeight:800, color:'var(--lime)', fontSize:'.85rem' }}>👑 MODO DUEÑO</span>
                             <span style={{ color:'var(--text-2)', fontSize:'.85rem' }}>Estás viendo todas las combinadas desbloqueadas. Para salir: <code style={{ color:'var(--lime)' }}>?dueno=salir</code></span>
@@ -167,7 +168,7 @@ function Record({ t, go }) {
                     <h2 className="section__title" style={{ marginBottom:8 }}>{t.recordTitle}</h2>
                     <p style={{ color:'var(--text-2)', maxWidth:660, lineHeight:1.6, marginBottom:26 }}>{t.recordLead}</p>
 
-                    {window.MV_OWNER && window.DAILY && window.DAILY.meta && window.DAILY.meta.credits && (window.DAILY.meta.credits.used != null || window.DAILY.meta.credits.remaining != null) && (
+                    {isOwner() && window.DAILY && window.DAILY.meta && window.DAILY.meta.credits && (window.DAILY.meta.credits.used != null || window.DAILY.meta.credits.remaining != null) && (
                         <div style={{ display:'flex', alignItems:'center', gap:18, flexWrap:'wrap', background:'rgba(246,196,67,.08)', border:'1px solid rgba(246,196,67,.32)', borderRadius:12, padding:'12px 18px', marginBottom:22 }}>
                             <span style={{ fontFamily:'var(--font-head)', fontWeight:800, color:'var(--lime)', fontSize:'.85rem' }}>👑 API · The Odds API</span>
                             <span style={{ fontFamily:'var(--font-mono)', fontSize:'.82rem', color:'var(--text-2)' }}>Créditos usados: <b style={{ color:'var(--text)' }}>{window.DAILY.meta.credits.used ?? '—'}</b></span>
