@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-06-02T09:42:27.739Z",
+    "updatedAt": "2026-06-02T10:58:45.538Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
     "market": "h2h",
-    "matches": 10,
+    "matches": 11,
     "valuePicks": 0,
     "books": 14,
     "stale": false,
     "credits": {
-      "remaining": 424,
-      "used": 76
+      "remaining": 412,
+      "used": 88
     }
   },
   "TEAMS": {
@@ -209,6 +209,26 @@
       "id": "kyotop",
       "name": "Kyoto Purple Sanga",
       "code": "KYO",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "kawasa": {
+      "id": "kawasa",
+      "name": "Kawasaki Frontale",
+      "code": "KAW",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "hirosh": {
+      "id": "hirosh",
+      "name": "Hiroshima Sanfrecce FC",
+      "code": "HIR",
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
@@ -788,6 +808,54 @@
         "away": 0.2525504769813047,
         "fromMarket": true
       }
+    },
+    {
+      "id": "999f09b5931411b7cf71d2b954cfe9dd",
+      "group": "sáb, 06 jun",
+      "time": "12:00",
+      "home": "kawasa",
+      "away": "hirosh",
+      "odds": {
+        "home": {
+          "pinnacle": 3.4,
+          "winamax": 3.05,
+          "betsson": 3.25,
+          "nordicbet": 3.25,
+          "unibet": 3.15,
+          "betclic": 3.1,
+          "sport888": 3.25,
+          "williamhill": 3.25,
+          "marathonbet": 3.34
+        },
+        "draw": {
+          "pinnacle": 3.74,
+          "winamax": 3.4,
+          "betsson": 3.45,
+          "nordicbet": 3.45,
+          "unibet": 3.35,
+          "betclic": 3.3,
+          "sport888": 3.4,
+          "williamhill": 3.4,
+          "marathonbet": 3.66
+        },
+        "away": {
+          "pinnacle": 2.04,
+          "winamax": 1.98,
+          "betsson": 2.05,
+          "nordicbet": 2.05,
+          "unibet": 1.94,
+          "betclic": 1.94,
+          "sport888": 2,
+          "williamhill": 2,
+          "marathonbet": 2
+        }
+      },
+      "model": {
+        "home": 0.2820918610767554,
+        "draw": 0.26309915840574644,
+        "away": 0.45480898051749813,
+        "fromMarket": true
+      }
     }
   ],
   "COMBOS": [
@@ -856,14 +924,14 @@
           "book": "betsson"
         },
         {
-          "id": "91af55abdd4ad711d08323e544c02b7d",
+          "id": "999f09b5931411b7cf71d2b954cfe9dd",
           "sport": "soccer_japan_j_league",
-          "ts": 1780725600000,
-          "side": "home",
-          "match": "FC Machida Zelvia – Nagoya Grampus",
-          "pick": "Gana FC Machida Zelvia",
-          "odd": 2.14,
-          "book": "pinnacle"
+          "ts": 1780740000000,
+          "side": "away",
+          "match": "Kawasaki Frontale – Hiroshima Sanfrecce FC",
+          "pick": "Gana Hiroshima Sanfrecce FC",
+          "odd": 2.05,
+          "book": "betsson"
         }
       ]
     },
@@ -904,14 +972,14 @@
           "book": "betsson"
         },
         {
-          "id": "91af55abdd4ad711d08323e544c02b7d",
+          "id": "999f09b5931411b7cf71d2b954cfe9dd",
           "sport": "soccer_japan_j_league",
-          "ts": 1780725600000,
-          "side": "home",
-          "match": "FC Machida Zelvia – Nagoya Grampus",
-          "pick": "Gana FC Machida Zelvia",
-          "odd": 2.14,
-          "book": "pinnacle"
+          "ts": 1780740000000,
+          "side": "away",
+          "match": "Kawasaki Frontale – Hiroshima Sanfrecce FC",
+          "pick": "Gana Hiroshima Sanfrecce FC",
+          "odd": 2.05,
+          "book": "betsson"
         }
       ]
     }
