@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-06-02T10:58:45.538Z",
+    "updatedAt": "2026-06-02T16:01:19.715Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
     "market": "h2h",
-    "matches": 11,
+    "matches": 12,
     "valuePicks": 0,
-    "books": 14,
+    "books": 15,
     "stale": false,
     "credits": {
-      "remaining": 412,
-      "used": 88
+      "remaining": 400,
+      "used": 100
     }
   },
   "TEAMS": {
@@ -29,6 +29,26 @@
       "id": "juvent",
       "name": "Juventude",
       "code": "JUV",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "criciu": {
+      "id": "criciu",
+      "name": "Criciuma",
+      "code": "CRI",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "londri": {
+      "id": "londri",
+      "name": "Londrina",
+      "code": "LON",
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
@@ -309,6 +329,12 @@
       "color": "#c8102e",
       "url": "#"
     },
+    "onexbet": {
+      "name": "1xBet",
+      "abbr": "1XBE",
+      "color": "#1f5fd6",
+      "url": "#"
+    },
     "winamax": {
       "name": "Winamax",
       "abbr": "WINA",
@@ -339,10 +365,10 @@
           "coolbet": 2.3,
           "pinnacle": 2.32,
           "marathonbet": 2.23,
-          "sport888": 2.25,
-          "williamhill": 2.25,
+          "sport888": 2.15,
+          "williamhill": 2.15,
           "codere": 2.19,
-          "tipico": 2.1
+          "tipico": 2.2
         },
         "draw": {
           "leovegas": 2.85,
@@ -351,12 +377,12 @@
           "nordicbet": 2.78,
           "betonlineag": 2.64,
           "coolbet": 2.9,
-          "pinnacle": 2.68,
-          "marathonbet": 2.74,
+          "pinnacle": 2.67,
+          "marathonbet": 2.73,
           "sport888": 2.9,
           "williamhill": 2.9,
           "codere": 2.7,
-          "tipico": 2.8
+          "tipico": 2.6
         },
         "away": {
           "leovegas": 3.85,
@@ -365,18 +391,75 @@
           "nordicbet": 3.65,
           "betonlineag": 3.9,
           "coolbet": 3.5,
-          "pinnacle": 3.99,
-          "marathonbet": 3.76,
-          "sport888": 3.3,
-          "williamhill": 3.3,
+          "pinnacle": 4,
+          "marathonbet": 3.78,
+          "sport888": 3.5,
+          "williamhill": 3.5,
           "codere": 3.55,
           "tipico": 3.7
         }
       },
       "model": {
-        "home": 0.41698533898615103,
-        "draw": 0.3306400841709385,
-        "away": 0.2523745768429105,
+        "home": 0.41807592658811,
+        "draw": 0.33262692232095015,
+        "away": 0.24929715109093994,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "468d40850db8507bc33dcc0acc63239a",
+      "group": "sáb, 06 jun",
+      "time": "16:00",
+      "home": "criciu",
+      "away": "londri",
+      "odds": {
+        "home": {
+          "unibet": 1.67,
+          "leovegas": 1.63,
+          "pinnacle": 1.66,
+          "coolbet": 1.68,
+          "betsson": 1.65,
+          "betonlineag": 1.66,
+          "nordicbet": 1.65,
+          "onexbet": 1.66,
+          "marathonbet": 1.64,
+          "williamhill": 1.67,
+          "sport888": 1.67,
+          "tipico": 1.57
+        },
+        "draw": {
+          "unibet": 3.6,
+          "leovegas": 3.5,
+          "pinnacle": 3.57,
+          "coolbet": 3.6,
+          "betsson": 3.5,
+          "betonlineag": 3.5,
+          "nordicbet": 3.5,
+          "onexbet": 3.54,
+          "marathonbet": 3.54,
+          "williamhill": 3.3,
+          "sport888": 3.3,
+          "tipico": 3.5
+        },
+        "away": {
+          "unibet": 5.3,
+          "leovegas": 5.2,
+          "pinnacle": 5.64,
+          "coolbet": 5,
+          "betsson": 5.3,
+          "betonlineag": 5.1,
+          "nordicbet": 5.3,
+          "onexbet": 5.3,
+          "marathonbet": 5.35,
+          "williamhill": 5,
+          "sport888": 5,
+          "tipico": 5.5
+        }
+      },
+      "model": {
+        "home": 0.5595115668480651,
+        "draw": 0.2643410200417267,
+        "away": 0.17614741311020823,
         "fromMarket": true
       }
     },
@@ -863,6 +946,44 @@
       "id": "c1",
       "tier": "single",
       "name": "Combinada del Día",
+      "conf": 13,
+      "legs": [
+        {
+          "id": "468d40850db8507bc33dcc0acc63239a",
+          "sport": "soccer_brazil_serie_b",
+          "ts": 1780754400000,
+          "side": "home",
+          "match": "Criciuma – Londrina",
+          "pick": "Gana Criciuma",
+          "odd": 1.68,
+          "book": "coolbet"
+        },
+        {
+          "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780722000000,
+          "side": "home",
+          "match": "FC Tokyo – Cerezo Osaka",
+          "pick": "Gana FC Tokyo",
+          "odd": 1.85,
+          "book": "pinnacle"
+        },
+        {
+          "id": "02e90a97d3576f9814ff0440cf86ca30",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780729200000,
+          "side": "home",
+          "match": "Urawa Red Diamonds – Fagiano Okayama",
+          "pick": "Gana Urawa Red Diamonds",
+          "odd": 1.96,
+          "book": "pinnacle"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "tier": "all",
+      "name": "Combinada Segura",
       "conf": 11,
       "legs": [
         {
@@ -898,49 +1019,21 @@
       ]
     },
     {
-      "id": "c2",
-      "tier": "all",
-      "name": "Combinada Segura",
-      "conf": 10,
-      "legs": [
-        {
-          "id": "02e90a97d3576f9814ff0440cf86ca30",
-          "sport": "soccer_japan_j_league",
-          "ts": 1780729200000,
-          "side": "home",
-          "match": "Urawa Red Diamonds – Fagiano Okayama",
-          "pick": "Gana Urawa Red Diamonds",
-          "odd": 1.96,
-          "book": "pinnacle"
-        },
-        {
-          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
-          "sport": "soccer_japan_j_league",
-          "ts": 1780736400000,
-          "side": "home",
-          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
-          "pick": "Gana Kashiwa Reysol",
-          "odd": 1.98,
-          "book": "betsson"
-        },
-        {
-          "id": "999f09b5931411b7cf71d2b954cfe9dd",
-          "sport": "soccer_japan_j_league",
-          "ts": 1780740000000,
-          "side": "away",
-          "match": "Kawasaki Frontale – Hiroshima Sanfrecce FC",
-          "pick": "Gana Hiroshima Sanfrecce FC",
-          "odd": 2.05,
-          "book": "betsson"
-        }
-      ]
-    },
-    {
       "id": "c3",
       "tier": "all",
       "name": "Combinada Larga",
-      "conf": 5,
+      "conf": 6,
       "legs": [
+        {
+          "id": "468d40850db8507bc33dcc0acc63239a",
+          "sport": "soccer_brazil_serie_b",
+          "ts": 1780754400000,
+          "side": "home",
+          "match": "Criciuma – Londrina",
+          "pick": "Gana Criciuma",
+          "odd": 1.68,
+          "book": "coolbet"
+        },
         {
           "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
           "sport": "soccer_japan_j_league",
@@ -969,16 +1062,6 @@
           "match": "Kashiwa Reysol – Kyoto Purple Sanga",
           "pick": "Gana Kashiwa Reysol",
           "odd": 1.98,
-          "book": "betsson"
-        },
-        {
-          "id": "999f09b5931411b7cf71d2b954cfe9dd",
-          "sport": "soccer_japan_j_league",
-          "ts": 1780740000000,
-          "side": "away",
-          "match": "Kawasaki Frontale – Hiroshima Sanfrecce FC",
-          "pick": "Gana Hiroshima Sanfrecce FC",
-          "odd": 2.05,
           "book": "betsson"
         }
       ]
