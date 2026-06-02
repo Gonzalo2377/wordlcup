@@ -331,4 +331,122 @@ function How({ t, go }) {
     );
 }
 
-Object.assign(window, { Premium, Record, How, ComboCard, EquityCurve });
+Object.assign(window, { Premium, Record, How, ComboCard, EquityCurve, Arbitrage });
+
+/* ============================================================
+   ARBITRAJES / SUREBETS
+   ============================================================ */
+function Arbitrage({ t, go, lang }) {
+    const [stake, setStake] = useState(() => { try { return +localStorage.getItem('mv_arb_stake') || 100; } catch(e){ return 100; } });
+    useEffect(() => { try { localStorage.setItem('mv_arb_stake', stake); } catch(e){} }, [stake]);
+
+    const all = window.findArbs ? window.findArbs() : [];
+    const arbs = all.filter(a => a.hasArb);
+    const near = all.filter(a => !a.hasArb).slice(0, 6);
+    const total = Math.max(1, +stake || 0);
+
+    const ArbCard = ({ a, isArb }) => {
+        const home = teamById(a.m.home), away = teamById(a.m.away);
+        const split = window.arbSplit(a.legs, total);
+        const ret = window.arbReturn(a.legs, total);
+        const profit = ret - total;
+        return (
+            <div className="panel" style={{ overflow:'hidden', borderColor: isArb ? 'rgba(39,215,150,.45)' : 'var(--line)' }}>
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12, padding:'14px 16px', borderBottom:'1px solid var(--line)', cursor:'pointer' }} onClick={()=>go({view:'match', id:a.m.id})}>
+                    <div style={{ minWidth:0 }}>
+                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.1em', textTransform:'uppercase' }}>{a.m.group} · {a.m.time}</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{home.code} <span style={{ color:'var(--muted)' }}>v</span> {away.code}</div>
+                    </div>
+                    <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.78rem', padding:'5px 10px', borderRadius:8, whiteSpace:'nowrap',
+                        background: isArb ? 'rgba(39,215,150,.13)' : 'rgba(255,255,255,.04)',
+                        color: isArb ? 'var(--green)' : 'var(--muted)',
+                        border: '1px solid ' + (isArb ? 'rgba(39,215,150,.4)' : 'var(--line)') }}>
+                        {a.marginPct >= 0 ? '+' : ''}{a.marginPct.toFixed(2)}%
+                    </span>
+                </div>
+
+                <div style={{ padding:'4px 16px' }}>
+                    {split.map((l,i) => (
+                        <div key={i} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'11px 0', borderBottom: i<split.length-1?'1px solid var(--line)':'none' }}>
+                            <div style={{ minWidth:0, flex:1 }}>
+                                <div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.9rem', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{window.outcomeLabel(l.k, a.m, lang)}</div>
+                                <div style={{ display:'flex', alignItems:'center', gap:6, marginTop:3 }}>
+                                    <span style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)' }}>{t.arbAt}</span>
+                                    <Book id={l.book} size={18} />
+                                    {l.suspicious && <span title={t.arbSuspect} style={{ color:'#ffb01f', fontSize:'.8rem' }}>⚠</span>}
+                                </div>
+                            </div>
+                            <div style={{ textAlign:'right', whiteSpace:'nowrap' }}>
+                                <div style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.95rem', color:'var(--text)' }}>{l.price.toFixed(2)}</div>
+                                <div style={{ fontFamily:'var(--font-mono)', fontSize:'.7rem', color:'var(--lime)', marginTop:2 }}>{t.arbStake} {l.stake.toFixed(2)}€</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'12px 16px', background:'rgba(255,255,255,.02)', borderTop:'1px solid var(--line)' }}>
+                    <div>
+                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.08em', textTransform:'uppercase' }}>{t.arbReturnsAll}</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem' }}>{ret.toFixed(2)}€</div>
+                    </div>
+                    <div style={{ textAlign:'right' }}>
+                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.08em', textTransform:'uppercase' }}>{t.arbProfit}</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.15rem', color: profit > 0 ? 'var(--green)' : 'var(--red)' }}>{profit >= 0 ? '+' : ''}{profit.toFixed(2)}€</div>
+                    </div>
+                </div>
+                {!isArb && <div style={{ padding:'8px 16px', fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', background:'rgba(255,255,255,.02)' }}>{t.arbNearTag}</div>}
+            </div>
+        );
+    };
+
+    return (
+        <main>
+            <section className="section">
+                <div className="wrap">
+                    <div className="section__head">
+                        <div>
+                            <span className="eyebrow"><span className="dot" />{t.arbEyebrow}</span>
+                            <h2 className="section__title">{t.arbTitle}</h2>
+                        </div>
+                        {arbs.length > 0 && <span className="tag tag--lime">{arbs.length} {t.arbFound}</span>}
+                    </div>
+                    <p style={{ color:'var(--text-2)', maxWidth:680, margin:'-8px 0 20px', lineHeight:1.6 }}>{t.arbLead}</p>
+
+                    {/* stake control */}
+                    <div className="panel panel--pad" style={{ display:'flex', alignItems:'center', gap:14, flexWrap:'wrap', marginBottom:24 }}>
+                        <label style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', letterSpacing:'.1em', textTransform:'uppercase', color:'var(--muted)' }}>{t.arbStakeLabel}</label>
+                        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+                            <input type="number" min="1" value={stake} onChange={e=>setStake(e.target.value)}
+                                style={{ width:120, background:'var(--bg)', border:'1px solid var(--line)', color:'var(--text)', borderRadius:9, padding:'10px 12px', fontFamily:'var(--font-mono)', fontSize:'1rem', fontWeight:700 }} />
+                            <span style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.1rem', color:'var(--muted)' }}>€</span>
+                        </div>
+                        <div style={{ display:'flex', gap:7 }}>
+                            {[50,100,250,500].map(v => (
+                                <button key={v} onClick={()=>setStake(v)} style={{ cursor:'pointer', background: +stake===v ? 'var(--lime)' : 'rgba(255,255,255,.04)', color: +stake===v ? '#0b0e17' : 'var(--text-2)', border:'1px solid ' + (+stake===v ? 'var(--lime)' : 'var(--line)'), borderRadius:8, padding:'8px 12px', fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.8rem' }}>{v}€</button>
+                            ))}
+                        </div>
+                    </div>
+
+                    {arbs.length > 0 ? (
+                        <div className="grid grid--3">{arbs.map(a => <ArbCard key={a.m.id} a={a} isArb />)}</div>
+                    ) : (
+                        <div className="panel panel--pad" style={{ textAlign:'center', padding:'34px 22px', marginBottom:26 }}>
+                            <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.15rem', marginBottom:6 }}>{t.arbNone}</div>
+                            <div style={{ color:'var(--text-2)', fontSize:'.9rem', lineHeight:1.55, maxWidth:520, margin:'0 auto' }}>{t.arbNoneLead}</div>
+                        </div>
+                    )}
+
+                    {near.length > 0 && (
+                        <div style={{ marginTop:30 }}>
+                            <span className="eyebrow muted"><span className="dot" />{t.arbNear}</span>
+                            <div className="grid grid--3" style={{ marginTop:14 }}>{near.map(a => <ArbCard key={a.m.id} a={a} isArb={false} />)}</div>
+                        </div>
+                    )}
+
+                    <div className="disclaimer" style={{ marginTop:24 }}><b>{t.discTitle}</b> {t.arbDisc}</div>
+                </div>
+            </section>
+            <Footer t={t} go={go} />
+        </main>
+    );
+}

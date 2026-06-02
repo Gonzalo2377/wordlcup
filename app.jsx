@@ -56,6 +56,7 @@ function App() {
         case 'combos':
         case 'premium': view = <Premium t={t} go={go} />; break;
         case 'record':  view = <Record t={t} go={go} />; break;
+        case 'arb':     view = <Arbitrage t={t} go={go} lang={lang} />; break;
         case 'how':     view = <How t={t} go={go} />; break;
         default:        view = <Home t={t} go={go} lang={lang} />;
     }
@@ -148,8 +149,8 @@ function handleUnlockRedirect() {
             localStorage.setItem('mv_plan', u);
         }
         // OWNER MODE: ?dueno=CLAVE unlocks everything locally; ?dueno=salir exits.
-        const owner = (get('dueno') || get('owner') || '').trim();
-        const key = ((window.MV_CONFIG && window.MV_CONFIG.ownerKey) || '').trim();
+        const owner = (get('dueno') || get('owner') || '').trim().toLowerCase();
+        const key = ((window.MV_CONFIG && window.MV_CONFIG.ownerKey) || '').trim().toLowerCase();
         if (owner) {
             if (owner === 'salir' || owner === 'exit') { localStorage.removeItem('mv_owner'); localStorage.removeItem('mv_plan'); }
             else if (key && owner === key) { localStorage.setItem('mv_owner', '1'); localStorage.setItem('mv_plan', 'all'); }

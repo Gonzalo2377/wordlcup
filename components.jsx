@@ -23,6 +23,7 @@ const Icon = {
     x: (p={}) => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" {...p}><path d="M18 6 6 18M6 6l12 12"/></svg>),
     ext: (p={}) => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>),
     trophy: (p={}) => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}><path d="M6 4h12v4a6 6 0 0 1-12 0zM6 6H3v2a3 3 0 0 0 3 3M18 6h3v2a3 3 0 0 1-3 3M9 19h6M12 14v5"/></svg>),
+    scale: (p={}) => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" {...p}><path d="M12 3v18M7 21h10M12 5l-7 2 7-2 7 2-7-2M5 7l-2.5 6a3 3 0 0 0 6 0L5 7zM19 7l-2.5 6a3 3 0 0 0 6 0L19 7z"/></svg>),
 };
 
 function pickInk(hex) {
@@ -94,6 +95,7 @@ function Nav({ t, lang, setLang, route, go }) {
     const links = [
         ['value', t.navValue, Icon.target],
         ['combos', t.navCombos, Icon.layers],
+        ['arb', t.navArb, Icon.scale],
         ['record', t.navRecord, Icon.chart],
         ['how', t.navHow, Icon.book],
     ];
@@ -142,8 +144,8 @@ function MobileNav({ t, route, go }) {
     const items = [
         ['value', t.navValue, Icon.target],
         ['combos', t.navCombos, Icon.layers],
+        ['arb', t.navArb, Icon.scale],
         ['record', t.navRecord, Icon.chart],
-        ['premium', t.goPremium, Icon.trophy],
     ];
     const isActive = (k) => route.view === k || (k==='value'&&route.view==='match');
     return (

@@ -184,6 +184,52 @@ window.outcomeLabel = function (k, m, lang) {
     return (tm && tm.name) || (typeof id === 'string' ? id : 'Equipo');
 };
 
+/* ---- ARBITRAJE / SUREBETS ----------------------------------
+   Apostar a TODOS los resultados de un partido, cada uno en la casa que
+   mejor lo paga. Si la suma de probabilidades implícitas (1/cuota) es < 1,
+   hay beneficio garantizado gane quien gane.  margen% = (1 - Σ 1/cuota)·100  */
+window.findArbs = function (matches) {
+    const list = matches || window.MATCHES || [];
+    const out = [];
+    list.forEach(m => {
+        if (!m.odds) return;
+        const keys = ['home','draw','away'].filter(k => m.odds[k] && Object.keys(m.odds[k]).length);
+        if (keys.length < 2) return;                       // need at least 2 outcomes priced
+        const legs = keys.map(k => {
+            const all = m.odds[k];
+            const best = window.bestPrice(all);            // TRUE best price (where you'd place it)
+            const vals = Object.values(all).sort((a,b)=>a-b);
+            const n = vals.length;
+            const med = n ? (n%2 ? vals[(n-1)/2] : (vals[n/2-1]+vals[n/2])/2) : 0;
+            const suspicious = med && best.price > med * 1.6;   // outlier → maybe a bookmaker error
+            return { k, book: best.book, price: best.price, suspicious };
+        });
+        const inv = legs.reduce((s,l)=> s + 1/l.price, 0);
+        const marginPct = (1 - inv) * 100;                 // >0 → guaranteed profit
+        const distinctBooks = new Set(legs.map(l=>l.book)).size;
+        out.push({
+            m, legs, inv, marginPct,
+            distinctBooks,
+            sameBook: distinctBooks < 2,                   // info: all best prices at one book (rare)
+            hasArb: marginPct > 0.01,                      // a positive margin IS a surebet
+            suspicious: legs.some(l=>l.suspicious),
+        });
+    });
+    return out.sort((a,b)=> b.marginPct - a.marginPct);
+};
+/* split a total stake across the legs so every outcome returns the same amount */
+window.arbSplit = function (legs, total) {
+    const inv = legs.reduce((s,l)=> s + 1/l.price, 0);
+    return legs.map(l => {
+        const stake = total * (1/l.price) / inv;
+        return Object.assign({}, l, { stake, ret: stake * l.price });
+    });
+};
+window.arbReturn = function (legs, total) {
+    const inv = legs.reduce((s,l)=> s + 1/l.price, 0);
+    return total / inv;     // guaranteed payout regardless of result
+};
+
 /* ---- COMBINADAS (accumulators) ----------------------------- */
 /* free users: locked. €3.99: combo of the day. €14.99/mo: all */
 window.COMBOS = [
@@ -303,7 +349,22 @@ window.DAILY = {
 window.I18N = {
     es: {
         brandSub:'VALOR · FÚTBOL',
-        navToday:'Hoy', navValue:'Valor', navCombos:'Combinadas', navRecord:'Récord', navHow:'Cómo funciona',
+        navToday:'Hoy', navValue:'Valor', navCombos:'Combinadas', navRecord:'Récord', navHow:'Cómo funciona', navArb:'Sin Riesgo',
+        arbEyebrow:'BENEFICIO GARANTIZADO · GANE QUIEN GANE',
+        arbTitle:'Apuestas sin riesgo',
+        arbLead:'Apostando a TODOS los resultados de un partido (1, X y 2) —cada uno en la casa que mejor lo paga— recuperas lo mismo gane quien gane, incluido el empate. Solo ocurre cuando las casas discrepan lo suficiente. Aquí escaneamos cada partido en busca de esa diferencia.',
+        arbStakeLabel:'Inversión total a repartir',
+        arbFound:'arbitrajes activos',
+        arbNone:'Ahora mismo no hay arbitrajes garantizados',
+        arbNoneLead:'Los arbitrajes son raros y duran poco. Te mostramos igualmente las mejores oportunidades de hoy, ordenadas por cercanía al beneficio garantizado.',
+        arbProfit:'Beneficio garantizado',
+        arbMargin:'Margen',
+        arbStake:'Apuesta', arbReturns:'Devuelve', arbAt:'en', arbReturnsAll:'Retorno (cualquier resultado)',
+        arbNear:'Más cerca del arbitraje',
+        arbNearTag:'aún no garantiza profit',
+        arbSuspect:'⚠ Cuota muy alta en una casa: verifícala antes de apostar (podría ser un error).',
+        arbHow:'Cómo se reparte',
+        arbDisc:'El arbitraje requiere cuentas en varias casas y actuar rápido: las cuotas cambian y algunas casas limitan a quienes lo hacen. Verifica siempre las cuotas en la casa antes de apostar.',
         searchPh:'Buscar equipo o partido…',
         updated:'Actualizado hoy', autoUpdate:'Se actualiza solo cada mañana',
         heroEyebrow:'CUOTAS CON VALOR · FÚTBOL',
@@ -361,7 +422,22 @@ window.I18N = {
     },
     en: {
         brandSub:'VALUE · FOOTBALL',
-        navToday:'Today', navValue:'Value', navCombos:'Accas', navRecord:'Record', navHow:'How it works',
+        navToday:'Today', navValue:'Value', navCombos:'Accas', navRecord:'Record', navHow:'How it works', navArb:'No-Risk',
+        arbEyebrow:'GUARANTEED PROFIT · WHOEVER WINS',
+        arbTitle:'No-risk bets',
+        arbLead:'By backing EVERY outcome of a match (home, draw and away) —each at the bookmaker paying it best— you get the same return whoever wins, draw included. It only happens when bookmakers disagree enough. Here we scan every match for that gap.',
+        arbStakeLabel:'Total stake to split',
+        arbFound:'live arbs',
+        arbNone:'No guaranteed arbitrage right now',
+        arbNoneLead:'Arbs are rare and short-lived. We still show today\\u2019s best opportunities, sorted by how close they are to guaranteed profit.',
+        arbProfit:'Guaranteed profit',
+        arbMargin:'Margin',
+        arbStake:'Stake', arbReturns:'Returns', arbAt:'at', arbReturnsAll:'Return (any result)',
+        arbNear:'Closest to an arb',
+        arbNearTag:'not yet guaranteed profit',
+        arbSuspect:'⚠ Very high price at one book: verify it before betting (could be an error).',
+        arbHow:'How to split',
+        arbDisc:'Arbitrage needs accounts at several bookmakers and quick action: odds move and some books limit arbers. Always verify the odds at the book before betting.',
         searchPh:'Search team or match…',
         updated:'Updated today', autoUpdate:'Auto-updates every morning',
         heroEyebrow:'VALUE ODDS · FOOTBALL',

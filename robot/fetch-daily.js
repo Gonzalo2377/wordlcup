@@ -41,7 +41,7 @@ const BOOK_WHITELIST = (process.env.ODDS_BOOKS || '').split(',').map(s => s.trim
 // Only include matches kicking off within this many hours (today + tomorrow).
 // Keeps the board focused on imminent fixtures and excludes far-future events
 // like the World Cup until it's actually here. Override with ODDS_WINDOW_HOURS.
-const WINDOW_HOURS = parseInt(process.env.ODDS_WINDOW_HOURS || '48', 10);
+const WINDOW_HOURS = parseInt(process.env.ODDS_WINDOW_HOURS || '72', 10);
 const OUT = path.join(__dirname, '..', 'daily.json');
 
 // running tally of API credits (filled from response headers on every odds/scores call)
@@ -435,19 +435,44 @@ async function main(){
     const merge = (...pools) => seen([].concat(...pools));
     const byEdge = [...valued].sort((a,b)=>b.v.edge-a.v.edge);
 
+    // FIREWALL #1 — never publish two combos with the same set of picks.
+    // Signature = the legs' "match|pick" sorted, so order doesn't matter.
+    const comboSig = (legs) => legs.map(l => `${l.match}|${l.pick}`).sort().join(' + ');
+    const usedSigs = new Set();
+    function pushCombo(meta, pool, n){
+        // try a few starting offsets so a thin day can still yield DISTINCT combos
+        for (let off = 0; off + n <= pool.length && off <= 3; off++){
+            const legs = pool.slice(off, off+n).map(legOf);
+            if (legs.length < n) break;
+            const sig = comboSig(legs);
+            if (usedSigs.has(sig)) continue;          // identical to one already added → skip
+            usedSigs.add(sig);
+            COMBOS.push({ ...meta, conf: confOf(pool.slice(off, off+n)), legs });
+            return true;
+        }
+        return false;
+    }
+
     // c1 — Combinada del Día (taster + 3,99€): the MOST LIKELY one (value first, fill with favourites)
-    const dayPool = merge(valued, safePool);
-    if (dayPool.length >= 2) COMBOS.push({ id:'c1', tier:'single', conf: confOf(dayPool.slice(0,3)), name:'Combinada del Día', legs: dayPool.slice(0,3).map(legOf) });
-    // c2 — Combinada Valor (14,99€): value by edge, fallback to safe
-    const valPool = merge(byEdge, safePool);
-    if (valPool.length >= 2) COMBOS.push({ id:'c2', tier:'all', conf: confOf(valPool.slice(0,3)), name: valued.length>=2 ? 'Combinada Valor' : 'Combinada Segura', legs: valPool.slice(0,3).map(legOf) });
-    // c3 — Combinada Larga (14,99€): 4 legs when possible
-    const bigPool = merge(byEdge, safePool);
-    if (bigPool.length >= 4) COMBOS.push({ id:'c3', tier:'all', conf: confOf(bigPool.slice(0,4)), name:'Combinada Larga', legs: bigPool.slice(0,4).map(legOf) });
+    pushCombo({ id:'c1', tier:'single', name:'Combinada del Día' }, merge(valued, safePool), 3);
+    // c2 — Combinada Valor (14,99€): value by edge, fallback to safe — only if DISTINCT from c1
+    pushCombo({ id:'c2', tier:'all', name: valued.length>=2 ? 'Combinada Valor' : 'Combinada Segura' }, merge(byEdge, safePool), 3);
+    // c3 — Combinada Larga (14,99€): 4 legs when possible — only if DISTINCT
+    pushCombo({ id:'c3', tier:'all', name:'Combinada Larga' }, merge(byEdge, safePool), 4);
 
     // ---- track record: read previous state, settle finished picks + combos ----
     let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [];
     try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; COMBO_PENDING = prev.COMBO_PENDING || []; COMBO_RECORD = prev.COMBO_RECORD || []; } catch (e) {}
+
+    // FIREWALL #2 — kill duplicates that share the SAME pick + date (singles) or the
+    // SAME set of legs + date (combos). Keeps the first occurrence, drops the rest.
+    const dedupBy = (arr, keyFn) => { const s = new Set(); return arr.filter(o => { const k = keyFn(o); if (s.has(k)) return false; s.add(k); return true; }); };
+    const singleSig = (r) => `${r.date||''}|${r.match||''}|${r.pick||r.pickLabel||''}`;
+    const comboKey  = (c) => `${c.date||''}|${(c.legs||[]).map(l=>`${l.match}|${l.pick}`).sort().join(' + ')}`;
+    RECORD        = dedupBy(RECORD, singleSig);
+    PENDING       = dedupBy(PENDING, singleSig);
+    COMBO_RECORD  = dedupBy(COMBO_RECORD, comboKey);
+    COMBO_PENDING = dedupBy(COMBO_PENDING, comboKey);
     try {
         // query scores for any competition with a pending single pick OR combo leg (saves credits)
         const need = [...new Set([
@@ -466,21 +491,24 @@ async function main(){
     // ---- snapshot TODAY's combos so we can settle them later (once per day per combo) ----
     const today = fmtDay(new Date().toISOString());
     const haveCombo = new Set(COMBO_PENDING.map(c=>c.dayId).concat(COMBO_RECORD.map(c=>c.dayId)));
+    const haveComboSig = new Set([...COMBO_PENDING, ...COMBO_RECORD].map(comboKey));
     COMBOS.forEach(c => {
         const dayId = today + '·' + c.id;
         // only snapshot combos whose legs are all near-term (real, settle-able) matches
         const settleable = c.legs.every(l => l.id && l.sport);
-        if (!settleable || haveCombo.has(dayId)) return;
-        COMBO_PENDING.push({ dayId, date: today, name: c.name, tier: c.tier, legs: c.legs.map(l=>({ id:l.id, sport:l.sport, side:l.side, match:l.match, pick:l.pick, odd:l.odd })) });
-        haveCombo.add(dayId);
+        const snap = { dayId, date: today, name: c.name, tier: c.tier, legs: c.legs.map(l=>({ id:l.id, sport:l.sport, side:l.side, match:l.match, pick:l.pick, odd:l.odd })) };
+        // skip if same id OR same set of legs+date already tracked (FIREWALL #3)
+        if (!settleable || haveCombo.has(dayId) || haveComboSig.has(comboKey(snap))) return;
+        COMBO_PENDING.push(snap);
+        haveCombo.add(dayId); haveComboSig.add(comboKey(snap));
     });
 
     // ---- register today's headline value picks as PENDING (to settle later) ----
-    // Track up to the top 3 value picks of the day; never duplicate by event id.
+    // Track up to the top 3 value picks of the day; never duplicate by event id OR pick+date.
     const haveId = new Set([...PENDING.map(p=>p.id), ...RECORD.map(r=>r.id).filter(Boolean)]);
+    const havePickSig = new Set([...PENDING, ...RECORD].map(singleSig));
     valued.slice(0,3).forEach(x => {
-        if (haveId.has(x.m.id)) return;
-        PENDING.push({
+        const entry = {
             id: x.m.id,
             sport: x.m._sport,
             ts: new Date(x.m._commence).getTime(),
@@ -490,8 +518,11 @@ async function main(){
             pickLabel: label(x.m, x.v.pick.k),
             odd: +x.v.pick.best.price.toFixed(2),
             book: x.v.pick.best.book,
-        });
-        haveId.add(x.m.id);
+        };
+        const sig = singleSig({ date: entry.date, match: entry.match, pickLabel: entry.pickLabel });
+        if (haveId.has(x.m.id) || havePickSig.has(sig)) return;   // FIREWALL: no dup by id or pick+date
+        PENDING.push(entry);
+        haveId.add(x.m.id); havePickSig.add(sig);
     });
     // Clean the pending list:
     //  · drop legacy entries with no timestamp (old junk),
@@ -508,13 +539,31 @@ async function main(){
     // strip internal fields from matches before writing
     MATCHES.forEach(m => { delete m._commence; delete m._sport; });
 
+    // SAFETY NET: if this run found NO upcoming matches (dead season — e.g. early June
+    // before the World Cup), do NOT blank the board. Reuse the previous day's matches,
+    // books, teams and combos so the site always shows something. We still update the
+    // record/pending (those were settled above).
+    let keepTeams = TEAMS, keepBooks = BOOKS, keepMatches = MATCHES, keepCombos = COMBOS;
+    let stale = false;
+    if (!MATCHES.length) {
+        try {
+            const prev = JSON.parse(fs.readFileSync(OUT, 'utf8'));
+            if (prev.MATCHES && prev.MATCHES.length) {
+                keepTeams = prev.TEAMS || TEAMS; keepBooks = prev.BOOKS || BOOKS;
+                keepMatches = prev.MATCHES; keepCombos = prev.COMBOS || [];
+                stale = true;
+                console.log(`  ⚠ sin partidos nuevos → conservo ${keepMatches.length} del día anterior (no vacío el tablero)`);
+            }
+        } catch (e) {}
+    }
+
     const daily = {
         meta: {
             updatedAt:new Date().toISOString(), source:'the-odds-api', sport:SPORT, regions:REGIONS, market:MARKET,
-            matches:MATCHES.length, valuePicks:valued.length, books:Object.keys(BOOKS).length,
-            credits: { remaining: CREDITS.remaining, used: CREDITS.used },
+            matches:keepMatches.length, valuePicks:valued.length, books:Object.keys(keepBooks).length,
+            stale, credits: { remaining: CREDITS.remaining, used: CREDITS.used },
         },
-        TEAMS, BOOKS, MATCHES, COMBOS, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD,
+        TEAMS:keepTeams, BOOKS:keepBooks, MATCHES:keepMatches, COMBOS:keepCombos, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD,
     };
     fs.writeFileSync(OUT, JSON.stringify(daily, null, 2));
     console.log(`✓ wrote ${OUT}\n  ${MATCHES.length} football matches · ${valued.length} value picks · ${Object.keys(BOOKS).length} books · ${COMBOS.length} accas · ${RECORD.length} en récord · ${PENDING.length} pendientes · ${COMBO_RECORD.length} combis resueltas · ${COMBO_PENDING.length} combis en juego`);
