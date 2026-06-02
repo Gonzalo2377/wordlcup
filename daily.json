@@ -1,46 +1,232 @@
 {
   "meta": {
-    "updatedAt": "2026-06-02T09:21:09.123Z",
+    "updatedAt": "2026-06-02T09:42:27.739Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
     "market": "h2h",
-    "matches": 1,
+    "matches": 10,
     "valuePicks": 0,
-    "books": 15,
-    "stale": true,
+    "books": 14,
+    "stale": false,
     "credits": {
-      "remaining": 444,
-      "used": 56
+      "remaining": 424,
+      "used": 76
     }
   },
   "TEAMS": {
-    "pontep": {
-      "id": "pontep",
-      "name": "Ponte Preta",
-      "code": "PON",
+    "operar": {
+      "id": "operar",
+      "name": "Operario PR",
+      "code": "OPE",
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
       "form": "",
       "known": false
     },
-    "bot": {
-      "id": "bot",
-      "name": "Botafogo",
-      "code": "BOT",
-      "color": "#1a1a1a",
-      "conf": "Club",
-      "elo": 1840,
-      "form": "WDWWL",
-      "known": true
+    "juvent": {
+      "id": "juvent",
+      "name": "Juventude",
+      "code": "JUV",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "jefuni": {
+      "id": "jefuni",
+      "name": "JEF United Chiba",
+      "code": "JEF",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "avispa": {
+      "id": "avispa",
+      "name": "Avispa Fukuoka",
+      "code": "AVI",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "fctoky": {
+      "id": "fctoky",
+      "name": "FC Tokyo",
+      "code": "FCT",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "cerezo": {
+      "id": "cerezo",
+      "name": "Cerezo Osaka",
+      "code": "CER",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "kashim": {
+      "id": "kashim",
+      "name": "Kashima Antlers",
+      "code": "KAS",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "vissel": {
+      "id": "vissel",
+      "name": "Vissel Kobe",
+      "code": "VIS",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "fcmach": {
+      "id": "fcmach",
+      "name": "FC Machida Zelvia",
+      "code": "FCM",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "nagoya": {
+      "id": "nagoya",
+      "name": "Nagoya Grampus",
+      "code": "NAG",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "mitoho": {
+      "id": "mitoho",
+      "name": "Mito HollyHock",
+      "code": "MIT",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "vvaren": {
+      "id": "vvaren",
+      "name": "V-Varen Nagasaki",
+      "code": "VVA",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "urawar": {
+      "id": "urawar",
+      "name": "Urawa Red Diamonds",
+      "code": "URA",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "fagian": {
+      "id": "fagian",
+      "name": "Fagiano Okayama",
+      "code": "FAG",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "tokyov": {
+      "id": "tokyov",
+      "name": "Tokyo Verdy",
+      "code": "TOK",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "gambao": {
+      "id": "gambao",
+      "name": "Gamba Osaka",
+      "code": "GAM",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "yokoha": {
+      "id": "yokoha",
+      "name": "Yokohama F Marinos",
+      "code": "YOK",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "shimiz": {
+      "id": "shimiz",
+      "name": "Shimizu S Pulse",
+      "code": "SHI",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "kashiw": {
+      "id": "kashiw",
+      "name": "Kashiwa Reysol",
+      "code": "KAS",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "kyotop": {
+      "id": "kyotop",
+      "name": "Kyoto Purple Sanga",
+      "code": "KYO",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
     }
   },
   "BOOKS": {
-    "nordicbet": {
-      "name": "Nordic Bet",
-      "abbr": "NORD",
-      "color": "#1f3a93",
+    "leovegas": {
+      "name": "LeoVegas",
+      "abbr": "LEOV",
+      "color": "#e5a000",
+      "url": "#"
+    },
+    "unibet": {
+      "name": "Unibet",
+      "abbr": "UNIB",
+      "color": "#0aa05a",
       "url": "#"
     },
     "betsson": {
@@ -49,9 +235,33 @@
       "color": "#ff8a1e",
       "url": "#"
     },
-    "onexbet": {
-      "name": "1xBet",
-      "abbr": "1XBE",
+    "nordicbet": {
+      "name": "Nordic Bet",
+      "abbr": "NORD",
+      "color": "#1f3a93",
+      "url": "#"
+    },
+    "betonlineag": {
+      "name": "BetOnline.ag",
+      "abbr": "BETO",
+      "color": "#1a1a1a",
+      "url": "#"
+    },
+    "coolbet": {
+      "name": "Coolbet",
+      "abbr": "COOL",
+      "color": "#0aa05a",
+      "url": "#"
+    },
+    "pinnacle": {
+      "name": "Pinnacle",
+      "abbr": "PINN",
+      "color": "#3a4660",
+      "url": "#"
+    },
+    "marathonbet": {
+      "name": "Marathon Bet",
+      "abbr": "MARA",
       "color": "#1f5fd6",
       "url": "#"
     },
@@ -67,58 +277,10 @@
       "color": "#1f5fd6",
       "url": "#"
     },
-    "marathonbet": {
-      "name": "Marathon Bet",
-      "abbr": "MARA",
-      "color": "#1f5fd6",
-      "url": "#"
-    },
-    "coolbet": {
-      "name": "Coolbet",
-      "abbr": "COOL",
-      "color": "#0aa05a",
-      "url": "#"
-    },
-    "leovegas": {
-      "name": "LeoVegas",
-      "abbr": "LEOV",
-      "color": "#e5a000",
-      "url": "#"
-    },
-    "unibet": {
-      "name": "Unibet",
-      "abbr": "UNIB",
-      "color": "#0aa05a",
-      "url": "#"
-    },
-    "betonlineag": {
-      "name": "BetOnline.ag",
-      "abbr": "BETO",
-      "color": "#1a1a1a",
-      "url": "#"
-    },
-    "pinnacle": {
-      "name": "Pinnacle",
-      "abbr": "PINN",
-      "color": "#3a4660",
-      "url": "#"
-    },
     "codere": {
       "name": "Codere",
       "abbr": "CODE",
       "color": "#0aa05a",
-      "url": "#"
-    },
-    "matchbook": {
-      "name": "Matchbook",
-      "abbr": "MATC",
-      "color": "#5a6b8c",
-      "url": "#"
-    },
-    "betfair": {
-      "name": "Betfair",
-      "abbr": "BETF",
-      "color": "#ffb01f",
       "url": "#"
     },
     "tipico": {
@@ -126,77 +288,634 @@
       "abbr": "TIPI",
       "color": "#c8102e",
       "url": "#"
+    },
+    "winamax": {
+      "name": "Winamax",
+      "abbr": "WINA",
+      "color": "#e5484d",
+      "url": "#"
+    },
+    "betclic": {
+      "name": "Betclic",
+      "abbr": "BETC",
+      "color": "#e5484d",
+      "url": "#"
     }
   },
   "MATCHES": [
     {
-      "id": "3d7f63e022bde2dd7ac9c739a6be19bf",
-      "group": "mar, 02 jun",
-      "time": "00:00",
-      "home": "pontep",
-      "away": "bot",
+      "id": "5f53708f98ace903914ecddca6a9fcc3",
+      "group": "sáb, 06 jun",
+      "time": "01:00",
+      "home": "operar",
+      "away": "juvent",
       "odds": {
         "home": {
-          "nordicbet": 2.68,
-          "betsson": 2.68,
-          "onexbet": 2.71,
-          "sport888": 2.7,
-          "williamhill": 2.7,
-          "marathonbet": 2.71,
-          "coolbet": 2.65,
-          "leovegas": 2.63,
-          "unibet": 2.7,
-          "betonlineag": 2.82,
-          "pinnacle": 2.95,
-          "codere": 2.65,
-          "matchbook": 2.94,
-          "betfair": 2.94,
-          "tipico": 2.85
+          "leovegas": 2.08,
+          "unibet": 2.14,
+          "betsson": 2.25,
+          "nordicbet": 2.25,
+          "betonlineag": 2.26,
+          "coolbet": 2.3,
+          "pinnacle": 2.32,
+          "marathonbet": 2.23,
+          "sport888": 2.25,
+          "williamhill": 2.25,
+          "codere": 2.19,
+          "tipico": 2.1
         },
         "draw": {
-          "nordicbet": 2.82,
-          "betsson": 2.82,
-          "onexbet": 2.81,
-          "sport888": 2.8,
-          "williamhill": 2.8,
-          "marathonbet": 2.81,
-          "coolbet": 2.95,
-          "leovegas": 2.95,
-          "unibet": 3,
-          "betonlineag": 2.74,
-          "pinnacle": 2.76,
-          "codere": 2.8,
-          "matchbook": 2.98,
-          "betfair": 2.98,
-          "tipico": 2.75
+          "leovegas": 2.85,
+          "unibet": 2.9,
+          "betsson": 2.78,
+          "nordicbet": 2.78,
+          "betonlineag": 2.64,
+          "coolbet": 2.9,
+          "pinnacle": 2.68,
+          "marathonbet": 2.74,
+          "sport888": 2.9,
+          "williamhill": 2.9,
+          "codere": 2.7,
+          "tipico": 2.8
         },
         "away": {
-          "nordicbet": 2.82,
-          "betsson": 2.82,
-          "onexbet": 2.82,
-          "sport888": 2.75,
-          "williamhill": 2.75,
-          "marathonbet": 2.82,
-          "coolbet": 2.8,
-          "leovegas": 2.7,
-          "unibet": 2.8,
-          "betonlineag": 2.94,
-          "pinnacle": 2.97,
-          "codere": 2.8,
-          "matchbook": 3,
-          "betfair": 3,
-          "tipico": 2.55
+          "leovegas": 3.85,
+          "unibet": 3.95,
+          "betsson": 3.65,
+          "nordicbet": 3.65,
+          "betonlineag": 3.9,
+          "coolbet": 3.5,
+          "pinnacle": 3.99,
+          "marathonbet": 3.76,
+          "sport888": 3.3,
+          "williamhill": 3.3,
+          "codere": 3.55,
+          "tipico": 3.7
         }
       },
       "model": {
-        "home": 0.3400072002493625,
-        "draw": 0.3282069448814606,
-        "away": 0.33178585486917694,
+        "home": 0.41698533898615103,
+        "draw": 0.3306400841709385,
+        "away": 0.2523745768429105,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "5861fd9fc20372e46d80b63dee3b5a21",
+      "group": "sáb, 06 jun",
+      "time": "07:00",
+      "home": "jefuni",
+      "away": "avispa",
+      "odds": {
+        "home": {
+          "pinnacle": 2.96,
+          "winamax": 2.65,
+          "betsson": 2.82,
+          "unibet": 2.75,
+          "nordicbet": 2.82,
+          "betclic": 2.7,
+          "sport888": 2.88,
+          "williamhill": 2.88
+        },
+        "draw": {
+          "pinnacle": 3.01,
+          "winamax": 2.95,
+          "betsson": 2.98,
+          "unibet": 2.9,
+          "nordicbet": 2.98,
+          "betclic": 2.87,
+          "sport888": 2.8,
+          "williamhill": 2.8
+        },
+        "away": {
+          "pinnacle": 2.65,
+          "winamax": 2.4,
+          "betsson": 2.52,
+          "unibet": 2.4,
+          "nordicbet": 2.52,
+          "betclic": 2.38,
+          "sport888": 2.6,
+          "williamhill": 2.6
+        }
+      },
+      "model": {
+        "home": 0.3243183131939674,
+        "draw": 0.3126122872801831,
+        "away": 0.3630693995258495,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
+      "group": "sáb, 06 jun",
+      "time": "07:00",
+      "home": "fctoky",
+      "away": "cerezo",
+      "odds": {
+        "home": {
+          "pinnacle": 1.85,
+          "winamax": 1.8,
+          "betsson": 1.85,
+          "unibet": 1.77,
+          "nordicbet": 1.85,
+          "betclic": 1.77,
+          "sport888": 1.85,
+          "williamhill": 1.85,
+          "marathonbet": 1.82
+        },
+        "draw": {
+          "pinnacle": 3.74,
+          "winamax": 3.4,
+          "betsson": 3.45,
+          "unibet": 3.35,
+          "nordicbet": 3.45,
+          "betclic": 3.3,
+          "sport888": 3.4,
+          "williamhill": 3.4,
+          "marathonbet": 3.7
+        },
+        "away": {
+          "pinnacle": 4.11,
+          "winamax": 3.6,
+          "betsson": 3.85,
+          "unibet": 3.75,
+          "nordicbet": 3.85,
+          "betclic": 3.68,
+          "sport888": 3.8,
+          "williamhill": 3.8,
+          "marathonbet": 3.95
+        }
+      },
+      "model": {
+        "home": 0.4988859685003832,
+        "draw": 0.2628227837181445,
+        "away": 0.2382912477814723,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "cf986b6f46cdee380e580d28aa5a6c40",
+      "group": "sáb, 06 jun",
+      "time": "07:00",
+      "home": "kashim",
+      "away": "vissel",
+      "odds": {
+        "home": {
+          "pinnacle": 2.56,
+          "winamax": 2.35,
+          "betsson": 2.48,
+          "unibet": 2.3,
+          "nordicbet": 2.48,
+          "betclic": 2.32,
+          "sport888": 2.5,
+          "williamhill": 2.5,
+          "marathonbet": 2.51
+        },
+        "draw": {
+          "pinnacle": 3.15,
+          "winamax": 3.1,
+          "betsson": 3.1,
+          "unibet": 3.05,
+          "nordicbet": 3.1,
+          "betclic": 2.98,
+          "sport888": 2.9,
+          "williamhill": 2.9,
+          "marathonbet": 3.12
+        },
+        "away": {
+          "pinnacle": 2.92,
+          "winamax": 2.6,
+          "betsson": 2.78,
+          "unibet": 2.7,
+          "nordicbet": 2.78,
+          "betclic": 2.67,
+          "sport888": 2.8,
+          "williamhill": 2.8,
+          "marathonbet": 2.83
+        }
+      },
+      "model": {
+        "home": 0.37223085833147374,
+        "draw": 0.29872807522826156,
+        "away": 0.32904106644026476,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "91af55abdd4ad711d08323e544c02b7d",
+      "group": "sáb, 06 jun",
+      "time": "08:00",
+      "home": "fcmach",
+      "away": "nagoya",
+      "odds": {
+        "home": {
+          "pinnacle": 2.14,
+          "winamax": 2,
+          "betsson": 2.1,
+          "unibet": 1.99,
+          "nordicbet": 2.1,
+          "betclic": 1.98,
+          "sport888": 2.1,
+          "williamhill": 2.1,
+          "marathonbet": 2.1
+        },
+        "draw": {
+          "pinnacle": 3.33,
+          "winamax": 3.1,
+          "betsson": 3.2,
+          "unibet": 3.1,
+          "nordicbet": 3.2,
+          "betclic": 3.05,
+          "sport888": 3.1,
+          "williamhill": 3.1,
+          "marathonbet": 3.3
+        },
+        "away": {
+          "pinnacle": 3.53,
+          "winamax": 3.1,
+          "betsson": 3.4,
+          "unibet": 3.3,
+          "nordicbet": 3.4,
+          "betclic": 3.23,
+          "sport888": 3.3,
+          "williamhill": 3.3,
+          "marathonbet": 3.42
+        }
+      },
+      "model": {
+        "home": 0.43964657250701117,
+        "draw": 0.28730937415447677,
+        "away": 0.2730440533385121,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "24b26ae6991c6dcfa987c672dfe7c402",
+      "group": "sáb, 06 jun",
+      "time": "08:00",
+      "home": "mitoho",
+      "away": "vvaren",
+      "odds": {
+        "home": {
+          "pinnacle": 2.44,
+          "unibet": 2.25,
+          "betsson": 2.38,
+          "winamax": 2.25,
+          "nordicbet": 2.38,
+          "betclic": 2.23,
+          "sport888": 2.4,
+          "williamhill": 2.4,
+          "marathonbet": 2.38
+        },
+        "draw": {
+          "pinnacle": 3.23,
+          "unibet": 3.1,
+          "betsson": 3.15,
+          "winamax": 3.1,
+          "nordicbet": 3.15,
+          "betclic": 3.03,
+          "sport888": 3,
+          "williamhill": 3,
+          "marathonbet": 3.22
+        },
+        "away": {
+          "pinnacle": 3.03,
+          "unibet": 2.8,
+          "betsson": 2.88,
+          "winamax": 2.7,
+          "nordicbet": 2.88,
+          "betclic": 2.77,
+          "sport888": 2.9,
+          "williamhill": 2.9,
+          "marathonbet": 2.93
+        }
+      },
+      "model": {
+        "home": 0.38869032517845736,
+        "draw": 0.2931564381256485,
+        "away": 0.31815323669589424,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "02e90a97d3576f9814ff0440cf86ca30",
+      "group": "sáb, 06 jun",
+      "time": "09:00",
+      "home": "urawar",
+      "away": "fagian",
+      "odds": {
+        "home": {
+          "pinnacle": 1.96,
+          "betclic": 1.86,
+          "betsson": 1.95,
+          "nordicbet": 1.95,
+          "unibet": 1.86,
+          "sport888": 1.91,
+          "winamax": 1.88,
+          "williamhill": 1.91,
+          "marathonbet": 1.92
+        },
+        "draw": {
+          "pinnacle": 3.36,
+          "betclic": 3.03,
+          "betsson": 3.15,
+          "nordicbet": 3.15,
+          "unibet": 3.1,
+          "sport888": 3.1,
+          "winamax": 3.15,
+          "williamhill": 3.1,
+          "marathonbet": 3.38
+        },
+        "away": {
+          "pinnacle": 4.08,
+          "betclic": 3.68,
+          "betsson": 3.85,
+          "nordicbet": 3.85,
+          "unibet": 3.75,
+          "sport888": 3.9,
+          "winamax": 3.6,
+          "williamhill": 3.9,
+          "marathonbet": 3.92
+        }
+      },
+      "model": {
+        "home": 0.47569825033467183,
+        "draw": 0.2871399305272161,
+        "away": 0.23716181913811205,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "69c972a84e01ff955abf4f0d295a4534",
+      "group": "sáb, 06 jun",
+      "time": "09:00",
+      "home": "tokyov",
+      "away": "gambao",
+      "odds": {
+        "home": {
+          "pinnacle": 3.15,
+          "betsson": 2.98,
+          "unibet": 2.9,
+          "nordicbet": 2.98,
+          "winamax": 2.8,
+          "betclic": 2.85,
+          "sport888": 3,
+          "williamhill": 3,
+          "marathonbet": 3.04
+        },
+        "draw": {
+          "pinnacle": 3.04,
+          "betsson": 3,
+          "unibet": 2.9,
+          "nordicbet": 3,
+          "winamax": 2.95,
+          "betclic": 2.87,
+          "sport888": 2.8,
+          "williamhill": 2.8,
+          "marathonbet": 3.08
+        },
+        "away": {
+          "pinnacle": 2.48,
+          "betsson": 2.42,
+          "unibet": 2.25,
+          "nordicbet": 2.42,
+          "winamax": 2.3,
+          "betclic": 2.27,
+          "sport888": 2.45,
+          "williamhill": 2.45,
+          "marathonbet": 2.39
+        }
+      },
+      "model": {
+        "home": 0.30714493262863957,
+        "draw": 0.31015410564980844,
+        "away": 0.38270096172155194,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "3ca333e6eabd45aa6ed82f3eb63cb96d",
+      "group": "sáb, 06 jun",
+      "time": "10:00",
+      "home": "yokoha",
+      "away": "shimiz",
+      "odds": {
+        "home": {
+          "pinnacle": 2.38,
+          "betclic": 2.2,
+          "betsson": 2.35,
+          "nordicbet": 2.35,
+          "unibet": 2.2,
+          "sport888": 2.3,
+          "williamhill": 2.3,
+          "winamax": 2.2,
+          "marathonbet": 2.3
+        },
+        "draw": {
+          "pinnacle": 3.22,
+          "betclic": 2.98,
+          "betsson": 3.1,
+          "nordicbet": 3.1,
+          "unibet": 3.05,
+          "sport888": 3,
+          "williamhill": 3,
+          "winamax": 3,
+          "marathonbet": 3.3
+        },
+        "away": {
+          "pinnacle": 3.14,
+          "betclic": 2.87,
+          "betsson": 3,
+          "nordicbet": 3,
+          "unibet": 2.9,
+          "sport888": 3,
+          "williamhill": 3,
+          "winamax": 2.75,
+          "marathonbet": 3
+        }
+      },
+      "model": {
+        "home": 0.3977624016926916,
+        "draw": 0.2950681698877477,
+        "away": 0.3071694284195608,
+        "fromMarket": true
+      }
+    },
+    {
+      "id": "f3b507e4c14b0315a77cfc9e73dc04da",
+      "group": "sáb, 06 jun",
+      "time": "11:00",
+      "home": "kashiw",
+      "away": "kyotop",
+      "odds": {
+        "home": {
+          "pinnacle": 1.97,
+          "winamax": 1.9,
+          "betsson": 1.98,
+          "nordicbet": 1.98,
+          "unibet": 1.87,
+          "betclic": 1.87,
+          "sport888": 1.95,
+          "williamhill": 1.95,
+          "marathonbet": 1.92
+        },
+        "draw": {
+          "pinnacle": 3.5,
+          "winamax": 3.25,
+          "betsson": 3.3,
+          "nordicbet": 3.3,
+          "unibet": 3.2,
+          "betclic": 3.15,
+          "sport888": 3.25,
+          "williamhill": 3.25,
+          "marathonbet": 3.54
+        },
+        "away": {
+          "pinnacle": 3.85,
+          "winamax": 3.4,
+          "betsson": 3.65,
+          "nordicbet": 3.65,
+          "unibet": 3.55,
+          "betclic": 3.47,
+          "sport888": 3.6,
+          "williamhill": 3.6,
+          "marathonbet": 3.72
+        }
+      },
+      "model": {
+        "home": 0.47150140966482945,
+        "draw": 0.2759481133538659,
+        "away": 0.2525504769813047,
         "fromMarket": true
       }
     }
   ],
-  "COMBOS": [],
+  "COMBOS": [
+    {
+      "id": "c1",
+      "tier": "single",
+      "name": "Combinada del Día",
+      "conf": 11,
+      "legs": [
+        {
+          "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780722000000,
+          "side": "home",
+          "match": "FC Tokyo – Cerezo Osaka",
+          "pick": "Gana FC Tokyo",
+          "odd": 1.85,
+          "book": "pinnacle"
+        },
+        {
+          "id": "02e90a97d3576f9814ff0440cf86ca30",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780729200000,
+          "side": "home",
+          "match": "Urawa Red Diamonds – Fagiano Okayama",
+          "pick": "Gana Urawa Red Diamonds",
+          "odd": 1.96,
+          "book": "pinnacle"
+        },
+        {
+          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780736400000,
+          "side": "home",
+          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
+          "pick": "Gana Kashiwa Reysol",
+          "odd": 1.98,
+          "book": "betsson"
+        }
+      ]
+    },
+    {
+      "id": "c2",
+      "tier": "all",
+      "name": "Combinada Segura",
+      "conf": 10,
+      "legs": [
+        {
+          "id": "02e90a97d3576f9814ff0440cf86ca30",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780729200000,
+          "side": "home",
+          "match": "Urawa Red Diamonds – Fagiano Okayama",
+          "pick": "Gana Urawa Red Diamonds",
+          "odd": 1.96,
+          "book": "pinnacle"
+        },
+        {
+          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780736400000,
+          "side": "home",
+          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
+          "pick": "Gana Kashiwa Reysol",
+          "odd": 1.98,
+          "book": "betsson"
+        },
+        {
+          "id": "91af55abdd4ad711d08323e544c02b7d",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780725600000,
+          "side": "home",
+          "match": "FC Machida Zelvia – Nagoya Grampus",
+          "pick": "Gana FC Machida Zelvia",
+          "odd": 2.14,
+          "book": "pinnacle"
+        }
+      ]
+    },
+    {
+      "id": "c3",
+      "tier": "all",
+      "name": "Combinada Larga",
+      "conf": 5,
+      "legs": [
+        {
+          "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780722000000,
+          "side": "home",
+          "match": "FC Tokyo – Cerezo Osaka",
+          "pick": "Gana FC Tokyo",
+          "odd": 1.85,
+          "book": "pinnacle"
+        },
+        {
+          "id": "02e90a97d3576f9814ff0440cf86ca30",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780729200000,
+          "side": "home",
+          "match": "Urawa Red Diamonds – Fagiano Okayama",
+          "pick": "Gana Urawa Red Diamonds",
+          "odd": 1.96,
+          "book": "pinnacle"
+        },
+        {
+          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780736400000,
+          "side": "home",
+          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
+          "pick": "Gana Kashiwa Reysol",
+          "odd": 1.98,
+          "book": "betsson"
+        },
+        {
+          "id": "91af55abdd4ad711d08323e544c02b7d",
+          "sport": "soccer_japan_j_league",
+          "ts": 1780725600000,
+          "side": "home",
+          "match": "FC Machida Zelvia – Nagoya Grampus",
+          "pick": "Gana FC Machida Zelvia",
+          "odd": 2.14,
+          "book": "pinnacle"
+        }
+      ]
+    }
+  ],
   "RECORD": [
     {
       "id": "ea30e9681a6618720cae67524b78b985",
@@ -260,7 +979,112 @@
     }
   ],
   "PENDING": [],
-  "COMBO_PENDING": [],
+  "COMBO_PENDING": [
+    {
+      "dayId": "02 JUN·c1",
+      "date": "02 JUN",
+      "name": "Combinada del Día",
+      "tier": "single",
+      "legs": [
+        {
+          "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "FC Tokyo – Cerezo Osaka",
+          "pick": "Gana FC Tokyo",
+          "odd": 1.85
+        },
+        {
+          "id": "02e90a97d3576f9814ff0440cf86ca30",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "Urawa Red Diamonds – Fagiano Okayama",
+          "pick": "Gana Urawa Red Diamonds",
+          "odd": 1.96
+        },
+        {
+          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
+          "pick": "Gana Kashiwa Reysol",
+          "odd": 1.98
+        }
+      ]
+    },
+    {
+      "dayId": "02 JUN·c2",
+      "date": "02 JUN",
+      "name": "Combinada Segura",
+      "tier": "all",
+      "legs": [
+        {
+          "id": "02e90a97d3576f9814ff0440cf86ca30",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "Urawa Red Diamonds – Fagiano Okayama",
+          "pick": "Gana Urawa Red Diamonds",
+          "odd": 1.96
+        },
+        {
+          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
+          "pick": "Gana Kashiwa Reysol",
+          "odd": 1.98
+        },
+        {
+          "id": "91af55abdd4ad711d08323e544c02b7d",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "FC Machida Zelvia – Nagoya Grampus",
+          "pick": "Gana FC Machida Zelvia",
+          "odd": 2.14
+        }
+      ]
+    },
+    {
+      "dayId": "02 JUN·c3",
+      "date": "02 JUN",
+      "name": "Combinada Larga",
+      "tier": "all",
+      "legs": [
+        {
+          "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "FC Tokyo – Cerezo Osaka",
+          "pick": "Gana FC Tokyo",
+          "odd": 1.85
+        },
+        {
+          "id": "02e90a97d3576f9814ff0440cf86ca30",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "Urawa Red Diamonds – Fagiano Okayama",
+          "pick": "Gana Urawa Red Diamonds",
+          "odd": 1.96
+        },
+        {
+          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
+          "pick": "Gana Kashiwa Reysol",
+          "odd": 1.98
+        },
+        {
+          "id": "91af55abdd4ad711d08323e544c02b7d",
+          "sport": "soccer_japan_j_league",
+          "side": "home",
+          "match": "FC Machida Zelvia – Nagoya Grampus",
+          "pick": "Gana FC Machida Zelvia",
+          "odd": 2.14
+        }
+      ]
+    }
+  ],
   "COMBO_RECORD": [
     {
       "dayId": "31 MAY·c2",
