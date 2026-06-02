@@ -303,30 +303,36 @@ window.COMBO_PENDING = window.COMBO_PENDING || [];
 // pinned combos always lead, deduped by dayId
 window.COMBO_RECORD = [...window.COMBO_PINNED, ...window.COMBO_RECORD.filter(c => !window.COMBO_PINNED.some(p => p.dayId === c.dayId))];
 window.recordSummary = function () {
-    const r = window.RECORD;
+    const r = window.RECORD || [];
     let staked = 0, ret = 0, w = 0, l = 0, p = 0;
+    const num = (v,d)=>{ const x=+v; return isFinite(x)?x:d; };
     r.forEach(x => {
-        staked += x.stake;
-        if (x.result === 'W') { ret += x.stake * x.odd; w++; }
-        else if (x.result === 'P') { ret += x.stake; p++; }
+        const stake = num(x.stake, 1), odd = num(x.odd, 0);
+        staked += stake;
+        if (x.result === 'W') { ret += stake * odd; w++; }
+        else if (x.result === 'P') { ret += stake; p++; }
         else { l++; }
     });
+    const denom = (w + l) || 1;
+    const safeStaked = staked || 1;
     const profit = ret - staked;
     return {
         picks: r.length, w, l, p,
-        winRate: Math.round(w / (w + l) * 100),
+        winRate: Math.round(w / denom * 100),
         profit: +profit.toFixed(2),
-        roi: +((profit / staked) * 100).toFixed(1),
-        avgOdd: +(r.reduce((s,x)=>s+x.odd,0)/r.length).toFixed(2),
+        roi: +((profit / safeStaked) * 100).toFixed(1),
+        avgOdd: r.length ? +(r.reduce((s,x)=>s+num(x.odd,0),0)/r.length).toFixed(2) : 0,
         staked,
     };
 };
 /* cumulative profit points for the equity curve */
 window.equitySeries = function () {
     let cum = 0; const pts = [{ x:0, y:0 }];
-    window.RECORD.forEach((x, i) => {
-        if (x.result === 'W') cum += x.stake * (x.odd - 1);
-        else if (x.result === 'L') cum -= x.stake;
+    const num = (v,d)=>{ const x=+v; return isFinite(x)?x:d; };
+    (window.RECORD || []).forEach((x, i) => {
+        const stake = num(x.stake, 1), odd = num(x.odd, 0);
+        if (x.result === 'W') cum += stake * (odd - 1);
+        else if (x.result === 'L') cum -= stake;
         pts.push({ x: i+1, y: +cum.toFixed(2) });
     });
     return pts;
@@ -359,7 +365,7 @@ window.I18N = {
         arbNoneLead:'Los arbitrajes son raros y duran poco. Te mostramos igualmente las mejores oportunidades de hoy, ordenadas por cercanía al beneficio garantizado.',
         arbProfit:'Beneficio garantizado',
         arbMargin:'Margen',
-        arbStake:'Apuesta', arbReturns:'Devuelve', arbAt:'en', arbReturnsAll:'Retorno (cualquier resultado)',
+        arbStake:'Apuesta', arbReturns:'Devuelve', arbAt:'en', arbReturnsAll:'Retorno (cualquier resultado)', arbIfWins:'Si gana:',
         arbNear:'Más cerca del arbitraje',
         arbNearTag:'aún no garantiza profit',
         arbSuspect:'⚠ Cuota muy alta en una casa: verifícala antes de apostar (podría ser un error).',
@@ -432,7 +438,7 @@ window.I18N = {
         arbNoneLead:'Arbs are rare and short-lived. We still show today\\u2019s best opportunities, sorted by how close they are to guaranteed profit.',
         arbProfit:'Guaranteed profit',
         arbMargin:'Margin',
-        arbStake:'Stake', arbReturns:'Returns', arbAt:'at', arbReturnsAll:'Return (any result)',
+        arbStake:'Stake', arbReturns:'Returns', arbAt:'at', arbReturnsAll:'Return (any result)', arbIfWins:'If wins:',
         arbNear:'Closest to an arb',
         arbNearTag:'not yet guaranteed profit',
         arbSuspect:'⚠ Very high price at one book: verify it before betting (could be an error).',

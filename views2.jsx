@@ -140,8 +140,10 @@ function EquityCurve() {
     const w = 600, h = 120, pad = 6;
     const xs = pts.map(p=>p.x), ys = pts.map(p=>p.y);
     const minY = Math.min(0, ...ys), maxY = Math.max(...ys, 1);
-    const sx = (x) => pad + (x/(Math.max(...xs))) * (w - pad*2);
-    const sy = (y) => h - pad - ((y - minY)/(maxY - minY)) * (h - pad*2);
+    const maxX = Math.max(...xs) || 1;
+    const spanY = (maxY - minY) || 1;
+    const sx = (x) => pad + (x/maxX) * (w - pad*2);
+    const sy = (y) => h - pad - ((y - minY)/spanY) * (h - pad*2);
     const line = pts.map((p,i)=>`${i?'L':'M'}${sx(p.x).toFixed(1)},${sy(p.y).toFixed(1)}`).join(' ');
     const area = `${line} L${sx(xs[xs.length-1]).toFixed(1)},${(h-pad).toFixed(1)} L${sx(0).toFixed(1)},${(h-pad).toFixed(1)} Z`;
     const zeroY = sy(0);
@@ -217,7 +219,9 @@ function Record({ t, go }) {
                             </tr></thead>
                             <tbody>
                                 {window.RECORD.map((x,i)=>{
-                                    const p = x.result==='W' ? x.stake*(x.odd-1) : x.result==='L' ? -x.stake : 0;
+                                    const stake = (typeof x.stake==='number'&&isFinite(x.stake))?x.stake:1;
+                                    const odd = (+x.odd)||0;
+                                    const p = x.result==='W' ? stake*(odd-1) : x.result==='L' ? -stake : 0;
                                     cum += p;
                                     const resCls = x.result==='W'?'w':x.result==='L'?'l':'p';
                                     const resLbl = x.result==='W'?t.resW:x.result==='L'?t.resL:t.resP;
@@ -226,7 +230,7 @@ function Record({ t, go }) {
                                             <td className="l" style={{ color:'var(--muted)' }}>{x.date}</td>
                                             <td className="l" style={{ fontFamily:'var(--font-head)', fontWeight:600 }}>{x.pick}</td>
                                             <td className="l" style={{ color:'var(--text-2)' }}>{x.match}</td>
-                                            <td>{x.odd.toFixed(2)}</td>
+                                            <td>{odd.toFixed(2)}</td>
                                             <td><Book id={x.book} showName={false} size={20} /></td>
                                             <td><span className={'res-pill ' + resCls}>{resLbl}</span></td>
                                             <td className={'profit ' + (p>=0?'pos':'neg')}>{p>=0?'+':''}{p.toFixed(2)}</td>
@@ -255,19 +259,19 @@ function Record({ t, go }) {
                                                 <span className={'res-pill ' + (won?'w':'l')}>{won?t.resW:t.resL}</span>
                                             </div>
                                             <div style={{ padding:'4px 16px' }}>
-                                                {c.legs.map((l,j)=>(
+                                                {(c.legs||[]).map((l,j)=>(
                                                     <div key={j} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'9px 0', borderBottom: j<c.legs.length-1?'1px solid var(--line)':'none' }}>
                                                         <div style={{ minWidth:0 }}>
                                                             <div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.88rem', color: l.win?'var(--text)':'var(--muted)', textDecoration: l.win?'none':'line-through' }}>{l.pick}</div>
                                                             <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{l.match}</div>
                                                         </div>
-                                                        <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.82rem', color: l.win?'var(--green)':'var(--red)' }}>{l.win?'✓':'✗'} {l.odd.toFixed(2)}</span>
+                                                        <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.82rem', color: l.win?'var(--green)':'var(--red)' }}>{l.win?'✓':'✗'} {((+l.odd)||0).toFixed(2)}</span>
                                                     </div>
                                                 ))}
                                             </div>
                                             <div className="combo__foot">
                                                 <span style={{ fontFamily:'var(--font-mono)', fontSize:'.72rem', color:'var(--muted)' }}>{t.comboTotal}</span>
-                                                <span style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.1rem', color: won?'var(--green)':'var(--red)' }}>{c.totalOdd.toFixed(2)}</span>
+                                                <span style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.1rem', color: won?'var(--green)':'var(--red)' }}>{((+c.totalOdd)||0).toFixed(2)}</span>
                                             </div>
                                         </div>
                                     );
