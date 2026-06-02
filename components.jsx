@@ -4,7 +4,7 @@
 const { useState, useEffect, useRef } = React;
 
 const teamById = (id) => window.TEAMS[id] || { id, name: (typeof id==='string'? id : 'Equipo'), code: (typeof id==='string'? id.slice(0,3).toUpperCase() : '?'), color: '#3a4768', known: false, elo: null, conf: null, form: '-----' };
-const bookById = (id) => window.BOOKS[id] || { id, name: (typeof id==='string'? id : 'Casa') };
+const bookById = (id) => window.BOOKS[id] || { id, name: (typeof id==='string'? id : 'Casa'), abbr: (typeof id==='string'? id.slice(0,3).toUpperCase() : '?'), color: '#5b6472' };
 
 const MV_BRAND = (window.MV_CONFIG && window.MV_CONFIG.brand) || { name:'GOL', accent:'VALUE', tagline:'VALOR · FÚTBOL' };
 
@@ -27,6 +27,7 @@ const Icon = {
 };
 
 function pickInk(hex) {
+    if (typeof hex !== 'string' || !/^#?[0-9a-fA-F]{6}$/.test(hex.replace('#',''))) return '#ffffff';
     const c = hex.replace('#',''); const r=parseInt(c.slice(0,2),16), g=parseInt(c.slice(2,4),16), b=parseInt(c.slice(4,6),16);
     return (0.299*r + 0.587*g + 0.114*b) > 150 ? '#0b0e17' : '#ffffff';
 }
@@ -47,10 +48,11 @@ function Flag({ team, size = 30, radius = 8 }) {
 function Book({ id, showName = true, size = 24 }) {
     const b = bookById(id);
     if (!b) return null;
+    const col = b.color || '#5b6472';
     return (
         <span className="book">
-            <span className="book__mark" style={{ background:b.color, color:pickInk(b.color), width:size, height:size }}>{b.abbr}</span>
-            {showName && b.name}
+            <span className="book__mark" style={{ background:col, color:pickInk(col), width:size, height:size }}>{b.abbr || (typeof id==='string'?id.slice(0,3).toUpperCase():'?')}</span>
+            {showName && (b.name || id)}
         </span>
     );
 }
