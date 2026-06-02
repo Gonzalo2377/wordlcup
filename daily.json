@@ -1,20 +1,40 @@
 {
   "meta": {
-    "updatedAt": "2026-06-02T16:01:19.715Z",
+    "updatedAt": "2026-06-02T21:14:46.386Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
     "market": "h2h",
-    "matches": 12,
+    "matches": 13,
     "valuePicks": 0,
-    "books": 15,
+    "books": 17,
     "stale": false,
     "credits": {
-      "remaining": 400,
-      "used": 100
+      "remaining": 386,
+      "used": 114
     }
   },
   "TEAMS": {
+    "cdcast": {
+      "id": "cdcast",
+      "name": "CD Castellón",
+      "code": "CDC",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
+    "almeri": {
+      "id": "almeri",
+      "name": "Almería",
+      "code": "ALM",
+      "color": "#5a6b8c",
+      "conf": "—",
+      "fifa": 55,
+      "form": "",
+      "known": false
+    },
     "operar": {
       "id": "operar",
       "name": "Operario PR",
@@ -263,16 +283,16 @@
       "color": "#e5a000",
       "url": "#"
     },
+    "pmu": {
+      "name": "PMU",
+      "abbr": "PMU",
+      "color": "#5a6b8c",
+      "url": "#"
+    },
     "unibet": {
       "name": "Unibet",
       "abbr": "UNIB",
       "color": "#0aa05a",
-      "url": "#"
-    },
-    "betsson": {
-      "name": "Betsson",
-      "abbr": "BETS",
-      "color": "#ff8a1e",
       "url": "#"
     },
     "nordicbet": {
@@ -281,16 +301,10 @@
       "color": "#1f3a93",
       "url": "#"
     },
-    "betonlineag": {
-      "name": "BetOnline.ag",
-      "abbr": "BETO",
-      "color": "#1a1a1a",
-      "url": "#"
-    },
-    "coolbet": {
-      "name": "Coolbet",
-      "abbr": "COOL",
-      "color": "#0aa05a",
+    "marathonbet": {
+      "name": "Marathon Bet",
+      "abbr": "MARA",
+      "color": "#1f5fd6",
       "url": "#"
     },
     "pinnacle": {
@@ -299,22 +313,52 @@
       "color": "#3a4660",
       "url": "#"
     },
-    "marathonbet": {
-      "name": "Marathon Bet",
-      "abbr": "MARA",
+    "betonlineag": {
+      "name": "BetOnline.ag",
+      "abbr": "BETO",
+      "color": "#1a1a1a",
+      "url": "#"
+    },
+    "betsson": {
+      "name": "Betsson",
+      "abbr": "BETS",
+      "color": "#ff8a1e",
+      "url": "#"
+    },
+    "onexbet": {
+      "name": "1xBet",
+      "abbr": "1XBE",
       "color": "#1f5fd6",
       "url": "#"
     },
-    "sport888": {
-      "name": "888sport",
-      "abbr": "888S",
-      "color": "#ff8a1e",
+    "betfair": {
+      "name": "Betfair",
+      "abbr": "BETF",
+      "color": "#ffb01f",
       "url": "#"
     },
     "williamhill": {
       "name": "William Hill",
       "abbr": "WILL",
       "color": "#1f5fd6",
+      "url": "#"
+    },
+    "betclic": {
+      "name": "Betclic",
+      "abbr": "BETC",
+      "color": "#e5484d",
+      "url": "#"
+    },
+    "coolbet": {
+      "name": "Coolbet",
+      "abbr": "COOL",
+      "color": "#0aa05a",
+      "url": "#"
+    },
+    "sport888": {
+      "name": "888sport",
+      "abbr": "888S",
+      "color": "#ff8a1e",
       "url": "#"
     },
     "codere": {
@@ -329,26 +373,74 @@
       "color": "#c8102e",
       "url": "#"
     },
-    "onexbet": {
-      "name": "1xBet",
-      "abbr": "1XBE",
-      "color": "#1f5fd6",
-      "url": "#"
-    },
     "winamax": {
       "name": "Winamax",
       "abbr": "WINA",
       "color": "#e5484d",
       "url": "#"
-    },
-    "betclic": {
-      "name": "Betclic",
-      "abbr": "BETC",
-      "color": "#e5484d",
-      "url": "#"
     }
   },
   "MATCHES": [
+    {
+      "id": "c8486564e402714866628d13fb394279",
+      "group": "sáb, 06 jun",
+      "time": "21:00",
+      "home": "cdcast",
+      "away": "almeri",
+      "odds": {
+        "home": {
+          "leovegas": 1.75,
+          "pmu": 1.68,
+          "unibet": 1.8,
+          "nordicbet": 1.8,
+          "marathonbet": 1.81,
+          "pinnacle": 1.8,
+          "betonlineag": 1.77,
+          "betsson": 1.8,
+          "onexbet": 1.79,
+          "betfair": 1.83,
+          "williamhill": 1.75,
+          "betclic": 1.7,
+          "coolbet": 1.8
+        },
+        "draw": {
+          "leovegas": 3.85,
+          "pmu": 3.7,
+          "unibet": 3.95,
+          "nordicbet": 3.75,
+          "marathonbet": 4.1,
+          "pinnacle": 3.91,
+          "betonlineag": 3.7,
+          "betsson": 3.75,
+          "onexbet": 4.06,
+          "betfair": 4.2,
+          "williamhill": 3.75,
+          "betclic": 3.55,
+          "coolbet": 4
+        },
+        "away": {
+          "leovegas": 3.8,
+          "pmu": 3.65,
+          "unibet": 3.9,
+          "nordicbet": 3.9,
+          "marathonbet": 4.25,
+          "pinnacle": 4.15,
+          "betonlineag": 4,
+          "betsson": 3.9,
+          "onexbet": 4.21,
+          "betfair": 4.3,
+          "williamhill": 3.9,
+          "betclic": 3.68,
+          "coolbet": 4
+        }
+      },
+      "model": {
+        "home": 0.5242053886169022,
+        "draw": 0.24105743885535297,
+        "away": 0.2347371725277448,
+        "fromMarket": true
+      }
+    },
     {
       "id": "5f53708f98ace903914ecddca6a9fcc3",
       "group": "sáb, 06 jun",
@@ -359,50 +451,50 @@
         "home": {
           "leovegas": 2.08,
           "unibet": 2.14,
-          "betsson": 2.25,
-          "nordicbet": 2.25,
-          "betonlineag": 2.26,
+          "betsson": 2.18,
+          "nordicbet": 2.18,
+          "betonlineag": 2.24,
           "coolbet": 2.3,
-          "pinnacle": 2.32,
-          "marathonbet": 2.23,
+          "pinnacle": 2.24,
+          "marathonbet": 2.17,
           "sport888": 2.15,
           "williamhill": 2.15,
-          "codere": 2.19,
-          "tipico": 2.2
+          "codere": 2.14,
+          "tipico": 2.1
         },
         "draw": {
           "leovegas": 2.85,
           "unibet": 2.9,
-          "betsson": 2.78,
-          "nordicbet": 2.78,
-          "betonlineag": 2.64,
+          "betsson": 2.82,
+          "nordicbet": 2.82,
+          "betonlineag": 2.68,
           "coolbet": 2.9,
-          "pinnacle": 2.67,
-          "marathonbet": 2.73,
+          "pinnacle": 2.73,
+          "marathonbet": 2.77,
           "sport888": 2.9,
           "williamhill": 2.9,
-          "codere": 2.7,
-          "tipico": 2.6
+          "codere": 2.75,
+          "tipico": 2.7
         },
         "away": {
           "leovegas": 3.85,
           "unibet": 3.95,
-          "betsson": 3.65,
-          "nordicbet": 3.65,
-          "betonlineag": 3.9,
+          "betsson": 3.75,
+          "nordicbet": 3.75,
+          "betonlineag": 3.85,
           "coolbet": 3.5,
-          "pinnacle": 4,
-          "marathonbet": 3.78,
-          "sport888": 3.5,
-          "williamhill": 3.5,
-          "codere": 3.55,
-          "tipico": 3.7
+          "pinnacle": 4.12,
+          "marathonbet": 3.88,
+          "sport888": 3.4,
+          "williamhill": 3.4,
+          "codere": 3.6,
+          "tipico": 3.8
         }
       },
       "model": {
-        "home": 0.41807592658811,
-        "draw": 0.33262692232095015,
-        "away": 0.24929715109093994,
+        "home": 0.4244596149979987,
+        "draw": 0.3281816969622067,
+        "away": 0.24735868803979447,
         "fromMarket": true
       }
     },
@@ -564,7 +656,7 @@
       "away": "vissel",
       "odds": {
         "home": {
-          "pinnacle": 2.56,
+          "pinnacle": 2.55,
           "winamax": 2.35,
           "betsson": 2.48,
           "unibet": 2.3,
@@ -572,7 +664,7 @@
           "betclic": 2.32,
           "sport888": 2.5,
           "williamhill": 2.5,
-          "marathonbet": 2.51
+          "marathonbet": 2.5
         },
         "draw": {
           "pinnacle": 3.15,
@@ -586,7 +678,7 @@
           "marathonbet": 3.12
         },
         "away": {
-          "pinnacle": 2.92,
+          "pinnacle": 2.94,
           "winamax": 2.6,
           "betsson": 2.78,
           "unibet": 2.7,
@@ -594,13 +686,13 @@
           "betclic": 2.67,
           "sport888": 2.8,
           "williamhill": 2.8,
-          "marathonbet": 2.83
+          "marathonbet": 2.85
         }
       },
       "model": {
-        "home": 0.37223085833147374,
-        "draw": 0.29872807522826156,
-        "away": 0.32904106644026476,
+        "home": 0.3726097624813787,
+        "draw": 0.29877887097266925,
+        "away": 0.3286113665459519,
         "fromMarket": true
       }
     },
@@ -946,7 +1038,7 @@
       "id": "c1",
       "tier": "single",
       "name": "Combinada del Día",
-      "conf": 13,
+      "conf": 15,
       "legs": [
         {
           "id": "468d40850db8507bc33dcc0acc63239a",
@@ -959,6 +1051,16 @@
           "book": "coolbet"
         },
         {
+          "id": "c8486564e402714866628d13fb394279",
+          "sport": "soccer_spain_segunda_division",
+          "ts": 1780772400000,
+          "side": "home",
+          "match": "CD Castellón – Almería",
+          "pick": "Gana CD Castellón",
+          "odd": 1.83,
+          "book": "betfair"
+        },
+        {
           "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
           "sport": "soccer_japan_j_league",
           "ts": 1780722000000,
@@ -966,16 +1068,6 @@
           "match": "FC Tokyo – Cerezo Osaka",
           "pick": "Gana FC Tokyo",
           "odd": 1.85,
-          "book": "pinnacle"
-        },
-        {
-          "id": "02e90a97d3576f9814ff0440cf86ca30",
-          "sport": "soccer_japan_j_league",
-          "ts": 1780729200000,
-          "side": "home",
-          "match": "Urawa Red Diamonds – Fagiano Okayama",
-          "pick": "Gana Urawa Red Diamonds",
-          "odd": 1.96,
           "book": "pinnacle"
         }
       ]
@@ -984,8 +1076,18 @@
       "id": "c2",
       "tier": "all",
       "name": "Combinada Segura",
-      "conf": 11,
+      "conf": 12,
       "legs": [
+        {
+          "id": "c8486564e402714866628d13fb394279",
+          "sport": "soccer_spain_segunda_division",
+          "ts": 1780772400000,
+          "side": "home",
+          "match": "CD Castellón – Almería",
+          "pick": "Gana CD Castellón",
+          "odd": 1.83,
+          "book": "betfair"
+        },
         {
           "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
           "sport": "soccer_japan_j_league",
@@ -1005,16 +1107,6 @@
           "pick": "Gana Urawa Red Diamonds",
           "odd": 1.96,
           "book": "pinnacle"
-        },
-        {
-          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
-          "sport": "soccer_japan_j_league",
-          "ts": 1780736400000,
-          "side": "home",
-          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
-          "pick": "Gana Kashiwa Reysol",
-          "odd": 1.98,
-          "book": "betsson"
         }
       ]
     },
@@ -1022,7 +1114,7 @@
       "id": "c3",
       "tier": "all",
       "name": "Combinada Larga",
-      "conf": 6,
+      "conf": 7,
       "legs": [
         {
           "id": "468d40850db8507bc33dcc0acc63239a",
@@ -1035,6 +1127,16 @@
           "book": "coolbet"
         },
         {
+          "id": "c8486564e402714866628d13fb394279",
+          "sport": "soccer_spain_segunda_division",
+          "ts": 1780772400000,
+          "side": "home",
+          "match": "CD Castellón – Almería",
+          "pick": "Gana CD Castellón",
+          "odd": 1.83,
+          "book": "betfair"
+        },
+        {
           "id": "99d4e6c497c8fb1b8b4b2f7531a8de20",
           "sport": "soccer_japan_j_league",
           "ts": 1780722000000,
@@ -1053,16 +1155,6 @@
           "pick": "Gana Urawa Red Diamonds",
           "odd": 1.96,
           "book": "pinnacle"
-        },
-        {
-          "id": "f3b507e4c14b0315a77cfc9e73dc04da",
-          "sport": "soccer_japan_j_league",
-          "ts": 1780736400000,
-          "side": "home",
-          "match": "Kashiwa Reysol – Kyoto Purple Sanga",
-          "pick": "Gana Kashiwa Reysol",
-          "odd": 1.98,
-          "book": "betsson"
         }
       ]
     }
