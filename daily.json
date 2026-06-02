@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-02T09:20:20.207Z",
+    "updatedAt": "2026-06-02T09:21:09.123Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 15,
     "stale": true,
     "credits": {
-      "remaining": 454,
-      "used": 46
+      "remaining": 444,
+      "used": 56
     }
   },
   "TEAMS": {
