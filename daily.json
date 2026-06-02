@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-01T12:13:20.830Z",
+    "updatedAt": "2026-06-02T08:57:58.428Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -8,9 +8,10 @@
     "matches": 1,
     "valuePicks": 0,
     "books": 15,
+    "stale": true,
     "credits": {
-      "remaining": 476,
-      "used": 24
+      "remaining": 466,
+      "used": 34
     }
   },
   "TEAMS": {
@@ -266,34 +267,6 @@
       "date": "31 MAY",
       "name": "Combinada Segura",
       "tier": "all",
-      "legs": [
-        {
-          "match": "O'Higgins – Everton de Viña del Mar",
-          "pick": "Gana O'Higgins",
-          "odd": 2,
-          "win": false
-        },
-        {
-          "match": "Palestino – Audax Italiano",
-          "pick": "Gana Palestino",
-          "odd": 2.02,
-          "win": false
-        },
-        {
-          "match": "Cruzeiro – Fluminense",
-          "pick": "Gana Cruzeiro",
-          "odd": 1.96,
-          "win": false
-        }
-      ],
-      "totalOdd": 7.92,
-      "result": "L"
-    },
-    {
-      "dayId": "31 MAY·c1",
-      "date": "31 MAY",
-      "name": "Combinada del Día",
-      "tier": "single",
       "legs": [
         {
           "match": "O'Higgins – Everton de Viña del Mar",
