@@ -357,9 +357,12 @@ function Arbitrage({ t, go, lang }) {
         return (
             <div className="panel" style={{ overflow:'hidden', borderColor: isArb ? 'rgba(39,215,150,.45)' : 'var(--line)' }}>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12, padding:'14px 16px', borderBottom:'1px solid var(--line)', cursor:'pointer' }} onClick={()=>go({view:'match', id:a.m.id})}>
-                    <div style={{ minWidth:0 }}>
-                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.1em', textTransform:'uppercase' }}>{a.m.group} · {a.m.time}</div>
-                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{home.code} <span style={{ color:'var(--muted)' }}>v</span> {away.code}</div>
+                    <div style={{ display:'flex', alignItems:'center', gap:10, minWidth:0 }}>
+                        <span style={{ display:'inline-flex' }}><Crest id={a.m.home} size={28} /><span style={{ marginLeft:-9 }}><Crest id={a.m.away} size={28} /></span></span>
+                        <div style={{ minWidth:0 }}>
+                            <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.1em', textTransform:'uppercase' }}>{a.m.group} · {a.m.time}</div>
+                            <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{home.code} <span style={{ color:'var(--muted)' }}>v</span> {away.code}</div>
+                        </div>
                     </div>
                     <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.78rem', padding:'5px 10px', borderRadius:8, whiteSpace:'nowrap',
                         background: isArb ? 'rgba(39,215,150,.13)' : 'rgba(255,255,255,.04)',

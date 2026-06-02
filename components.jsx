@@ -45,13 +45,24 @@ function Flag({ team, size = 30, radius = 8 }) {
 }
 
 /* ---------- bookmaker chip ---------- */
+/* ---------- team crest (logo if provided, else colour monogram) ---------- */
+function Crest({ id, size = 30 }) {
+    const tm = teamById(id);
+    const col = (tm && tm.color) || '#5b6472';
+    const logo = (tm && tm.logo) || (window.GOL_LOGOS && window.GOL_LOGOS[id]);
+    const wrap = { width:size, height:size, borderRadius:'50%', flexShrink:0, display:'inline-grid', placeItems:'center', overflow:'hidden', boxShadow:'0 1px 4px rgba(0,0,0,.25)' };
+    if (logo) return <span style={{ ...wrap, background:'#fff' }}><img src={logo} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} onError={(e)=>{ e.target.style.display='none'; }} /></span>;
+    return <span style={{ ...wrap, background:col, color:pickInk(col), fontFamily:'var(--font-mono)', fontWeight:700, fontSize:size*0.3 }}>{(tm && tm.code) || '?'}</span>;
+}
+
 function Book({ id, showName = true, size = 24 }) {
     const b = bookById(id);
     if (!b) return null;
     const col = b.color || '#5b6472';
+    const abbr = b.abbr || (typeof id==='string'?id.slice(0,3).toUpperCase():'?');
     return (
         <span className="book">
-            <span className="book__mark" style={{ background:col, color:pickInk(col), width:size, height:size }}>{b.abbr || (typeof id==='string'?id.slice(0,3).toUpperCase():'?')}</span>
+            <span className="book__mark" style={{ background:col, color:pickInk(col), width:size, height:size }}>{showName ? '' : abbr}</span>
             {showName && (b.name || id)}
         </span>
     );

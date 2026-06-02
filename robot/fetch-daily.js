@@ -369,9 +369,19 @@ function settleCombos(pending, scores, RECORD){
 }
 
 /* ---------------- build daily.json --------------------------- */
+const fetchFriendlies = require('./friendlies.js');
 async function main(){
     const events = await fetchOdds();
     console.log(`· ${events.length} events returned`);
+
+    // extra source: international friendlies via API-Football (national-team friendlies
+    // that The Odds API doesn't carry). Set APIFOOTBALL_KEY to enable.
+    if (process.env.APIFOOTBALL_KEY) {
+        try {
+            const fr = await fetchFriendlies(process.env.APIFOOTBALL_KEY, WINDOW_HOURS);
+            if (fr.length) events.push(...fr);
+        } catch(e){ console.log('· amistosos no disponibles:', e.message); }
+    }
 
     const TEAMS = {}, BOOKS = {}, MATCHES = [];
 
@@ -407,6 +417,7 @@ async function main(){
         if (!Object.keys(odds.home).length || !Object.keys(odds.draw).length || !Object.keys(odds.away).length) continue;
 
         MATCHES.push({ id: ev.id || `${homeId}-${awayId}`, group: fmtGroup(ev.commence_time), time: fmtTime(ev.commence_time), home: homeId, away: awayId, odds, _commence: ev.commence_time, _sport: ev.sport_key });
+        if (ev._logos) { if (ev._logos.home && TEAMS[homeId]) TEAMS[homeId].logo = ev._logos.home; if (ev._logos.away && TEAMS[awayId]) TEAMS[awayId].logo = ev._logos.away; }
     }
 
     // Attach probabilities:
