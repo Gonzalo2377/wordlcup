@@ -464,6 +464,15 @@ async function main(){
     let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [];
     try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; COMBO_PENDING = prev.COMBO_PENDING || []; COMBO_RECORD = prev.COMBO_RECORD || []; } catch (e) {}
 
+    // MIGRATION: older versions accidentally mixed combo-shaped entries into RECORD.
+    // Move anything with `legs` (a combo) out of RECORD into COMBO_RECORD, and keep
+    // only clean single picks in RECORD. Self-heals the ledger on the next run.
+    {
+        const strayCombos = RECORD.filter(x => x && x.legs);
+        if (strayCombos.length) COMBO_RECORD = [...strayCombos, ...COMBO_RECORD];
+        RECORD = RECORD.filter(x => x && !x.legs && x.result);
+    }
+
     // FIREWALL #2 — kill duplicates that share the SAME pick + date (singles) or the
     // SAME set of legs + date (combos). Keeps the first occurrence, drops the rest.
     const dedupBy = (arr, keyFn) => { const s = new Set(); return arr.filter(o => { const k = keyFn(o); if (s.has(k)) return false; s.add(k); return true; }); };

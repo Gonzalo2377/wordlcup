@@ -303,7 +303,7 @@ window.COMBO_PENDING = window.COMBO_PENDING || [];
 // pinned combos always lead, deduped by dayId
 window.COMBO_RECORD = [...window.COMBO_PINNED, ...window.COMBO_RECORD.filter(c => !window.COMBO_PINNED.some(p => p.dayId === c.dayId))];
 window.recordSummary = function () {
-    const r = window.RECORD || [];
+    const r = (window.RECORD || []).filter(x => x && !x.legs && x.result);
     let staked = 0, ret = 0, w = 0, l = 0, p = 0;
     const num = (v,d)=>{ const x=+v; return isFinite(x)?x:d; };
     r.forEach(x => {
@@ -329,7 +329,7 @@ window.recordSummary = function () {
 window.equitySeries = function () {
     let cum = 0; const pts = [{ x:0, y:0 }];
     const num = (v,d)=>{ const x=+v; return isFinite(x)?x:d; };
-    (window.RECORD || []).forEach((x, i) => {
+    (window.RECORD || []).filter(x => x && !x.legs && x.result).forEach((x, i) => {
         const stake = num(x.stake, 1), odd = num(x.odd, 0);
         if (x.result === 'W') cum += stake * (odd - 1);
         else if (x.result === 'L') cum -= stake;

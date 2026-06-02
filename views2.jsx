@@ -47,7 +47,7 @@ function ComboCard({ c, t, locked, onUnlock }) {
                                 <span className="combo-leg__book">· {bookById(l.book).name}</span>
                             </div>
                         </div>
-                        <span className="combo-leg__odd">{l.odd.toFixed(2)}</span>
+                        <span className="combo-leg__odd">{((+l.odd)||0).toFixed(2)}</span>
                     </div>
                 ))}
             </div>
@@ -218,7 +218,7 @@ function Record({ t, go }) {
                                 <th>{t.colOdd}</th><th>{t.colBook}</th><th>{t.colResult}</th><th>{t.colProfit}</th>
                             </tr></thead>
                             <tbody>
-                                {window.RECORD.map((x,i)=>{
+                                {window.RECORD.filter(x => x && !x.legs && x.result).map((x,i)=>{
                                     const stake = (typeof x.stake==='number'&&isFinite(x.stake))?x.stake:1;
                                     const odd = (+x.odd)||0;
                                     const p = x.result==='W' ? stake*(odd-1) : x.result==='L' ? -stake : 0;
