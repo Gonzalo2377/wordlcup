@@ -35,24 +35,38 @@ function pickInk(hex) {
 /* ---------- national-team crest (code box) ---------- */
 function Flag({ team, size = 30, radius = 8 }) {
     if (!team) return null;
+    const logo = team.logo || (window.GOL_LOGOS && window.GOL_LOGOS[team.id]);
+    if (logo) return (
+        <span className="vc-team__logo" style={{ width:size, height:size, borderRadius:radius, overflow:'hidden', background:'#fff', display:'inline-grid', placeItems:'center' }}>
+            <img src={logo} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} onError={(e)=>{ e.target.style.display='none'; }} />
+        </span>
+    );
+    // unique deterministic gradient (same look as the tennis avatars)
+    const key = (team.name || team.id || '?') + (team.code || '');
+    const seed = key.split('').reduce((a,c)=>a + c.charCodeAt(0)*31, 0);
+    const hue = Math.abs(seed) % 360;
+    const grad = `linear-gradient(140deg, hsl(${hue} 60% 46%), hsl(${(hue+30)%360} 64% 30%))`;
     return (
         <span className="vc-team__logo" style={{
-            width: size, height: size, borderRadius: radius, background: team.color,
-            color: pickInk(team.color), fontSize: size * 0.32,
-            border: team.color === '#ffffff' ? '1px solid var(--line)' : 'none'
+            width: size, height: size, borderRadius: radius, background: grad,
+            color: '#fff', fontSize: size * 0.32
         }}>{team.code}</span>
     );
 }
 
 /* ---------- bookmaker chip ---------- */
-/* ---------- team crest (logo if provided, else colour monogram) ---------- */
+/* ---------- team crest (logo if provided, else unique gradient monogram) ---------- */
 function Crest({ id, size = 30 }) {
     const tm = teamById(id);
-    const col = (tm && tm.color) || '#5b6472';
     const logo = (tm && tm.logo) || (window.GOL_LOGOS && window.GOL_LOGOS[id]);
     const wrap = { width:size, height:size, borderRadius:'50%', flexShrink:0, display:'inline-grid', placeItems:'center', overflow:'hidden', boxShadow:'0 1px 4px rgba(0,0,0,.25)' };
     if (logo) return <span style={{ ...wrap, background:'#fff' }}><img src={logo} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} onError={(e)=>{ e.target.style.display='none'; }} /></span>;
-    return <span style={{ ...wrap, background:col, color:pickInk(col), fontFamily:'var(--font-mono)', fontWeight:700, fontSize:size*0.3 }}>{(tm && tm.code) || '?'}</span>;
+    // unique, deterministic gradient per team (same look as the tennis avatars)
+    const key = ((tm && tm.name) || id || '?') + ((tm && tm.code) || '');
+    const seed = key.split('').reduce((a,c)=>a + c.charCodeAt(0)*31, 0);
+    const hue = Math.abs(seed) % 360;
+    const grad = `linear-gradient(140deg, hsl(${hue} 60% 46%), hsl(${(hue+30)%360} 64% 30%))`;
+    return <span style={{ ...wrap, background:grad, color:'#fff', fontFamily:'var(--font-mono)', fontWeight:700, fontSize:size*0.3 }}>{(tm && tm.code) || '?'}</span>;
 }
 
 function Book({ id, showName = true, size = 24 }) {

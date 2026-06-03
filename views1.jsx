@@ -218,7 +218,7 @@ function MatchPage({ t, go, id, lang }) {
                     <span className="eyebrow"><span className="dot" />{m.group} · {m.time}</span>
                     <div className="mh-teams">
                         <div className="mh-team">
-                            <span className="mh-team__crest" style={{ background:home.color, color:pickInk(home.color), border: home.color==='#ffffff'?'1px solid var(--line)':'none' }}>{home.code}</span>
+                            <Flag team={home} size={46} radius={23} />
                             <div><div className="mh-team__name">{home.name}</div><div className="mh-team__rec">{teamRank(home)}{home.elo==null && home.conf ? ' · ' + home.conf : ''}</div></div>
                         </div>
                         <div className="mh-center">
@@ -227,7 +227,7 @@ function MatchPage({ t, go, id, lang }) {
                             <div className="mh-center__lbl" style={{ marginTop:8 }}>{t.drawL} {Math.round(mdl.draw*100)}%</div>
                         </div>
                         <div className="mh-team">
-                            <span className="mh-team__crest" style={{ background:away.color, color:pickInk(away.color), border: away.color==='#ffffff'?'1px solid var(--line)':'none' }}>{away.code}</span>
+                            <Flag team={away} size={46} radius={23} />
                             <div><div className="mh-team__name">{away.name}</div><div className="mh-team__rec">{teamRank(away)}{away.elo==null && away.conf ? ' · ' + away.conf : ''}</div></div>
                         </div>
                     </div>
