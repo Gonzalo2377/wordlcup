@@ -38,8 +38,7 @@ jobs:
           ODDS_REGIONS: eu
           # Ventana de días hacia delante. En temporada normal 48-72h sobra; en
           # temporada muerta (junio, antes del Mundial) súbelo para captar más
-          # partidos de los próximos días. 168 = 7 días.
-          ODDS_WINDOW_HOURS: '168'
+          ODDS_WINDOW_HOURS: '96'
         run: node robot/fetch-daily.js
       - name: Commit si hay cambios
         run: |
