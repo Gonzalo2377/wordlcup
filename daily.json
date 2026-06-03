@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-03T08:15:29.869Z",
+    "updatedAt": "2026-06-03T08:33:56.121Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 18,
     "stale": false,
     "credits": {
-      "remaining": 339,
-      "used": 161
+      "remaining": 322,
+      "used": 178
     }
   },
   "TEAMS": {
@@ -462,7 +462,7 @@
           "betonlineag": 2.26,
           "coolbet": 2.3,
           "pinnacle": 2.33,
-          "marathonbet": 2.26,
+          "marathonbet": 2.24,
           "sport888": 2.25,
           "williamhill": 2.25,
           "codere": 2.18,
@@ -492,7 +492,7 @@
           "betonlineag": 3.85,
           "coolbet": 3.5,
           "pinnacle": 3.88,
-          "marathonbet": 3.72,
+          "marathonbet": 3.78,
           "sport888": 3.3,
           "williamhill": 3.3,
           "codere": 3.5,
@@ -501,9 +501,9 @@
         }
       },
       "model": {
-        "home": 0.41515957945802073,
-        "draw": 0.3323404775412579,
-        "away": 0.25249994300072126,
+        "home": 0.4154507273260591,
+        "draw": 0.3323479738608804,
+        "away": 0.2522012988130605,
         "fromMarket": true
       }
     },
@@ -905,7 +905,7 @@
       "away": "shimiz",
       "odds": {
         "home": {
-          "pinnacle": 2.38,
+          "pinnacle": 2.39,
           "betclic": 2.2,
           "betsson": 2.35,
           "nordicbet": 2.35,
@@ -916,7 +916,7 @@
           "marathonbet": 2.31
         },
         "draw": {
-          "pinnacle": 3.22,
+          "pinnacle": 3.21,
           "betclic": 2.98,
           "betsson": 3.1,
           "nordicbet": 3.1,
@@ -927,7 +927,7 @@
           "marathonbet": 3.28
         },
         "away": {
-          "pinnacle": 3.14,
+          "pinnacle": 3.13,
           "betclic": 2.87,
           "betsson": 3,
           "nordicbet": 3,
@@ -939,9 +939,9 @@
         }
       },
       "model": {
-        "home": 0.39757373115899014,
-        "draw": 0.2952557725203963,
-        "away": 0.3071704963206135,
+        "home": 0.3973871081012919,
+        "draw": 0.295346695886009,
+        "away": 0.3072661960126991,
         "fromMarket": true
       }
     },
