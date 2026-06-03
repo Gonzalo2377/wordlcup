@@ -232,6 +232,8 @@ function medianPrice(map){ const v=Object.values(map).sort((a,b)=>a-b); const n=
 function saneBest(map){ const med=medianPrice(map); let best=null; for(const b in map){ const p=map[b]; if(med && p>med*1.5) continue; if(!best||p>best.price) best={book:b,price:p}; } return best || bestPrice(map); }
 function marketProbs(m){ const avg=o=>{const v=Object.values(o);return v.reduce((s,x)=>s+1/x,0)/v.length;}; const h=avg(m.odds.home),d=avg(m.odds.draw),a=avg(m.odds.away),s=h+d+a; return {home:h/s,draw:d/s,away:a/s}; }
 function matchValue(m){ const mk=marketProbs(m); const fromMarket=m.model&&m.model.fromMarket; const MIN_P=0.33, MAX_ODD=3.40; const all=['home','draw','away'].map(k=>{ const best=saneBest(m.odds[k]); const p=fromMarket?mk[k]:m.model[k]; const ev=(mk[k]*best.price-1)*100; const edge=fromMarket?ev:(m.model[k]-mk[k])*100; const eligible=p>=MIN_P && best.price<=MAX_ODD; return {k,modelP:m.model[k],mktP:mk[k],best,edge,ev,p,eligible}; }); const eligibles=all.filter(o=>o.eligible).sort((a,b)=>b.edge-a.edge); const pick=eligibles.length?eligibles[0]:[...all].sort((a,b)=>b.p-a.p)[0]; const positive=pick.eligible&&pick.edge>=2; return {pick,edge:pick.edge,positive,source:fromMarket?'market':'model'}; }
+/* surebet (3-way): back home/draw/away each at its best book; marginPct>0 → guaranteed */
+function arbOf(m){ const legs=['home','draw','away'].map(k=>{const best=bestPrice(m.odds[k]);return {k,book:best.book,price:best.price};}); const inv=legs.reduce((s,l)=>s+1/l.price,0); return { legs, marginPct:(1-inv)*100, hasArb:(1-inv)*100>0.01 }; }
 
 /* ---------------- API ---------------------------------------- */
 // Priority ranking of competitions by visibility/popularity. In AUTO mode we keep
@@ -474,8 +476,8 @@ async function main(){
     pushCombo({ id:'c3', tier:'all', name:'Combinada Larga' }, merge(byEdge, safePool), 4);
 
     // ---- track record: read previous state, settle finished picks + combos ----
-    let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [];
-    try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; COMBO_PENDING = prev.COMBO_PENDING || []; COMBO_RECORD = prev.COMBO_RECORD || []; } catch (e) {}
+    let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [], ARB_RECORD = [], ARB_PENDING = [];
+    try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; COMBO_PENDING = prev.COMBO_PENDING || []; COMBO_RECORD = prev.COMBO_RECORD || []; ARB_RECORD = prev.ARB_RECORD || []; ARB_PENDING = prev.ARB_PENDING || []; } catch (e) {}
 
     // MIGRATION: older versions accidentally mixed combo-shaped entries into RECORD.
     // Move anything with `legs` (a combo) out of RECORD into COMBO_RECORD, and keep
@@ -491,15 +493,19 @@ async function main(){
     const dedupBy = (arr, keyFn) => { const s = new Set(); return arr.filter(o => { const k = keyFn(o); if (s.has(k)) return false; s.add(k); return true; }); };
     const singleSig = (r) => `${r.date||''}|${r.match||''}|${r.pick||r.pickLabel||''}`;
     const comboKey  = (c) => `${c.date||''}|${(c.legs||[]).map(l=>`${l.match}|${l.pick}`).sort().join(' + ')}`;
+    const arbKey    = (a) => `${a.date||''}|${a.id||a.match||''}`;
     RECORD        = dedupBy(RECORD, singleSig);
     PENDING       = dedupBy(PENDING, singleSig);
     COMBO_RECORD  = dedupBy(COMBO_RECORD, comboKey);
     COMBO_PENDING = dedupBy(COMBO_PENDING, comboKey);
+    ARB_RECORD    = dedupBy(ARB_RECORD, arbKey);
+    ARB_PENDING   = dedupBy(ARB_PENDING, arbKey);
     try {
         // query scores for any competition with a pending single pick OR combo leg (saves credits)
         const need = [...new Set([
             ...PENDING.map(p => p.sport),
             ...COMBO_PENDING.flatMap(c => c.legs.map(l => l.sport)),
+            ...ARB_PENDING.map(p => p.sport),
         ].filter(Boolean))];
         if (need.length) {
             const scores = await fetchScores(need);
@@ -507,6 +513,14 @@ async function main(){
             PENDING = out.stillPending; RECORD = out.RECORD;
             const cout = settleCombos(COMBO_PENDING, scores, COMBO_RECORD);
             COMBO_PENDING = cout.still; COMBO_RECORD = cout.RECORD;
+            // settle surebets: profit locked when bet; once the match is final → realized history
+            const byId = {}; scores.forEach(s => { if (s && s.id) byId[s.id] = s; });
+            const aStill = [];
+            ARB_PENDING.forEach(a => {
+                if (!winnerOf(byId[a.id])) { aStill.push(a); return; }   // not finished yet
+                ARB_RECORD.unshift({ date:a.date, match:a.match, marginPct:a.marginPct, profit:a.profit, legs:a.legs });
+            });
+            ARB_PENDING = aStill;
         }
     } catch (e) { console.log('· scores no disponibles:', e.message); }
 
@@ -546,6 +560,20 @@ async function main(){
         PENDING.push(entry);
         haveId.add(x.m.id); havePickSig.add(sig);
     });
+
+    // ---- snapshot TODAY's surebets (guaranteed profit at 100€ reference) → settle later ----
+    const REF = 100;
+    const haveArb = new Set([...ARB_PENDING, ...ARB_RECORD].map(arbKey));
+    MATCHES.forEach(m => {
+        const a = arbOf(m); if (!a.hasArb) return;
+        const inv = a.legs.reduce((s,l)=> s + 1/l.price, 0);
+        const profit = +((REF/inv) - REF).toFixed(2);
+        const rec = { id:m.id, sport:m._sport, ts:new Date(m._commence).getTime(), date: fmtDay(m._commence),
+            match:`${TEAMS[m.home].name} – ${TEAMS[m.away].name}`, marginPct:+a.marginPct.toFixed(2), profit,
+            legs:a.legs.map(l=>({ pick:label(m,l.k), odd:+l.price.toFixed(2), book:l.book })) };
+        if (haveArb.has(arbKey(rec))) return;
+        ARB_PENDING.push(rec); haveArb.add(arbKey(rec));
+    });
     // Clean the pending list:
     //  · drop legacy entries with no timestamp (old junk),
     //  · drop picks registered too far in the future (odds not final yet — e.g. World Cup weeks away),
@@ -558,6 +586,9 @@ async function main(){
     const COMBO_EXPIRY = 5*24*3600*1000;
     COMBO_PENDING = COMBO_PENDING.filter(c => c.legs.some(l => l.ts && (Date.now() - l.ts) < COMBO_EXPIRY) || c.legs.every(l => !l.ts));
     COMBO_RECORD = COMBO_RECORD.slice(0, 40);
+    // surebets housekeeping: drop pendings whose match is >4 days past & never settled
+    ARB_PENDING = ARB_PENDING.filter(a => a.ts && (Date.now() - a.ts) < EXPIRY);
+    ARB_RECORD = ARB_RECORD.slice(0, 40);
     // strip internal fields from matches before writing
     MATCHES.forEach(m => { delete m._commence; delete m._sport; });
 
@@ -585,7 +616,7 @@ async function main(){
             matches:keepMatches.length, valuePicks:valued.length, books:Object.keys(keepBooks).length,
             stale, credits: { remaining: CREDITS.remaining, used: CREDITS.used },
         },
-        TEAMS:keepTeams, BOOKS:keepBooks, MATCHES:keepMatches, COMBOS:keepCombos, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD,
+        TEAMS:keepTeams, BOOKS:keepBooks, MATCHES:keepMatches, COMBOS:keepCombos, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD, ARB_RECORD, ARB_PENDING,
     };
     fs.writeFileSync(OUT, JSON.stringify(daily, null, 2));
     console.log(`✓ wrote ${OUT}\n  ${MATCHES.length} football matches · ${valued.length} value picks · ${Object.keys(BOOKS).length} books · ${COMBOS.length} accas · ${RECORD.length} en récord · ${PENDING.length} pendientes · ${COMBO_RECORD.length} combis resueltas · ${COMBO_PENDING.length} combis en juego`);

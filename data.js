@@ -325,6 +325,19 @@ window.recordSummary = function () {
         staked,
     };
 };
+/* SIN RIESGO — historial de surebets (beneficio garantizado a 100€ de referencia) */
+if (!Array.isArray(window.ARB_RECORD)) window.ARB_RECORD = [
+  { date:'02 JUN', match:'Sevilla – Betis', marginPct:1.80, profit:1.80,
+    legs:[ {pick:'Gana Sevilla', odd:2.70, book:'bet365'}, {pick:'Empate', odd:3.60, book:'betfair'}, {pick:'Gana Betis', odd:3.20, book:'winamax'} ] },
+  { date:'01 JUN', match:'Arsenal – PSG', marginPct:1.20, profit:1.20,
+    legs:[ {pick:'Gana Arsenal', odd:2.45, book:'pinnacle'}, {pick:'Empate', odd:3.50, book:'unibet'}, {pick:'Gana PSG', odd:3.10, book:'bet365'} ] },
+];
+window.arbSummary = function () {
+    const a = window.ARB_RECORD || [];
+    const profit = a.reduce((s,x)=> s + (+x.profit||0), 0);
+    const avg = a.length ? a.reduce((s,x)=> s + (+x.marginPct||0), 0)/a.length : 0;
+    return { n:a.length, profit:+profit.toFixed(2), avg:+avg.toFixed(2) };
+};
 /* cumulative profit points for the equity curve */
 window.equitySeries = function () {
     let cum = 0; const pts = [{ x:0, y:0 }];
@@ -415,6 +428,8 @@ window.I18N = {
         pendingTitle:'Nuestras selecciones · en juego', pendingLead:'Picks que ya hemos publicado y están a la espera de resultado. Quedan registrados aquí con su cuota antes de empezar el partido — transparencia total.', pendingEmpty:'Ahora mismo no hay selecciones pendientes. Vuelve cuando publiquemos el próximo pick.', statusPending:'EN JUEGO',
         colDate:'Fecha', colPick:'Pick', colMatch:'Partido', colOdd:'Cuota', colBook:'Casa', colResult:'Resultado', colProfit:'Beneficio',
         comboRecTitle:'Combinadas resueltas', comboRecLead:'Cada combinada que publicamos queda registrada cuando se juegan todos sus partidos. Solo gana si aciertan TODAS las selecciones.',
+        arbRecTitle:'Historial sin riesgo', arbRecLead:'Cada apuesta sin riesgo que detectamos queda registrada con su beneficio garantizado (calculado sobre 100€ de referencia).',
+        arbRecN:'Surebets', arbRecProfit:'Beneficio acumulado', arbRecAvg:'Margen medio', arbRecMargin:'Margen',
         resW:'GANADA', resL:'FALLADA', resP:'NULA',
         howTitle:'Cómo funciona', howLead:'Sin humo. Esto es lo que hace el modelo cada mañana, de forma automática.',
         step1T:'Cuotas del mercado', step1D:'Cada mañana descargamos las cuotas de ganador (1X2) de 8 casas para todos los partidos del día.',
@@ -492,6 +507,8 @@ window.I18N = {
         pendingTitle:'Our selections · live', pendingLead:'Picks we have already published and are awaiting the result. Logged here with their pre-match odds — full transparency.', pendingEmpty:'No pending selections right now. Check back when we post the next pick.', statusPending:'LIVE',
         colDate:'Date', colPick:'Pick', colMatch:'Match', colOdd:'Odds', colBook:'Book', colResult:'Result', colProfit:'Profit',
         comboRecTitle:'Settled accumulators', comboRecLead:'Every acca we publish is logged once all its matches are played. It only wins if ALL legs come in.',
+        arbRecTitle:'No-risk history', arbRecLead:'Every no-risk bet we catch is logged with its guaranteed profit (on a 100€ reference stake).',
+        arbRecN:'Surebets', arbRecProfit:'Total profit', arbRecAvg:'Avg margin', arbRecMargin:'Margin',
         resW:'WON', resL:'LOST', resP:'VOID',
         howTitle:'How it works', howLead:'No smoke. Here\u2019s what the model does every morning, automatically.',
         step1T:'Market odds', step1D:'Every morning we pull match-winner (1X2) odds from 8 books for all of the day\u2019s matches.',

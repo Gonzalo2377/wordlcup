@@ -103,6 +103,7 @@ function applyDaily(d) {
     const seen = new Set([...pinned.map(c => c.dayId), ...pinned.map(comboKey)]);
     window.COMBO_RECORD = [...pinned, ...feedCombos.filter(c => !seen.has(c.dayId) && !seen.has(comboKey(c)))];
     window.COMBO_PENDING = dedupBy(Array.isArray(d.COMBO_PENDING) ? d.COMBO_PENDING : (window.COMBO_PENDING || []), comboKey);
+    if (Array.isArray(d.ARB_RECORD)) window.ARB_RECORD = d.ARB_RECORD;
     if (d.meta)    window.DAILY.meta = d.meta;
     // Trust the model the robot already computed (single source of truth).
     // Only (re)compute for matches that arrive without one — e.g. older feeds.

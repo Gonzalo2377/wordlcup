@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOLVALUE · Generador de posts</title>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0b0e17;color:#eef2fb;font-family:'Plus Jakarta Sans',system-ui,sans-serif;padding:24px}
+.wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:28px;align-items:start}
+@media(max-width:900px){.wrap{grid-template-columns:1fr}}
+h1{font-family:'Big Shoulders Display',sans-serif;font-weight:900;font-size:1.7rem;text-transform:uppercase;margin-bottom:4px}
+.sub{color:#aab3c9;font-size:.88rem;margin-bottom:18px;line-height:1.5}
+label{display:block;font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#6b7693;margin:13px 0 5px}
+input,select,textarea{width:100%;background:#141a28;border:1px solid rgba(150,170,210,.18);color:#eef2fb;border-radius:9px;padding:10px 12px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.9rem}
+textarea{resize:vertical;min-height:70px;font-family:'Space Mono',monospace;font-size:.82rem;line-height:1.5}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#f6c443}
+.btn{width:100%;margin-top:18px;background:#f6c443;color:#0b0e17;border:none;border-radius:11px;padding:14px;font-family:'Big Shoulders Display',sans-serif;font-weight:800;font-size:1.1rem;text-transform:uppercase;letter-spacing:.02em;cursor:pointer}
+.btn:hover{filter:brightness(1.05)}
+.btn2{width:100%;margin-top:8px;background:#141a28;color:#eef2fb;border:1px solid rgba(150,170,210,.2);border-radius:11px;padding:11px;font-family:'Plus Jakarta Sans';font-weight:600;font-size:.9rem;cursor:pointer}
+.preview{display:flex;flex-direction:column;align-items:center;gap:12px}
+canvas{width:100%;max-width:560px;height:auto;border-radius:18px;border:1px solid rgba(150,170,210,.13)}
+.hint{color:#6b7693;font-size:.8rem;text-align:center;max-width:560px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.seg{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.seg button{flex:1;min-width:calc(50% - 3px);background:#141a28;border:1px solid rgba(150,170,210,.18);color:#aab3c9;border-radius:8px;padding:9px 6px;font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer}
+.seg button.on{background:#f6c443;color:#0b0e17;border-color:#f6c443;font-weight:700}
+.fields{display:none}.fields.on{display:block}
+.tweet{background:#10131d;border-left:3px solid #f6c443;padding:12px 14px;border-radius:8px;font-size:.86rem;line-height:1.55;color:#dfe5f1;white-space:pre-wrap;margin-top:14px}
+.cap{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#6b7693;margin:16px 0 6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div>
+    <h1>Generador de posts</h1>
+    <p class="sub">Elige el tipo, rellena y pulsa Descargar. Imagen 1080×1080 para Twitter/Instagram, con el texto del tweet listo para copiar.</p>
+
+    <label>Tipo de post</label>
+    <div class="seg" id="type">
+      <button data-t="value" class="on">Pick de valor</button>
+      <button data-t="combo">Combinada</button>
+      <button data-t="even">Sin Riesgo · Igual</button>
+      <button data-t="cover">Sin Riesgo · Cubrir</button>
+    </div>
+
+    <!-- PICK DE VALOR -->
+    <div class="fields on" data-f="value">
+      <label>Competición</label><input id="v_comp" value="Champions League · Final">
+      <div class="two"><div><label>Local</label><input id="v_home" value="Real Madrid"></div><div><label>Visitante</label><input id="v_away" value="Inter"></div></div>
+      <label>Hora / fecha</label><input id="v_time" value="Sáb 31 May · 21:00">
+      <label>El pick</label><input id="v_pick" value="GANA REAL MADRID">
+      <div class="two"><div><label>Cuota</label><input id="v_odd" value="2.10"></div><div><label>Casa</label><input id="v_book" value="Bet365"></div></div>
+      <div class="two"><div><label>Prob. modelo %</label><input id="v_model" value="52"></div><div><label>Valor %</label><input id="v_value" value="+6.4"></div></div>
+    </div>
+
+    <!-- COMBINADA -->
+    <div class="fields" data-f="combo">
+      <label>Nombre</label><input id="c_name" value="Combinada del Día">
+      <label>Fecha</label><input id="c_date" value="Sáb 31 May">
+      <label>Selecciones (una por línea: Pick @cuota)</label>
+      <textarea id="c_legs">Gana Real Madrid @1.40
+Gana Bayern @1.55
+Más de 2.5 goles @1.80</textarea>
+      <div class="two"><div><label>Cuota total</label><input id="c_total" value="3.90"></div><div><label>Confianza %</label><input id="c_conf" value="68"></div></div>
+    </div>
+
+    <!-- SIN RIESGO IGUAL -->
+    <div class="fields" data-f="even">
+      <label>Competición</label><input id="e_comp" value="LaLiga">
+      <div class="two"><div><label>Local</label><input id="e_home" value="Sevilla"></div><div><label>Visitante</label><input id="e_away" value="Betis"></div></div>
+      <label>Inversión total (€)</label><input id="e_stake" value="100">
+      <label>Patas (una por línea: Resultado @cuota · Casa)</label>
+      <textarea id="e_legs">Gana Sevilla @2.70 · Bet365
+Empate @3.60 · Betfair
+Gana Betis @3.10 · Winamax</textarea>
+    </div>
+
+    <!-- SIN RIESGO CUBRIR -->
+    <div class="fields" data-f="cover">
+      <label>Competición</label><input id="o_comp" value="LaLiga">
+      <div class="two"><div><label>Local</label><input id="o_home" value="Sevilla"></div><div><label>Visitante</label><input id="o_away" value="Betis"></div></div>
+      <div class="two"><div><label>Inversión total (€)</label><input id="o_stake" value="100"></div><div><label>¿Cuál respaldas? (nº)</label><input id="o_back" value="1"></div></div>
+      <label>Patas (una por línea: Resultado @cuota · Casa)</label>
+      <textarea id="o_legs">Gana Sevilla @2.70 · Bet365
+Empate @3.60 · Betfair
+Gana Betis @3.10 · Winamax</textarea>
+    </div>
+
+    <button class="btn" onclick="download()">⬇ Descargar imagen</button>
+    <button class="btn2" onclick="copyTweet()">📋 Copiar texto del tweet</button>
+
+    <div class="cap">Texto del tweet</div>
+    <div class="tweet" id="tweet"></div>
+  </div>
+
+  <div class="preview">
+    <canvas id="c" width="1080" height="1080"></canvas>
+    <p class="hint">Vista previa en vivo · se descarga a 1080×1080.</p>
+  </div>
+</div>
+
+<script src="post-engine.js?sport=football"></script>
+</body>
+</html>
