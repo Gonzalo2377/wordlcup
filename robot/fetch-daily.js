@@ -379,8 +379,10 @@ async function main(){
     if (process.env.APIFOOTBALL_KEY) {
         try {
             const fr = await fetchFriendlies(process.env.APIFOOTBALL_KEY, WINDOW_HOURS);
-            if (fr.length) events.push(...fr);
+            if (fr.length) { events.push(...fr); console.log(`· amistosos añadidos al pool: ${fr.length}`); }
         } catch(e){ console.log('· amistosos no disponibles:', e.message); }
+    } else {
+        console.log('· amistosos: APIFOOTBALL_KEY NO está configurada (crea el secret en GitHub → Settings → Secrets → Actions)');
     }
 
     const TEAMS = {}, BOOKS = {}, MATCHES = [];
