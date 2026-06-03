@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-03T07:00:55.827Z",
+    "updatedAt": "2026-06-03T08:13:29.648Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 18,
     "stale": false,
     "credits": {
-      "remaining": 373,
-      "used": 127
+      "remaining": 356,
+      "used": 144
     }
   },
   "TEAMS": {
@@ -477,11 +477,11 @@
           "betonlineag": 2.64,
           "coolbet": 2.9,
           "pinnacle": 2.72,
-          "marathonbet": 2.71,
+          "marathonbet": 2.72,
           "sport888": 2.9,
           "williamhill": 2.9,
           "codere": 2.75,
-          "tipico": 2.7,
+          "tipico": 2.8,
           "matchbook": 3
         },
         "away": {
@@ -492,18 +492,18 @@
           "betonlineag": 3.85,
           "coolbet": 3.5,
           "pinnacle": 3.88,
-          "marathonbet": 3.74,
+          "marathonbet": 3.72,
           "sport888": 3.3,
           "williamhill": 3.3,
           "codere": 3.5,
-          "tipico": 3.7,
+          "tipico": 3.5,
           "matchbook": 4.2
         }
       },
       "model": {
-        "home": 0.41522761789054075,
-        "draw": 0.3334353047369029,
-        "away": 0.25133707737255634,
+        "home": 0.41515957945802073,
+        "draw": 0.3323404775412579,
+        "away": 0.25249994300072126,
         "fromMarket": true
       }
     },
@@ -761,7 +761,7 @@
       "away": "vvaren",
       "odds": {
         "home": {
-          "pinnacle": 2.44,
+          "pinnacle": 2.42,
           "unibet": 2.25,
           "betsson": 2.38,
           "winamax": 2.25,
@@ -783,7 +783,7 @@
           "marathonbet": 3.22
         },
         "away": {
-          "pinnacle": 3.03,
+          "pinnacle": 3.06,
           "unibet": 2.8,
           "betsson": 2.88,
           "winamax": 2.7,
@@ -795,9 +795,9 @@
         }
       },
       "model": {
-        "home": 0.38869032517845736,
-        "draw": 0.2931564381256485,
-        "away": 0.31815323669589424,
+        "home": 0.38902711861855516,
+        "draw": 0.2931519450571123,
+        "away": 0.3178209363243325,
         "fromMarket": true
       }
     },
@@ -857,7 +857,7 @@
       "away": "gambao",
       "odds": {
         "home": {
-          "pinnacle": 3.15,
+          "pinnacle": 3.09,
           "betsson": 2.98,
           "unibet": 2.9,
           "nordicbet": 2.98,
@@ -865,7 +865,7 @@
           "betclic": 2.85,
           "sport888": 3,
           "williamhill": 3,
-          "marathonbet": 3.04
+          "marathonbet": 3
         },
         "draw": {
           "pinnacle": 3.04,
@@ -879,7 +879,7 @@
           "marathonbet": 3.08
         },
         "away": {
-          "pinnacle": 2.48,
+          "pinnacle": 2.52,
           "betsson": 2.42,
           "unibet": 2.25,
           "nordicbet": 2.42,
@@ -887,13 +887,13 @@
           "betclic": 2.27,
           "sport888": 2.45,
           "williamhill": 2.45,
-          "marathonbet": 2.39
+          "marathonbet": 2.42
         }
       },
       "model": {
-        "home": 0.30714493262863957,
-        "draw": 0.31015410564980844,
-        "away": 0.38270096172155194,
+        "home": 0.30824423113688854,
+        "draw": 0.3101866383345611,
+        "away": 0.3815691305285504,
         "fromMarket": true
       }
     },
@@ -913,7 +913,7 @@
           "sport888": 2.3,
           "williamhill": 2.3,
           "winamax": 2.2,
-          "marathonbet": 2.3
+          "marathonbet": 2.31
         },
         "draw": {
           "pinnacle": 3.22,
@@ -924,7 +924,7 @@
           "sport888": 3,
           "williamhill": 3,
           "winamax": 3,
-          "marathonbet": 3.3
+          "marathonbet": 3.28
         },
         "away": {
           "pinnacle": 3.14,
@@ -939,9 +939,9 @@
         }
       },
       "model": {
-        "home": 0.3977624016926916,
-        "draw": 0.2950681698877477,
-        "away": 0.3071694284195608,
+        "home": 0.39757373115899014,
+        "draw": 0.2952557725203963,
+        "away": 0.3071704963206135,
         "fromMarket": true
       }
     },
