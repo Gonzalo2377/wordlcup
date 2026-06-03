@@ -343,6 +343,8 @@ Object.assign(window, { Premium, Record, How, ComboCard, EquityCurve, Arbitrage 
 function Arbitrage({ t, go, lang }) {
     const [stake, setStake] = useState(() => { try { return +localStorage.getItem('mv_arb_stake') || 100; } catch(e){ return 100; } });
     useEffect(() => { try { localStorage.setItem('mv_arb_stake', stake); } catch(e){} }, [stake]);
+    const [mode, setMode] = useState(() => { try { return localStorage.getItem('mv_arb_mode') || 'even'; } catch(e){ return 'even'; } });
+    useEffect(() => { try { localStorage.setItem('mv_arb_mode', mode); } catch(e){} }, [mode]);
 
     const all = window.findArbs ? window.findArbs() : [];
     const arbs = all.filter(a => a.hasArb);
@@ -351,9 +353,27 @@ function Arbitrage({ t, go, lang }) {
 
     const ArbCard = ({ a, isArb }) => {
         const home = teamById(a.m.home), away = teamById(a.m.away);
-        const split = window.arbSplit(a.legs, total);
-        const ret = window.arbReturn(a.legs, total);
-        const profit = ret - total;
+        // default profit leg = the favourite (lowest odds)
+        const favKey = a.legs.reduce((m,l)=> l.price < m.price ? l : m, a.legs[0]).k;
+        const [profitKey, setProfitKey] = useState(favKey);
+        let split, evenRet, evenProfit;
+        if (mode === 'cover') {
+            // the chosen leg profits; every OTHER leg breaks even (returns exactly `total`)
+            const others = a.legs.filter(l => l.k !== profitKey);
+            const stakeOthers = others.reduce((s,l)=> s + total / l.price, 0);
+            const stakeProfit = total - stakeOthers;
+            split = a.legs.map(l => {
+                const st = l.k === profitKey ? stakeProfit : (total / l.price);
+                return { ...l, stake: st, ret: st * l.price };
+            });
+        } else {
+            split = window.arbSplit(a.legs, total);
+            evenRet = window.arbReturn(a.legs, total);
+            evenProfit = evenRet - total;
+        }
+        const profitLeg = split.find(l => l.k === profitKey) || split[0];
+        const coverNet = profitLeg.ret - total;
+        const profitName = window.outcomeLabel(profitKey, a.m, lang);
         return (
             <div className="panel" style={{ overflow:'hidden', borderColor: isArb ? 'rgba(39,215,150,.45)' : 'var(--line)' }}>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:12, padding:'14px 16px', borderBottom:'1px solid var(--line)', cursor:'pointer' }} onClick={()=>go({view:'match', id:a.m.id})}>
@@ -373,34 +393,54 @@ function Arbitrage({ t, go, lang }) {
                 </div>
 
                 <div style={{ padding:'4px 16px' }}>
-                    {split.map((l,i) => (
+                    {split.map((l,i) => {
+                        const net = l.ret - total; const nc = net>0.005?'var(--green)':net<-0.005?'var(--red)':'var(--muted)';
+                        const isProfit = mode==='cover' && l.k===profitKey;
+                        return (
                         <div key={i} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'11px 0', borderBottom: i<split.length-1?'1px solid var(--line)':'none' }}>
-                            <div style={{ minWidth:0, flex:1 }}>
-                                <div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.9rem', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{window.outcomeLabel(l.k, a.m, lang)}</div>
-                                <div style={{ display:'flex', alignItems:'center', gap:6, marginTop:3 }}>
-                                    <span style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)' }}>{t.arbAt}</span>
-                                    <Book id={l.book} size={18} />
-                                    {l.suspicious && <span title={t.arbSuspect} style={{ color:'#ffb01f', fontSize:'.8rem' }}>⚠</span>}
+                            <div style={{ minWidth:0, flex:1, display:'flex', alignItems:'center', gap:9 }}>
+                                {mode==='cover' && <button onClick={(e)=>{e.stopPropagation();setProfitKey(l.k);}} title={t.arbBack} style={{ flexShrink:0, width:20, height:20, borderRadius:'50%', border:'2px solid '+(isProfit?'var(--green)':'var(--line)'), background:isProfit?'var(--green)':'transparent', cursor:'pointer', padding:0 }} />}
+                                <div style={{ minWidth:0 }}>
+                                    <div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.9rem', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{window.outcomeLabel(l.k, a.m, lang)}</div>
+                                    <div style={{ display:'flex', alignItems:'center', gap:6, marginTop:3 }}>
+                                        <span style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)' }}>{t.arbAt}</span>
+                                        <Book id={l.book} size={18} />
+                                        {l.suspicious && <span title={t.arbSuspect} style={{ color:'#ffb01f', fontSize:'.8rem' }}>⚠</span>}
+                                    </div>
                                 </div>
                             </div>
                             <div style={{ textAlign:'right', whiteSpace:'nowrap' }}>
                                 <div style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.95rem', color:'var(--text)' }}>{l.price.toFixed(2)}</div>
                                 <div style={{ fontFamily:'var(--font-mono)', fontSize:'.7rem', color:'var(--lime)', marginTop:2 }}>{t.arbStake} {l.stake.toFixed(2)}€</div>
+                                {mode==='cover' && <div style={{ fontFamily:'var(--font-mono)', fontSize:'.7rem', color:nc, marginTop:2 }}>{t.arbIfWins} {net>=0?'+':''}{net.toFixed(2)}€</div>}
                             </div>
                         </div>
-                    ))}
+                    );})}
                 </div>
 
+                {mode==='even' ? (
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'12px 16px', background:'rgba(255,255,255,.02)', borderTop:'1px solid var(--line)' }}>
                     <div>
                         <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.08em', textTransform:'uppercase' }}>{t.arbReturnsAll}</div>
-                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem' }}>{ret.toFixed(2)}€</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem' }}>{evenRet.toFixed(2)}€</div>
                     </div>
                     <div style={{ textAlign:'right' }}>
                         <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.08em', textTransform:'uppercase' }}>{t.arbProfit}</div>
-                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.15rem', color: profit > 0 ? 'var(--green)' : 'var(--red)' }}>{profit >= 0 ? '+' : ''}{profit.toFixed(2)}€</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.15rem', color: evenProfit > 0 ? 'var(--green)' : 'var(--red)' }}>{evenProfit >= 0 ? '+' : ''}{evenProfit.toFixed(2)}€</div>
                     </div>
                 </div>
+                ) : (
+                <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'12px 16px', background:'rgba(255,255,255,.02)', borderTop:'1px solid var(--line)' }}>
+                    <div>
+                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.08em', textTransform:'uppercase' }}>{t.arbCoverIf} {profitName}</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.15rem', color: coverNet>0?'var(--green)':'var(--red)' }}>{coverNet>=0?'+':''}{coverNet.toFixed(2)}€</div>
+                    </div>
+                    <div style={{ textAlign:'right' }}>
+                        <div style={{ fontFamily:'var(--font-mono)', fontSize:'.62rem', color:'var(--muted)', letterSpacing:'.08em', textTransform:'uppercase' }}>{t.arbCoverElse}</div>
+                        <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem', color:'var(--muted)' }}>0,00€</div>
+                    </div>
+                </div>
+                )}
                 {!isArb && <div style={{ padding:'8px 16px', fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', background:'rgba(255,255,255,.02)' }}>{t.arbNearTag}</div>}
             </div>
         );
@@ -432,7 +472,17 @@ function Arbitrage({ t, go, lang }) {
                                 <button key={v} onClick={()=>setStake(v)} style={{ cursor:'pointer', background: +stake===v ? 'var(--lime)' : 'rgba(255,255,255,.04)', color: +stake===v ? '#0b0e17' : 'var(--text-2)', border:'1px solid ' + (+stake===v ? 'var(--lime)' : 'var(--line)'), borderRadius:8, padding:'8px 12px', fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.8rem' }}>{v}€</button>
                             ))}
                         </div>
+                        <div style={{ flex:1 }} />
+                        <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
+                            <label style={{ fontFamily:'var(--font-mono)', fontSize:'.6rem', letterSpacing:'.1em', textTransform:'uppercase', color:'var(--muted)' }}>{t.arbModeLabel}</label>
+                            <div style={{ display:'flex', border:'1px solid var(--line)', borderRadius:9, overflow:'hidden' }}>
+                                {[['even',t.arbModeEven],['cover',t.arbModeCover]].map(([k,lbl]) => (
+                                    <button key={k} onClick={()=>setMode(k)} style={{ cursor:'pointer', background: mode===k?'var(--lime)':'rgba(255,255,255,.04)', color: mode===k?'#0b0e17':'var(--text-2)', border:'none', padding:'8px 14px', fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.74rem' }}>{lbl}</button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
+                    <p style={{ fontFamily:'var(--font-mono)', fontSize:'.72rem', color:'var(--muted)', margin:'-12px 0 22px', lineHeight:1.5, maxWidth:680 }}>{mode==='even'?t.arbModeEvenHint:t.arbModeCoverHint}</p>
 
                     {arbs.length > 0 ? (
                         <div className="grid grid--3">{arbs.map(a => <ArbCard key={a.m.id} a={a} isArb />)}</div>
