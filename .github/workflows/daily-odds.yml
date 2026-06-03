@@ -9,7 +9,7 @@ name: Daily odds robot
 
 on:
   schedule:
-    - cron: '23 6 * * *'   # 06:23 UTC (~08:23 Madrid). Minuto "raro" a propósito:
+    - cron: '00 7 * * *'   # 07:00 UTC (~09:00 Madrid). Minuto "raro" a propósito:
                             # las horas en punto van saturadas y GitHub retrasa más.
   workflow_dispatch: {}
 
@@ -27,14 +27,19 @@ jobs:
       - name: Generar daily.json
         env:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          # amistosos de selecciones (api-sports.io) — opcional. Si no lo pones, se omiten.
+          APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
           # auto = el robot coge las 12 competiciones ACTIVAS más relevantes
           # (según el ranking SPORT_PRIORITY del robot: Champions, grandes ligas,
           # selecciones, Sudamérica...). Cambia ODDS_MAX para coger más o menos.
           # Para fijar competiciones a mano: ODDS_SPORT: soccer_uefa_champs_league,soccer_brazil_campeonato
           ODDS_SPORT: auto
-          ODDS_MAX: '18'
+          ODDS_MAX: '16'
           ODDS_REGIONS: eu
-          ODDS_WINDOW_HOURS: '96'
+          # Ventana de días hacia delante. En temporada normal 48-72h sobra; en
+          # temporada muerta (junio, antes del Mundial) súbelo para captar más
+          # partidos de los próximos días. 168 = 7 días.
+          ODDS_WINDOW_HOURS: '168'
         run: node robot/fetch-daily.js
       - name: Commit si hay cambios
         run: |
@@ -45,6 +50,8 @@ jobs:
             echo "Sin cambios."
           else
             git commit -m "chore: refresh daily odds"
+            # Sincroniza con lo último del repo ANTES de subir, para no chocar con
+            # otros commits (deploys, ediciones tuyas). Reintenta si hace falta.
             for i in 1 2 3; do
               git pull --rebase --autostash origin main && git push && break
               echo "push rechazado, reintento $i…"; sleep 3
