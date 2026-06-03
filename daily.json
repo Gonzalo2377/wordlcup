@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-03T08:13:29.648Z",
+    "updatedAt": "2026-06-03T08:15:29.869Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 18,
     "stale": false,
     "credits": {
-      "remaining": 356,
-      "used": 144
+      "remaining": 339,
+      "used": 161
     }
   },
   "TEAMS": {
@@ -404,7 +404,7 @@
           "betonlineag": 1.77,
           "betsson": 1.8,
           "onexbet": 1.79,
-          "betfair": 1.84,
+          "betfair": 1.89,
           "williamhill": 1.75,
           "betclic": 1.7,
           "coolbet": 1.8
@@ -434,16 +434,16 @@
           "betonlineag": 4,
           "betsson": 3.9,
           "onexbet": 4.21,
-          "betfair": 4.2,
+          "betfair": 4,
           "williamhill": 3.9,
           "betclic": 3.68,
           "coolbet": 4
         }
       },
       "model": {
-        "home": 0.5238966744927588,
-        "draw": 0.24101316908220385,
-        "away": 0.2350901564250373,
+        "home": 0.5229606852241082,
+        "draw": 0.24105581243137786,
+        "away": 0.23598350234451398,
         "fromMarket": true
       }
     },
@@ -1066,7 +1066,7 @@
           "side": "home",
           "match": "CD Castellón – Almería",
           "pick": "Gana CD Castellón",
-          "odd": 1.84,
+          "odd": 1.89,
           "book": "betfair"
         },
         {
@@ -1094,7 +1094,7 @@
           "side": "home",
           "match": "CD Castellón – Almería",
           "pick": "Gana CD Castellón",
-          "odd": 1.84,
+          "odd": 1.89,
           "book": "betfair"
         },
         {
@@ -1142,7 +1142,7 @@
           "side": "home",
           "match": "CD Castellón – Almería",
           "pick": "Gana CD Castellón",
-          "odd": 1.84,
+          "odd": 1.89,
           "book": "betfair"
         },
         {
