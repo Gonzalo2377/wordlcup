@@ -539,11 +539,10 @@ async function main(){
         haveCombo.add(dayId); haveComboSig.add(comboKey(snap));
     });
 
-    // ---- register today's headline value picks as PENDING (to settle later) ----
-    // Track up to the top 3 value picks of the day; never duplicate by event id OR pick+date.
+    // ---- register EVERY value pick of the day as our official pick (history of hits/misses) ----
     const haveId = new Set([...PENDING.map(p=>p.id), ...RECORD.map(r=>r.id).filter(Boolean)]);
     const havePickSig = new Set([...PENDING, ...RECORD].map(singleSig));
-    valued.slice(0,3).forEach(x => {
+    valued.forEach(x => {
         const entry = {
             id: x.m.id,
             sport: x.m._sport,

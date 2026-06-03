@@ -428,7 +428,7 @@ window.I18N = {
         pendingTitle:'Nuestras selecciones · en juego', pendingLead:'Picks que ya hemos publicado y están a la espera de resultado. Quedan registrados aquí con su cuota antes de empezar el partido — transparencia total.', pendingEmpty:'Ahora mismo no hay selecciones pendientes. Vuelve cuando publiquemos el próximo pick.', statusPending:'EN JUEGO',
         colDate:'Fecha', colPick:'Pick', colMatch:'Partido', colOdd:'Cuota', colBook:'Casa', colResult:'Resultado', colProfit:'Beneficio',
         comboRecTitle:'Combinadas resueltas', comboRecLead:'Cada combinada que publicamos queda registrada cuando se juegan todos sus partidos. Solo gana si aciertan TODAS las selecciones.',
-        arbRecTitle:'Historial sin riesgo', arbRecLead:'Cada apuesta sin riesgo que detectamos queda registrada con su beneficio garantizado (calculado sobre 100€ de referencia).',
+        arbRecTitle:'Historial sin riesgo', arbRecLead:'Cada apuesta sin riesgo (reparto «Igual») que detectamos queda registrada con su beneficio garantizado, calculado sobre 100€ de referencia.',
         arbRecN:'Surebets', arbRecProfit:'Beneficio acumulado', arbRecAvg:'Margen medio', arbRecMargin:'Margen',
         resW:'GANADA', resL:'FALLADA', resP:'NULA',
         howTitle:'Cómo funciona', howLead:'Sin humo. Esto es lo que hace el modelo cada mañana, de forma automática.',
