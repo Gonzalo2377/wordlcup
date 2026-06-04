@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-04T23:22:44.721Z",
+    "updatedAt": "2026-06-04T23:30:46.193Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 18,
     "stale": false,
     "credits": {
-      "remaining": 164,
-      "used": 336
+      "remaining": 144,
+      "used": 356
     }
   },
   "TEAMS": {
@@ -642,14 +642,14 @@
           "williamhill": 3.5,
           "codere": 3.6,
           "tipico": 3.8,
-          "matchbook": 3.95,
-          "betfair": 3.95
+          "matchbook": 4.1,
+          "betfair": 3.9
         }
       },
       "model": {
-        "home": 0.42228778014703877,
-        "draw": 0.3313297051619745,
-        "away": 0.2463825146909868,
+        "home": 0.422469800193832,
+        "draw": 0.3314725192600206,
+        "away": 0.24605768054614738,
         "fromMarket": true
       }
     },
@@ -1101,7 +1101,7 @@
           "betclic": 2.08,
           "sport888": 2.25,
           "williamhill": 2.25,
-          "marathonbet": 2.23
+          "marathonbet": 2.24
         },
         "draw": {
           "pinnacle": 3.26,
@@ -1112,7 +1112,7 @@
           "betclic": 3.18,
           "sport888": 3,
           "williamhill": 3,
-          "marathonbet": 3.26
+          "marathonbet": 3.25
         },
         "away": {
           "pinnacle": 3.25,
@@ -1123,13 +1123,13 @@
           "betclic": 3.28,
           "sport888": 3.1,
           "williamhill": 3.1,
-          "marathonbet": 3.15
+          "marathonbet": 3.14
         }
       },
       "model": {
-        "home": 0.42350165125456296,
-        "draw": 0.29018728371572944,
-        "away": 0.28631106502970766,
+        "home": 0.42329981460784166,
+        "draw": 0.2902847907478163,
+        "away": 0.28641539464434196,
         "fromMarket": true
       }
     },
