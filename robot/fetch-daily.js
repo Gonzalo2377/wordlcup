@@ -470,6 +470,11 @@ async function main(){
     const safePool = MATCHES.map(m => ({ m, v: matchValue(m) }))
         .filter(x => x.v.pick && x.v.pick.best && x.v.pick.best.price >= 1.20 && x.v.pick.best.price <= 3.60 && x.v.pick.modelP >= 0.38)
         .sort((a,b)=> b.v.pick.modelP - a.v.pick.modelP);
+    // SURE pool: SOLO favoritos claros para la "Combinada Segura" — probabilidad alta y cuota baja,
+    // así una combi de 3 queda en cuota ~2.5-4 (de verdad segura), no 8.
+    const surePool = MATCHES.map(m => ({ m, v: matchValue(m) }))
+        .filter(x => x.v.pick && x.v.pick.best && x.v.pick.best.price >= 1.15 && x.v.pick.best.price <= 1.65 && x.v.pick.modelP >= 0.60)
+        .sort((a,b)=> b.v.pick.modelP - a.v.pick.modelP);
     const seen = (arr) => { const s=new Set(); return arr.filter(x=>{ if(s.has(x.m.id)) return false; s.add(x.m.id); return true; }); };
     const merge = (...pools) => seen([].concat(...pools));
     const byEdge = [...valued].sort((a,b)=>b.v.edge-a.v.edge);
@@ -494,10 +499,12 @@ async function main(){
 
     // c1 — Combinada del Día (taster + 3,99€): the MOST LIKELY one (value first, fill with favourites)
     pushCombo({ id:'c1', tier:'single', name:'Combinada del Día' }, merge(valued, safePool), 3);
-    // c2 — Combinada Valor (14,99€): value by edge, fallback to safe — only if DISTINCT from c1
-    pushCombo({ id:'c2', tier:'all', name: valued.length>=2 ? 'Combinada Valor' : 'Combinada Segura' }, merge(byEdge, safePool), 3);
-    // c3 — Combinada Larga (14,99€): 4 legs when possible — only if DISTINCT
-    pushCombo({ id:'c3', tier:'all', name:'Combinada Larga' }, merge(byEdge, safePool), 4);
+    // c2 — Combinada Segura (14,99€): SOLO favoritos claros del surePool (cuota baja, alta prob)
+    pushCombo({ id:'c2', tier:'all', name:'Combinada Segura' }, merge(surePool), 3);
+    // c3 — Combinada Valor (14,99€): value by edge — solo si DISTINTA
+    pushCombo({ id:'c3', tier:'all', name:'Combinada Valor' }, merge(byEdge, safePool), 3);
+    // c4 — Combinada Larga (14,99€): 4 legs cuando se pueda — solo si DISTINTA
+    pushCombo({ id:'c4', tier:'all', name:'Combinada Larga' }, merge(byEdge, safePool), 4);
 
     // ---- track record: read previous state, settle finished picks + combos ----
     let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [], ARB_RECORD = [], ARB_PENDING = [];
