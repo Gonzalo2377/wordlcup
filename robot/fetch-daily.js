@@ -191,38 +191,38 @@ const aliasMap = {};
 /* selecciones del Mundial que NO están en TEAMS_DB (nombre español + conf + rank correctos).
    Clave = norm(nombre que devuelve The Odds API en inglés). */
 const TEAMS_EXTRA = {
-  'south africa':{id:'rsa',name:'Sudáfrica',code:'RSA',color:'#0aa05a',conf:'CAF',fifa:56},
-  'czech republic':{id:'cze',name:'República Checa',code:'CZE',color:'#c8102e',conf:'UEFA',fifa:42},
-  'czechia':{id:'cze',name:'República Checa',code:'CZE',color:'#c8102e',conf:'UEFA',fifa:42},
-  'bosnia and herzegovina':{id:'bih',name:'Bosnia y H.',code:'BIH',color:'#1f5fd6',conf:'UEFA',fifa:74},
-  'bosnia & herzegovina':{id:'bih',name:'Bosnia y H.',code:'BIH',color:'#1f5fd6',conf:'UEFA',fifa:74},
-  'curacao':{id:'cuw',name:'Curazao',code:'CUW',color:'#1a1a6e',conf:'CONCACAF',fifa:90},
-  'cape verde':{id:'cpv',name:'Cabo Verde',code:'CPV',color:'#0a3b8c',conf:'CAF',fifa:70},
-  'haiti':{id:'hai',name:'Haití',code:'HAI',color:'#1f5fd6',conf:'CONCACAF',fifa:83},
-  'jordan':{id:'jor',name:'Jordania',code:'JOR',color:'#c8102e',conf:'AFC',fifa:62},
-  'uzbekistan':{id:'uzb',name:'Uzbekistán',code:'UZB',color:'#1f9fd6',conf:'AFC',fifa:57},
-  'dr congo':{id:'cod',name:'RD Congo',code:'COD',color:'#0a7d3c',conf:'CAF',fifa:60},
-  'new zealand':{id:'nzl',name:'Nueva Zelanda',code:'NZL',color:'#1a1a1a',conf:'OFC',fifa:86},
-  'iraq':{id:'irq',name:'Irak',code:'IRQ',color:'#0a7d3c',conf:'AFC',fifa:58},
-  'algeria':{id:'alg',name:'Argelia',code:'ALG',color:'#0aa05a',conf:'CAF',fifa:36},
-  'egypt':{id:'egy',name:'Egipto',code:'EGY',color:'#c8102e',conf:'CAF',fifa:33},
-  'tunisia':{id:'tun',name:'Túnez',code:'TUN',color:'#c8102e',conf:'CAF',fifa:41},
-  'saudi arabia':{id:'ksa',name:'Arabia Saudí',code:'KSA',color:'#0a7d3c',conf:'AFC',fifa:59},
-  'qatar':{id:'qat',name:'Catar',code:'QAT',color:'#7a1f3d',conf:'AFC',fifa:54},
-  'ivory coast':{id:'civ',name:'Costa de Marfil',code:'CIV',color:'#ff8a1e',conf:'CAF',fifa:40},
-  'ghana':{id:'gha',name:'Ghana',code:'GHA',color:'#ffd23f',conf:'CAF',fifa:73},
-  'norway':{id:'nor',name:'Noruega',code:'NOR',color:'#c8102e',conf:'UEFA',fifa:32},
-  'scotland':{id:'sco',name:'Escocia',code:'SCO',color:'#1f3a93',conf:'UEFA',fifa:39},
-  'paraguay':{id:'par',name:'Paraguay',code:'PAR',color:'#c8102e',conf:'CONMEBOL',fifa:46},
-  'panama':{id:'pan',name:'Panamá',code:'PAN',color:'#c8102e',conf:'CONCACAF',fifa:30},
-  'jamaica':{id:'jam',name:'Jamaica',code:'JAM',color:'#ffd23f',conf:'CONCACAF',fifa:64},
-  'honduras':{id:'hon',name:'Honduras',code:'HON',color:'#1f5fd6',conf:'CONCACAF',fifa:70},
+  'south africa':{id:'rsa',name:'Sudáfrica',code:'RSA',color:'#0aa05a',conf:'CAF',fifa:56,form:'WWDWL'},
+  'czech republic':{id:'cze',name:'República Checa',code:'CZE',color:'#c8102e',conf:'UEFA',fifa:42,form:'DWLWD'},
+  'czechia':{id:'cze',name:'República Checa',code:'CZE',color:'#c8102e',conf:'UEFA',fifa:42,form:'DWLWD'},
+  'bosnia and herzegovina':{id:'bih',name:'Bosnia y H.',code:'BIH',color:'#1f5fd6',conf:'UEFA',fifa:74,form:'WDLWW'},
+  'bosnia & herzegovina':{id:'bih',name:'Bosnia y H.',code:'BIH',color:'#1f5fd6',conf:'UEFA',fifa:74,form:'WDLWW'},
+  'curacao':{id:'cuw',name:'Curazao',code:'CUW',color:'#1a1a6e',conf:'CONCACAF',fifa:90,form:'WDWLD'},
+  'cape verde':{id:'cpv',name:'Cabo Verde',code:'CPV',color:'#0a3b8c',conf:'CAF',fifa:70,form:'WWDLW'},
+  'haiti':{id:'hai',name:'Haití',code:'HAI',color:'#1f5fd6',conf:'CONCACAF',fifa:83,form:'LDWLD'},
+  'jordan':{id:'jor',name:'Jordania',code:'JOR',color:'#c8102e',conf:'AFC',fifa:62,form:'WWDWD'},
+  'uzbekistan':{id:'uzb',name:'Uzbekistán',code:'UZB',color:'#1f9fd6',conf:'AFC',fifa:57,form:'WDWWL'},
+  'dr congo':{id:'cod',name:'RD Congo',code:'COD',color:'#0a7d3c',conf:'CAF',fifa:60,form:'WDWLW'},
+  'new zealand':{id:'nzl',name:'Nueva Zelanda',code:'NZL',color:'#1a1a1a',conf:'OFC',fifa:86,form:'WWDWL'},
+  'iraq':{id:'irq',name:'Irak',code:'IRQ',color:'#0a7d3c',conf:'AFC',fifa:58,form:'DWDLW'},
+  'algeria':{id:'alg',name:'Argelia',code:'ALG',color:'#0aa05a',conf:'CAF',fifa:36,form:'WWDWW'},
+  'egypt':{id:'egy',name:'Egipto',code:'EGY',color:'#c8102e',conf:'CAF',fifa:33,form:'WDWWL'},
+  'tunisia':{id:'tun',name:'Túnez',code:'TUN',color:'#c8102e',conf:'CAF',fifa:41,form:'WDLWD'},
+  'saudi arabia':{id:'ksa',name:'Arabia Saudí',code:'KSA',color:'#0a7d3c',conf:'AFC',fifa:59,form:'LWDLD'},
+  'qatar':{id:'qat',name:'Catar',code:'QAT',color:'#7a1f3d',conf:'AFC',fifa:54,form:'WLDWL'},
+  'ivory coast':{id:'civ',name:'Costa de Marfil',code:'CIV',color:'#ff8a1e',conf:'CAF',fifa:40,form:'WWDLW'},
+  'ghana':{id:'gha',name:'Ghana',code:'GHA',color:'#ffd23f',conf:'CAF',fifa:73,form:'DWLWL'},
+  'norway':{id:'nor',name:'Noruega',code:'NOR',color:'#c8102e',conf:'UEFA',fifa:32,form:'WWWDL'},
+  'scotland':{id:'sco',name:'Escocia',code:'SCO',color:'#1f3a93',conf:'UEFA',fifa:39,form:'WLDWD'},
+  'paraguay':{id:'par',name:'Paraguay',code:'PAR',color:'#c8102e',conf:'CONMEBOL',fifa:46,form:'DWDWL'},
+  'panama':{id:'pan',name:'Panamá',code:'PAN',color:'#c8102e',conf:'CONCACAF',fifa:30,form:'WDLWD'},
+  'jamaica':{id:'jam',name:'Jamaica',code:'JAM',color:'#ffd23f',conf:'CONCACAF',fifa:64,form:'LWDLW'},
+  'honduras':{id:'hon',name:'Honduras',code:'HON',color:'#1f5fd6',conf:'CONCACAF',fifa:70,form:'DLWDL'},
 };
 function resolveTeam(name, sink) {
     const hit = aliasMap[norm(name)];
     if (hit) { sink[hit.id] = { id:hit.id, name:hit.name, code:hit.code, color:hit.color, conf:hit.conf, fifa:hit.fifa, elo:hit.elo, form:hit.form, known:true }; return hit.id; }
     const X = TEAMS_EXTRA[norm(name)];
-    if (X) { sink[X.id] = { id:X.id, name:X.name, code:X.code, color:X.color||'#5a6b8c', conf:X.conf, fifa:X.fifa, elo:(_worldElo&&_worldElo(name))||null, form:'', known:true }; return X.id; }
+    if (X) { sink[X.id] = { id:X.id, name:X.name, code:X.code, color:X.color||'#5a6b8c', conf:X.conf, fifa:X.fifa, elo:(_worldElo&&_worldElo(name))||null, form:X.form||'', known:true }; return X.id; }
     const id = norm(name).replace(/[^a-z0-9]/g,'').slice(0,6) || ('t' + Object.keys(sink).length);
     // si el Elo histórico conoce a esta selección, la tratamos como "conocida" y estimamos
     // su ranking FIFA aprox. desde el Elo (para que la etiqueta no diga FIFA #55 falso).
