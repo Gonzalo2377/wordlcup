@@ -41,6 +41,12 @@ function Flag({ team, size = 30, radius = 8 }) {
             <img src={logo} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} onError={(e)=>{ e.target.style.display='none'; }} />
         </span>
     );
+    const flag = window.flagUrl && window.flagUrl(team);
+    if (flag) return (
+        <span className="vc-team__logo" style={{ width:size, height:size, borderRadius:radius, overflow:'hidden', background:'#fff', display:'inline-grid', placeItems:'center' }}>
+            <img src={flag} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} onError={(e)=>{ e.target.style.display='none'; }} />
+        </span>
+    );
     // unique deterministic gradient (same look as the tennis avatars)
     const key = (team.name || team.id || '?') + (team.code || '');
     const seed = key.split('').reduce((a,c)=>a + c.charCodeAt(0)*31, 0);
@@ -61,6 +67,8 @@ function Crest({ id, size = 30 }) {
     const logo = (tm && tm.logo) || (window.GOL_LOGOS && window.GOL_LOGOS[id]);
     const wrap = { width:size, height:size, borderRadius:'50%', flexShrink:0, display:'inline-grid', placeItems:'center', overflow:'hidden', boxShadow:'0 1px 4px rgba(0,0,0,.25)' };
     if (logo) return <span style={{ ...wrap, background:'#fff' }}><img src={logo} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} onError={(e)=>{ e.target.style.display='none'; }} /></span>;
+    const flag = window.flagUrl && window.flagUrl(tm);
+    if (flag) return <span style={{ ...wrap, background:'#fff' }}><img src={flag} alt="" style={{ width:'100%', height:'100%', objectFit:'cover' }} onError={(e)=>{ e.target.style.display='none'; }} /></span>;
     // unique, deterministic gradient per team (same look as the tennis avatars)
     const key = ((tm && tm.name) || id || '?') + ((tm && tm.code) || '');
     const seed = key.split('').reduce((a,c)=>a + c.charCodeAt(0)*31, 0);
