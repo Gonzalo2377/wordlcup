@@ -203,7 +203,8 @@ function bookAbbr(name){ return (name||'').replace(/[^A-Za-z0-9]/g,'').slice(0,4
 
 /* ---------------- the model (ported 1:1 from model.js) -------- */
 function ratingFromRank(rank){ return 1500 + 560 * Math.exp(-0.035 * (rank - 1)); }
-function baseRating(team){ if(!team) return ratingFromRank(55); if(team.elo!=null) return team.elo; return ratingFromRank(team.fifa!=null?team.fifa:55); }
+const _worldElo = require('./world-elo.js');
+function baseRating(team){ if(!team) return ratingFromRank(55); const we=_worldElo && _worldElo(team.name); if(we!=null) return we; if(team.elo!=null) return team.elo; return ratingFromRank(team.fifa!=null?team.fifa:55); }
 function formScore(form){ if(!form) return 0; const p={W:3,D:1,L:0}; let s=0,n=0; for(const c of form){ if(p[c]!=null){s+=p[c];n++;} } return n ? ((s/n)-1.5)*28 : 0; }
 const _f=[1]; function factorial(n){ if(_f[n]!=null)return _f[n]; let r=_f[_f.length-1]; for(let i=_f.length;i<=n;i++){r*=i;_f[i]=r;} return _f[n]; }
 function poisson(k,l){ return Math.exp(-l)*Math.pow(l,k)/factorial(k); }
@@ -465,10 +466,10 @@ async function main(){
     const legOf = (x) => ({ id:x.m.id, sport:x.m._sport, ts:new Date(x.m._commence).getTime(), side:x.v.pick.k, match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
     const confOf = (arr) => Math.round(arr.reduce((p,x)=>p*x.v.pick.modelP,1)*100);
     const COMBOS = [];
-    // Safe pool: each match's most-likely pick (favourite), credible odds. Used as
-    // fallback so there is ALWAYS a combo, even on days with little/no "value".
+    // Safe pool: favoritos creíbles (cuota moderada) para combinar. Acotado para que las
+    // combis no se llenen de picks a 3-4 (que fallan demasiado).
     const safePool = MATCHES.map(m => ({ m, v: matchValue(m) }))
-        .filter(x => x.v.pick && x.v.pick.best && x.v.pick.best.price >= 1.20 && x.v.pick.best.price <= 3.60 && x.v.pick.modelP >= 0.38)
+        .filter(x => x.v.pick && x.v.pick.best && x.v.pick.best.price >= 1.20 && x.v.pick.best.price <= 2.10 && x.v.pick.modelP >= 0.50)
         .sort((a,b)=> b.v.pick.modelP - a.v.pick.modelP);
     // SURE pool: SOLO favoritos claros para la "Combinada Segura" — probabilidad alta y cuota baja,
     // así una combi de 3 queda en cuota ~2.5-4 (de verdad segura), no 8.
@@ -497,14 +498,14 @@ async function main(){
         return false;
     }
 
-    // c1 — Combinada del Día (taster + 3,99€): the MOST LIKELY one (value first, fill with favourites)
-    pushCombo({ id:'c1', tier:'single', name:'Combinada del Día' }, merge(valued, safePool), 3);
+    // c1 — Combinada del Día (taster + 3,99€): favoritos claros primero (segura), luego valor acotado
+    pushCombo({ id:'c1', tier:'single', name:'Combinada del Día' }, merge(surePool, safePool), 3);
     // c2 — Combinada Segura (14,99€): SOLO favoritos claros del surePool (cuota baja, alta prob)
     pushCombo({ id:'c2', tier:'all', name:'Combinada Segura' }, merge(surePool), 3);
-    // c3 — Combinada Valor (14,99€): value by edge — solo si DISTINTA
-    pushCombo({ id:'c3', tier:'all', name:'Combinada Valor' }, merge(byEdge, safePool), 3);
-    // c4 — Combinada Larga (14,99€): 4 legs cuando se pueda — solo si DISTINTA
-    pushCombo({ id:'c4', tier:'all', name:'Combinada Larga' }, merge(byEdge, safePool), 4);
+    // c3 — Combinada Valor (14,99€): valor PERO con cuota acotada (≤2.10), no picks disparados
+    pushCombo({ id:'c3', tier:'all', name:'Combinada Valor' }, merge(byEdge.filter(x=>x.v.pick.best.price<=2.10), safePool), 3);
+    // c4 — Combinada Larga (14,99€): 4 favoritos del surePool/safePool (no value alto)
+    pushCombo({ id:'c4', tier:'all', name:'Combinada Larga' }, merge(surePool, safePool), 4);
 
     // ---- track record: read previous state, settle finished picks + combos ----
     let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [], ARB_RECORD = [], ARB_PENDING = [];
