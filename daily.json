@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-08T21:51:18.328Z",
+    "updatedAt": "2026-06-08T21:58:44.226Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 22,
     "stale": false,
     "credits": {
-      "remaining": 420,
-      "used": 80
+      "remaining": 400,
+      "used": 100
     }
   },
   "TEAMS": {
@@ -33,7 +33,7 @@
       "conf": "CAF",
       "fifa": 56,
       "elo": 1640,
-      "form": "",
+      "form": "WWDWL",
       "known": true
     },
     "kor": {
@@ -54,7 +54,7 @@
       "conf": "UEFA",
       "fifa": 42,
       "elo": 1730,
-      "form": "",
+      "form": "DWLWD",
       "known": true
     },
     "can": {
@@ -75,7 +75,7 @@
       "conf": "UEFA",
       "fifa": 74,
       "elo": 1700,
-      "form": "",
+      "form": "WDLWW",
       "known": true
     },
     "almeri": {
@@ -766,14 +766,14 @@
         }
       },
       "model": {
-        "home": 0.679972205647629,
-        "draw": 0.20394016105212678,
-        "away": 0.11608763330024424,
-        "lambdaH": 2.1349230769230774,
-        "lambdaA": 0.7749230769230768,
+        "home": 0.6543595621479019,
+        "draw": 0.2137015361832746,
+        "away": 0.13193890166882347,
+        "lambdaH": 2.0712051282051283,
+        "lambdaA": 0.8278717948717949,
         "ratingH": 1787.2,
-        "ratingA": 1640,
-        "sup": 1.3600000000000003
+        "ratingA": 1654,
+        "sup": 1.2433333333333336
       }
     },
     {
@@ -854,14 +854,14 @@
         }
       },
       "model": {
-        "home": 0.4209013687395327,
-        "draw": 0.2655342608632312,
-        "away": 0.31356437039723617,
-        "lambdaH": 1.5573846153846154,
-        "lambdaA": 1.3173846153846156,
+        "home": 0.4154658247429612,
+        "draw": 0.2660433620567655,
+        "away": 0.3184908132002733,
+        "lambdaH": 1.544641025641026,
+        "lambdaA": 1.3279743589743591,
         "ratingH": 1742.8,
-        "ratingA": 1730,
-        "sup": 0.23999999999999963
+        "ratingA": 1732.8,
+        "sup": 0.21666666666666667
       }
     },
     {
@@ -942,14 +942,14 @@
         }
       },
       "model": {
-        "home": 0.39240211976701045,
-        "draw": 0.26404429650501837,
-        "away": 0.34355358372797123,
-        "lambdaH": 1.5214615384615389,
-        "lambdaA": 1.4114615384615385,
+        "home": 0.3659874152449922,
+        "draw": 0.2650583783007658,
+        "away": 0.36895420645424193,
+        "lambdaH": 1.45774358974359,
+        "lambdaA": 1.4644102564102564,
         "ratingH": 1697.2,
-        "ratingA": 1700,
-        "sup": 0.11000000000000038
+        "ratingA": 1714,
+        "sup": -0.006666666666666288
       }
     },
     {
@@ -1102,7 +1102,7 @@
         },
         "draw": {
           "pinnacle": 3.06,
-          "unibet": 3,
+          "unibet": 2.95,
           "betsson": 2.92,
           "leovegas": 2.85,
           "nordicbet": 2.92,
@@ -1132,9 +1132,9 @@
         }
       },
       "model": {
-        "home": 0.3810801824985345,
-        "draw": 0.3150742948794693,
-        "away": 0.3038455226219962,
+        "home": 0.38092598008872675,
+        "draw": 0.3153514470356805,
+        "away": 0.3037225728755927,
         "fromMarket": true
       }
     },
@@ -1168,7 +1168,7 @@
           "nordicbet": 2.98,
           "betsson": 2.98,
           "pinnacle": 3.1,
-          "onexbet": 2.94,
+          "onexbet": 2.93,
           "marathonbet": 2.93,
           "tipico": 3,
           "williamhill": 2.8,
@@ -1176,8 +1176,8 @@
           "coolbet": 3,
           "betonlineag": 3,
           "codere": 2.95,
-          "matchbook": 3.15,
-          "betfair": 3.15
+          "matchbook": 3.2,
+          "betfair": 3.2
         },
         "away": {
           "unibet": 3.9,
@@ -1185,7 +1185,7 @@
           "nordicbet": 3.5,
           "betsson": 3.5,
           "pinnacle": 3.8,
-          "onexbet": 3.7,
+          "onexbet": 3.72,
           "marathonbet": 3.7,
           "tipico": 3.8,
           "williamhill": 3.5,
@@ -1198,9 +1198,9 @@
         }
       },
       "model": {
-        "home": 0.4328227068014262,
-        "draw": 0.31505228673913477,
-        "away": 0.252125006459439,
+        "home": 0.4330974655031958,
+        "draw": 0.31470779676887867,
+        "away": 0.2521947377279256,
         "fromMarket": true
       }
     },
@@ -2129,7 +2129,7 @@
           "onexbet": 3.09,
           "betonlineag": 3.15,
           "marathonbet": 3.08,
-          "betfair": 3.15,
+          "betfair": 3.2,
           "coolbet": 3.25,
           "sport888": 2.9,
           "williamhill": 2.9,
@@ -2140,9 +2140,9 @@
         }
       },
       "model": {
-        "home": 0.4273885801074113,
-        "draw": 0.26953138211188377,
-        "away": 0.3030800377807048,
+        "home": 0.4275196328567751,
+        "draw": 0.2696140301523548,
+        "away": 0.3028663369908702,
         "fromMarket": true
       }
     },
@@ -2164,7 +2164,7 @@
           "pinnacle": 1.93,
           "leovegas": 1.83,
           "unibet": 1.83,
-          "betfair": 1.99,
+          "betfair": 1.97,
           "betonlineag": 1.94,
           "coolbet": 1.92
         },
@@ -2200,9 +2200,9 @@
         }
       },
       "model": {
-        "home": 0.4884459556442752,
-        "draw": 0.2769219449776587,
-        "away": 0.2346320993780662,
+        "home": 0.48863206590678143,
+        "draw": 0.2768211970382333,
+        "away": 0.23454673705498527,
         "fromMarket": true
       }
     },
@@ -2285,7 +2285,7 @@
           "coolbet": 2.37,
           "unibet": 2.38,
           "leovegas": 2.38,
-          "betfair": 2.1,
+          "betfair": 2.4,
           "betonlineag": 2.4
         },
         "draw": {
@@ -2315,14 +2315,14 @@
           "coolbet": 2.95,
           "unibet": 2.88,
           "leovegas": 2.88,
-          "betfair": 2.74,
+          "betfair": 2.72,
           "betonlineag": 2.72
         }
       },
       "model": {
-        "home": 0.3953469350104341,
-        "draw": 0.2717268112399037,
-        "away": 0.33292625374966217,
+        "home": 0.3927030778577919,
+        "draw": 0.2728288899649797,
+        "away": 0.33446803217722826,
         "fromMarket": true
       }
     }
@@ -2332,7 +2332,7 @@
       "id": "c1",
       "tier": "single",
       "name": "Combinada del Día",
-      "conf": 26,
+      "conf": 25,
       "legs": [
         {
           "id": "6fef2d5783d5d60a0195062cca67ae1a",
@@ -2370,7 +2370,7 @@
       "id": "c3",
       "tier": "all",
       "name": "Combinada Valor",
-      "conf": 21,
+      "conf": 20,
       "legs": [
         {
           "id": "80d82d1113934bfbea4ce8daf37a2433",
