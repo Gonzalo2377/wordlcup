@@ -241,15 +241,15 @@ function bookAbbr(name){ return (name||'').replace(/[^A-Za-z0-9]/g,'').slice(0,4
 /* ---------------- the model (ported 1:1 from model.js) -------- */
 function ratingFromRank(rank){ return 1500 + 560 * Math.exp(-0.035 * (rank - 1)); }
 function baseRating(team){ if(!team) return ratingFromRank(55); const we=_worldElo && _worldElo(team.name); if(we!=null) return we; if(team.elo!=null) return team.elo; return ratingFromRank(team.fifa!=null?team.fifa:55); }
-function formScore(form){ if(!form) return 0; const p={W:3,D:1,L:0}; let s=0,n=0; for(const c of form){ if(p[c]!=null){s+=p[c];n++;} } return n ? ((s/n)-1.5)*28 : 0; }
+function formScore(form, real){ if(real!=null) return real; if(!form) return 0; const p={W:3,D:1,L:0}; let s=0,n=0; for(const c of form){ if(p[c]!=null){s+=p[c];n++;} } return n ? ((s/n)-1.5)*28 : 0; }
 const _f=[1]; function factorial(n){ if(_f[n]!=null)return _f[n]; let r=_f[_f.length-1]; for(let i=_f.length;i<=n;i++){r*=i;_f[i]=r;} return _f[n]; }
 function poisson(k,l){ return Math.exp(-l)*Math.pow(l,k)/factorial(k); }
 function dcTau(i,j,lh,la,rho){ if(i===0&&j===0)return 1-lh*la*rho; if(i===0&&j===1)return 1+lh*rho; if(i===1&&j===0)return 1+la*rho; if(i===1&&j===1)return 1-rho; return 1; }
 function computeModel(homeId, awayId, teams, opts){
     opts=opts||{}; const H=teams[homeId], A=teams[awayId];
     if(!H||!A) return { home:1/3, draw:1/3, away:1/3 };
-    const rH=baseRating(H)+formScore(H.form);
-    const rA=baseRating(A)+formScore(A.form);
+    const rH=baseRating(H)+formScore(H.form, H.formReal);
+    const rA=baseRating(A)+formScore(A.form, A.formReal);
     const homeAdv = opts.neutral===false ? 65 : 16;
     const sup=(rH-rA+homeAdv)/120;
     const avg=(rH+rA)/2;
@@ -484,6 +484,15 @@ async function main(){
         MATCHES.push({ id: ev.id || `${homeId}-${awayId}`, group: fmtGroup(ev.commence_time), time: fmtTime(ev.commence_time), home: homeId, away: awayId, odds, _commence: ev.commence_time, _sport: ev.sport_key });
         if (ev._logos) { if (ev._logos.home && TEAMS[homeId]) TEAMS[homeId].logo = ev._logos.home; if (ev._logos.away && TEAMS[awayId]) TEAMS[awayId].logo = ev._logos.away; }
     }
+
+    // ---- forma REAL de selecciones vía SofaScore (oficiales + amistosos x0.5, ponderada) ----
+    try {
+      const sofaTeams = require('./sofascore-football.js');
+      const names = []; Object.values(TEAMS).forEach(t=>{ if(t&&t.name) names.push(t.name); });
+      const sf = await sofaTeams(names);
+      const nrm = s => (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z ]/g,' ').replace(/\s+/g,' ').trim();
+      Object.values(TEAMS).forEach(t=>{ const r=sf[nrm(t.name)]; if(r&&r.form){ t.form=r.form; t.formReal=r.formScore; } });
+    } catch(e){ console.log('· SofaScore forma no disponible:', e.message); }
 
     // Attach probabilities:
     //  · both teams known (FIFA rank) → full value model (can surface value)
