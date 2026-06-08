@@ -27,11 +27,14 @@
     'irak':'iq','noruega':'no','argelia':'dz','jordania':'jo','rd congo':'cd','inglaterra':'gb-eng','croacia':'hr',
     'ghana_es':'gh','panama_es':'pa','uzbekistan_es':'uz','italia':'it','polonia':'pl','dinamarca':'dk','ucrania':'ua',
   };
-  function norm(s){ return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z ]/g,'').trim(); }
+  function norm(s){ return (s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/&/g,' and ').replace(/[^a-z ]/g,' ').replace(/\s+/g,' ').trim(); }
+  // re-normaliza las claves del mapa para que "bosnia & herzegovina" case con cualquier grafía
+  const N = {}; for (const k in ISO) N[norm(k)] = ISO[k];
+  N['bosnia and herzegovina']='ba'; N['bosnia herzegovina']='ba'; N['bosnia']='ba';
   window.flagUrl = function(team){
     if (!team) return null;
     const n = norm(team.name);
-    const iso = ISO[n] || ISO[n+'_es'];
+    const iso = N[n] || ISO[norm(team.name)+'_es'] || N[n.replace(' and ',' ')];
     return iso ? ('https://flagcdn.com/w160/' + iso + '.png') : null;
   };
 })();

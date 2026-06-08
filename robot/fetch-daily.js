@@ -17,6 +17,7 @@ const path = require('path');
 
 /* ---------------- config (env) ---------------- */
 const API_KEY = process.env.ODDS_API_KEY;
+const _worldElo = require('./world-elo.js');   // Elo histórico de selecciones (base del modelo)
 // World Cup matches live under 'soccer_fifa_world_cup' (only once books list them).
 // Out of season, test with any in-season football key, e.g.:
 //   soccer_uefa_champs_league · soccer_spain_la_liga · soccer_conmebol_copa_america
@@ -191,7 +192,11 @@ function resolveTeam(name, sink) {
     const hit = aliasMap[norm(name)];
     if (hit) { sink[hit.id] = { id:hit.id, name:hit.name, code:hit.code, color:hit.color, conf:hit.conf, fifa:hit.fifa, elo:hit.elo, form:hit.form, known:true }; return hit.id; }
     const id = norm(name).replace(/[^a-z0-9]/g,'').slice(0,6) || ('t' + Object.keys(sink).length);
-    sink[id] = { id, name, code: name.replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase() || 'TBD', color:'#5a6b8c', conf:'—', fifa:55, form:'', known:false };
+    // si el Elo histórico conoce a esta selección, la tratamos como "conocida" y estimamos
+    // su ranking FIFA aprox. desde el Elo (para que la etiqueta no diga FIFA #55 falso).
+    const we = _worldElo ? _worldElo(name) : null;
+    const estFifa = we!=null ? Math.max(1, Math.round(Math.log((2200-1500)/(we-1500+1))/0.035)+1) : 55;
+    sink[id] = { id, name, code: name.replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase() || 'TBD', color:'#5a6b8c', conf: we!=null?'':'—', fifa: we!=null?estFifa:55, elo: we!=null?we:null, form:'', known: we!=null };
     return id;
 }
 
@@ -203,7 +208,6 @@ function bookAbbr(name){ return (name||'').replace(/[^A-Za-z0-9]/g,'').slice(0,4
 
 /* ---------------- the model (ported 1:1 from model.js) -------- */
 function ratingFromRank(rank){ return 1500 + 560 * Math.exp(-0.035 * (rank - 1)); }
-const _worldElo = require('./world-elo.js');
 function baseRating(team){ if(!team) return ratingFromRank(55); const we=_worldElo && _worldElo(team.name); if(we!=null) return we; if(team.elo!=null) return team.elo; return ratingFromRank(team.fifa!=null?team.fifa:55); }
 function formScore(form){ if(!form) return 0; const p={W:3,D:1,L:0}; let s=0,n=0; for(const c of form){ if(p[c]!=null){s+=p[c];n++;} } return n ? ((s/n)-1.5)*28 : 0; }
 const _f=[1]; function factorial(n){ if(_f[n]!=null)return _f[n]; let r=_f[_f.length-1]; for(let i=_f.length;i<=n;i++){r*=i;_f[i]=r;} return _f[n]; }
