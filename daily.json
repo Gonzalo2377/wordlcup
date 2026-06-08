@@ -1933,26 +1933,6 @@
       "book": "coolbet",
       "stake": 1,
       "result": "W"
-    },
-    {
-      "id": "b32633aa2442ef8135cd962344d7b4b2",
-      "date": "30 MAY",
-      "pick": "Grêmio",
-      "match": "Grêmio – Corinthians",
-      "odd": 3.3,
-      "book": "matchbook",
-      "stake": 1,
-      "result": "L"
-    },
-    {
-      "id": "05d40cc47e24d558e805edcccf22f769",
-      "date": "30 MAY",
-      "pick": "VPS Vaasa",
-      "match": "TPS Turku – VPS Vaasa",
-      "odd": 2.51,
-      "book": "coolbet",
-      "stake": 1,
-      "result": "L"
     }
   ],
   "PENDING": [
