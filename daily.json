@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-06-08T16:17:10.999Z",
+    "updatedAt": "2026-06-08T16:32:34.256Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 22,
     "stale": false,
     "credits": {
-      "remaining": 160,
-      "used": 340
+      "remaining": 480,
+      "used": 20
     }
   },
   "TEAMS": {
@@ -641,7 +641,7 @@
         "draw": {
           "marathonbet": 3.16,
           "coolbet": 3.14,
-          "betfair": 3.25,
+          "betfair": 3.2,
           "everygame": 3.05,
           "pinnacle": 3.14,
           "betonlineag": 3.11,
@@ -686,9 +686,9 @@
         }
       },
       "model": {
-        "home": 0.3617443419725947,
-        "draw": 0.3048452005736561,
-        "away": 0.33341045745374925,
+        "home": 0.36166527744727517,
+        "draw": 0.30499713683875573,
+        "away": 0.33333758571396915,
         "fromMarket": true
       }
     },
@@ -730,7 +730,7 @@
           "matchbook": 3.85,
           "williamhill": 3.3,
           "betfair": 3.85,
-          "pinnacle": 3.53,
+          "pinnacle": 3.55,
           "betanysports": 3.4
         },
         "away": {
@@ -746,15 +746,15 @@
           "marathonbet": 2.93,
           "matchbook": 2.98,
           "williamhill": 2.75,
-          "betfair": 2.98,
-          "pinnacle": 2.9,
+          "betfair": 2.96,
+          "pinnacle": 2.89,
           "betanysports": 2.8
         }
       },
       "model": {
-        "home": 0.40701961531911385,
-        "draw": 0.26446878348334724,
-        "away": 0.32851160119753875,
+        "home": 0.406972250881943,
+        "draw": 0.2643384013128019,
+        "away": 0.328689347805255,
         "fromMarket": true
       }
     },
@@ -770,10 +770,10 @@
           "betonlineag": 2.24,
           "unibet": 2.1,
           "betclic": 2.1,
-          "williamhill": 2.15,
+          "williamhill": 2.2,
           "onexbet": 2.23,
           "coolbet": 2.25,
-          "betfair": 2.2,
+          "betfair": 2.28,
           "matchbook": 2.2,
           "marathonbet": 2.25,
           "leovegas": 2.05,
@@ -812,9 +812,9 @@
         }
       },
       "model": {
-        "home": 0.4298263675613937,
-        "draw": 0.2816915627236257,
-        "away": 0.2884820697149806,
+        "home": 0.4287408284161065,
+        "draw": 0.2822278681590872,
+        "away": 0.2890313034248064,
         "fromMarket": true
       }
     },
@@ -826,7 +826,7 @@
       "away": "atleti",
       "odds": {
         "home": {
-          "pinnacle": 2.52,
+          "pinnacle": 2.51,
           "unibet": 2.33,
           "betsson": 2.38,
           "leovegas": 2.23,
@@ -841,7 +841,7 @@
           "betfair": 2.56
         },
         "draw": {
-          "pinnacle": 3.02,
+          "pinnacle": 3.03,
           "unibet": 3.05,
           "betsson": 2.98,
           "leovegas": 2.9,
@@ -856,7 +856,7 @@
           "betfair": 3.1
         },
         "away": {
-          "pinnacle": 3.22,
+          "pinnacle": 3.24,
           "unibet": 3.15,
           "betsson": 3.1,
           "leovegas": 3,
@@ -872,9 +872,9 @@
         }
       },
       "model": {
-        "home": 0.38576947481413526,
-        "draw": 0.31496447455237503,
-        "away": 0.29926605063348966,
+        "home": 0.38592229443729237,
+        "draw": 0.3149184050287824,
+        "away": 0.29915930053392514,
         "fromMarket": true
       }
     },
@@ -893,7 +893,7 @@
           "pinnacle": 2.06,
           "onexbet": 2.02,
           "marathonbet": 2,
-          "tipico": 1.87,
+          "tipico": 1.9,
           "williamhill": 2,
           "sport888": 2,
           "coolbet": 2,
@@ -927,7 +927,7 @@
           "pinnacle": 4.22,
           "onexbet": 4.11,
           "marathonbet": 4.1,
-          "tipico": 4.2,
+          "tipico": 4,
           "williamhill": 4,
           "sport888": 4,
           "coolbet": 4,
@@ -938,9 +938,9 @@
         }
       },
       "model": {
-        "home": 0.46495212510210576,
-        "draw": 0.3074347021951171,
-        "away": 0.22761317270277714,
+        "home": 0.46432826863949966,
+        "draw": 0.3073686672455735,
+        "away": 0.2283030641149267,
         "fromMarket": true
       }
     },
@@ -965,7 +965,7 @@
           "pinnacle": 3.42,
           "codere": 3.1,
           "betfair": 3.55,
-          "matchbook": 3.55
+          "matchbook": 3.6
         },
         "draw": {
           "sport888": 2.7,
@@ -1001,9 +1001,9 @@
         }
       },
       "model": {
-        "home": 0.2859784650797465,
-        "draw": 0.3315482509038182,
-        "away": 0.38247328401643543,
+        "home": 0.28579356797848066,
+        "draw": 0.3316341058921117,
+        "away": 0.3825723261294078,
         "fromMarket": true
       }
     },
@@ -1215,7 +1215,7 @@
           "unibet": 1.82,
           "leovegas": 1.75,
           "codere": 1.73,
-          "betfair": 1.8,
+          "betfair": 1.78,
           "matchbook": 1.78,
           "betonlineag": 1.79
         },
@@ -1253,9 +1253,9 @@
         }
       },
       "model": {
-        "home": 0.5216519281040893,
-        "draw": 0.2766889457759866,
-        "away": 0.20165912611992404,
+        "home": 0.5218488965568135,
+        "draw": 0.2765750141083635,
+        "away": 0.2015760893348229,
         "fromMarket": true
       }
     },
@@ -1343,7 +1343,8 @@
           "betfair": 2.64,
           "tipico": 2.6,
           "coolbet": 2.75,
-          "everygame": 2.45
+          "everygame": 2.45,
+          "betanysports": 2.58
         },
         "draw": {
           "unibet": 3.55,
@@ -1359,7 +1360,8 @@
           "betfair": 3.6,
           "tipico": 3.5,
           "coolbet": 3.6,
-          "everygame": 3.25
+          "everygame": 3.25,
+          "betanysports": 3.4
         },
         "away": {
           "unibet": 2.35,
@@ -1375,13 +1377,14 @@
           "betfair": 2.62,
           "tipico": 2.3,
           "coolbet": 2.45,
-          "everygame": 2.4
+          "everygame": 2.4,
+          "betanysports": 2.52
         }
       },
       "model": {
-        "home": 0.35552725503656873,
-        "draw": 0.2680019150462347,
-        "away": 0.3764708299171965,
+        "home": 0.35578280469469403,
+        "draw": 0.2683141836693963,
+        "away": 0.37590301163590967,
         "fromMarket": true
       }
     },
@@ -1406,7 +1409,8 @@
           "betfair": 1.97,
           "tipico": 1.75,
           "coolbet": 1.94,
-          "everygame": 1.8
+          "everygame": 1.8,
+          "betanysports": 1.87
         },
         "draw": {
           "unibet": 3.7,
@@ -1422,7 +1426,8 @@
           "betfair": 3.9,
           "tipico": 3.8,
           "coolbet": 3.8,
-          "everygame": 3.65
+          "everygame": 3.65,
+          "betanysports": 3.8
         },
         "away": {
           "unibet": 3.6,
@@ -1438,13 +1443,14 @@
           "betfair": 3.65,
           "tipico": 3.7,
           "coolbet": 3.7,
-          "everygame": 3.4
+          "everygame": 3.4,
+          "betanysports": 3.55
         }
       },
       "model": {
-        "home": 0.48840437953910926,
-        "draw": 0.24987376244619944,
-        "away": 0.26172185801469117,
+        "home": 0.4888654834761887,
+        "draw": 0.2494661270866901,
+        "away": 0.2616683894371212,
         "fromMarket": true
       }
     },
@@ -1469,7 +1475,8 @@
           "betfair": 2.6,
           "tipico": 2.4,
           "coolbet": 2.53,
-          "everygame": 2.5
+          "everygame": 2.5,
+          "betanysports": 2.64
         },
         "draw": {
           "unibet": 3.4,
@@ -1485,7 +1492,8 @@
           "betfair": 3.55,
           "tipico": 3.4,
           "coolbet": 3.55,
-          "everygame": 3.25
+          "everygame": 3.25,
+          "betanysports": 3.3
         },
         "away": {
           "unibet": 2.8,
@@ -1501,13 +1509,14 @@
           "betfair": 2.62,
           "tipico": 2.55,
           "coolbet": 2.69,
-          "everygame": 2.35
+          "everygame": 2.35,
+          "betanysports": 2.52
         }
       },
       "model": {
-        "home": 0.36349771057164054,
-        "draw": 0.27518813764329675,
-        "away": 0.3613141517850627,
+        "home": 0.36267880791951757,
+        "draw": 0.27557000330215525,
+        "away": 0.36175118877832724,
         "fromMarket": true
       }
     },
@@ -1532,7 +1541,8 @@
           "williamhill": 2.15,
           "tipico": 2,
           "pinnacle": 2.19,
-          "everygame": 2.1
+          "everygame": 2.1,
+          "betanysports": 2.18
         },
         "draw": {
           "betsson": 3.5,
@@ -1548,7 +1558,8 @@
           "williamhill": 3.2,
           "tipico": 3.5,
           "pinnacle": 3.51,
-          "everygame": 3.25
+          "everygame": 3.25,
+          "betanysports": 3.4
         },
         "away": {
           "betsson": 3,
@@ -1564,13 +1575,14 @@
           "williamhill": 2.9,
           "tipico": 3.1,
           "pinnacle": 3.14,
-          "everygame": 2.9
+          "everygame": 2.9,
+          "betanysports": 3.1
         }
       },
       "model": {
-        "home": 0.42637154831486,
-        "draw": 0.2703316205953902,
-        "away": 0.30329683108974975,
+        "home": 0.4263832546827117,
+        "draw": 0.27054137625045915,
+        "away": 0.3030753690668292,
         "fromMarket": true
       }
     },
@@ -1661,7 +1673,7 @@
           "onexbet": 3.84,
           "betsson": 3.75,
           "sport888": 3.6,
-          "tipico": 3.9,
+          "tipico": 3.8,
           "williamhill": 3.6,
           "marathonbet": 3.84,
           "pinnacle": 4.01,
@@ -1676,7 +1688,7 @@
           "onexbet": 4.86,
           "betsson": 4.85,
           "sport888": 4.6,
-          "tipico": 4.8,
+          "tipico": 5,
           "williamhill": 4.6,
           "marathonbet": 4.9,
           "pinnacle": 4.95,
@@ -1688,9 +1700,9 @@
         }
       },
       "model": {
-        "home": 0.5651567685866778,
-        "draw": 0.24208632949421152,
-        "away": 0.1927569019191108,
+        "home": 0.5652208123622634,
+        "draw": 0.24259597715869607,
+        "away": 0.19218321047904063,
         "fromMarket": true
       }
     },
