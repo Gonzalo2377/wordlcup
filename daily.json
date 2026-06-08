@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-06-08T21:07:17.714Z",
+    "updatedAt": "2026-06-08T21:20:33.606Z",
     "source": "the-odds-api",
     "sport": "auto",
     "regions": "eu",
     "market": "h2h",
     "matches": 25,
-    "valuePicks": 1,
+    "valuePicks": 2,
     "books": 22,
     "stale": false,
     "credits": {
-      "remaining": 460,
-      "used": 40
+      "remaining": 440,
+      "used": 60
     }
   },
   "TEAMS": {
@@ -30,10 +30,11 @@
       "name": "South Africa",
       "code": "SOU",
       "color": "#5a6b8c",
-      "conf": "—",
-      "fifa": 55,
+      "conf": "",
+      "fifa": 47,
+      "elo": 1640,
       "form": "",
-      "known": false
+      "known": true
     },
     "kor": {
       "id": "kor",
@@ -50,10 +51,11 @@
       "name": "Czech Republic",
       "code": "CZE",
       "color": "#5a6b8c",
-      "conf": "—",
-      "fifa": 55,
+      "conf": "",
+      "fifa": 33,
+      "elo": 1730,
       "form": "",
-      "known": false
+      "known": true
     },
     "can": {
       "id": "can",
@@ -70,10 +72,11 @@
       "name": "Bosnia & Herzegovina",
       "code": "BOS",
       "color": "#5a6b8c",
-      "conf": "—",
-      "fifa": 55,
+      "conf": "",
+      "fifa": 37,
+      "elo": 1700,
       "form": "",
-      "known": false
+      "known": true
     },
     "almeri": {
       "id": "almeri",
@@ -82,6 +85,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -92,6 +96,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -102,6 +107,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -112,6 +118,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -122,6 +129,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -132,6 +140,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -142,6 +151,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -162,6 +172,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -172,6 +183,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -182,6 +194,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -202,6 +215,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -212,6 +226,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -222,6 +237,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -232,6 +248,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -242,6 +259,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -252,6 +270,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -262,6 +281,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -272,6 +292,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -282,6 +303,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -292,6 +314,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -302,6 +325,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -312,6 +336,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -322,6 +347,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -332,6 +358,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -342,6 +369,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -352,6 +380,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -362,6 +391,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -372,6 +402,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -382,6 +413,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -392,6 +424,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -402,6 +435,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -412,6 +446,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -422,6 +457,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -432,6 +468,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -442,6 +479,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -452,6 +490,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -462,6 +501,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -472,6 +512,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -482,6 +523,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -492,6 +534,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     },
@@ -502,6 +545,7 @@
       "color": "#5a6b8c",
       "conf": "—",
       "fifa": 55,
+      "elo": null,
       "form": "",
       "known": false
     }
@@ -670,7 +714,7 @@
           "matchbook": 1.45,
           "betanysports": 1.38,
           "codere": 1.42,
-          "tipico": 1.37
+          "tipico": 1.4
         },
         "draw": {
           "marathonbet": 4.5,
@@ -694,7 +738,7 @@
           "matchbook": 4.7,
           "betanysports": 4.7,
           "codere": 4.4,
-          "tipico": 4.7
+          "tipico": 4.6
         },
         "away": {
           "marathonbet": 9.1,
@@ -715,17 +759,21 @@
           "gtbets": 7.89,
           "nordicbet": 8.9,
           "onexbet": 8.9,
-          "matchbook": 9.6,
+          "matchbook": 9.8,
           "betanysports": 9,
           "codere": 8.2,
-          "tipico": 9
+          "tipico": 8.2
         }
       },
       "model": {
-        "home": 0.6738466519724987,
-        "draw": 0.2152045542531471,
-        "away": 0.11094879377435427,
-        "fromMarket": true
+        "home": 0.679972205647629,
+        "draw": 0.20394016105212678,
+        "away": 0.11608763330024424,
+        "lambdaH": 2.1349230769230774,
+        "lambdaA": 0.7749230769230768,
+        "ratingH": 1787.2,
+        "ratingA": 1640,
+        "sup": 1.3600000000000003
       }
     },
     {
@@ -806,10 +854,14 @@
         }
       },
       "model": {
-        "home": 0.36465409064437926,
-        "draw": 0.3046244072478811,
-        "away": 0.33072150210773965,
-        "fromMarket": true
+        "home": 0.4209013687395327,
+        "draw": 0.2655342608632312,
+        "away": 0.31356437039723617,
+        "lambdaH": 1.5573846153846154,
+        "lambdaA": 1.3173846153846156,
+        "ratingH": 1742.8,
+        "ratingA": 1730,
+        "sup": 0.23999999999999963
       }
     },
     {
@@ -890,10 +942,14 @@
         }
       },
       "model": {
-        "home": 0.5285565172598468,
-        "draw": 0.26261379494737574,
-        "away": 0.2088296877927774,
-        "fromMarket": true
+        "home": 0.39240211976701045,
+        "draw": 0.26404429650501837,
+        "away": 0.34355358372797123,
+        "lambdaH": 1.5214615384615389,
+        "lambdaA": 1.4114615384615385,
+        "ratingH": 1697.2,
+        "ratingA": 1700,
+        "sup": 0.11000000000000038
       }
     },
     {
@@ -914,9 +970,9 @@
           "coolbet": 2.3,
           "betonlineag": 2.36,
           "marathonbet": 2.38,
-          "matchbook": 2.42,
+          "matchbook": 2.44,
           "williamhill": 2.25,
-          "betfair": 2.42,
+          "betfair": 2.44,
           "pinnacle": 2.41,
           "betanysports": 2.36
         },
@@ -948,17 +1004,17 @@
           "coolbet": 2.9,
           "betonlineag": 2.88,
           "marathonbet": 2.94,
-          "matchbook": 3.05,
+          "matchbook": 2.98,
           "williamhill": 2.75,
-          "betfair": 3.05,
+          "betfair": 2.98,
           "pinnacle": 2.93,
           "betanysports": 2.88
         }
       },
       "model": {
-        "home": 0.4079411128454817,
-        "draw": 0.265557902202206,
-        "away": 0.32650098495231233,
+        "home": 0.4072970675251772,
+        "draw": 0.26541453717361707,
+        "away": 0.32728839530120585,
         "fromMarket": true
       }
     },
@@ -1031,9 +1087,9 @@
       "odds": {
         "home": {
           "pinnacle": 2.5,
-          "unibet": 2.4,
+          "unibet": 2.43,
           "betsson": 2.42,
-          "leovegas": 2.3,
+          "leovegas": 2.32,
           "nordicbet": 2.42,
           "tipico": 2.35,
           "williamhill": 2.4,
@@ -1060,8 +1116,8 @@
           "betfair": 3.15
         },
         "away": {
-          "pinnacle": 3.21,
-          "unibet": 3.05,
+          "pinnacle": 3.2,
+          "unibet": 3.1,
           "betsson": 3.05,
           "leovegas": 2.95,
           "nordicbet": 3.05,
@@ -1072,13 +1128,13 @@
           "betonlineag": 3.15,
           "codere": 3,
           "matchbook": 3.25,
-          "betfair": 3.2
+          "betfair": 3.25
         }
       },
       "model": {
-        "home": 0.3829461080943687,
-        "draw": 0.3145603612615302,
-        "away": 0.3024935306441012,
+        "home": 0.38280314920264086,
+        "draw": 0.31496671910838336,
+        "away": 0.3022301316889759,
         "fromMarket": true
       }
     },
@@ -1094,31 +1150,31 @@
           "leovegas": 2.04,
           "nordicbet": 2.18,
           "betsson": 2.18,
-          "pinnacle": 2.3,
-          "onexbet": 2.22,
-          "marathonbet": 2.19,
+          "pinnacle": 2.25,
+          "onexbet": 2.2,
+          "marathonbet": 2.18,
           "tipico": 2,
           "williamhill": 2.2,
           "sport888": 2.2,
           "coolbet": 2.25,
-          "betonlineag": 2.28,
+          "betonlineag": 2.22,
           "codere": 2.16,
-          "matchbook": 2.3,
-          "betfair": 2.3
+          "matchbook": 2.28,
+          "betfair": 2.28
         },
         "draw": {
           "unibet": 2.9,
           "leovegas": 2.75,
           "nordicbet": 2.98,
           "betsson": 2.98,
-          "pinnacle": 3.02,
+          "pinnacle": 3.05,
           "onexbet": 2.92,
           "marathonbet": 2.92,
           "tipico": 2.95,
           "williamhill": 2.8,
           "sport888": 2.8,
           "coolbet": 3,
-          "betonlineag": 2.9,
+          "betonlineag": 3,
           "codere": 2.95,
           "matchbook": 3.1,
           "betfair": 3.1
@@ -1128,23 +1184,23 @@
           "leovegas": 3.7,
           "nordicbet": 3.5,
           "betsson": 3.5,
-          "pinnacle": 3.66,
-          "onexbet": 3.56,
-          "marathonbet": 3.58,
+          "pinnacle": 3.74,
+          "onexbet": 3.62,
+          "marathonbet": 3.6,
           "tipico": 3.7,
           "williamhill": 3.5,
           "sport888": 3.5,
           "coolbet": 3.4,
-          "betonlineag": 3.55,
+          "betonlineag": 3.6,
           "codere": 3.5,
-          "matchbook": 4,
-          "betfair": 4
+          "matchbook": 4.1,
+          "betfair": 4.1
         }
       },
       "model": {
-        "home": 0.42542255593811773,
-        "draw": 0.31762871419805366,
-        "away": 0.2569487298638287,
+        "home": 0.42781972937041407,
+        "draw": 0.3168612328566419,
+        "away": 0.25531903777294396,
         "fromMarket": true
       }
     },
@@ -1201,13 +1257,13 @@
           "pinnacle": 2.35,
           "codere": 2.26,
           "betfair": 2.4,
-          "matchbook": 2.5
+          "matchbook": 2.46
         }
       },
       "model": {
-        "home": 0.28005849567682584,
-        "draw": 0.32475550767330946,
-        "away": 0.3951859966498647,
+        "home": 0.2799378891437904,
+        "draw": 0.3246156524770942,
+        "away": 0.39544645837911535,
         "fromMarket": true
       }
     },
@@ -1281,7 +1337,7 @@
         "home": {
           "betsson": 1.7,
           "nordicbet": 1.7,
-          "tipico": 1.6,
+          "tipico": 1.62,
           "onexbet": 1.72,
           "marathonbet": 1.7,
           "pinnacle": 1.73,
@@ -1315,7 +1371,7 @@
         "away": {
           "betsson": 4.75,
           "nordicbet": 4.75,
-          "tipico": 4.9,
+          "tipico": 4.7,
           "onexbet": 4.67,
           "marathonbet": 4.7,
           "pinnacle": 4.8,
@@ -1331,9 +1387,9 @@
         }
       },
       "model": {
-        "home": 0.5455437252234057,
-        "draw": 0.2600951419210071,
-        "away": 0.19436113285558723,
+        "home": 0.5450337087635171,
+        "draw": 0.2600795621062709,
+        "away": 0.1948867291302119,
         "fromMarket": true
       }
     },
@@ -1346,7 +1402,7 @@
       "odds": {
         "home": {
           "nordicbet": 2.3,
-          "marathonbet": 2.34,
+          "marathonbet": 2.33,
           "betsson": 2.3,
           "tipico": 2.35,
           "pinnacle": 2.39,
@@ -1362,7 +1418,7 @@
         },
         "draw": {
           "nordicbet": 2.92,
-          "marathonbet": 2.89,
+          "marathonbet": 2.9,
           "betsson": 2.92,
           "tipico": 2.6,
           "pinnacle": 2.94,
@@ -1394,9 +1450,9 @@
         }
       },
       "model": {
-        "home": 0.3983055560082834,
-        "draw": 0.3196377252335327,
-        "away": 0.28205671875818383,
+        "home": 0.3984098814938459,
+        "draw": 0.3195453455081654,
+        "away": 0.28204477299798875,
         "fromMarket": true
       }
     },
@@ -1425,9 +1481,9 @@
         },
         "draw": {
           "sport888": 3.25,
-          "tipico": 3.4,
+          "tipico": 3.3,
           "nordicbet": 3.35,
-          "onexbet": 3.4,
+          "onexbet": 3.38,
           "williamhill": 3.25,
           "betsson": 3.35,
           "pinnacle": 3.46,
@@ -1441,9 +1497,9 @@
         },
         "away": {
           "sport888": 4.75,
-          "tipico": 4.8,
+          "tipico": 5,
           "nordicbet": 4.65,
-          "onexbet": 4.83,
+          "onexbet": 4.88,
           "williamhill": 4.75,
           "betsson": 4.65,
           "pinnacle": 5,
@@ -1457,9 +1513,9 @@
         }
       },
       "model": {
-        "home": 0.5257703366170637,
-        "draw": 0.27477300738509736,
-        "away": 0.1994566559978388,
+        "home": 0.5257634607175837,
+        "draw": 0.27547176336010204,
+        "away": 0.19876477592231415,
         "fromMarket": true
       }
     },
@@ -1781,7 +1837,7 @@
           "pinnacle": 2.54,
           "williamhill": 2.45,
           "sport888": 2.45,
-          "betfair": 2.68,
+          "betfair": 2.62,
           "tipico": 2.55,
           "coolbet": 2.85,
           "everygame": 2.4
@@ -1797,8 +1853,8 @@
           "pinnacle": 3.73,
           "williamhill": 3.3,
           "sport888": 3.3,
-          "betfair": 3.7,
-          "tipico": 3.6,
+          "betfair": 3.75,
+          "tipico": 3.5,
           "coolbet": 3.5,
           "everygame": 3.45
         },
@@ -1814,15 +1870,15 @@
           "williamhill": 2.45,
           "sport888": 2.45,
           "betfair": 2.66,
-          "tipico": 2.3,
+          "tipico": 2.35,
           "coolbet": 2.41,
           "everygame": 2.4
         }
       },
       "model": {
-        "home": 0.36520996090649493,
-        "draw": 0.2632083273809042,
-        "away": 0.371581711712601,
+        "home": 0.3656885704448293,
+        "draw": 0.26343225398329795,
+        "away": 0.37087917557187267,
         "fromMarket": true
       }
     },
@@ -1844,7 +1900,7 @@
           "pinnacle": 2.6,
           "williamhill": 2.5,
           "sport888": 2.5,
-          "betfair": 2.62,
+          "betfair": 2.64,
           "tipico": 2.6,
           "coolbet": 2.75,
           "everygame": 2.45,
@@ -1886,9 +1942,9 @@
         }
       },
       "model": {
-        "home": 0.35635505773416665,
-        "draw": 0.2680697615425341,
-        "away": 0.3755751807232994,
+        "home": 0.3562400332431788,
+        "draw": 0.2681176677495837,
+        "away": 0.37564229900723745,
         "fromMarket": true
       }
     },
@@ -1927,7 +1983,7 @@
           "pinnacle": 3.92,
           "williamhill": 3.4,
           "sport888": 3.4,
-          "betfair": 3.75,
+          "betfair": 3.5,
           "tipico": 3.8,
           "coolbet": 3.8,
           "everygame": 3.65,
@@ -1952,9 +2008,9 @@
         }
       },
       "model": {
-        "home": 0.48760389163002693,
-        "draw": 0.24932724466935996,
-        "away": 0.26306886370061316,
+        "home": 0.48703108240913423,
+        "draw": 0.2502090921761321,
+        "away": 0.26275982541473375,
         "fromMarket": true
       }
     },
@@ -1980,7 +2036,7 @@
           "tipico": 2.4,
           "coolbet": 2.53,
           "everygame": 2.5,
-          "betanysports": 2.7
+          "betanysports": 2.55
         },
         "draw": {
           "unibet": 3.4,
@@ -2014,13 +2070,13 @@
           "tipico": 2.55,
           "coolbet": 2.69,
           "everygame": 2.35,
-          "betanysports": 2.56
+          "betanysports": 2.45
         }
       },
       "model": {
-        "home": 0.3625332549581735,
-        "draw": 0.2756153038411422,
-        "away": 0.36185144120068446,
+        "home": 0.3629972404822252,
+        "draw": 0.2749474504318386,
+        "away": 0.3620553090859362,
         "fromMarket": true
       }
     },
@@ -2039,7 +2095,7 @@
           "onexbet": 2.18,
           "betonlineag": 2.18,
           "marathonbet": 2.16,
-          "betfair": 2.24,
+          "betfair": 2.22,
           "coolbet": 2.14,
           "sport888": 2.15,
           "williamhill": 2.15,
@@ -2084,9 +2140,9 @@
         }
       },
       "model": {
-        "home": 0.4272794493651485,
-        "draw": 0.26984823080284587,
-        "away": 0.30287231983200563,
+        "home": 0.42742180876053315,
+        "draw": 0.26978115545355,
+        "away": 0.3027970357859167,
         "fromMarket": true
       }
     },
@@ -2472,6 +2528,17 @@
       "pickLabel": "Gana IK Oddevold",
       "odd": 3,
       "book": "coolbet"
+    },
+    {
+      "id": "384cbb5d76b535896a24fe65f93cfac8",
+      "sport": "soccer_fifa_world_cup",
+      "ts": 1781229600000,
+      "date": "12 JUN",
+      "match": "Corea del Sur – Czech Republic",
+      "pickKey": "home",
+      "pickLabel": "Gana Corea del Sur",
+      "odd": 2.74,
+      "book": "betfair"
     }
   ],
   "COMBO_PENDING": [
