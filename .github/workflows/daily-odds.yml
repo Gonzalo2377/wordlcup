@@ -33,7 +33,7 @@ jobs:
           # (según el ranking SPORT_PRIORITY del robot: Champions, grandes ligas,
           # selecciones, Sudamérica...). Cambia ODDS_MAX para coger más o menos.
           # Para fijar competiciones a mano: ODDS_SPORT: soccer_uefa_champs_league,soccer_brazil_campeonato
-          ODDS_SPORT: auto
+          ODDS_SPORT: soccer_fifa_world_cup
           ODDS_MAX: '16'
           ODDS_REGIONS: eu
           # Ventana de días hacia delante. En temporada normal 48-72h sobra; en
