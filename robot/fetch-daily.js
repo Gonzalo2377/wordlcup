@@ -510,6 +510,26 @@ async function main(){
     const label = (m,k) => k==='draw' ? 'Empate' : (k==='home' ? `Gana ${TEAMS[m.home].name}` : `Gana ${TEAMS[m.away].name}`);
     const legOf = (x) => ({ id:x.m.id, sport:x.m._sport, ts:new Date(x.m._commence).getTime(), side:x.v.pick.k, match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
     const confOf = (arr) => Math.round(arr.reduce((p,x)=>p*x.v.pick.modelP,1)*100);
+    // elige la casa que da la cuota COMBINADA más alta teniendo TODAS las selecciones,
+    // y reescribe cada pierna en esa misma casa (combi de una sola casa, fácil de apostar).
+    const singleBookLegs = (slice) => {
+        const baseLegs = slice.map(legOf);
+        // casas presentes en todas las piernas
+        let common = null;
+        slice.forEach(x => {
+            const odds = (x.m.odds && x.m.odds[x.v.pick.k]) || {};
+            const books = new Set(Object.keys(odds));
+            common = common === null ? books : new Set([...common].filter(b => books.has(b)));
+        });
+        if (!common || !common.size) return baseLegs;   // sin casa común → deja la mejor de cada una
+        let bestBook = null, bestProd = 0;
+        common.forEach(b => {
+            const prod = slice.reduce((p,x) => p * (x.m.odds[x.v.pick.k][b] || 0), 1);
+            if (prod > bestProd) { bestProd = prod; bestBook = b; }
+        });
+        if (!bestBook) return baseLegs;
+        return slice.map((x,i) => ({ ...baseLegs[i], book: bestBook, odd: +x.m.odds[x.v.pick.k][bestBook].toFixed(2) }));
+    };
     const COMBOS = [];
     // Safe pool: favoritos creíbles (cuota moderada) para combinar. Acotado para que las
     // combis no se llenen de picks a 3-4 (que fallan demasiado).
@@ -532,7 +552,7 @@ async function main(){
     function pushCombo(meta, pool, n){
         // try a few starting offsets so a thin day can still yield DISTINCT combos
         for (let off = 0; off + n <= pool.length && off <= 3; off++){
-            const legs = pool.slice(off, off+n).map(legOf);
+            const legs = singleBookLegs(pool.slice(off, off+n));
             if (legs.length < n) break;
             const sig = comboSig(legs);
             if (usedSigs.has(sig)) continue;          // identical to one already added → skip
