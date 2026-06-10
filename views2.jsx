@@ -373,6 +373,9 @@ function Arbitrage({ t, go, lang }) {
     useEffect(() => { try { localStorage.setItem('mv_arb_stake', stake); } catch(e){} }, [stake]);
     const [mode, setMode] = useState(() => { try { return localStorage.getItem('mv_arb_mode') || 'even'; } catch(e){ return 'even'; } });
     useEffect(() => { try { localStorage.setItem('mv_arb_mode', mode); } catch(e){} }, [mode]);
+    const [round, setRound] = useState(() => { try { return localStorage.getItem('mv_arb_round') || '1'; } catch(e){ return '1'; } });
+    useEffect(() => { try { localStorage.setItem('mv_arb_round', round); } catch(e){} }, [round]);
+    const roundStake = (v) => { const step=+round; return step>0 ? Math.max(step, Math.round(v/step)*step) : v; };
 
     const all = window.findArbs ? window.findArbs() : [];
     const arbs = all.filter(a => a.hasArb);
@@ -396,11 +399,16 @@ function Arbitrage({ t, go, lang }) {
             });
         } else {
             split = window.arbSplit(a.legs, total);
-            evenRet = window.arbReturn(a.legs, total);
-            evenProfit = evenRet - total;
+        }
+        // redondea cada apuesta a cifra "humana" y recalcula retornos reales
+        split = split.map(l => { const st = roundStake(l.stake); return { ...l, stake: st, ret: st * l.price }; });
+        const realTotal = split.reduce((s,l)=> s + l.stake, 0);
+        if (mode !== 'cover') {
+            evenRet = Math.min(...split.map(l=>l.ret));
+            evenProfit = evenRet - realTotal;
         }
         const profitLeg = split.find(l => l.k === profitKey) || split[0];
-        const coverNet = profitLeg.ret - total;
+        const coverNet = profitLeg.ret - realTotal;
         const profitName = window.outcomeLabel(profitKey, a.m, lang);
         return (
             <div className="panel" style={{ overflow:'hidden', borderColor: isArb ? 'rgba(39,215,150,.45)' : 'var(--line)' }}>
@@ -422,7 +430,7 @@ function Arbitrage({ t, go, lang }) {
 
                 <div style={{ padding:'4px 16px' }}>
                     {split.map((l,i) => {
-                        const net = l.ret - total; const nc = net>0.005?'var(--green)':net<-0.005?'var(--red)':'var(--muted)';
+                        const net = l.ret - realTotal; const nc = net>0.005?'var(--green)':net<-0.005?'var(--red)':'var(--muted)';
                         const isProfit = mode==='cover' && l.k===profitKey;
                         return (
                         <div key={i} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'11px 0', borderBottom: i<split.length-1?'1px solid var(--line)':'none' }}>
@@ -439,7 +447,7 @@ function Arbitrage({ t, go, lang }) {
                             </div>
                             <div style={{ textAlign:'right', whiteSpace:'nowrap' }}>
                                 <div style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.95rem', color:'var(--text)' }}>{l.price.toFixed(2)}</div>
-                                <div style={{ fontFamily:'var(--font-mono)', fontSize:'.7rem', color:'var(--lime)', marginTop:2 }}>{t.arbStake} {l.stake.toFixed(2)}€</div>
+                                <div style={{ fontFamily:'var(--font-mono)', fontSize:'.7rem', color:'var(--lime)', marginTop:2 }}>{t.arbStake} {(+round>0 ? l.stake.toFixed(0) : l.stake.toFixed(2))}€</div>
                                 {mode==='cover' && <div style={{ fontFamily:'var(--font-mono)', fontSize:'.7rem', color:nc, marginTop:2 }}>{t.arbIfWins} {net>=0?'+':''}{net.toFixed(2)}€</div>}
                             </div>
                         </div>
@@ -509,8 +517,15 @@ function Arbitrage({ t, go, lang }) {
                                 ))}
                             </div>
                         </div>
+                        <div style={{ display:'flex', flexDirection:'column', gap:5 }}>
+                            <label style={{ fontFamily:'var(--font-mono)', fontSize:'.6rem', letterSpacing:'.1em', textTransform:'uppercase', color:'var(--muted)' }}>{t.arbRoundLabel}</label>
+                            <div style={{ display:'flex', border:'1px solid var(--line)', borderRadius:9, overflow:'hidden' }}>
+                                {[['0','€0,01'],['1','1€'],['5','5€']].map(([k,lbl]) => (
+                                    <button key={k} onClick={()=>setRound(k)} style={{ cursor:'pointer', background: round===k?'var(--lime)':'rgba(255,255,255,.04)', color: round===k?'#0b0e17':'var(--text-2)', border:'none', padding:'8px 12px', fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.74rem' }}>{lbl}</button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
-                    <p style={{ fontFamily:'var(--font-mono)', fontSize:'.72rem', color:'var(--muted)', margin:'-12px 0 22px', lineHeight:1.5, maxWidth:680 }}>{mode==='even'?t.arbModeEvenHint:t.arbModeCoverHint}</p>
 
                     {arbs.length > 0 ? (
                         <div className="grid grid--3">{arbs.map(a => <ArbCard key={a.m.id} a={a} isArb />)}</div>
