@@ -195,14 +195,19 @@ window.findArbs = function (matches) {
         if (!m.odds) return;
         const keys = ['home','draw','away'].filter(k => m.odds[k] && Object.keys(m.odds[k]).length);
         if (keys.length < 2) return;                       // need at least 2 outcomes priced
+        let suspicious = false;
         const legs = keys.map(k => {
             const all = m.odds[k];
-            const best = window.bestPrice(all);            // TRUE best price (where you'd place it)
             const vals = Object.values(all).sort((a,b)=>a-b);
             const n = vals.length;
             const med = n ? (n%2 ? vals[(n-1)/2] : (vals[n/2-1]+vals[n/2])/2) : 0;
-            const suspicious = med && best.price > med * 1.6;   // outlier → maybe a bookmaker error
-            return { k, book: best.book, price: best.price, suspicious };
+            // mejor cuota IGNORANDO outliers (>1.5× la mediana = casi seguro cuota errónea/vieja)
+            let best = null;
+            for (const b in all){ const p=all[b]; if(med && p>med*1.5) continue; if(!best||p>best.price) best={book:b,price:p}; }
+            if (!best) best = window.bestPrice(all);
+            const out = Object.values(all).some(p=>med && p>med*1.5);   // había alguna cuota disparada
+            if (out) suspicious = true;
+            return { k, book: best.book, price: best.price };
         });
         const inv = legs.reduce((s,l)=> s + 1/l.price, 0);
         const marginPct = (1 - inv) * 100;                 // >0 → guaranteed profit
@@ -210,9 +215,10 @@ window.findArbs = function (matches) {
         out.push({
             m, legs, inv, marginPct,
             distinctBooks,
-            sameBook: distinctBooks < 2,                   // info: all best prices at one book (rare)
-            hasArb: marginPct > 0.01,                      // a positive margin IS a surebet
-            suspicious: legs.some(l=>l.suspicious),
+            sameBook: distinctBooks < 2,
+            // surebet real solo si margen creíble (0–12%) y sin cuotas-error. >12% = dato malo.
+            hasArb: marginPct > 0.01 && marginPct < 12 && !suspicious,
+            suspicious,
         });
     });
     return out.sort((a,b)=> b.marginPct - a.marginPct);
@@ -325,6 +331,23 @@ window.recordSummary = function () {
         staked,
     };
 };
+/* COMBINADAS — resumen del historial (ganadas/falladas, profit a 1u por combi) */
+window.comboSummary = function () {
+    const c = (window.COMBO_RECORD || []).filter(x => x && x.result);
+    let staked = 0, ret = 0, w = 0, l = 0;
+    c.forEach(x => {
+        if (x.result === 'V') return;                 // anulada → no cuenta
+        staked += 1;
+        if (x.result === 'W') { ret += (+x.totalOdd || 0); w++; } else { l++; }
+    });
+    const profit = ret - staked;
+    return {
+        n: c.length, w, l,
+        winRate: (w+l) ? Math.round(w/(w+l)*100) : 0,
+        profit: +profit.toFixed(2),
+        roi: staked ? +((profit/staked)*100).toFixed(1) : 0,
+    };
+};
 /* SIN RIESGO — historial de surebets (beneficio garantizado a 100€ de referencia) */
 if (!Array.isArray(window.ARB_RECORD)) window.ARB_RECORD = [
   { date:'02 JUN', match:'Sevilla – Betis', marginPct:1.80, profit:1.80,
@@ -427,7 +450,7 @@ window.I18N = {
         roi:'ROI', profit:'Beneficio', winRate:'% Acierto', totalPicks:'Picks totales', avgOdd:'Cuota media', units:'u',
         pendingTitle:'Nuestras selecciones · en juego', pendingLead:'Picks que ya hemos publicado y están a la espera de resultado. Quedan registrados aquí con su cuota antes de empezar el partido — transparencia total.', pendingEmpty:'Ahora mismo no hay selecciones pendientes. Vuelve cuando publiquemos el próximo pick.', statusPending:'EN JUEGO',
         colDate:'Fecha', colPick:'Pick', colMatch:'Partido', colOdd:'Cuota', colBook:'Casa', colResult:'Resultado', colProfit:'Beneficio',
-        comboRecTitle:'Combinadas resueltas', comboRecLead:'Cada combinada que publicamos queda registrada cuando se juegan todos sus partidos. Solo gana si aciertan TODAS las selecciones.',
+        comboRecTitle:'Combinadas resueltas', comboRecLead:'Cada combinada que publicamos queda registrada cuando se juegan todos sus partidos. Solo gana si aciertan TODAS las selecciones.', comboRecRoi:'ROI combis', comboRecProfit:'Beneficio', comboRecN:'Combis (G-F)',
         arbRecTitle:'Historial sin riesgo', arbRecLead:'Cada apuesta sin riesgo (reparto «Igual») que detectamos queda registrada con su beneficio garantizado, calculado sobre 100€ de referencia.',
         arbRecN:'Surebets', arbRecProfit:'Beneficio acumulado', arbRecAvg:'Margen medio', arbRecMargin:'Margen',
         resW:'GANADA', resL:'FALLADA', resP:'NULA',
@@ -506,7 +529,7 @@ window.I18N = {
         roi:'ROI', profit:'Profit', winRate:'Win %', totalPicks:'Total picks', avgOdd:'Avg odds', units:'u',
         pendingTitle:'Our selections · live', pendingLead:'Picks we have already published and are awaiting the result. Logged here with their pre-match odds — full transparency.', pendingEmpty:'No pending selections right now. Check back when we post the next pick.', statusPending:'LIVE',
         colDate:'Date', colPick:'Pick', colMatch:'Match', colOdd:'Odds', colBook:'Book', colResult:'Result', colProfit:'Profit',
-        comboRecTitle:'Settled accumulators', comboRecLead:'Every acca we publish is logged once all its matches are played. It only wins if ALL legs come in.',
+        comboRecTitle:'Settled accumulators', comboRecLead:'Every acca we publish is logged once all its matches are played. It only wins if ALL legs come in.', comboRecRoi:'Acca ROI', comboRecProfit:'Profit', comboRecN:'Accas (W-L)',
         arbRecTitle:'No-risk history', arbRecLead:'Every no-risk bet we catch is logged with its guaranteed profit (on a 100€ reference stake).',
         arbRecN:'Surebets', arbRecProfit:'Total profit', arbRecAvg:'Avg margin', arbRecMargin:'Margin',
         resW:'WON', resL:'LOST', resP:'VOID',
