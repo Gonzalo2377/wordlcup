@@ -2814,29 +2814,6 @@
   ],
   "ARB_RECORD": [
     {
-      "date": "12 JUN",
-      "match": "Corea del Sur – República Checa",
-      "marginPct": 39.66,
-      "profit": 65.73,
-      "legs": [
-        {
-          "pick": "Gana Corea del Sur",
-          "odd": 6.8,
-          "book": "marathonbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.15,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana República Checa",
-          "odd": 7.2,
-          "book": "marathonbet"
-        }
-      ]
-    },
-    {
       "date": "11 JUN",
       "match": "México – South Africa",
       "marginPct": 0.7,
