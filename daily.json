@@ -3222,29 +3222,6 @@
   ],
   "ARB_RECORD": [
     {
-      "date": "12 JUN",
-      "match": "Canadá – Bosnia y H.",
-      "marginPct": 46.6,
-      "profit": 87.26,
-      "legs": [
-        {
-          "pick": "Gana Canadá",
-          "odd": 6.45,
-          "book": "marathonbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.7,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Bosnia y H.",
-          "odd": 9.2,
-          "book": "marathonbet"
-        }
-      ]
-    },
-    {
       "date": "13 JUN",
       "match": "Estados Unidos – Paraguay",
       "marginPct": 0.1,
