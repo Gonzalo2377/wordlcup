@@ -34,7 +34,7 @@ export async function readToken(token, secret) {
     const expected = await hmac(`${plan}.${exp}`, secret);
     if (sig !== expected) return 'free';                 // tampered
     if (parseInt(exp, 10) * 1000 < Date.now()) return 'free'; // expired
-    return (plan === 'all' || plan === 'single') ? plan : 'free';
+    return (plan === 'all' || plan === 'single' || plan === 'ladder') ? plan : 'free';
 }
 
 export function getCookie(request, name) {

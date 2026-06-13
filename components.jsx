@@ -130,6 +130,7 @@ function Nav({ t, lang, setLang, route, go }) {
     const links = [
         ['value', t.navValue, Icon.target],
         ['combos', t.navCombos, Icon.layers],
+        ['reto', t.navReto, Icon.bolt],
         ['arb', t.navArb, Icon.scale],
         ['record', t.navRecord, Icon.chart],
         ['how', t.navHow, Icon.book],
@@ -179,6 +180,7 @@ function MobileNav({ t, route, go }) {
     const items = [
         ['value', t.navValue, Icon.target],
         ['combos', t.navCombos, Icon.layers],
+        ['reto', t.navReto, Icon.bolt],
         ['arb', t.navArb, Icon.scale],
         ['record', t.navRecord, Icon.chart],
     ];

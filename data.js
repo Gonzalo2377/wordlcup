@@ -355,6 +355,22 @@ if (!Array.isArray(window.ARB_RECORD)) window.ARB_RECORD = [
   { date:'01 JUN', match:'Arsenal – PSG', marginPct:1.20, profit:1.20,
     legs:[ {pick:'Gana Arsenal', odd:2.45, book:'pinnacle'}, {pick:'Empate', odd:3.50, book:'unibet'}, {pick:'Gana PSG', odd:3.10, book:'bet365'} ] },
 ];
+/* ============================================================
+   RETO ESCALERA — banca 10€ → meta 250€ en ~10 peldaños.
+   ============================================================ */
+window.LADDER = window.LADDER || {
+  id:'L1', start:10, target:250, steps:10, current:3, status:'live', bank:27.44,
+  rungs:[
+    { n:1, match:'Real Madrid – Getafe', pick:'Gana Real Madrid', odd:1.30, book:'bet365', bank:13.00, result:'W' },
+    { n:2, match:'Bayern – Augsburgo', pick:'Gana Bayern', odd:1.36, book:'betfair', bank:17.68, result:'W' },
+    { n:3, match:'Man City – Burnley', pick:'Gana Man City', odd:1.33, book:'winamax', bank:23.51, result:'W' },
+    { n:4, match:null, pick:null, odd:null, book:null, bank:null, result:'today' },
+    { n:5 }, { n:6 }, { n:7 }, { n:8 }, { n:9 }, { n:10 },
+  ],
+};
+window.LADDER_HISTORY = window.LADDER_HISTORY || [
+  { id:'L0', start:10, target:250, brokeAt:6, reached:53.7, result:'broken', date:'28 MAY' },
+];
 window.arbSummary = function () {
     const a = window.ARB_RECORD || [];
     const profit = a.reduce((s,x)=> s + (+x.profit||0), 0);
@@ -391,7 +407,14 @@ window.DAILY = {
 window.I18N = {
     es: {
         brandSub:'VALOR · FÚTBOL',
-        navToday:'Hoy', navValue:'Valor', navCombos:'Combinadas', navRecord:'Récord', navHow:'Cómo funciona', navArb:'Sin Riesgo',
+        navToday:'Hoy', navValue:'Valor', navCombos:'Combinadas', navRecord:'Récord', navHow:'Cómo funciona', navArb:'Sin Riesgo', navReto:'Reto',
+        ladEyebrow:'RETO ESCALERA · PREMIUM', ladTitle:'El Reto 10 → 250',
+        ladLead:'Cada día, el pick más claro (cuota baja) para multiplicar la banca peldaño a peldaño. De 10€ a 250€ en 10 días. Si la escalera cae, empezamos otra sin coste — sigues suscrito hasta que se complete una.',
+        ladStep:'Peldaño', ladTodayLocked:'Pick de hoy bloqueado', ladSoon:'Pick disponible pronto',
+        ladCtaTitle:'Desbloquea el Reto · 2,49€/mes', ladCtaLead:'Recibe el pick de cada peldaño. Si la escalera se rompe, la siguiente va incluida. Cancela cuando quieras.',
+        ladCtaBtn:'Suscribirme · 2,49€/mes', ladCtaFine:'Pago seguro con Stripe · +18 · Juego responsable',
+        ladActive:'Suscripción activa — tienes el pick de cada peldaño',
+        ladHistTitle:'Escaleras anteriores', ladDone:'COMPLETADA', ladBroke:'Rota en peldaño',
         arbEyebrow:'BENEFICIO GARANTIZADO · GANE QUIEN GANE',
         arbTitle:'Apuestas sin riesgo',
         arbLead:'Apostando a TODOS los resultados de un partido (1, X y 2) —cada uno en la casa que mejor lo paga— recuperas lo mismo gane quien gane, incluido el empate. Solo ocurre cuando las casas discrepan lo suficiente. Aquí escaneamos cada partido en busca de esa diferencia.',
@@ -470,7 +493,14 @@ window.I18N = {
     },
     en: {
         brandSub:'VALUE · FOOTBALL',
-        navToday:'Today', navValue:'Value', navCombos:'Accas', navRecord:'Record', navHow:'How it works', navArb:'No-Risk',
+        navToday:'Today', navValue:'Value', navCombos:'Accas', navRecord:'Record', navHow:'How it works', navArb:'No-Risk', navReto:'Challenge',
+        ladEyebrow:'LADDER CHALLENGE · PREMIUM', ladTitle:'The 10 → 250 Challenge',
+        ladLead:'Each day, the clearest pick (low odds) to compound the bank rung by rung. From 10€ to 250€ in 10 days. If the ladder breaks, we start another at no cost — you stay subscribed until one completes.',
+        ladStep:'Rung', ladTodayLocked:'Today\u2019s pick locked', ladSoon:'Pick available soon',
+        ladCtaTitle:'Unlock the Challenge · 2.49€/mo', ladCtaLead:'Get the pick for every rung. If the ladder breaks, the next one is included. Cancel anytime.',
+        ladCtaBtn:'Subscribe · 2.49€/mo', ladCtaFine:'Secure payment with Stripe · 18+ · Gamble responsibly',
+        ladActive:'Subscription active — you get every rung\u2019s pick',
+        ladHistTitle:'Previous ladders', ladDone:'COMPLETED', ladBroke:'Broke at rung',
         arbEyebrow:'GUARANTEED PROFIT · WHOEVER WINS',
         arbTitle:'No-risk bets',
         arbLead:'By backing EVERY outcome of a match (home, draw and away) —each at the bookmaker paying it best— you get the same return whoever wins, draw included. It only happens when bookmakers disagree enough. Here we scan every match for that gap.',

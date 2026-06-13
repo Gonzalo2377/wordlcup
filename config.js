@@ -45,4 +45,7 @@ window.MV_CONFIG = {
        Para salir del modo dueño:  https://golvalue.online/?dueno=salir
        👉 CAMBIA esta clave por una tuya y vuelve a subir config.js. */
     ownerKey: 'golvalue2026',
+
+    /* RETO ESCALERA: modo dueño con  ?reto=TU_CLAVE  para verlo sin pagar. */
+    ladderKey: 'golreto2026',
 };

@@ -55,6 +55,7 @@ function App() {
         case 'match':   view = <MatchPage t={t} go={go} id={route.id} lang={lang} />; break;
         case 'combos':
         case 'premium': view = <Premium t={t} go={go} />; break;
+        case 'reto':    view = <Ladder t={t} go={go} />; break;
         case 'record':  view = <Record t={t} go={go} />; break;
         case 'arb':     view = <Arbitrage t={t} go={go} lang={lang} />; break;
         case 'how':     view = <How t={t} go={go} />; break;
@@ -87,6 +88,8 @@ const CACHE_MS = (CFG.cacheHours != null ? CFG.cacheHours : 12) * 3600 * 1000;
 
 function applyDaily(d) {
     if (!d) return false;
+    if (d.LADDER) window.LADDER = d.LADDER;
+    if (Array.isArray(d.LADDER_HISTORY)) window.LADDER_HISTORY = d.LADDER_HISTORY;
     if (d.TEAMS)   window.TEAMS   = d.TEAMS;
     if (d.BOOKS)   window.BOOKS   = d.BOOKS;
     if (d.MATCHES) window.MATCHES = d.MATCHES;
@@ -146,9 +149,13 @@ function handleUnlockRedirect() {
         const ph = new URLSearchParams(fromHash);
         const get = (k) => p.get(k) || ph.get(k);
         const u = get('unlocked');
-        if (u === 'single' || u === 'all') {
+        if (u === 'single' || u === 'all' || u === 'ladder') {
             localStorage.setItem('mv_plan', u);
         }
+        // MODO DUEÑO del reto: ?reto=CLAVE desbloquea la escalera solo en tu navegador
+        const reto = (p.get('reto')||'').trim().toLowerCase();
+        const lkey = ((window.MV_CONFIG && window.MV_CONFIG.ladderKey) || '').trim().toLowerCase();
+        if (reto) { if (reto==='salir') localStorage.removeItem('mv_ladder'); else if (lkey && reto===lkey) localStorage.setItem('mv_ladder','1'); }
         // OWNER MODE: ?dueno=CLAVE unlocks everything locally; ?dueno=salir exits.
         const owner = (get('dueno') || get('owner') || '').trim().toLowerCase();
         const key = ((window.MV_CONFIG && window.MV_CONFIG.ownerKey) || '').trim().toLowerCase();
@@ -161,6 +168,7 @@ function handleUnlockRedirect() {
             history.replaceState({}, '', location.pathname + cleanHash);
         }
         if (localStorage.getItem('mv_owner') === '1') { window.MV_OWNER = true; window.MV_PLAN = 'all'; localStorage.setItem('mv_plan', 'all'); }
+        if (localStorage.getItem('mv_ladder') === '1') { window.MV_LADDER = true; }
     } catch (e) {}
 }
 

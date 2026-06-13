@@ -14,12 +14,14 @@ export async function onRequestPost(context) {
     let tier = 'single';
     try { tier = (await request.json()).tier || 'single'; } catch (e) {}
 
-    const price = tier === 'all' ? env.STRIPE_PRICE_ALL : env.STRIPE_PRICE_SINGLE;
+    const price = tier === 'ladder' ? env.STRIPE_PRICE_LADDER
+                : tier === 'all'    ? env.STRIPE_PRICE_ALL
+                :                     env.STRIPE_PRICE_SINGLE;
     if (!price) return json({ error: 'price_not_configured' }, 500);
 
     const origin = new URL(request.url).origin;
     const body = new URLSearchParams();
-    body.set('mode', tier === 'all' ? 'subscription' : 'payment');
+    body.set('mode', (tier === 'all' || tier === 'ladder') ? 'subscription' : 'payment');
     body.set('line_items[0][price]', price);
     body.set('line_items[0][quantity]', '1');
     body.set('allow_promotion_codes', 'true');

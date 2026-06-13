@@ -21,13 +21,28 @@ export async function onRequestGet(context) {
     let plan = 'free', ttl = 0;
     const paid = s && (s.payment_status === 'paid' || s.status === 'complete');
     if (paid) {
-        if (s.mode === 'subscription') { plan = 'all';    ttl = 60 * 60 * 24 * 31; }  // ~1 month, re-checked on renewal
-        else                          { plan = 'single';  ttl = 60 * 60 * 24 * 3; }   // acca of the day: 3 days
+        if (s.mode === 'subscription') {
+            // distingue reto escalera de "todas las combis" por el precio comprado
+            const priceId = s.line_items && s.line_items.data && s.line_items.data[0] && s.line_items.data[0].price && s.line_items.data[0].price.id;
+            plan = (env.STRIPE_PRICE_LADDER && priceId === env.STRIPE_PRICE_LADDER) ? 'ladder' : 'all';
+            ttl = 60 * 60 * 24 * 31;
+        }
+        else { plan = 'single'; ttl = 60 * 60 * 24 * 3; }
     }
     if (plan === 'free') return Response.redirect(home, 302);
+    // re-pide la sesión con line_items expandido para saber el precio (fiable)
+    if (s.mode === 'subscription' && env.STRIPE_PRICE_LADDER) {
+        try {
+            const r2 = await fetch(`https://api.stripe.com/v1/checkout/sessions/${sid}?expand[]=line_items`, { headers:{ 'Authorization':`Bearer ${env.STRIPE_SECRET_KEY}` } });
+            const s2 = await r2.json();
+            const pid = s2.line_items && s2.line_items.data && s2.line_items.data[0] && s2.line_items.data[0].price && s2.line_items.data[0].price.id;
+            plan = (pid === env.STRIPE_PRICE_LADDER) ? 'ladder' : 'all';
+        } catch(e){}
+    }
 
     const token = await makeToken(plan, ttl, env.AUTH_SECRET);
-    const headers = new Headers({ 'Location': `${url.origin}/?unlocked=${plan}#/premium` });
+    const dest = plan==='ladder' ? 'reto' : 'premium';
+    const headers = new Headers({ 'Location': `${url.origin}/?unlocked=${plan}#/${dest}` });
     headers.append('Set-Cookie', `mv_access=${token}; Path=/; Max-Age=${ttl}; HttpOnly; Secure; SameSite=Lax`);
     return new Response(null, { status: 302, headers });
 }

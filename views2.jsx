@@ -370,7 +370,88 @@ function How({ t, go }) {
     );
 }
 
-Object.assign(window, { Premium, Record, How, ComboCard, EquityCurve, Arbitrage });
+Object.assign(window, { Premium, Record, How, ComboCard, EquityCurve, Arbitrage, Ladder });
+
+/* ============================================================
+   RETO ESCALERA (fútbol)
+   ============================================================ */
+function Ladder({ t, go }) {
+    const L = window.LADDER || { rungs:[], start:10, target:250, steps:10, current:0, status:'live', bank:10 };
+    const hist = window.LADDER_HISTORY || [];
+    const unlocked = (window.MV_LADDER === true || window.MV_PLAN === 'ladder' || window.MV_PLAN === 'all' || window.MV_OWNER === true);
+    const [busy, setBusy] = useState(false);
+    const pct = Math.round((L.current / (L.steps||10)) * 100);
+    const subscribe = async () => {
+        setBusy(true);
+        try {
+            const r = await fetch('/api/checkout', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ tier:'ladder' }) });
+            const j = await r.json();
+            if (j.url) location.href = j.url; else { alert(j.error==='backend_not_configured'?'Pagos aún no configurados.':(j.error||'Error')); setBusy(false); }
+        } catch(e){ alert('Error de conexión'); setBusy(false); }
+    };
+    return (
+        <main><section className="section"><div className="wrap">
+            <div className="section__head">
+                <div><span className="eyebrow"><span className="dot" />{t.ladEyebrow}</span><h2 className="section__title">{t.ladTitle}</h2></div>
+                <span className="tag tag--lime">{L.start}€ → {L.target}€</span>
+            </div>
+            <p style={{ color:'var(--text-2)', maxWidth:680, margin:'-6px 0 18px', lineHeight:1.6 }}>{t.ladLead}</p>
+            <div className="panel panel--pad" style={{ marginBottom:20 }}>
+                <div style={{ display:'flex', justifyContent:'space-between', alignItems:'baseline', marginBottom:10 }}>
+                    <span style={{ fontFamily:'var(--font-mono)', fontSize:'.72rem', color:'var(--muted)', textTransform:'uppercase', letterSpacing:'.1em' }}>{t.ladStep} {L.current}/{L.steps}</span>
+                    <span style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.4rem', color:'var(--lime)' }}>{(L.bank||L.start).toFixed(2)}€</span>
+                </div>
+                <div style={{ height:10, borderRadius:99, background:'rgba(255,255,255,.06)', overflow:'hidden' }}>
+                    <div style={{ height:'100%', width:pct+'%', background:'linear-gradient(90deg,var(--lime-dim),var(--lime))', borderRadius:99 }} />
+                </div>
+            </div>
+            <div className="panel" style={{ overflow:'hidden' }}>
+                {L.rungs.map((r,i)=>{
+                    const done=r.result==='W', lost=r.result==='L', today=r.result==='today', future=!r.result;
+                    const locked = today && !unlocked;
+                    return (
+                        <div key={i} style={{ display:'flex', alignItems:'center', gap:12, padding:'13px 16px', borderBottom: i<L.rungs.length-1?'1px solid var(--line-soft)':'none', background: today?'rgba(246,196,67,.06)':'transparent', opacity: future?0.5:1 }}>
+                            <span style={{ width:30, height:30, borderRadius:'50%', flexShrink:0, display:'grid', placeItems:'center', fontFamily:'var(--font-head)', fontWeight:800, fontSize:'.85rem', background: done?'var(--green)':lost?'var(--red)':today?'var(--lime)':'rgba(255,255,255,.06)', color: today?'#0b0e17':(done||lost)?'#fff':'var(--muted)' }}>{done?'✓':lost?'✗':r.n}</span>
+                            <div style={{ flex:1, minWidth:0 }}>
+                                {locked ? <div style={{ fontFamily:'var(--font-head)', fontWeight:700, color:'var(--lime)' }}>🔒 {t.ladTodayLocked}</div>
+                                 : today ? <div><div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.95rem' }}>{r.pick||t.ladSoon}</div>{r.match && <div className="vb-time">{r.match}</div>}</div>
+                                 : (done||lost) ? <div><div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.92rem', textDecoration: lost?'line-through':'none', color: lost?'var(--muted)':'var(--text)' }}>{r.pick}</div><div className="vb-time">{r.match}</div></div>
+                                 : <div style={{ fontFamily:'var(--font-mono)', fontSize:'.8rem', color:'var(--muted)' }}>{t.ladStep} {r.n}</div>}
+                            </div>
+                            <div style={{ textAlign:'right', whiteSpace:'nowrap' }}>
+                                {r.odd && (locked ? <span style={{ filter:'blur(5px)', fontFamily:'var(--font-mono)', fontWeight:700 }}>1.30</span> : <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, color:'var(--lime)' }}>{r.odd.toFixed(2)}</span>)}
+                                {r.bank!=null && <div className="vb-time">{r.bank.toFixed(2)}€</div>}
+                            </div>
+                        </div>
+                    );
+                })}
+            </div>
+            {!unlocked && (
+                <div className="panel panel--pad" style={{ marginTop:20, textAlign:'center', border:'2px solid var(--lime)' }}>
+                    <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.3rem', marginBottom:6 }}>{t.ladCtaTitle}</div>
+                    <p style={{ color:'var(--text-2)', maxWidth:460, margin:'0 auto 14px', lineHeight:1.55 }}>{t.ladCtaLead}</p>
+                    <button className="btn btn--lime" onClick={subscribe} disabled={busy} style={{ fontSize:'1.05rem', padding:'13px 26px' }}>{busy?'…':t.ladCtaBtn}</button>
+                    <div style={{ fontFamily:'var(--font-mono)', fontSize:'.68rem', color:'var(--muted)', marginTop:10 }}>{t.ladCtaFine}</div>
+                </div>
+            )}
+            {unlocked && <div style={{ marginTop:14, fontFamily:'var(--font-mono)', fontSize:'.72rem', color:'var(--green)', textAlign:'center' }}>✅ {t.ladActive}</div>}
+            {hist.length>0 && (
+                <div style={{ marginTop:30 }}>
+                    <span className="eyebrow muted"><span className="dot" />{t.ladHistTitle}</span>
+                    <div className="grid grid--2" style={{ marginTop:14 }}>
+                        {hist.map((h,i)=>(
+                            <div className="panel panel--pad" key={i} style={{ display:'flex', justifyContent:'space-between', alignItems:'center' }}>
+                                <div><div style={{ fontFamily:'var(--font-head)', fontWeight:700 }}>{h.start}€ → {h.target}€</div><div className="vb-time">{h.date}</div></div>
+                                <span className={'res-pill '+(h.result==='completed'?'w':'l')}>{h.result==='completed'?t.ladDone:`${t.ladBroke} ${h.brokeAt} · ${h.reached}€`}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            <div className="disclaimer" style={{ marginTop:24 }}><b>{t.discTitle}</b> {t.disc}</div>
+        </div></section><Footer t={t} go={go} /></main>
+    );
+}
 
 /* ============================================================
    ARBITRAJES / SUREBETS
