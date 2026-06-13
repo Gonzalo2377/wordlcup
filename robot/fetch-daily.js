@@ -573,8 +573,8 @@ async function main(){
     pushCombo({ id:'c4', tier:'all', name:'Combinada Larga' }, merge(surePool, safePool), 4);
 
     // ---- track record: read previous state, settle finished picks + combos ----
-    let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [], ARB_RECORD = [], ARB_PENDING = [];
-    try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; COMBO_PENDING = prev.COMBO_PENDING || []; COMBO_RECORD = prev.COMBO_RECORD || []; ARB_RECORD = prev.ARB_RECORD || []; ARB_PENDING = prev.ARB_PENDING || []; } catch (e) {}
+    let RECORD = [], PENDING = [], COMBO_PENDING = [], COMBO_RECORD = [], ARB_RECORD = [], ARB_PENDING = [], LADDER = null, LADDER_HISTORY = [];
+    try { const prev = JSON.parse(fs.readFileSync(OUT,'utf8')); RECORD = prev.RECORD || []; PENDING = prev.PENDING || []; COMBO_PENDING = prev.COMBO_PENDING || []; COMBO_RECORD = prev.COMBO_RECORD || []; ARB_RECORD = prev.ARB_RECORD || []; ARB_PENDING = prev.ARB_PENDING || []; LADDER = prev.LADDER || null; LADDER_HISTORY = prev.LADDER_HISTORY || []; } catch (e) {}
 
     // MIGRATION: older versions accidentally mixed combo-shaped entries into RECORD.
     // Move anything with `legs` (a combo) out of RECORD into COMBO_RECORD, and keep
@@ -597,6 +597,7 @@ async function main(){
     COMBO_PENDING = dedupBy(COMBO_PENDING, comboKey);
     ARB_RECORD    = dedupBy(ARB_RECORD, arbKey);
     ARB_PENDING   = dedupBy(ARB_PENDING, arbKey);
+    let ladderScores = [];
     try {
         // query scores for any competition with a pending single pick OR combo leg (saves credits)
         const need = [...new Set([
@@ -606,6 +607,7 @@ async function main(){
         ].filter(Boolean))];
         if (need.length) {
             const scores = await fetchScores(need);
+            ladderScores = scores;
             const out = settle(PENDING, scores, RECORD);
             PENDING = out.stillPending; RECORD = out.RECORD;
             const cout = settleCombos(COMBO_PENDING, scores, COMBO_RECORD);
@@ -623,6 +625,46 @@ async function main(){
 
     // ---- snapshot TODAY's combos so we can settle them later (once per day per combo) ----
     const today = fmtDay(new Date().toISOString());
+
+    // ---- RETO ESCALERA: liquida el peldaño de hoy y genera el siguiente ----
+    try {
+        const LAD_START=10, LAD_TARGET=250, LAD_STEPS=10;
+        const sk=(s)=>(s||'').trim().split(/\s+/).pop().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
+        // pares de partidos terminados con su ganador (de las puntuaciones liquidadas en este run)
+        const finishedPairs=[];
+        try { (ladderScores||[]).forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) finishedPairs.push({a:sk(s.home_team),b:sk(s.away_team),w:sk(side==='home'?s.home_team:s.away_team)}); }); } catch(e){}
+        const resolvePick=(matchStr,pickName)=>{
+            const nm=(matchStr||'').split('–').map(s=>sk(s)); if(nm.length<2) return null;
+            const f=finishedPairs.find(v=>(v.a===nm[0]&&v.b===nm[1])||(v.a===nm[1]&&v.b===nm[0]));
+            if(!f) return null; return f.w===sk((pickName||'').replace(/^Gana\s+/i,''));
+        };
+        if(!LADDER) LADDER={ id:'L'+Date.now().toString(36), start:LAD_START, target:LAD_TARGET, steps:LAD_STEPS, current:0, status:'live', bank:LAD_START, rungs:[] };
+        const todayRung=LADDER.rungs.find(r=>r.result==='today');
+        if(todayRung){
+            const res=resolvePick(todayRung.match, todayRung.pick);
+            if(res===true){ todayRung.result='W'; LADDER.current++; LADDER.bank=todayRung.bank; }
+            else if(res===false){ todayRung.result='L'; LADDER_HISTORY.unshift({ id:LADDER.id, start:LADDER.start, target:LADDER.target, brokeAt:todayRung.n, reached:+((LADDER.bank)||LADDER.start).toFixed(2), result:'broken', date:todayRung.date||today }); LADDER=null; }
+        }
+        if(LADDER && LADDER.current>=LADDER.steps){ LADDER_HISTORY.unshift({ id:LADDER.id, start:LADDER.start, target:LADDER.target, reached:+LADDER.bank.toFixed(2), result:'completed', date:today }); LADDER=null; }
+        if(!LADDER) LADDER={ id:'L'+Date.now().toString(36), start:LAD_START, target:LAD_TARGET, steps:LAD_STEPS, current:0, status:'live', bank:LAD_START, rungs:[] };
+        // genera el peldaño de HOY: el pick MÁS CLARO (favorito del modelo, cuota baja). Si no hay → esperamos a mañana.
+        const hasToday=LADDER.rungs.some(r=>r.result==='today');
+        if(!hasToday && LADDER.current<LADDER.steps){
+            const cand=MATCHES.map(m=>{ const v=matchValue(m); const k=v.pick&&v.pick.k; if(!k||k==='draw') return null; const best=v.pick.best; return {m,k,prob:v.pick.modelP,odd:best.price,book:best.book}; })
+                .filter(c=> c && c.odd>=1.18 && c.odd<=1.55 && c.prob>=0.66 && new Date(c.m._commence).getTime()>Date.now()+30*60*1000)
+                .sort((a,b)=> a.odd-b.odd);
+            const pick=cand[0];
+            if(pick){
+                const stepN=LADDER.current+1; const newBank=+((LADDER.bank||LADDER.start)*pick.odd).toFixed(2);
+                LADDER.rungs=LADDER.rungs.filter(r=>r.result==='W'||r.result==='L');
+                LADDER.rungs.push({ n:stepN, match:`${TEAMS[pick.m.home].name} – ${TEAMS[pick.m.away].name}`, pick:`Gana ${TEAMS[pick.k==='home'?pick.m.home:pick.m.away].name}`, odd:+pick.odd.toFixed(2), book:pick.book, bank:newBank, result:'today', date:today });
+                for(let i=stepN+1;i<=LADDER.steps;i++) LADDER.rungs.push({ n:i });
+            } else { console.log('· reto escalera: sin pick claro hoy, esperamos a mañana'); }
+        }
+        LADDER_HISTORY=LADDER_HISTORY.slice(0,12);
+        console.log(`· reto escalera: peldaño ${LADDER.current}/${LADDER.steps} · banca ${(LADDER.bank||LADDER.start).toFixed(2)}€`);
+    } catch(e){ console.log('· reto escalera error:', e.message); }
+
     const haveCombo = new Set(COMBO_PENDING.map(c=>c.dayId).concat(COMBO_RECORD.map(c=>c.dayId)));
     const haveComboSig = new Set([...COMBO_PENDING, ...COMBO_RECORD].map(comboKey));
     COMBOS.forEach(c => {
@@ -712,7 +754,7 @@ async function main(){
             matches:keepMatches.length, valuePicks:valued.length, books:Object.keys(keepBooks).length,
             stale, credits: { remaining: CREDITS.remaining, used: CREDITS.used },
         },
-        TEAMS:keepTeams, BOOKS:keepBooks, MATCHES:keepMatches, COMBOS:keepCombos, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD, ARB_RECORD, ARB_PENDING,
+        TEAMS:keepTeams, BOOKS:keepBooks, MATCHES:keepMatches, COMBOS:keepCombos, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD, ARB_RECORD, ARB_PENDING, LADDER, LADDER_HISTORY,
     };
     fs.writeFileSync(OUT, JSON.stringify(daily, null, 2));
     console.log(`✓ wrote ${OUT}\n  ${MATCHES.length} football matches · ${valued.length} value picks · ${Object.keys(BOOKS).length} books · ${COMBOS.length} accas · ${RECORD.length} en récord · ${PENDING.length} pendientes · ${COMBO_RECORD.length} combis resueltas · ${COMBO_PENDING.length} combis en juego`);
