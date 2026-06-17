@@ -39,6 +39,8 @@ const REGIONS = process.env.ODDS_REGIONS || 'eu';   // eu|uk|us|au (comma-sep). 
 const MARKET  = 'h2h';                               // match winner (1X2)
 // Optional whitelist of bookmakers (base ids, comma-sep), e.g. "bet365,betfair,winamax,williamhill,pinnacle".
 const BOOK_WHITELIST = (process.env.ODDS_BOOKS || '').split(',').map(s => s.trim()).filter(Boolean);
+// Casas excluidas siempre (cuotas raras/distorsionan): Marathon, etc. Editable con ODDS_BOOKS_EXCLUDE.
+const BOOK_BLACKLIST = (process.env.ODDS_BOOKS_EXCLUDE || 'marathonbet,marathon').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
 // Only include matches kicking off within this many hours (today + tomorrow).
 // Keeps the board focused on imminent fixtures and excludes far-future events
 // like the World Cup until it's actually here. Override with ODDS_WINDOW_HOURS.
@@ -416,7 +418,8 @@ async function scoresOnly(){
     let d;
     try { d = JSON.parse(fs.readFileSync(OUT,'utf8')); } catch(e){ console.log('· scores-only: no hay daily.json, nada que liquidar'); return; }
     let RECORD=d.RECORD||[], PENDING=d.PENDING||[], COMBO_RECORD=d.COMBO_RECORD||[], COMBO_PENDING=d.COMBO_PENDING||[], ARB_RECORD=d.ARB_RECORD||[], ARB_PENDING=d.ARB_PENDING||[];
-    const need=[...new Set([...PENDING.map(p=>p.sport), ...COMBO_PENDING.flatMap(c=>c.legs.map(l=>l.sport)), ...ARB_PENDING.map(p=>p.sport)].filter(Boolean))];
+    const ladderRung = d.LADDER && Array.isArray(d.LADDER.rungs) ? d.LADDER.rungs.find(r=>r.result==='today') : null;
+    const need=[...new Set([...PENDING.map(p=>p.sport), ...COMBO_PENDING.flatMap(c=>c.legs.map(l=>l.sport)), ...ARB_PENDING.map(p=>p.sport), (ladderRung?(ladderRung.sport||'soccer_fifa_world_cup'):null)].filter(Boolean))];
     if(!need.length){ console.log('· scores-only: no hay nada pendiente'); return; }
     let settled=0;
     try {
@@ -425,6 +428,21 @@ async function scoresOnly(){
         const c=settleCombos(COMBO_PENDING,scores,COMBO_RECORD); COMBO_PENDING=c.still; COMBO_RECORD=c.RECORD;
         const byId={}; scores.forEach(s=>{ if(s&&s.id) byId[s.id]=s; });
         const aStill=[]; ARB_PENDING.forEach(a=>{ if(!winnerOf(byId[a.id])){ aStill.push(a); return; } ARB_RECORD.unshift({date:a.date,match:a.match,marginPct:a.marginPct,profit:a.profit,legs:a.legs}); settled++; }); ARB_PENDING=aStill;
+        // RETO ESCALERA: liquidar SOLO el peldaño de hoy (no genera el siguiente — eso lo hace el run de cuotas)
+        if (ladderRung && d.LADDER){
+            const fin=[]; scores.forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) fin.push({a:sk(s.home_team),b:sk(s.away_team),w:sk(side==='home'?s.home_team:s.away_team)}); });
+            const nm=(ladderRung.match||'').split('–').map(x=>sk(x));
+            const f=nm.length>=2?fin.find(v=>(v.a===nm[0]&&v.b===nm[1])||(v.a===nm[1]&&v.b===nm[0])):null;
+            if(f){
+                const won=f.w===sk((ladderRung.pick||'').replace(/^Gana\s+/i,''));
+                const LH=d.LADDER_HISTORY||[];
+                if(won){ ladderRung.result='W'; d.LADDER.current=(d.LADDER.current||0)+1; d.LADDER.bank=ladderRung.bank; }
+                else { ladderRung.result='L'; LH.unshift({id:d.LADDER.id,start:d.LADDER.start,target:d.LADDER.target,brokeAt:ladderRung.n,reached:+((d.LADDER.bank)||d.LADDER.start).toFixed(2),result:'broken',date:ladderRung.date||''}); d.LADDER=null; }
+                d.LADDER_HISTORY=LH.slice(0,12);
+                console.log('· reto escalera (scores): peldaño '+ladderRung.n+' → '+(won?'GANADO':'FALLADO'));
+                if(d.LADDER && d.LADDER.current>=d.LADDER.steps){ LH.unshift({id:d.LADDER.id,start:d.LADDER.start,target:d.LADDER.target,reached:+d.LADDER.bank.toFixed(2),result:'completed',date:''}); d.LADDER=null; d.LADDER_HISTORY=LH.slice(0,12); }
+            }
+        }
     } catch(e){ console.log('· scores-only: error', e.message); }
     d.RECORD=RECORD.slice(0,60); d.PENDING=PENDING; d.COMBO_RECORD=COMBO_RECORD.slice(0,40); d.COMBO_PENDING=COMBO_PENDING; d.ARB_RECORD=ARB_RECORD.slice(0,40); d.ARB_PENDING=ARB_PENDING;
     if(d.meta) d.meta.updatedAt=new Date().toISOString();
@@ -465,6 +483,7 @@ async function main(){
 
         for (const bk of (ev.bookmakers || [])) {
             const id = baseBook(bk.key);
+            if (BOOK_BLACKLIST.includes(id)) continue;          // casas que distorsionan (cuotas raras)
             if (BOOK_WHITELIST.length && !BOOK_WHITELIST.includes(id)) continue;
             const mkt = (bk.markets || []).find(x => x.key === 'h2h');
             if (!mkt) continue;
