@@ -3609,9 +3609,9 @@
     "start": 10,
     "target": 250,
     "steps": 10,
-    "current": 0,
+    "current": 1,
     "status": "live",
-    "bank": 10,
+    "bank": 14.30,
     "rungs": [
       {
         "n": 1,
@@ -3620,7 +3620,7 @@
         "odd": 1.43,
         "book": "betfair",
         "bank": 14.3,
-        "result": "today",
+        "result": "W",
         "date": "13 JUN"
       },
       {
