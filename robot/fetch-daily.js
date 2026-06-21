@@ -430,11 +430,12 @@ async function scoresOnly(){
         const aStill=[]; ARB_PENDING.forEach(a=>{ if(!winnerOf(byId[a.id])){ aStill.push(a); return; } ARB_RECORD.unshift({date:a.date,match:a.match,marginPct:a.marginPct,profit:a.profit,legs:a.legs}); settled++; }); ARB_PENDING=aStill;
         // RETO ESCALERA: liquidar SOLO el peldaño de hoy (no genera el siguiente — eso lo hace el run de cuotas)
         if (ladderRung && d.LADDER){
-            const fin=[]; scores.forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) fin.push({a:sk(s.home_team),b:sk(s.away_team),w:sk(side==='home'?s.home_team:s.away_team)}); });
-            const nm=(ladderRung.match||'').split('–').map(x=>sk(x));
+            const _sk2={};
+            const fin=[]; scores.forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) fin.push({a:resolveTeam(s.home_team,_sk2),b:resolveTeam(s.away_team,_sk2),w:resolveTeam(side==='home'?s.home_team:s.away_team,_sk2)}); });
+            const nm=(ladderRung.match||'').split('–').map(x=>resolveTeam(x.trim(),_sk2));
             const f=nm.length>=2?fin.find(v=>(v.a===nm[0]&&v.b===nm[1])||(v.a===nm[1]&&v.b===nm[0])):null;
             if(f){
-                const won=f.w===sk((ladderRung.pick||'').replace(/^Gana\s+/i,''));
+                const won=f.w===resolveTeam((ladderRung.pick||'').replace(/^Gana\s+/i,'').trim(),_sk2);
                 const LH=d.LADDER_HISTORY||[];
                 if(won){ ladderRung.result='W'; d.LADDER.current=(d.LADDER.current||0)+1; d.LADDER.bank=ladderRung.bank; }
                 else { ladderRung.result='L'; LH.unshift({id:d.LADDER.id,start:d.LADDER.start,target:d.LADDER.target,brokeAt:ladderRung.n,reached:+((d.LADDER.bank)||d.LADDER.start).toFixed(2),result:'broken',date:ladderRung.date||''}); d.LADDER=null; }
@@ -651,11 +652,12 @@ async function main(){
         const sk=(s)=>(s||'').trim().split(/\s+/).pop().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
         // pares de partidos terminados con su ganador (de las puntuaciones liquidadas en este run)
         const finishedPairs=[];
-        try { (ladderScores||[]).forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) finishedPairs.push({a:sk(s.home_team),b:sk(s.away_team),w:sk(side==='home'?s.home_team:s.away_team)}); }); } catch(e){}
+        const _sk={};
+        try { (ladderScores||[]).forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) finishedPairs.push({a:resolveTeam(s.home_team,_sk),b:resolveTeam(s.away_team,_sk),w:resolveTeam(side==='home'?s.home_team:s.away_team,_sk)}); }); } catch(e){}
         const resolvePick=(matchStr,pickName)=>{
-            const nm=(matchStr||'').split('–').map(s=>sk(s)); if(nm.length<2) return null;
+            const nm=(matchStr||'').split('–').map(s=>resolveTeam(s.trim(),_sk)); if(nm.length<2) return null;
             const f=finishedPairs.find(v=>(v.a===nm[0]&&v.b===nm[1])||(v.a===nm[1]&&v.b===nm[0]));
-            if(!f) return null; return f.w===sk((pickName||'').replace(/^Gana\s+/i,''));
+            if(!f) return null; return f.w===resolveTeam((pickName||'').replace(/^Gana\s+/i,'').trim(),_sk);
         };
         if(!LADDER) LADDER={ id:'L'+Date.now().toString(36), start:LAD_START, target:LAD_TARGET, steps:LAD_STEPS, current:0, status:'live', bank:LAD_START, rungs:[] };
         const todayRung=LADDER.rungs.find(r=>r.result==='today');
