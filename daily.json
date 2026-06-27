@@ -4324,9 +4324,9 @@
     "start": 10,
     "target": 250,
     "steps": 10,
-    "current": 4,
+    "current": 5,
     "status": "live",
-    "bank": 43.3,
+    "bank": 50.23,
     "rungs": [
       {
         "n": 1,
@@ -4375,7 +4375,7 @@
         "odd": 1.16,
         "book": "gtbets",
         "bank": 50.23,
-        "result": "today",
+        "result": "W",
         "date": "24 JUN"
       },
       {
