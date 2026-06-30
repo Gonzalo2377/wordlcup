@@ -3940,9 +3940,9 @@
     "start": 10,
     "target": 250,
     "steps": 10,
-    "current": 5,
+    "current": 6,
     "status": "live",
-    "bank": 50.23,
+    "bank": 87.90,
     "rungs": [
       {
         "n": 1,
@@ -3996,12 +3996,12 @@
       },
       {
         "n": 6,
-        "match": "Alemania – Paraguay",
-        "pick": "Gana Alemania",
-        "odd": 1.4,
+        "match": "Brasil - Japón",
+        "pick": "Gana Brasil",
+        "odd": 1.75,
         "book": "onexbet",
-        "bank": 70.32,
-        "result": "today",
+        "bank": 87.90,
+        "result": "W",
         "date": "28 JUN"
       },
       {
