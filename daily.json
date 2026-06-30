@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-06-29T11:58:42.682Z",
+    "updatedAt": "2026-06-30T07:00:57.427Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
     "market": "h2h",
     "matches": 6,
-    "valuePicks": 4,
+    "valuePicks": 0,
     "books": 21,
-    "stale": false,
+    "stale": true,
     "credits": {
-      "remaining": 0,
-      "used": 500
+      "remaining": null,
+      "used": null
     }
   },
   "TEAMS": {
@@ -3942,7 +3942,7 @@
     "steps": 10,
     "current": 6,
     "status": "live",
-    "bank": 87.90,
+    "bank": 87.9,
     "rungs": [
       {
         "n": 1,
@@ -4000,7 +4000,7 @@
         "pick": "Gana Brasil",
         "odd": 1.75,
         "book": "onexbet",
-        "bank": 87.90,
+        "bank": 87.9,
         "result": "W",
         "date": "28 JUN"
       },
