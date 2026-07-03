@@ -4136,9 +4136,9 @@
     "start": 10,
     "target": 250,
     "steps": 10,
-    "current": 6,
+    "current": 7,
     "status": "live",
-    "bank": 87.9,
+    "bank": 115.15,
     "rungs": [
       {
         "n": 1,
@@ -4207,7 +4207,7 @@
         "odd": 1.31,
         "book": "onexbet",
         "bank": 115.15,
-        "result": "today",
+        "result": "W",
         "date": "01 JUL"
       },
       {
