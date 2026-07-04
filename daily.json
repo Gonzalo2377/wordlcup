@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-07-04T07:00:19.584Z",
+    "updatedAt": "2026-07-04T09:22:37.686Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
     "market": "h2h",
     "matches": 4,
     "valuePicks": 4,
-    "books": 20,
+    "books": 21,
     "stale": false,
     "credits": {
-      "remaining": 451,
-      "used": 49
+      "remaining": 444,
+      "used": 56
     }
   },
   "TEAMS": {
@@ -200,6 +200,12 @@
       "color": "#1f5fd6",
       "url": "#"
     },
+    "coolbet": {
+      "name": "Coolbet",
+      "abbr": "COOL",
+      "color": "#0aa05a",
+      "url": "#"
+    },
     "everygame": {
       "name": "Everygame",
       "abbr": "EVER",
@@ -228,70 +234,73 @@
       "away": "mar",
       "odds": {
         "home": {
-          "pmu": 4.9,
+          "pmu": 5.1,
           "unibet": 5.5,
-          "leovegas": 5,
+          "leovegas": 5.3,
           "betclic": 5.25,
           "winamax": 4.8,
           "codere": 5,
-          "pinnacle": 5.34,
+          "pinnacle": 5.56,
           "mybookieag": 4.9,
           "tipico": 5.5,
-          "gtbets": 4.7,
+          "gtbets": 5.01,
           "matchbook": 5.7,
           "betfair": 5.7,
-          "nordicbet": 4.95,
-          "betsson": 4.95,
-          "onexbet": 5.22,
-          "sport888": 4.6,
-          "williamhill": 4.8,
-          "everygame": 5.25,
-          "betonlineag": 5.4,
-          "betanysports": 5.4
+          "nordicbet": 5.3,
+          "betsson": 5.3,
+          "onexbet": 5.47,
+          "sport888": 4.8,
+          "williamhill": 5,
+          "coolbet": 5.6,
+          "everygame": 5.5,
+          "betonlineag": 5.5,
+          "betanysports": 5.5
         },
         "draw": {
-          "pmu": 3.25,
+          "pmu": 3.35,
           "unibet": 3.5,
-          "leovegas": 3.35,
+          "leovegas": 3.4,
           "betclic": 3.5,
           "winamax": 3.5,
           "codere": 3.45,
-          "pinnacle": 3.5,
+          "pinnacle": 3.46,
           "mybookieag": 3.38,
           "tipico": 3.5,
           "gtbets": 3.46,
-          "matchbook": 3.5,
-          "betfair": 3.5,
-          "nordicbet": 3.45,
-          "betsson": 3.45,
-          "onexbet": 3.52,
+          "matchbook": 3.55,
+          "betfair": 3.55,
+          "nordicbet": 3.5,
+          "betsson": 3.5,
+          "onexbet": 3.49,
           "sport888": 3.25,
           "williamhill": 3.3,
-          "everygame": 3.4,
-          "betonlineag": 3.46,
-          "betanysports": 3.46
+          "coolbet": 3.48,
+          "everygame": 3.35,
+          "betonlineag": 3.48,
+          "betanysports": 3.48
         },
         "away": {
-          "pmu": 1.78,
-          "unibet": 1.83,
-          "leovegas": 1.81,
+          "pmu": 1.73,
+          "unibet": 1.79,
+          "leovegas": 1.76,
           "betclic": 1.8,
           "winamax": 1.8,
           "codere": 1.79,
-          "pinnacle": 1.81,
+          "pinnacle": 1.8,
           "mybookieag": 1.78,
           "tipico": 1.72,
-          "gtbets": 1.88,
+          "gtbets": 1.79,
           "matchbook": 1.84,
-          "betfair": 1.84,
-          "nordicbet": 1.85,
-          "betsson": 1.85,
-          "onexbet": 1.85,
+          "betfair": 1.83,
+          "nordicbet": 1.8,
+          "betsson": 1.8,
+          "onexbet": 1.83,
           "sport888": 1.75,
-          "williamhill": 1.8,
+          "williamhill": 1.75,
+          "coolbet": 1.8,
           "everygame": 1.75,
-          "betonlineag": 1.8,
-          "betanysports": 1.8
+          "betonlineag": 1.78,
+          "betanysports": 1.78
         }
       },
       "model": {
@@ -315,37 +324,38 @@
         "home": {
           "unibet": 19,
           "pmu": 16,
-          "leovegas": 17,
+          "leovegas": 18,
           "gtbets": 14.85,
-          "onexbet": 17,
+          "onexbet": 16.5,
           "betclic": 19,
-          "mybookieag": 26.05,
+          "mybookieag": 28.69,
           "pinnacle": 19.5,
           "winamax": 17,
-          "tipico": 20,
-          "matchbook": 22,
-          "betfair": 23,
-          "nordicbet": 17,
-          "betsson": 17,
+          "tipico": 18,
+          "matchbook": 23,
+          "betfair": 22,
+          "nordicbet": 19,
+          "betsson": 19,
           "sport888": 15,
           "williamhill": 15,
           "betonlineag": 20.5,
-          "codere": 15,
+          "codere": 16,
           "everygame": 17,
+          "coolbet": 20,
           "betanysports": 20.5
         },
         "draw": {
-          "unibet": 7.8,
+          "unibet": 8,
           "pmu": 7,
-          "leovegas": 7,
+          "leovegas": 7.5,
           "gtbets": 6.78,
-          "onexbet": 7.8,
+          "onexbet": 7.95,
           "betclic": 7.75,
-          "mybookieag": 8.18,
+          "mybookieag": 8.36,
           "pinnacle": 7.45,
           "winamax": 7.25,
           "tipico": 7.2,
-          "matchbook": 7.8,
+          "matchbook": 7.6,
           "betfair": 7.8,
           "nordicbet": 7,
           "betsson": 7,
@@ -354,28 +364,30 @@
           "betonlineag": 7.4,
           "codere": 6.8,
           "everygame": 7,
+          "coolbet": 7.5,
           "betanysports": 7.4
         },
         "away": {
-          "unibet": 1.19,
-          "pmu": 1.16,
+          "unibet": 1.18,
+          "pmu": 1.15,
           "leovegas": 1.17,
           "gtbets": 1.19,
-          "onexbet": 1.21,
+          "onexbet": 1.2,
           "betclic": 1.17,
-          "mybookieag": 1.11,
+          "mybookieag": 1.1,
           "pinnacle": 1.19,
           "winamax": 1.17,
-          "tipico": 1.16,
+          "tipico": 1.17,
           "matchbook": 1.2,
           "betfair": 1.2,
-          "nordicbet": 1.21,
-          "betsson": 1.21,
+          "nordicbet": 1.2,
+          "betsson": 1.2,
           "sport888": 1.17,
           "williamhill": 1.17,
           "betonlineag": 1.18,
           "codere": 1.19,
           "everygame": 1.18,
+          "coolbet": 1.19,
           "betanysports": 1.18
         }
       },
@@ -408,8 +420,8 @@
           "mybookieag": 1.82,
           "sport888": 1.8,
           "williamhill": 1.85,
-          "matchbook": 1.86,
-          "betfair": 1.85,
+          "matchbook": 1.87,
+          "betfair": 1.86,
           "gtbets": 1.86,
           "pinnacle": 1.83,
           "winamax": 1.8,
@@ -417,7 +429,8 @@
           "betsson": 1.88,
           "betonlineag": 1.83,
           "betanysports": 1.82,
-          "everygame": 1.8
+          "everygame": 1.8,
+          "coolbet": 1.86
         },
         "draw": {
           "tipico": 3.8,
@@ -433,13 +446,14 @@
           "matchbook": 3.8,
           "betfair": 3.8,
           "gtbets": 3.69,
-          "pinnacle": 3.79,
+          "pinnacle": 3.77,
           "winamax": 3.8,
           "nordicbet": 3.7,
           "betsson": 3.7,
           "betonlineag": 3.69,
           "betanysports": 3.8,
-          "everygame": 3.75
+          "everygame": 3.75,
+          "coolbet": 3.8
         },
         "away": {
           "tipico": 4.5,
@@ -461,7 +475,8 @@
           "betsson": 4.45,
           "betonlineag": 4.67,
           "betanysports": 4.2,
-          "everygame": 4.4
+          "everygame": 4.4,
+          "coolbet": 4.5
         }
       },
       "model": {
@@ -494,14 +509,15 @@
           "codere": 3.15,
           "betclic": 3.15,
           "williamhill": 2.9,
-          "matchbook": 3.2,
+          "matchbook": 3.25,
           "mybookieag": 3.1,
           "gtbets": 3.13,
-          "betfair": 3.2,
-          "nordicbet": 3.1,
-          "betsson": 3.1,
+          "betfair": 3.25,
+          "nordicbet": 3.15,
+          "betsson": 3.15,
           "betonlineag": 3.05,
           "everygame": 3.1,
+          "coolbet": 3.2,
           "betanysports": 3.05
         },
         "draw": {
@@ -524,6 +540,7 @@
           "betsson": 3.3,
           "betonlineag": 3.28,
           "everygame": 3.2,
+          "coolbet": 3.25,
           "betanysports": 3.28
         },
         "away": {
@@ -542,10 +559,11 @@
           "mybookieag": 2.4,
           "gtbets": 2.41,
           "betfair": 2.54,
-          "nordicbet": 2.45,
-          "betsson": 2.45,
+          "nordicbet": 2.42,
+          "betsson": 2.42,
           "betonlineag": 2.49,
           "everygame": 2.4,
+          "coolbet": 2.48,
           "betanysports": 2.49
         }
       },
@@ -575,8 +593,8 @@
           "side": "away",
           "match": "Paraguay – Francia",
           "pick": "Gana Francia",
-          "odd": 1.21,
-          "book": "nordicbet"
+          "odd": 1.2,
+          "book": "matchbook"
         },
         {
           "id": "a4634eae056c18d705e3feffb347163f",
@@ -585,8 +603,8 @@
           "side": "home",
           "match": "Brasil – Noruega",
           "pick": "Gana Brasil",
-          "odd": 1.88,
-          "book": "nordicbet"
+          "odd": 1.87,
+          "book": "matchbook"
         },
         {
           "id": "9c7073ae2c29ee4881bb695f92168c68",
@@ -595,8 +613,8 @@
           "side": "away",
           "match": "Canadá – Marruecos",
           "pick": "Gana Marruecos",
-          "odd": 1.85,
-          "book": "nordicbet"
+          "odd": 1.84,
+          "book": "matchbook"
         }
       ]
     }
