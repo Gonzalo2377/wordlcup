@@ -1,60 +1,20 @@
 {
   "meta": {
-    "updatedAt": "2026-07-06T11:27:11.537Z",
+    "updatedAt": "2026-07-07T07:00:20.897Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
     "market": "h2h",
-    "matches": 4,
-    "valuePicks": 2,
-    "books": 20,
+    "matches": 2,
+    "valuePicks": 1,
+    "books": 19,
     "stale": false,
     "credits": {
-      "remaining": 416,
-      "used": 84
+      "remaining": 409,
+      "used": 91
     }
   },
   "TEAMS": {
-    "por": {
-      "id": "por",
-      "name": "Portugal",
-      "code": "POR",
-      "color": "#0aa05a",
-      "conf": "UEFA",
-      "fifa": 6,
-      "form": "WWLWW",
-      "known": true
-    },
-    "esp": {
-      "id": "esp",
-      "name": "España",
-      "code": "ESP",
-      "color": "#c8102e",
-      "conf": "UEFA",
-      "fifa": 2,
-      "form": "WWWDW",
-      "known": true
-    },
-    "usa": {
-      "id": "usa",
-      "name": "Estados Unidos",
-      "code": "USA",
-      "color": "#1f5fd6",
-      "conf": "CONCACAF",
-      "fifa": 16,
-      "form": "WLWDL",
-      "known": true
-    },
-    "bel": {
-      "id": "bel",
-      "name": "Bélgica",
-      "code": "BEL",
-      "color": "#e5484d",
-      "conf": "UEFA",
-      "fifa": 8,
-      "form": "WLWDW",
-      "known": true
-    },
     "arg": {
       "id": "arg",
       "name": "Argentina",
@@ -97,16 +57,16 @@
     }
   },
   "BOOKS": {
-    "pmu": {
-      "name": "PMU",
-      "abbr": "PMU",
-      "color": "#5a6b8c",
-      "url": "#"
-    },
     "unibet": {
       "name": "Unibet",
       "abbr": "UNIB",
       "color": "#0aa05a",
+      "url": "#"
+    },
+    "tipico": {
+      "name": "Tipico",
+      "abbr": "TIPI",
+      "color": "#c8102e",
       "url": "#"
     },
     "leovegas": {
@@ -115,10 +75,46 @@
       "color": "#e5a000",
       "url": "#"
     },
-    "tipico": {
-      "name": "Tipico",
-      "abbr": "TIPI",
-      "color": "#c8102e",
+    "pmu": {
+      "name": "PMU",
+      "abbr": "PMU",
+      "color": "#5a6b8c",
+      "url": "#"
+    },
+    "gtbets": {
+      "name": "GTbets",
+      "abbr": "GTBE",
+      "color": "#5a6b8c",
+      "url": "#"
+    },
+    "mybookieag": {
+      "name": "MyBookie.ag",
+      "abbr": "MYBO",
+      "color": "#5a6b8c",
+      "url": "#"
+    },
+    "onexbet": {
+      "name": "1xBet",
+      "abbr": "1XBE",
+      "color": "#1f5fd6",
+      "url": "#"
+    },
+    "winamax": {
+      "name": "Winamax",
+      "abbr": "WINA",
+      "color": "#e5484d",
+      "url": "#"
+    },
+    "pinnacle": {
+      "name": "Pinnacle",
+      "abbr": "PINN",
+      "color": "#3a4660",
+      "url": "#"
+    },
+    "matchbook": {
+      "name": "Matchbook",
+      "abbr": "MATC",
+      "color": "#5a6b8c",
       "url": "#"
     },
     "sport888": {
@@ -133,70 +129,10 @@
       "color": "#1f5fd6",
       "url": "#"
     },
-    "onexbet": {
-      "name": "1xBet",
-      "abbr": "1XBE",
-      "color": "#1f5fd6",
-      "url": "#"
-    },
-    "pinnacle": {
-      "name": "Pinnacle",
-      "abbr": "PINN",
-      "color": "#3a4660",
-      "url": "#"
-    },
-    "gtbets": {
-      "name": "GTbets",
-      "abbr": "GTBE",
-      "color": "#5a6b8c",
-      "url": "#"
-    },
-    "matchbook": {
-      "name": "Matchbook",
-      "abbr": "MATC",
-      "color": "#5a6b8c",
-      "url": "#"
-    },
-    "codere": {
-      "name": "Codere",
-      "abbr": "CODE",
-      "color": "#0aa05a",
-      "url": "#"
-    },
-    "mybookieag": {
-      "name": "MyBookie.ag",
-      "abbr": "MYBO",
-      "color": "#5a6b8c",
-      "url": "#"
-    },
     "betfair": {
       "name": "Betfair",
       "abbr": "BETF",
       "color": "#ffb01f",
-      "url": "#"
-    },
-    "coolbet": {
-      "name": "Coolbet",
-      "abbr": "COOL",
-      "color": "#0aa05a",
-      "url": "#"
-    },
-    "winamax": {
-      "name": "Winamax",
-      "abbr": "WINA",
-      "color": "#e5484d",
-      "url": "#"
-    },
-    "nordicbet": {
-      "name": "Nordic Bet",
-      "abbr": "NORD",
-      "color": "#1f3a93",
-      "url": "#"
-    },
-    "betsson": {
-      "name": "Betsson",
-      "abbr": "BETS",
-      "color": "#ff8a1e",
       "url": "#"
     },
     "betonlineag": {
@@ -205,10 +141,28 @@
       "color": "#1a1a1a",
       "url": "#"
     },
+    "betsson": {
+      "name": "Betsson",
+      "abbr": "BETS",
+      "color": "#ff8a1e",
+      "url": "#"
+    },
+    "nordicbet": {
+      "name": "Nordic Bet",
+      "abbr": "NORD",
+      "color": "#1f3a93",
+      "url": "#"
+    },
     "everygame": {
       "name": "Everygame",
       "abbr": "EVER",
       "color": "#5a6b8c",
+      "url": "#"
+    },
+    "codere": {
+      "name": "Codere",
+      "abbr": "CODE",
+      "color": "#0aa05a",
       "url": "#"
     },
     "betanysports": {
@@ -220,176 +174,6 @@
   },
   "MATCHES": [
     {
-      "id": "16ed3adcf661b3a9bea39871a2d204df",
-      "group": "lun, 06 jul",
-      "time": "21:00",
-      "home": "por",
-      "away": "esp",
-      "odds": {
-        "home": {
-          "pmu": 4.1,
-          "unibet": 4.25,
-          "leovegas": 4.1,
-          "tipico": 4.1,
-          "sport888": 3.8,
-          "williamhill": 4,
-          "onexbet": 4.17,
-          "pinnacle": 4.25,
-          "gtbets": 3.89,
-          "matchbook": 4.4,
-          "codere": 4.1,
-          "mybookieag": 4,
-          "betfair": 4.4,
-          "coolbet": 4.35,
-          "winamax": 4,
-          "nordicbet": 4.1,
-          "betsson": 4.1,
-          "betonlineag": 4.24,
-          "everygame": 4.2,
-          "betanysports": 4.24
-        },
-        "draw": {
-          "pmu": 3.7,
-          "unibet": 3.75,
-          "leovegas": 3.6,
-          "tipico": 3.7,
-          "sport888": 3.3,
-          "williamhill": 3.4,
-          "onexbet": 3.66,
-          "pinnacle": 3.65,
-          "gtbets": 3.59,
-          "matchbook": 3.7,
-          "codere": 3.6,
-          "mybookieag": 3.55,
-          "betfair": 3.7,
-          "coolbet": 3.67,
-          "winamax": 3.7,
-          "nordicbet": 3.6,
-          "betsson": 3.6,
-          "betonlineag": 3.67,
-          "everygame": 3.6,
-          "betanysports": 3.67
-        },
-        "away": {
-          "pmu": 1.93,
-          "unibet": 1.94,
-          "leovegas": 1.88,
-          "tipico": 1.87,
-          "sport888": 1.85,
-          "williamhill": 1.91,
-          "onexbet": 1.99,
-          "pinnacle": 1.94,
-          "gtbets": 1.89,
-          "matchbook": 1.97,
-          "codere": 1.9,
-          "mybookieag": 1.88,
-          "betfair": 1.97,
-          "coolbet": 1.92,
-          "winamax": 1.9,
-          "nordicbet": 1.98,
-          "betsson": 1.98,
-          "betonlineag": 1.92,
-          "everygame": 1.9,
-          "betanysports": 1.92
-        }
-      },
-      "model": {
-        "home": 0.23840028482935263,
-        "draw": 0.2853476532144954,
-        "away": 0.476252061956152,
-        "lambdaH": 0.9570512820512815,
-        "lambdaA": 1.4537179487179495,
-        "ratingH": 2000.2,
-        "ratingA": 2075.8,
-        "sup": -0.4966666666666678
-      }
-    },
-    {
-      "id": "810f80b3ae79f5e86b3747ca15718ed8",
-      "group": "mar, 07 jul",
-      "time": "02:00",
-      "home": "usa",
-      "away": "bel",
-      "odds": {
-        "home": {
-          "leovegas": 2.5,
-          "pmu": 2.55,
-          "unibet": 2.6,
-          "tipico": 2.4,
-          "mybookieag": 2.47,
-          "gtbets": 2.48,
-          "betfair": 2.58,
-          "matchbook": 2.58,
-          "pinnacle": 2.56,
-          "onexbet": 2.57,
-          "winamax": 2.45,
-          "betonlineag": 2.52,
-          "nordicbet": 2.55,
-          "betsson": 2.55,
-          "sport888": 2.4,
-          "williamhill": 2.45,
-          "everygame": 2.5,
-          "codere": 2.49,
-          "coolbet": 2.56,
-          "betanysports": 2.5
-        },
-        "draw": {
-          "leovegas": 3.4,
-          "pmu": 3.5,
-          "unibet": 3.55,
-          "tipico": 3.5,
-          "mybookieag": 3.38,
-          "gtbets": 3.39,
-          "betfair": 3.55,
-          "matchbook": 3.55,
-          "pinnacle": 3.47,
-          "onexbet": 3.5,
-          "winamax": 3.6,
-          "betonlineag": 3.47,
-          "nordicbet": 3.45,
-          "betsson": 3.45,
-          "sport888": 3.2,
-          "williamhill": 3.25,
-          "everygame": 3.35,
-          "codere": 3.4,
-          "coolbet": 3.52,
-          "betanysports": 3.4
-        },
-        "away": {
-          "leovegas": 2.8,
-          "pmu": 2.75,
-          "unibet": 2.88,
-          "tipico": 2.9,
-          "mybookieag": 2.78,
-          "gtbets": 2.83,
-          "betfair": 2.98,
-          "matchbook": 2.98,
-          "pinnacle": 2.91,
-          "onexbet": 2.93,
-          "winamax": 2.75,
-          "betonlineag": 2.9,
-          "nordicbet": 2.85,
-          "betsson": 2.85,
-          "sport888": 2.75,
-          "williamhill": 2.8,
-          "everygame": 2.85,
-          "codere": 2.8,
-          "coolbet": 2.87,
-          "betanysports": 2.8
-        }
-      },
-      "model": {
-        "home": 0.1497341154936628,
-        "draw": 0.23685955385633833,
-        "away": 0.6134063306499988,
-        "lambdaH": 0.8119102564102567,
-        "lambdaA": 1.8602435897435896,
-        "ratingH": 1797.2,
-        "ratingA": 1939,
-        "sup": -1.048333333333333
-      }
-    },
-    {
       "id": "190922affd0be754bfefd71548dbf90d",
       "group": "mar, 07 jul",
       "time": "18:00",
@@ -397,70 +181,67 @@
       "away": "egy",
       "odds": {
         "home": {
-          "unibet": 1.38,
-          "tipico": 1.35,
-          "leovegas": 1.36,
-          "pmu": 1.35,
+          "unibet": 1.35,
+          "tipico": 1.33,
+          "leovegas": 1.32,
+          "pmu": 1.3,
           "gtbets": 1.41,
-          "mybookieag": 1.37,
-          "onexbet": 1.43,
-          "winamax": 1.37,
-          "pinnacle": 1.39,
-          "matchbook": 1.41,
-          "sport888": 1.36,
-          "williamhill": 1.36,
-          "betfair": 1.4,
-          "coolbet": 1.4,
-          "betonlineag": 1.4,
-          "betsson": 1.4,
-          "nordicbet": 1.4,
-          "everygame": 1.36,
-          "codere": 1.38,
-          "betanysports": 1.38
+          "mybookieag": 1.34,
+          "onexbet": 1.36,
+          "winamax": 1.33,
+          "pinnacle": 1.36,
+          "matchbook": 1.38,
+          "sport888": 1.3,
+          "williamhill": 1.33,
+          "betfair": 1.38,
+          "betonlineag": 1.36,
+          "betsson": 1.38,
+          "nordicbet": 1.38,
+          "everygame": 1.35,
+          "codere": 1.33,
+          "betanysports": 1.34
         },
         "draw": {
-          "unibet": 5,
+          "unibet": 5.2,
           "tipico": 4.9,
-          "leovegas": 4.7,
-          "pmu": 4.6,
-          "gtbets": 4.44,
-          "mybookieag": 4.6,
-          "onexbet": 4.82,
-          "winamax": 4.9,
-          "pinnacle": 4.75,
-          "matchbook": 4.9,
-          "sport888": 4.2,
-          "williamhill": 4.4,
-          "betfair": 5,
-          "coolbet": 4.8,
-          "betonlineag": 4.8,
-          "betsson": 4.65,
-          "nordicbet": 4.65,
-          "everygame": 4.6,
-          "codere": 4.7,
-          "betanysports": 4.7
+          "leovegas": 5,
+          "pmu": 4.9,
+          "gtbets": 4.69,
+          "mybookieag": 4.8,
+          "onexbet": 5.13,
+          "winamax": 5.2,
+          "pinnacle": 4.95,
+          "matchbook": 5.1,
+          "sport888": 4.5,
+          "williamhill": 4.6,
+          "betfair": 5.1,
+          "betonlineag": 4.97,
+          "betsson": 4.7,
+          "nordicbet": 4.7,
+          "everygame": 4.75,
+          "codere": 5,
+          "betanysports": 4.9
         },
         "away": {
-          "unibet": 10.5,
-          "tipico": 9.5,
-          "leovegas": 9.5,
-          "pmu": 9,
-          "gtbets": 8.54,
-          "mybookieag": 8.7,
-          "onexbet": 9.1,
-          "winamax": 8,
-          "pinnacle": 9.34,
-          "matchbook": 10.5,
-          "sport888": 8,
-          "williamhill": 8,
-          "betfair": 10.5,
-          "coolbet": 10,
-          "betonlineag": 9.5,
-          "betsson": 10,
-          "nordicbet": 10,
-          "everygame": 9,
-          "codere": 8.8,
-          "betanysports": 8.5
+          "unibet": 11.5,
+          "tipico": 10.5,
+          "leovegas": 11,
+          "pmu": 10.5,
+          "gtbets": 9.67,
+          "mybookieag": 9.6,
+          "onexbet": 11.5,
+          "winamax": 9.5,
+          "pinnacle": 11.05,
+          "matchbook": 12,
+          "sport888": 9.5,
+          "williamhill": 10,
+          "betfair": 12,
+          "betonlineag": 10.45,
+          "betsson": 11,
+          "nordicbet": 11,
+          "everygame": 10,
+          "codere": 10,
+          "betanysports": 10
         }
       },
       "model": {
@@ -482,70 +263,67 @@
       "away": "col",
       "odds": {
         "home": {
-          "leovegas": 3.45,
+          "leovegas": 3.65,
           "tipico": 3.5,
-          "pmu": 3.4,
-          "unibet": 3.7,
-          "codere": 3.45,
-          "mybookieag": 3.4,
+          "pmu": 3.6,
+          "unibet": 3.8,
+          "codere": 3.5,
+          "mybookieag": 3.48,
           "gtbets": 3.58,
-          "winamax": 3.35,
-          "onexbet": 3.58,
-          "matchbook": 3.65,
-          "pinnacle": 3.53,
-          "coolbet": 3.6,
-          "betonlineag": 3.55,
-          "nordicbet": 3.5,
-          "betsson": 3.5,
-          "betfair": 3.65,
-          "sport888": 3.3,
+          "winamax": 3.45,
+          "onexbet": 3.67,
+          "matchbook": 3.75,
+          "pinnacle": 3.67,
+          "betonlineag": 3.65,
+          "nordicbet": 3.6,
+          "betsson": 3.6,
+          "betfair": 3.75,
+          "sport888": 3.25,
           "williamhill": 3.3,
-          "everygame": 3.5,
+          "everygame": 3.6,
           "betanysports": 3.55
         },
         "draw": {
-          "leovegas": 3,
+          "leovegas": 3.05,
           "tipico": 3.1,
-          "pmu": 2.95,
-          "unibet": 3.1,
+          "pmu": 3,
+          "unibet": 3.2,
           "codere": 3.1,
           "mybookieag": 3.06,
           "gtbets": 3.13,
-          "winamax": 3.15,
-          "onexbet": 3.15,
-          "matchbook": 3.15,
-          "pinnacle": 3.09,
-          "coolbet": 3.1,
-          "betonlineag": 3.11,
-          "nordicbet": 3.15,
-          "betsson": 3.15,
-          "betfair": 3.15,
-          "sport888": 2.9,
-          "williamhill": 2.9,
-          "everygame": 3.05,
-          "betanysports": 3.11
+          "winamax": 3.2,
+          "onexbet": 3.24,
+          "matchbook": 3.2,
+          "pinnacle": 3.16,
+          "betonlineag": 3.13,
+          "nordicbet": 3.2,
+          "betsson": 3.2,
+          "betfair": 3.2,
+          "sport888": 3,
+          "williamhill": 3,
+          "everygame": 3.1,
+          "betanysports": 3.15
         },
         "away": {
-          "leovegas": 2.33,
+          "leovegas": 2.23,
           "tipico": 2.25,
-          "pmu": 2.28,
-          "unibet": 2.38,
-          "codere": 2.31,
-          "mybookieag": 2.29,
+          "pmu": 2.18,
+          "unibet": 2.28,
+          "codere": 2.26,
+          "mybookieag": 2.24,
           "gtbets": 2.31,
           "winamax": 2.25,
-          "onexbet": 2.38,
-          "matchbook": 2.4,
-          "pinnacle": 2.35,
-          "coolbet": 2.36,
-          "betonlineag": 2.32,
-          "nordicbet": 2.35,
-          "betsson": 2.35,
-          "betfair": 2.4,
-          "sport888": 2.25,
-          "williamhill": 2.3,
-          "everygame": 2.3,
-          "betanysports": 2.32
+          "onexbet": 2.3,
+          "matchbook": 2.34,
+          "pinnacle": 2.28,
+          "betonlineag": 2.29,
+          "nordicbet": 2.28,
+          "betsson": 2.28,
+          "betfair": 2.34,
+          "sport888": 2.2,
+          "williamhill": 2.25,
+          "everygame": 2.25,
+          "betanysports": 2.25
         }
       },
       "model": {
@@ -562,6 +340,16 @@
   ],
   "COMBOS": [],
   "RECORD": [
+    {
+      "id": "810f80b3ae79f5e86b3747ca15718ed8",
+      "date": "07 JUL",
+      "pick": "Gana Bélgica",
+      "match": "Estados Unidos – Bélgica",
+      "odd": 2.78,
+      "book": "betfair",
+      "stake": 1,
+      "result": "W"
+    },
     {
       "id": "e61a7b471cadc8e3849158ed59d49cab",
       "date": "06 JUL",
@@ -1151,30 +939,9 @@
       "book": "coolbet",
       "stake": 1,
       "result": "W"
-    },
-    {
-      "id": "cad7c979c04734d04342ba592d0931f8",
-      "date": "11 JUN",
-      "pick": "Gana Landskrona BoIS",
-      "match": "Helsingborgs IF – Landskrona BoIS",
-      "odd": 2.95,
-      "book": "coolbet",
-      "stake": 1,
-      "result": "W"
     }
   ],
   "PENDING": [
-    {
-      "id": "810f80b3ae79f5e86b3747ca15718ed8",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1783382400000,
-      "date": "07 JUL",
-      "match": "Estados Unidos – Bélgica",
-      "pickKey": "away",
-      "pickLabel": "Gana Bélgica",
-      "odd": 2.78,
-      "book": "betfair"
-    },
     {
       "id": "190922affd0be754bfefd71548dbf90d",
       "sport": "soccer_fifa_world_cup",
@@ -2595,6 +2362,52 @@
   ],
   "ARB_RECORD": [
     {
+      "date": "07 JUL",
+      "match": "Estados Unidos – Bélgica",
+      "marginPct": 0.24,
+      "profit": 0.24,
+      "legs": [
+        {
+          "pick": "Gana Estados Unidos",
+          "odd": 2.65,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.6,
+          "book": "winamax"
+        },
+        {
+          "pick": "Gana Bélgica",
+          "odd": 2.92,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
+      "date": "06 JUL",
+      "match": "Portugal – España",
+      "marginPct": 0.14,
+      "profit": 0.14,
+      "legs": [
+        {
+          "pick": "Gana Portugal",
+          "odd": 4.35,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.83,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana España",
+          "odd": 1.97,
+          "book": "matchbook"
+        }
+      ]
+    },
+    {
       "date": "06 JUL",
       "match": "México – Inglaterra",
       "marginPct": 0.02,
@@ -3467,107 +3280,9 @@
           "book": "betfair"
         }
       ]
-    },
-    {
-      "date": "24 JUN",
-      "match": "Suiza – Canadá",
-      "marginPct": 0.26,
-      "profit": 0.26,
-      "legs": [
-        {
-          "pick": "Gana Suiza",
-          "odd": 2.48,
-          "book": "betsson"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.2,
-          "book": "winamax"
-        },
-        {
-          "pick": "Gana Canadá",
-          "odd": 3.55,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "date": "25 JUN",
-      "match": "Sudáfrica – Corea del Sur",
-      "marginPct": 0.87,
-      "profit": 0.88,
-      "legs": [
-        {
-          "pick": "Gana Sudáfrica",
-          "odd": 6,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.95,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Corea del Sur",
-          "odd": 1.75,
-          "book": "betfair"
-        }
-      ]
     }
   ],
   "ARB_PENDING": [
-    {
-      "id": "16ed3adcf661b3a9bea39871a2d204df",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1783364400000,
-      "date": "06 JUL",
-      "match": "Portugal – España",
-      "marginPct": 0.14,
-      "profit": 0.14,
-      "legs": [
-        {
-          "pick": "Gana Portugal",
-          "odd": 4.35,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.83,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana España",
-          "odd": 1.97,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "810f80b3ae79f5e86b3747ca15718ed8",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1783382400000,
-      "date": "07 JUL",
-      "match": "Estados Unidos – Bélgica",
-      "marginPct": 0.24,
-      "profit": 0.24,
-      "legs": [
-        {
-          "pick": "Gana Estados Unidos",
-          "odd": 2.65,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.6,
-          "book": "winamax"
-        },
-        {
-          "pick": "Gana Bélgica",
-          "odd": 2.92,
-          "book": "betfair"
-        }
-      ]
-    },
     {
       "id": "190922affd0be754bfefd71548dbf90d",
       "sport": "soccer_fifa_world_cup",
@@ -3590,6 +3305,32 @@
         {
           "pick": "Gana Egipto",
           "odd": 10.5,
+          "book": "matchbook"
+        }
+      ]
+    },
+    {
+      "id": "a6da973c5749ce60adab77d64b3664f4",
+      "sport": "soccer_fifa_world_cup",
+      "ts": 1783454400000,
+      "date": "07 JUL",
+      "match": "Suiza – Colombia",
+      "marginPct": 0.08,
+      "profit": 0.09,
+      "legs": [
+        {
+          "pick": "Gana Suiza",
+          "odd": 3.8,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.24,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Colombia",
+          "odd": 2.34,
           "book": "matchbook"
         }
       ]
