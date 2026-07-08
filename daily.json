@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-07-08T07:00:55.304Z",
+    "updatedAt": "2026-07-08T09:24:59.922Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 20,
     "stale": false,
     "credits": {
-      "remaining": 395,
-      "used": 105
+      "remaining": 388,
+      "used": 112
     }
   },
   "TEAMS": {
@@ -182,7 +182,7 @@
           "betfair": 1.62,
           "betonlineag": 1.59,
           "betanysports": 1.6,
-          "sport888": 1.53,
+          "sport888": 1.57,
           "williamhill": 1.57,
           "everygame": 1.6,
           "codere": 1.59,
@@ -190,7 +190,7 @@
         },
         "draw": {
           "winamax": 3.9,
-          "unibet": 4.1,
+          "unibet": 4,
           "gtbets": 3.94,
           "leovegas": 3.9,
           "pmu": 3.8,
@@ -200,8 +200,8 @@
           "mybookieag": 3.85,
           "onexbet": 4.02,
           "matchbook": 4,
-          "pinnacle": 3.85,
-          "betfair": 4.1,
+          "pinnacle": 3.86,
+          "betfair": 4,
           "betonlineag": 3.94,
           "betanysports": 3.95,
           "sport888": 3.6,
@@ -214,7 +214,7 @@
           "winamax": 6.25,
           "unibet": 6.75,
           "gtbets": 6.19,
-          "leovegas": 6.25,
+          "leovegas": 6.4,
           "pmu": 6.1,
           "tipico": 6.5,
           "nordicbet": 6.2,
@@ -222,7 +222,7 @@
           "mybookieag": 5.6,
           "onexbet": 6.7,
           "matchbook": 7,
-          "pinnacle": 6.42,
+          "pinnacle": 6.45,
           "betfair": 7,
           "betonlineag": 6.61,
           "betanysports": 6,
