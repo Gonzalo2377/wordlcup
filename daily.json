@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-07-11T08:45:53.940Z",
+    "updatedAt": "2026-07-12T07:01:10.604Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
     "market": "h2h",
     "matches": 2,
-    "valuePicks": 2,
+    "valuePicks": 0,
     "books": 21,
-    "stale": false,
+    "stale": true,
     "credits": {
-      "remaining": 353,
-      "used": 147
+      "remaining": 346,
+      "used": 154
     }
   },
   "TEAMS": {
@@ -364,6 +364,26 @@
   ],
   "COMBOS": [],
   "RECORD": [
+    {
+      "id": "e66e4478b739fa0657a7a11235e1fcee",
+      "date": "11 JUL",
+      "pick": "Gana Inglaterra",
+      "match": "Noruega – Inglaterra",
+      "odd": 1.93,
+      "book": "unibet",
+      "stake": 1,
+      "result": "W"
+    },
+    {
+      "id": "200d9cd5eda092c7eb778cc104cd2fd2",
+      "date": "12 JUL",
+      "pick": "Gana Argentina",
+      "match": "Argentina – Suiza",
+      "odd": 1.74,
+      "book": "matchbook",
+      "stake": 1,
+      "result": "W"
+    },
     {
       "id": "fca257de4583bd4bc592e8b2a8f24ad7",
       "date": "10 JUL",
@@ -943,52 +963,9 @@
       "book": "betfair",
       "stake": 1,
       "result": "W"
-    },
-    {
-      "id": "d79edbd6aaeb578d33e313446b18d333",
-      "date": "14 JUN",
-      "pick": "Gana Alemania",
-      "match": "Alemania – Curazao",
-      "odd": 1.05,
-      "book": "betfair",
-      "stake": 1,
-      "result": "W"
-    },
-    {
-      "id": "32ec06abda2398ac41501c86eb9aa376",
-      "date": "14 JUN",
-      "pick": "Gana Países Bajos",
-      "match": "Países Bajos – Japón",
-      "odd": 2.12,
-      "book": "betfair",
-      "stake": 1,
-      "result": "L"
     }
   ],
-  "PENDING": [
-    {
-      "id": "200d9cd5eda092c7eb778cc104cd2fd2",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1783818000000,
-      "date": "12 JUL",
-      "match": "Argentina – Suiza",
-      "pickKey": "home",
-      "pickLabel": "Gana Argentina",
-      "odd": 1.74,
-      "book": "matchbook"
-    },
-    {
-      "id": "e66e4478b739fa0657a7a11235e1fcee",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1783803600000,
-      "date": "11 JUL",
-      "match": "Noruega – Inglaterra",
-      "pickKey": "away",
-      "pickLabel": "Gana Inglaterra",
-      "odd": 1.93,
-      "book": "unibet"
-    }
-  ],
+  "PENDING": [],
   "COMBO_PENDING": [
     {
       "dayId": "06 JUN·c2",
@@ -1205,7 +1182,9 @@
           "odd": 1.59
         }
       ]
-    },
+    }
+  ],
+  "COMBO_RECORD": [
     {
       "dayId": "10 JUL·c1",
       "date": "10 JUL",
@@ -1213,33 +1192,27 @@
       "tier": "single",
       "legs": [
         {
-          "id": "200d9cd5eda092c7eb778cc104cd2fd2",
-          "sport": "soccer_fifa_world_cup",
-          "side": "home",
           "match": "Argentina – Suiza",
           "pick": "Gana Argentina",
-          "odd": 1.74
+          "odd": 1.74,
+          "win": true
         },
         {
-          "id": "e66e4478b739fa0657a7a11235e1fcee",
-          "sport": "soccer_fifa_world_cup",
-          "side": "away",
           "match": "Noruega – Inglaterra",
           "pick": "Gana Inglaterra",
-          "odd": 1.93
+          "odd": 1.93,
+          "win": true
         },
         {
-          "id": "fca257de4583bd4bc592e8b2a8f24ad7",
-          "sport": "soccer_fifa_world_cup",
-          "side": "home",
           "match": "España – Bélgica",
           "pick": "Gana España",
-          "odd": 1.69
+          "odd": 1.69,
+          "win": true
         }
-      ]
-    }
-  ],
-  "COMBO_RECORD": [
+      ],
+      "totalOdd": 5.68,
+      "result": "W"
+    },
     {
       "dayId": "04 JUL·c1",
       "date": "04 JUL",
@@ -2397,37 +2370,55 @@
       ],
       "totalOdd": 3.86,
       "result": "L"
-    },
-    {
-      "dayId": "20 JUN·c2",
-      "date": "20 JUN",
-      "name": "Combinada Segura",
-      "tier": "all",
-      "legs": [
-        {
-          "match": "Ecuador – Curazao",
-          "pick": "Gana Ecuador",
-          "odd": 1.15,
-          "win": false
-        },
-        {
-          "match": "Bélgica – Irán",
-          "pick": "Gana Bélgica",
-          "odd": 1.48,
-          "win": false
-        },
-        {
-          "match": "Alemania – Costa de Marfil",
-          "pick": "Gana Alemania",
-          "odd": 1.57,
-          "win": true
-        }
-      ],
-      "totalOdd": 2.67,
-      "result": "L"
     }
   ],
   "ARB_RECORD": [
+    {
+      "date": "12 JUL",
+      "match": "Argentina – Suiza",
+      "marginPct": 0.92,
+      "profit": 0.92,
+      "legs": [
+        {
+          "pick": "Gana Argentina",
+          "odd": 1.75,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.8,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Suiza",
+          "odd": 6.4,
+          "book": "matchbook"
+        }
+      ]
+    },
+    {
+      "date": "11 JUL",
+      "match": "Noruega – Inglaterra",
+      "marginPct": 0.55,
+      "profit": 0.55,
+      "legs": [
+        {
+          "pick": "Gana Noruega",
+          "odd": 4.2,
+          "book": "matchbook"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.9,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Inglaterra",
+          "odd": 2,
+          "book": "matchbook"
+        }
+      ]
+    },
     {
       "date": "10 JUL",
       "match": "España – Bélgica",
@@ -3301,116 +3292,17 @@
           "book": "gtbets"
         }
       ]
-    },
-    {
-      "date": "26 JUN",
-      "match": "Paraguay – Australia",
-      "marginPct": 1.7,
-      "profit": 1.73,
-      "legs": [
-        {
-          "pick": "Gana Paraguay",
-          "odd": 3.1,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 2.32,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Australia",
-          "odd": 4.36,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "date": "26 JUN",
-      "match": "Túnez – Países Bajos",
-      "marginPct": 0.34,
-      "profit": 0.35,
-      "legs": [
-        {
-          "pick": "Gana Túnez",
-          "odd": 29,
-          "book": "betsson"
-        },
-        {
-          "pick": "Empate",
-          "odd": 10,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Países Bajos",
-          "odd": 1.16,
-          "book": "gtbets"
-        }
-      ]
     }
   ],
-  "ARB_PENDING": [
-    {
-      "id": "e66e4478b739fa0657a7a11235e1fcee",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1783803600000,
-      "date": "11 JUL",
-      "match": "Noruega – Inglaterra",
-      "marginPct": 0.55,
-      "profit": 0.55,
-      "legs": [
-        {
-          "pick": "Gana Noruega",
-          "odd": 4.2,
-          "book": "matchbook"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.9,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Inglaterra",
-          "odd": 2,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "200d9cd5eda092c7eb778cc104cd2fd2",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1783818000000,
-      "date": "12 JUL",
-      "match": "Argentina – Suiza",
-      "marginPct": 0.92,
-      "profit": 0.92,
-      "legs": [
-        {
-          "pick": "Gana Argentina",
-          "odd": 1.75,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.8,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Suiza",
-          "odd": 6.4,
-          "book": "matchbook"
-        }
-      ]
-    }
-  ],
+  "ARB_PENDING": [],
   "LADDER": {
     "id": "Lmrel6b07",
     "start": 10,
     "target": 250,
     "steps": 10,
-    "current": 1,
+    "current": 2,
     "status": "live",
-    "bank": 16.9,
+    "bank": 29.57,
     "rungs": [
       {
         "n": 1,
@@ -3429,7 +3321,7 @@
         "odd": 1.75,
         "book": "onexbet",
         "bank": 29.57,
-        "result": "today",
+        "result": "W",
         "date": "11 JUL"
       },
       {
