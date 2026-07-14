@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-07-13T10:25:25.492Z",
+    "updatedAt": "2026-07-14T07:01:10.724Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
     "market": "h2h",
-    "matches": 1,
-    "valuePicks": 0,
+    "matches": 2,
+    "valuePicks": 1,
     "books": 21,
     "stale": false,
     "credits": {
-      "remaining": 325,
-      "used": 175
+      "remaining": 318,
+      "used": 182
     }
   },
   "TEAMS": {
@@ -33,6 +33,26 @@
       "conf": "UEFA",
       "fifa": 2,
       "form": "WWWDW",
+      "known": true
+    },
+    "eng": {
+      "id": "eng",
+      "name": "Inglaterra",
+      "code": "ENG",
+      "color": "#ffffff",
+      "conf": "UEFA",
+      "fifa": 4,
+      "form": "WDWWD",
+      "known": true
+    },
+    "arg": {
+      "id": "arg",
+      "name": "Argentina",
+      "code": "ARG",
+      "color": "#6cabdd",
+      "conf": "CONMEBOL",
+      "fifa": 1,
+      "form": "WWWWD",
       "known": true
     }
   },
@@ -173,73 +193,73 @@
       "away": "esp",
       "odds": {
         "home": {
-          "williamhill": 2.3,
-          "tipico": 2.3,
-          "pinnacle": 2.37,
-          "sport888": 2.25,
-          "unibet": 2.4,
-          "pmu": 2.28,
-          "leovegas": 2.35,
-          "betclic": 2.25,
-          "mybookieag": 2.19,
-          "betonlineag": 2.33,
+          "williamhill": 2.38,
+          "tipico": 2.35,
+          "pinnacle": 2.51,
+          "sport888": 2.3,
+          "unibet": 2.38,
+          "pmu": 2.32,
+          "leovegas": 2.33,
+          "betclic": 2.35,
+          "mybookieag": 2.36,
+          "betonlineag": 2.43,
           "gtbets": 2.3,
-          "matchbook": 2.42,
-          "winamax": 2.3,
-          "betfair": 2.42,
-          "onexbet": 2.42,
-          "coolbet": 2.37,
-          "betsson": 2.4,
-          "nordicbet": 2.4,
-          "codere": 2.34,
-          "everygame": 2.35,
-          "betanysports": 2.35
+          "matchbook": 2.5,
+          "winamax": 2.35,
+          "betfair": 2.5,
+          "onexbet": 2.45,
+          "coolbet": 2.42,
+          "betsson": 2.52,
+          "nordicbet": 2.52,
+          "codere": 2.4,
+          "everygame": 2.45,
+          "betanysports": 2.42
         },
         "draw": {
           "williamhill": 3.3,
-          "tipico": 3.3,
-          "pinnacle": 3.24,
+          "tipico": 3.2,
+          "pinnacle": 3.2,
           "sport888": 3.25,
-          "unibet": 3.35,
+          "unibet": 3.3,
           "pmu": 3.3,
-          "leovegas": 3.2,
-          "betclic": 3.35,
-          "mybookieag": 3.34,
-          "betonlineag": 3.23,
+          "leovegas": 3.25,
+          "betclic": 3.3,
+          "mybookieag": 3.14,
+          "betonlineag": 3.22,
           "gtbets": 3.18,
-          "matchbook": 3.35,
+          "matchbook": 3.3,
           "winamax": 3.3,
-          "betfair": 3.35,
-          "onexbet": 3.31,
-          "coolbet": 3.3,
-          "betsson": 3.35,
-          "nordicbet": 3.35,
-          "codere": 3.25,
-          "everygame": 3.15,
-          "betanysports": 3.27
+          "betfair": 3.3,
+          "onexbet": 3.24,
+          "coolbet": 3.25,
+          "betsson": 3.25,
+          "nordicbet": 3.25,
+          "codere": 3.2,
+          "everygame": 3.1,
+          "betanysports": 3.22
         },
         "away": {
-          "williamhill": 3,
+          "williamhill": 2.9,
           "tipico": 3.2,
-          "pinnacle": 3.31,
-          "sport888": 2.9,
-          "unibet": 3.4,
-          "pmu": 3.3,
+          "pinnacle": 3.15,
+          "sport888": 2.8,
+          "unibet": 3.3,
+          "pmu": 3.25,
           "leovegas": 3.2,
-          "betclic": 3.37,
-          "mybookieag": 3.28,
-          "betonlineag": 3.38,
+          "betclic": 3.3,
+          "mybookieag": 3.14,
+          "betonlineag": 3.26,
           "gtbets": 3.12,
-          "matchbook": 3.4,
-          "winamax": 3.2,
-          "betfair": 3.4,
+          "matchbook": 3.3,
+          "winamax": 3.05,
+          "betfair": 3.3,
           "onexbet": 3.35,
-          "coolbet": 3.35,
-          "betsson": 3.2,
-          "nordicbet": 3.2,
-          "codere": 3.2,
-          "everygame": 3.3,
-          "betanysports": 3.22
+          "coolbet": 3.26,
+          "betsson": 3.1,
+          "nordicbet": 3.1,
+          "codere": 3.1,
+          "everygame": 3.15,
+          "betanysports": 3.14
         }
       },
       "model": {
@@ -251,6 +271,94 @@
         "ratingH": 2080.8,
         "ratingA": 2075.8,
         "sup": 0.175
+      }
+    },
+    {
+      "id": "ced22494ae0bbb8cc4f7108bf6f493df",
+      "group": "mié, 15 jul",
+      "time": "21:00",
+      "home": "eng",
+      "away": "arg",
+      "odds": {
+        "home": {
+          "pinnacle": 2.73,
+          "pmu": 2.6,
+          "leovegas": 2.65,
+          "unibet": 2.7,
+          "sport888": 2.5,
+          "betclic": 2.65,
+          "tipico": 2.7,
+          "winamax": 2.6,
+          "mybookieag": 2.63,
+          "williamhill": 2.6,
+          "gtbets": 2.51,
+          "betonlineag": 2.67,
+          "betfair": 2.78,
+          "matchbook": 2.78,
+          "onexbet": 2.7,
+          "nordicbet": 2.65,
+          "betsson": 2.65,
+          "everygame": 2.65,
+          "coolbet": 2.69,
+          "codere": 2.65,
+          "betanysports": 2.67
+        },
+        "draw": {
+          "pinnacle": 2.92,
+          "pmu": 2.95,
+          "leovegas": 2.88,
+          "unibet": 3,
+          "sport888": 2.9,
+          "betclic": 3.02,
+          "tipico": 3,
+          "winamax": 3,
+          "mybookieag": 2.95,
+          "williamhill": 2.9,
+          "gtbets": 3.04,
+          "betonlineag": 2.96,
+          "betfair": 3,
+          "matchbook": 3,
+          "onexbet": 3.08,
+          "nordicbet": 3.05,
+          "betsson": 3.05,
+          "everygame": 2.9,
+          "coolbet": 3,
+          "codere": 2.95,
+          "betanysports": 2.96
+        },
+        "away": {
+          "pinnacle": 3.08,
+          "pmu": 3.05,
+          "leovegas": 3.05,
+          "unibet": 3.15,
+          "sport888": 2.8,
+          "betclic": 3.02,
+          "tipico": 2.9,
+          "winamax": 2.95,
+          "mybookieag": 2.94,
+          "williamhill": 2.9,
+          "gtbets": 3.01,
+          "betonlineag": 3.15,
+          "betfair": 3.2,
+          "matchbook": 3.2,
+          "onexbet": 3.12,
+          "nordicbet": 3.1,
+          "betsson": 3.1,
+          "everygame": 3.05,
+          "coolbet": 3.15,
+          "codere": 2.95,
+          "betanysports": 3.15
+        }
+      },
+      "model": {
+        "home": 0.17660311468854278,
+        "draw": 0.27053133492872716,
+        "away": 0.5528655503827301,
+        "lambdaH": 0.7877948717948708,
+        "lambdaA": 1.5811282051282065,
+        "ratingH": 2009.6,
+        "ratingA": 2120.8,
+        "sup": -0.7933333333333356
       }
     }
   ],
@@ -857,7 +965,19 @@
       "result": "W"
     }
   ],
-  "PENDING": [],
+  "PENDING": [
+    {
+      "id": "ced22494ae0bbb8cc4f7108bf6f493df",
+      "sport": "soccer_fifa_world_cup",
+      "ts": 1784142000000,
+      "date": "15 JUL",
+      "match": "Inglaterra – Argentina",
+      "pickKey": "away",
+      "pickLabel": "Gana Argentina",
+      "odd": 3.2,
+      "book": "betfair"
+    }
+  ],
   "COMBO_PENDING": [
     {
       "dayId": "06 JUN·c2",
@@ -3186,7 +3306,60 @@
       ]
     }
   ],
-  "ARB_PENDING": [],
+  "ARB_PENDING": [
+    {
+      "id": "f9aa13a662d1658e5a02cfc06d6a2d73",
+      "sport": "soccer_fifa_world_cup",
+      "ts": 1784055600000,
+      "date": "14 JUL",
+      "match": "Francia – España",
+      "marginPct": 0.16,
+      "profit": 0.16,
+      "legs": [
+        {
+          "pick": "Gana Francia",
+          "odd": 2.52,
+          "book": "betsson"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.3,
+          "book": "williamhill"
+        },
+        {
+          "pick": "Gana España",
+          "odd": 3.35,
+          "book": "onexbet"
+        }
+      ]
+    },
+    {
+      "id": "ced22494ae0bbb8cc4f7108bf6f493df",
+      "sport": "soccer_fifa_world_cup",
+      "ts": 1784142000000,
+      "date": "15 JUL",
+      "match": "Inglaterra – Argentina",
+      "marginPct": 0.31,
+      "profit": 0.31,
+      "legs": [
+        {
+          "pick": "Gana Inglaterra",
+          "odd": 2.78,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.08,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Argentina",
+          "odd": 3.2,
+          "book": "betfair"
+        }
+      ]
+    }
+  ],
   "LADDER": {
     "id": "Lmrel6b07",
     "start": 10,
