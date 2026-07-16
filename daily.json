@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-07-15T09:08:56.630Z",
+    "updatedAt": "2026-07-16T07:00:39.155Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
     "market": "h2h",
     "matches": 1,
-    "valuePicks": 1,
+    "valuePicks": 0,
     "books": 21,
-    "stale": false,
+    "stale": true,
     "credits": {
-      "remaining": 297,
-      "used": 203
+      "remaining": 290,
+      "used": 210
     }
   },
   "TEAMS": {
@@ -256,6 +256,16 @@
   ],
   "COMBOS": [],
   "RECORD": [
+    {
+      "id": "ced22494ae0bbb8cc4f7108bf6f493df",
+      "date": "15 JUL",
+      "pick": "Gana Argentina",
+      "match": "Inglaterra – Argentina",
+      "odd": 3.2,
+      "book": "betfair",
+      "stake": 1,
+      "result": "W"
+    },
     {
       "id": "e66e4478b739fa0657a7a11235e1fcee",
       "date": "11 JUL",
@@ -845,31 +855,9 @@
       "book": "coolbet",
       "stake": 1,
       "result": "L"
-    },
-    {
-      "id": "b55f9569de3f4d731bc5537ff5ff43e4",
-      "date": "15 JUN",
-      "pick": "Gana Sweden",
-      "match": "Sweden – Túnez",
-      "odd": 2.02,
-      "book": "betfair",
-      "stake": 1,
-      "result": "W"
     }
   ],
-  "PENDING": [
-    {
-      "id": "ced22494ae0bbb8cc4f7108bf6f493df",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1784142000000,
-      "date": "15 JUL",
-      "match": "Inglaterra – Argentina",
-      "pickKey": "away",
-      "pickLabel": "Gana Argentina",
-      "odd": 3.2,
-      "book": "betfair"
-    }
-  ],
+  "PENDING": [],
   "COMBO_PENDING": [
     {
       "dayId": "06 JUN·c2",
@@ -2278,6 +2266,29 @@
   ],
   "ARB_RECORD": [
     {
+      "date": "15 JUL",
+      "match": "Inglaterra – Argentina",
+      "marginPct": 0.31,
+      "profit": 0.31,
+      "legs": [
+        {
+          "pick": "Gana Inglaterra",
+          "odd": 2.78,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.08,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Argentina",
+          "odd": 3.2,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
       "date": "14 JUL",
       "match": "Francia – España",
       "marginPct": 0.16,
@@ -3173,59 +3184,9 @@
           "book": "unibet"
         }
       ]
-    },
-    {
-      "date": "26 JUN",
-      "match": "Noruega – Francia",
-      "marginPct": 1.19,
-      "profit": 1.2,
-      "legs": [
-        {
-          "pick": "Gana Noruega",
-          "odd": 5.2,
-          "book": "tipico"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.9,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Francia",
-          "odd": 1.69,
-          "book": "gtbets"
-        }
-      ]
     }
   ],
-  "ARB_PENDING": [
-    {
-      "id": "ced22494ae0bbb8cc4f7108bf6f493df",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1784142000000,
-      "date": "15 JUL",
-      "match": "Inglaterra – Argentina",
-      "marginPct": 0.31,
-      "profit": 0.31,
-      "legs": [
-        {
-          "pick": "Gana Inglaterra",
-          "odd": 2.78,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.08,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Argentina",
-          "odd": 3.2,
-          "book": "betfair"
-        }
-      ]
-    }
-  ],
+  "ARB_PENDING": [],
   "LADDER": {
     "id": "Lmrel6b07",
     "start": 10,
