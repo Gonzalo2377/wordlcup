@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-07-19T09:04:19.317Z",
+    "updatedAt": "2026-07-20T07:00:41.953Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
@@ -8,10 +8,10 @@
     "matches": 1,
     "valuePicks": 0,
     "books": 21,
-    "stale": false,
+    "stale": true,
     "credits": {
-      "remaining": 241,
-      "used": 259
+      "remaining": 235,
+      "used": 265
     }
   },
   "TEAMS": {
@@ -2266,6 +2266,29 @@
   ],
   "ARB_RECORD": [
     {
+      "date": "19 JUL",
+      "match": "España – Argentina",
+      "marginPct": 0.07,
+      "profit": 0.07,
+      "legs": [
+        {
+          "pick": "Gana España",
+          "odd": 2.38,
+          "book": "matchbook"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.2,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Argentina",
+          "odd": 3.75,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
       "date": "18 JUL",
       "match": "Francia – Inglaterra",
       "marginPct": 0.61,
@@ -3161,59 +3184,9 @@
           "book": "onexbet"
         }
       ]
-    },
-    {
-      "date": "27 JUN",
-      "match": "Cabo Verde – Arabia Saudí",
-      "marginPct": 0.81,
-      "profit": 0.82,
-      "legs": [
-        {
-          "pick": "Gana Cabo Verde",
-          "odd": 2.58,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.55,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Arabia Saudí",
-          "odd": 3.1,
-          "book": "unibet"
-        }
-      ]
     }
   ],
-  "ARB_PENDING": [
-    {
-      "id": "fb30113e43d113f1ace48b8563ba1ee9",
-      "sport": "soccer_fifa_world_cup",
-      "ts": 1784487600000,
-      "date": "19 JUL",
-      "match": "España – Argentina",
-      "marginPct": 0.07,
-      "profit": 0.07,
-      "legs": [
-        {
-          "pick": "Gana España",
-          "odd": 2.38,
-          "book": "matchbook"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.2,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Argentina",
-          "odd": 3.75,
-          "book": "betfair"
-        }
-      ]
-    }
-  ],
+  "ARB_PENDING": [],
   "LADDER": {
     "id": "Lmrel6b07",
     "start": 10,
