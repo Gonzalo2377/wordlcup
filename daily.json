@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-08-05T09:36:37.775Z",
+    "updatedAt": "2026-08-06T07:01:15.705Z",
     "source": "the-odds-api",
     "sport": "soccer_fifa_world_cup",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 21,
     "stale": true,
     "credits": {
-      "remaining": 460,
-      "used": 40
+      "remaining": 456,
+      "used": 44
     }
   },
   "TEAMS": {
