@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-08-20T07:00:24.049Z",
+    "updatedAt": "2026-08-20T07:39:49.786Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 22,
     "stale": false,
     "credits": {
-      "remaining": 339,
-      "used": 161
+      "remaining": 326,
+      "used": 174
     }
   },
   "TEAMS": {
@@ -244,9 +244,9 @@
       "odds": {
         "home": {
           "unibet": 2.28,
-          "betclic": 2.25,
-          "onexbet": 2.36,
-          "codere": 2.29,
+          "betclic": 2.3,
+          "onexbet": 2.37,
+          "codere": 2.3,
           "coolbet": 2.3,
           "winamax": 2.2,
           "williamhill": 2.25,
@@ -258,14 +258,14 @@
           "pinnacle": 2.31,
           "pmu": 2.2,
           "leovegas": 2.17,
-          "betonlineag": 2.26,
+          "betonlineag": 2.3,
           "everygame": 2.25
         },
         "draw": {
           "unibet": 3.15,
-          "betclic": 3.07,
-          "onexbet": 3.17,
-          "codere": 3.05,
+          "betclic": 3.15,
+          "onexbet": 3.15,
+          "codere": 3.1,
           "coolbet": 3.08,
           "winamax": 3.15,
           "williamhill": 2.9,
@@ -275,18 +275,18 @@
           "betsson": 3,
           "matchbook": 3.05,
           "pinnacle": 3.06,
-          "pmu": 2.95,
-          "leovegas": 2.9,
-          "betonlineag": 3.1,
+          "pmu": 3,
+          "leovegas": 2.95,
+          "betonlineag": 3.03,
           "everygame": 2.95
         },
         "away": {
           "unibet": 3.75,
-          "betclic": 3.47,
-          "onexbet": 3.62,
-          "codere": 3.5,
+          "betclic": 3.48,
+          "onexbet": 3.63,
+          "codere": 3.4,
           "coolbet": 3.7,
-          "winamax": 3.35,
+          "winamax": 3.3,
           "williamhill": 3.4,
           "betfair": 3.75,
           "tipico": 3.5,
@@ -301,9 +301,9 @@
         }
       },
       "model": {
-        "home": 0.41969916938005103,
-        "draw": 0.31359156485295864,
-        "away": 0.26670926576699033,
+        "home": 0.4191137128494154,
+        "draw": 0.3131610662000203,
+        "away": 0.26772522095056434,
         "fromMarket": true
       }
     },
@@ -317,7 +317,7 @@
         "home": {
           "unibet": 2.1,
           "betclic": 2.07,
-          "onexbet": 2.12,
+          "onexbet": 2.15,
           "codere": 2.11,
           "coolbet": 2.05,
           "winamax": 2,
@@ -345,7 +345,7 @@
           "tipico": 3.4,
           "betsson": 3.4,
           "nordicbet": 3.4,
-          "pinnacle": 3.55,
+          "pinnacle": 3.54,
           "pmu": 3.3,
           "leovegas": 3.25,
           "matchbook": 3.6,
@@ -355,7 +355,7 @@
         "away": {
           "unibet": 3.8,
           "betclic": 3.55,
-          "onexbet": 3.8,
+          "onexbet": 3.7,
           "codere": 3.55,
           "coolbet": 3.9,
           "winamax": 3.4,
@@ -443,7 +443,7 @@
           "codere": 15,
           "unibet": 20,
           "williamhill": 13,
-          "betclic": 15.75,
+          "betclic": 16,
           "sport888": 13,
           "tipico": 16,
           "winamax": 13.5,
@@ -461,9 +461,9 @@
         }
       },
       "model": {
-        "home": 0.8114529559112418,
-        "draw": 0.12924748830913746,
-        "away": 0.05929955577962086,
+        "home": 0.8114895220794006,
+        "draw": 0.1292533125351227,
+        "away": 0.05925716538547669,
         "fromMarket": true
       }
     },
@@ -482,7 +482,7 @@
           "onexbet": 1.76,
           "unibet": 1.71,
           "betclic": 1.72,
-          "betfair": 1.78,
+          "betfair": 1.77,
           "coolbet": 1.7,
           "leovegas": 1.71,
           "nordicbet": 1.72,
@@ -539,9 +539,9 @@
         }
       },
       "model": {
-        "home": 0.5547518940102791,
-        "draw": 0.23183686952579532,
-        "away": 0.21341123646392565,
+        "home": 0.554822415045726,
+        "draw": 0.23180014982755556,
+        "away": 0.21337743512671833,
         "fromMarket": true
       }
     }
@@ -3528,6 +3528,32 @@
           "pick": "Gana Strasbourg",
           "odd": 5,
           "book": "unibet"
+        }
+      ]
+    },
+    {
+      "id": "623ff84505dae8a0598eefd6a15b5e14",
+      "sport": "soccer_spain_la_liga",
+      "ts": 1787338800000,
+      "date": "21 AGO",
+      "match": "Real Betis – Real Sociedad",
+      "marginPct": 0.07,
+      "profit": 0.07,
+      "legs": [
+        {
+          "pick": "Gana Real Betis",
+          "odd": 2.15,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.6,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Real Sociedad",
+          "odd": 3.9,
+          "book": "coolbet"
         }
       ]
     }
