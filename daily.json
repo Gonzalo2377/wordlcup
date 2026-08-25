@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-08-25T07:00:26.084Z",
+    "updatedAt": "2026-08-25T07:41:50.319Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 17,
     "stale": false,
     "credits": {
-      "remaining": 185,
-      "used": 315
+      "remaining": 174,
+      "used": 326
     }
   },
   "TEAMS": {
@@ -171,7 +171,7 @@
         "home": {
           "codere": 2.8,
           "winamax": 2.7,
-          "betclic": 2.8,
+          "betclic": 2.82,
           "unibet": 2.88,
           "betfair": 3,
           "tipico": 2.9,
@@ -189,7 +189,7 @@
         "draw": {
           "codere": 3.25,
           "winamax": 3.25,
-          "betclic": 3.25,
+          "betclic": 3.28,
           "unibet": 3.35,
           "betfair": 3.4,
           "tipico": 3.2,
@@ -207,9 +207,9 @@
         "away": {
           "codere": 2.6,
           "winamax": 2.5,
-          "betclic": 2.53,
+          "betclic": 2.55,
           "unibet": 2.63,
-          "betfair": 2.66,
+          "betfair": 2.68,
           "tipico": 2.5,
           "onexbet": 2.66,
           "pinnacle": 2.63,
@@ -219,7 +219,7 @@
           "williamhill": 2.5,
           "betsson": 2.55,
           "nordicbet": 2.55,
-          "matchbook": 2.66,
+          "matchbook": 2.68,
           "coolbet": 2.65
         }
       },
