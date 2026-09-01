@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-08-31T14:51:23.557Z",
+    "updatedAt": "2026-09-01T07:00:47.423Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 21,
     "stale": true,
     "credits": {
-      "remaining": null,
-      "used": null
+      "remaining": 479,
+      "used": 21
     }
   },
   "TEAMS": {
@@ -648,6 +648,36 @@
   "COMBOS": [],
   "RECORD": [
     {
+      "id": "29ac78994462bce061f8d01e93c7b3f0",
+      "date": "31 AGO",
+      "pick": "Gana Roma",
+      "match": "Lecce – Roma",
+      "odd": 1.65,
+      "book": "betanysports",
+      "stake": 1,
+      "result": "W"
+    },
+    {
+      "id": "7c2ad8552e286ff88f69ce39ca49541a",
+      "date": "30 AGO",
+      "pick": "Gana Monaco",
+      "match": "Monaco – Marseille",
+      "odd": 2.51,
+      "book": "gtbets",
+      "stake": 1,
+      "result": "W"
+    },
+    {
+      "id": "6a4c946a61ddb5ef4703eb4528ccdef1",
+      "date": "30 AGO",
+      "pick": "Gana Chelsea",
+      "match": "Chelsea – Brighton",
+      "odd": 1.9,
+      "book": "betfair",
+      "stake": 1,
+      "result": "W"
+    },
+    {
       "id": "7a8746a45dc76378359a7d9cc5474bc8",
       "date": "29 AGO",
       "pick": "Gana Newcastle",
@@ -1216,73 +1246,9 @@
       "book": "betfair",
       "stake": 1,
       "result": "W"
-    },
-    {
-      "id": "4cd769aa7bae0ad9762bd69b80ef2903",
-      "date": "20 JUN",
-      "pick": "Gana Marruecos",
-      "match": "Escocia – Marruecos",
-      "odd": 1.81,
-      "book": "onexbet",
-      "stake": 1,
-      "result": "W"
-    },
-    {
-      "id": "ef0f74a991d3e35798ae5af77667bce1",
-      "date": "20 JUN",
-      "pick": "Gana Brasil",
-      "match": "Brasil – Haití",
-      "odd": 1.14,
-      "book": "betsson",
-      "stake": 1,
-      "result": "W"
-    },
-    {
-      "id": "66ebb9e3f949caded535d97ce686ca09",
-      "date": "18 JUN",
-      "pick": "Gana República Checa",
-      "match": "República Checa – Sudáfrica",
-      "odd": 1.94,
-      "book": "betfair",
-      "stake": 1,
-      "result": "L"
     }
   ],
-  "PENDING": [
-    {
-      "id": "6a4c946a61ddb5ef4703eb4528ccdef1",
-      "sport": "soccer_epl",
-      "ts": 1788094800000,
-      "date": "30 AGO",
-      "match": "Chelsea – Brighton",
-      "pickKey": "home",
-      "pickLabel": "Gana Chelsea",
-      "odd": 1.9,
-      "book": "betfair"
-    },
-    {
-      "id": "7c2ad8552e286ff88f69ce39ca49541a",
-      "sport": "soccer_france_ligue_one",
-      "ts": 1788115500000,
-      "date": "30 AGO",
-      "match": "Monaco – Marseille",
-      "pickKey": "home",
-      "pickLabel": "Gana Monaco",
-      "odd": 2.51,
-      "book": "gtbets"
-    },
-    {
-      "id": "29ac78994462bce061f8d01e93c7b3f0",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1788193800000,
-      "date": "31 AGO",
-      "match": "Lecce – Roma",
-      "pickKey": "away",
-      "pickLabel": "Gana Roma",
-      "odd": 1.65,
-      "book": "betanysports"
-    }
-  ],
+  "PENDING": [],
   "COMBO_PENDING": [
     {
       "dayId": "06 JUN·c2",
@@ -1499,206 +1465,42 @@
           "odd": 1.59
         }
       ]
-    },
+    }
+  ],
+  "COMBO_RECORD": [
     {
-      "dayId": "29 AGO·c1",
-      "date": "29 AGO",
-      "name": "Combinada del Día",
-      "tier": "single",
-      "legs": [
-        {
-          "id": "385281ab2794b520e81b08f6cf141903",
-          "sport": "soccer_italy_serie_a",
-          "side": "home",
-          "match": "Juventus – Parma",
-          "pick": "Gana Juventus",
-          "odd": 1.27
-        },
-        {
-          "id": "9d7f045126ec9185b73d9c67f881c6d2",
-          "sport": "soccer_germany_bundesliga",
-          "side": "home",
-          "match": "Borussia Dortmund – Hamburger SV",
-          "pick": "Gana Borussia Dortmund",
-          "odd": 1.4
-        },
-        {
-          "id": "5759167055d94ba38e145ab92188abbf",
-          "sport": "soccer_epl",
-          "side": "home",
-          "match": "Manchester United – Ipswich Town",
-          "pick": "Gana Manchester United",
-          "odd": 1.45
-        }
-      ]
-    },
-    {
-      "dayId": "29 AGO·c2",
-      "date": "29 AGO",
-      "name": "Combinada Segura",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "9d7f045126ec9185b73d9c67f881c6d2",
-          "sport": "soccer_germany_bundesliga",
-          "side": "home",
-          "match": "Borussia Dortmund – Hamburger SV",
-          "pick": "Gana Borussia Dortmund",
-          "odd": 1.4
-        },
-        {
-          "id": "5759167055d94ba38e145ab92188abbf",
-          "sport": "soccer_epl",
-          "side": "home",
-          "match": "Manchester United – Ipswich Town",
-          "pick": "Gana Manchester United",
-          "odd": 1.45
-        },
-        {
-          "id": "744192fed865ae616fd27a1dc5392c1c",
-          "sport": "soccer_france_ligue_one",
-          "side": "home",
-          "match": "Rennes – Le Mans FC",
-          "pick": "Gana Rennes",
-          "odd": 1.47
-        }
-      ]
-    },
-    {
-      "dayId": "29 AGO·c3",
-      "date": "29 AGO",
-      "name": "Combinada Valor",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "9f599c08f90decb5098348bddfdd3c8a",
-          "sport": "soccer_spain_la_liga",
-          "side": "away",
-          "match": "Sevilla – Atlético Madrid",
-          "pick": "Gana Atlético Madrid",
-          "odd": 2.04
-        },
-        {
-          "id": "6a4c946a61ddb5ef4703eb4528ccdef1",
-          "sport": "soccer_epl",
-          "side": "home",
-          "match": "Chelsea – Brighton",
-          "pick": "Gana Chelsea",
-          "odd": 1.88
-        },
-        {
-          "id": "385281ab2794b520e81b08f6cf141903",
-          "sport": "soccer_italy_serie_a",
-          "side": "home",
-          "match": "Juventus – Parma",
-          "pick": "Gana Juventus",
-          "odd": 1.27
-        }
-      ]
-    },
-    {
-      "dayId": "29 AGO·c4",
-      "date": "29 AGO",
+      "dayId": "30 AGO·c4",
+      "date": "30 AGO",
       "name": "Combinada Larga",
       "tier": "all",
       "legs": [
         {
-          "id": "385281ab2794b520e81b08f6cf141903",
-          "sport": "soccer_italy_serie_a",
-          "side": "home",
-          "match": "Juventus – Parma",
-          "pick": "Gana Juventus",
-          "odd": 1.27
-        },
-        {
-          "id": "9d7f045126ec9185b73d9c67f881c6d2",
-          "sport": "soccer_germany_bundesliga",
-          "side": "home",
-          "match": "Borussia Dortmund – Hamburger SV",
-          "pick": "Gana Borussia Dortmund",
-          "odd": 1.4
-        },
-        {
-          "id": "5759167055d94ba38e145ab92188abbf",
-          "sport": "soccer_epl",
-          "side": "home",
-          "match": "Manchester United – Ipswich Town",
-          "pick": "Gana Manchester United",
-          "odd": 1.45
-        },
-        {
-          "id": "744192fed865ae616fd27a1dc5392c1c",
-          "sport": "soccer_france_ligue_one",
-          "side": "home",
-          "match": "Rennes – Le Mans FC",
-          "pick": "Gana Rennes",
-          "odd": 1.47
-        }
-      ]
-    },
-    {
-      "dayId": "30 AGO·c1",
-      "date": "30 AGO",
-      "name": "Combinada del Día",
-      "tier": "single",
-      "legs": [
-        {
-          "id": "5ab1a5278538ef69d7a84dfe2030facf",
-          "sport": "soccer_spain_la_liga",
-          "side": "home",
           "match": "Barcelona – Rayo Vallecano",
           "pick": "Gana Barcelona",
-          "odd": 1.18
+          "odd": 1.18,
+          "win": true
         },
         {
-          "id": "5759167055d94ba38e145ab92188abbf",
-          "sport": "soccer_epl",
-          "side": "home",
           "match": "Manchester United – Ipswich Town",
           "pick": "Gana Manchester United",
-          "odd": 1.41
+          "odd": 1.41,
+          "win": true
         },
         {
-          "id": "744192fed865ae616fd27a1dc5392c1c",
-          "sport": "soccer_france_ligue_one",
-          "side": "home",
           "match": "Rennes – Le Mans FC",
           "pick": "Gana Rennes",
-          "odd": 1.46
-        }
-      ]
-    },
-    {
-      "dayId": "30 AGO·c2",
-      "date": "30 AGO",
-      "name": "Combinada Segura",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "5759167055d94ba38e145ab92188abbf",
-          "sport": "soccer_epl",
-          "side": "home",
-          "match": "Manchester United – Ipswich Town",
-          "pick": "Gana Manchester United",
-          "odd": 1.43
+          "odd": 1.46,
+          "win": true
         },
         {
-          "id": "744192fed865ae616fd27a1dc5392c1c",
-          "sport": "soccer_france_ligue_one",
-          "side": "home",
-          "match": "Rennes – Le Mans FC",
-          "pick": "Gana Rennes",
-          "odd": 1.45
-        },
-        {
-          "id": "3e8cb1ccc68725b086d8e0af6bbc72ce",
-          "sport": "soccer_italy_serie_a",
-          "side": "away",
           "match": "Cagliari – Inter",
           "pick": "Gana Inter",
-          "odd": 1.46
+          "odd": 1.47,
+          "win": true
         }
-      ]
+      ],
+      "totalOdd": 3.57,
+      "result": "W"
     },
     {
       "dayId": "30 AGO·c3",
@@ -1707,73 +1509,201 @@
       "tier": "all",
       "legs": [
         {
-          "id": "6a4c946a61ddb5ef4703eb4528ccdef1",
-          "sport": "soccer_epl",
-          "side": "home",
           "match": "Chelsea – Brighton",
           "pick": "Gana Chelsea",
-          "odd": 1.91
+          "odd": 1.91,
+          "win": true
         },
         {
-          "id": "29ac78994462bce061f8d01e93c7b3f0",
-          "sport": "soccer_italy_serie_a",
-          "side": "away",
           "match": "Lecce – Roma",
           "pick": "Gana Roma",
-          "odd": 1.65
+          "odd": 1.65,
+          "win": true
         },
         {
-          "id": "5759167055d94ba38e145ab92188abbf",
-          "sport": "soccer_epl",
-          "side": "home",
           "match": "Manchester United – Ipswich Town",
           "pick": "Gana Manchester United",
-          "odd": 1.4
+          "odd": 1.4,
+          "win": true
         }
-      ]
+      ],
+      "totalOdd": 4.41,
+      "result": "W"
     },
     {
-      "dayId": "30 AGO·c4",
+      "dayId": "30 AGO·c2",
       "date": "30 AGO",
+      "name": "Combinada Segura",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Manchester United – Ipswich Town",
+          "pick": "Gana Manchester United",
+          "odd": 1.43,
+          "win": true
+        },
+        {
+          "match": "Rennes – Le Mans FC",
+          "pick": "Gana Rennes",
+          "odd": 1.45,
+          "win": true
+        },
+        {
+          "match": "Cagliari – Inter",
+          "pick": "Gana Inter",
+          "odd": 1.46,
+          "win": true
+        }
+      ],
+      "totalOdd": 3.03,
+      "result": "W"
+    },
+    {
+      "dayId": "30 AGO·c1",
+      "date": "30 AGO",
+      "name": "Combinada del Día",
+      "tier": "single",
+      "legs": [
+        {
+          "match": "Barcelona – Rayo Vallecano",
+          "pick": "Gana Barcelona",
+          "odd": 1.18,
+          "win": true
+        },
+        {
+          "match": "Manchester United – Ipswich Town",
+          "pick": "Gana Manchester United",
+          "odd": 1.41,
+          "win": true
+        },
+        {
+          "match": "Rennes – Le Mans FC",
+          "pick": "Gana Rennes",
+          "odd": 1.46,
+          "win": true
+        }
+      ],
+      "totalOdd": 2.43,
+      "result": "W"
+    },
+    {
+      "dayId": "29 AGO·c4",
+      "date": "29 AGO",
       "name": "Combinada Larga",
       "tier": "all",
       "legs": [
         {
-          "id": "5ab1a5278538ef69d7a84dfe2030facf",
-          "sport": "soccer_spain_la_liga",
-          "side": "home",
-          "match": "Barcelona – Rayo Vallecano",
-          "pick": "Gana Barcelona",
-          "odd": 1.18
+          "match": "Juventus – Parma",
+          "pick": "Gana Juventus",
+          "odd": 1.27,
+          "win": true
         },
         {
-          "id": "5759167055d94ba38e145ab92188abbf",
-          "sport": "soccer_epl",
-          "side": "home",
+          "match": "Borussia Dortmund – Hamburger SV",
+          "pick": "Gana Borussia Dortmund",
+          "odd": 1.4,
+          "win": true
+        },
+        {
           "match": "Manchester United – Ipswich Town",
           "pick": "Gana Manchester United",
-          "odd": 1.41
+          "odd": 1.45,
+          "win": true
         },
         {
-          "id": "744192fed865ae616fd27a1dc5392c1c",
-          "sport": "soccer_france_ligue_one",
-          "side": "home",
           "match": "Rennes – Le Mans FC",
           "pick": "Gana Rennes",
-          "odd": 1.46
+          "odd": 1.47,
+          "win": true
+        }
+      ],
+      "totalOdd": 3.79,
+      "result": "W"
+    },
+    {
+      "dayId": "29 AGO·c3",
+      "date": "29 AGO",
+      "name": "Combinada Valor",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Sevilla – Atlético Madrid",
+          "pick": "Gana Atlético Madrid",
+          "odd": 2.04,
+          "win": true
         },
         {
-          "id": "3e8cb1ccc68725b086d8e0af6bbc72ce",
-          "sport": "soccer_italy_serie_a",
-          "side": "away",
-          "match": "Cagliari – Inter",
-          "pick": "Gana Inter",
-          "odd": 1.47
+          "match": "Chelsea – Brighton",
+          "pick": "Gana Chelsea",
+          "odd": 1.88,
+          "win": true
+        },
+        {
+          "match": "Juventus – Parma",
+          "pick": "Gana Juventus",
+          "odd": 1.27,
+          "win": true
         }
-      ]
-    }
-  ],
-  "COMBO_RECORD": [
+      ],
+      "totalOdd": 4.87,
+      "result": "W"
+    },
+    {
+      "dayId": "29 AGO·c2",
+      "date": "29 AGO",
+      "name": "Combinada Segura",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Borussia Dortmund – Hamburger SV",
+          "pick": "Gana Borussia Dortmund",
+          "odd": 1.4,
+          "win": true
+        },
+        {
+          "match": "Manchester United – Ipswich Town",
+          "pick": "Gana Manchester United",
+          "odd": 1.45,
+          "win": true
+        },
+        {
+          "match": "Rennes – Le Mans FC",
+          "pick": "Gana Rennes",
+          "odd": 1.47,
+          "win": true
+        }
+      ],
+      "totalOdd": 2.98,
+      "result": "W"
+    },
+    {
+      "dayId": "29 AGO·c1",
+      "date": "29 AGO",
+      "name": "Combinada del Día",
+      "tier": "single",
+      "legs": [
+        {
+          "match": "Juventus – Parma",
+          "pick": "Gana Juventus",
+          "odd": 1.27,
+          "win": true
+        },
+        {
+          "match": "Borussia Dortmund – Hamburger SV",
+          "pick": "Gana Borussia Dortmund",
+          "odd": 1.4,
+          "win": true
+        },
+        {
+          "match": "Manchester United – Ipswich Town",
+          "pick": "Gana Manchester United",
+          "odd": 1.45,
+          "win": true
+        }
+      ],
+      "totalOdd": 2.58,
+      "result": "W"
+    },
     {
       "dayId": "28 AGO·c4",
       "date": "28 AGO",
@@ -2717,251 +2647,377 @@
       ],
       "totalOdd": 3.14,
       "result": "L"
-    },
-    {
-      "dayId": "27 JUN·c4",
-      "date": "27 JUN",
-      "name": "Combinada Larga",
-      "tier": "all",
-      "legs": [
-        {
-          "match": "Jordania – Argentina",
-          "pick": "Gana Argentina",
-          "odd": 1.17,
-          "win": true
-        },
-        {
-          "match": "Panamá – Inglaterra",
-          "pick": "Gana Inglaterra",
-          "odd": 1.18,
-          "win": true
-        },
-        {
-          "match": "Croacia – Ghana",
-          "pick": "Gana Croacia",
-          "odd": 1.94,
-          "win": true
-        },
-        {
-          "match": "Colombia – Portugal",
-          "pick": "Gana Portugal",
-          "odd": 2.1,
-          "win": false
-        }
-      ],
-      "totalOdd": 5.62,
-      "result": "L"
-    },
-    {
-      "dayId": "27 JUN·c3",
-      "date": "27 JUN",
-      "name": "Combinada Valor",
-      "tier": "all",
-      "legs": [
-        {
-          "match": "Croacia – Ghana",
-          "pick": "Gana Croacia",
-          "odd": 1.94,
-          "win": true
-        },
-        {
-          "match": "Colombia – Portugal",
-          "pick": "Gana Portugal",
-          "odd": 2.1,
-          "win": false
-        },
-        {
-          "match": "Jordania – Argentina",
-          "pick": "Gana Argentina",
-          "odd": 1.17,
-          "win": true
-        }
-      ],
-      "totalOdd": 4.77,
-      "result": "L"
-    },
-    {
-      "dayId": "27 JUN·c1",
-      "date": "27 JUN",
-      "name": "Combinada del Día",
-      "tier": "single",
-      "legs": [
-        {
-          "match": "Jordania – Argentina",
-          "pick": "Gana Argentina",
-          "odd": 1.16,
-          "win": true
-        },
-        {
-          "match": "Panamá – Inglaterra",
-          "pick": "Gana Inglaterra",
-          "odd": 1.19,
-          "win": true
-        },
-        {
-          "match": "Croacia – Ghana",
-          "pick": "Gana Croacia",
-          "odd": 1.95,
-          "win": true
-        }
-      ],
-      "totalOdd": 2.69,
-      "result": "W"
-    },
-    {
-      "dayId": "26 JUN·c4",
-      "date": "26 JUN",
-      "name": "Combinada Larga",
-      "tier": "all",
-      "legs": [
-        {
-          "match": "Jordania – Argentina",
-          "pick": "Gana Argentina",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Nueva Zelanda – Bélgica",
-          "pick": "Gana Bélgica",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Panamá – Inglaterra",
-          "pick": "Gana Inglaterra",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Senegal – Irak",
-          "pick": "Gana Senegal",
-          "odd": 1.25,
-          "win": true
-        }
-      ],
-      "totalOdd": 2.16,
-      "result": "W"
-    },
-    {
-      "dayId": "26 JUN·c3",
-      "date": "26 JUN",
-      "name": "Combinada Valor",
-      "tier": "all",
-      "legs": [
-        {
-          "match": "Noruega – Francia",
-          "pick": "Gana Francia",
-          "odd": 1.66,
-          "win": true
-        },
-        {
-          "match": "Croacia – Ghana",
-          "pick": "Gana Croacia",
-          "odd": 1.83,
-          "win": true
-        },
-        {
-          "match": "Jordania – Argentina",
-          "pick": "Gana Argentina",
-          "odd": 1.2,
-          "win": true
-        }
-      ],
-      "totalOdd": 3.65,
-      "result": "W"
-    },
-    {
-      "dayId": "26 JUN·c2",
-      "date": "26 JUN",
-      "name": "Combinada Segura",
-      "tier": "all",
-      "legs": [
-        {
-          "match": "Nueva Zelanda – Bélgica",
-          "pick": "Gana Bélgica",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Panamá – Inglaterra",
-          "pick": "Gana Inglaterra",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Senegal – Irak",
-          "pick": "Gana Senegal",
-          "odd": 1.25,
-          "win": true
-        }
-      ],
-      "totalOdd": 1.8,
-      "result": "W"
-    },
-    {
-      "dayId": "26 JUN·c1",
-      "date": "26 JUN",
-      "name": "Combinada del Día",
-      "tier": "single",
-      "legs": [
-        {
-          "match": "Jordania – Argentina",
-          "pick": "Gana Argentina",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Nueva Zelanda – Bélgica",
-          "pick": "Gana Bélgica",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Panamá – Inglaterra",
-          "pick": "Gana Inglaterra",
-          "odd": 1.2,
-          "win": true
-        }
-      ],
-      "totalOdd": 1.73,
-      "result": "W"
-    },
-    {
-      "dayId": "25 JUN·c4",
-      "date": "25 JUN",
-      "name": "Combinada Larga",
-      "tier": "all",
-      "legs": [
-        {
-          "match": "Nueva Zelanda – Bélgica",
-          "pick": "Gana Bélgica",
-          "odd": 1.2,
-          "win": true
-        },
-        {
-          "match": "Senegal – Irak",
-          "pick": "Gana Senegal",
-          "odd": 1.26,
-          "win": true
-        },
-        {
-          "match": "Curazao – Costa de Marfil",
-          "pick": "Gana Costa de Marfil",
-          "odd": 1.18,
-          "win": true
-        },
-        {
-          "match": "Uruguay – España",
-          "pick": "Gana España",
-          "odd": 1.51,
-          "win": true
-        }
-      ],
-      "totalOdd": 2.69,
-      "result": "W"
     }
   ],
   "ARB_RECORD": [
+    {
+      "date": "31 AGO",
+      "match": "Atalanta – Bologna",
+      "marginPct": 0.08,
+      "profit": 0.08,
+      "legs": [
+        {
+          "pick": "Gana Atalanta",
+          "odd": 2,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.75,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Bologna",
+          "odd": 4.3,
+          "book": "unibet"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Sunderland – Fulham",
+      "marginPct": 0.01,
+      "profit": 0.01,
+      "legs": [
+        {
+          "pick": "Gana Sunderland",
+          "odd": 2.38,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.45,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Fulham",
+          "odd": 3.45,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Leeds United – Brentford",
+      "marginPct": 0.62,
+      "profit": 0.62,
+      "legs": [
+        {
+          "pick": "Gana Leeds United",
+          "odd": 3,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.55,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Brentford",
+          "odd": 2.64,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
+      "date": "31 AGO",
+      "match": "CA Osasuna – Getafe",
+      "marginPct": 0.43,
+      "profit": 0.44,
+      "legs": [
+        {
+          "pick": "Gana CA Osasuna",
+          "odd": 2.27,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.1,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Getafe",
+          "odd": 4.3,
+          "book": "matchbook"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Monaco – Marseille",
+      "marginPct": 0.77,
+      "profit": 0.77,
+      "legs": [
+        {
+          "pick": "Gana Monaco",
+          "odd": 2.4,
+          "book": "coolbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.8,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Marseille",
+          "odd": 3.2,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Augsburg – FC Schalke 04",
+      "marginPct": 0.44,
+      "profit": 0.45,
+      "legs": [
+        {
+          "pick": "Gana Augsburg",
+          "odd": 2.3,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.75,
+          "book": "coolbet"
+        },
+        {
+          "pick": "Gana FC Schalke 04",
+          "odd": 3.4,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
+      "date": "31 AGO",
+      "match": "Lecce – Roma",
+      "marginPct": 6.03,
+      "profit": 6.41,
+      "legs": [
+        {
+          "pick": "Gana Lecce",
+          "odd": 8.6,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.6,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Roma",
+          "odd": 1.65,
+          "book": "betanysports"
+        }
+      ]
+    },
+    {
+      "date": "31 AGO",
+      "match": "Barcelona – Rayo Vallecano",
+      "marginPct": 0.08,
+      "profit": 0.08,
+      "legs": [
+        {
+          "pick": "Gana Barcelona",
+          "odd": 1.18,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 9.6,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Rayo Vallecano",
+          "odd": 21,
+          "book": "matchbook"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Celta Vigo – Athletic Club",
+      "marginPct": 0.02,
+      "profit": 0.02,
+      "legs": [
+        {
+          "pick": "Gana Celta Vigo",
+          "odd": 2.76,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.35,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Athletic Club",
+          "odd": 2.95,
+          "book": "coolbet"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "SC Freiburg – Werder Bremen",
+      "marginPct": 0.47,
+      "profit": 0.47,
+      "legs": [
+        {
+          "pick": "Gana SC Freiburg",
+          "odd": 2.01,
+          "book": "gtbets"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.85,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Werder Bremen",
+          "odd": 4.2,
+          "book": "matchbook"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Lazio – Genoa",
+      "marginPct": 0.71,
+      "profit": 0.72,
+      "legs": [
+        {
+          "pick": "Gana Lazio",
+          "odd": 2.16,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.2,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Genoa",
+          "odd": 4.6,
+          "book": "unibet"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Cagliari – Inter",
+      "marginPct": 0.24,
+      "profit": 0.24,
+      "legs": [
+        {
+          "pick": "Gana Cagliari",
+          "odd": 8.8,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.8,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Inter",
+          "odd": 1.48,
+          "book": "matchbook"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Napoli – Como",
+      "marginPct": 0.1,
+      "profit": 0.1,
+      "legs": [
+        {
+          "pick": "Gana Napoli",
+          "odd": 2.64,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.25,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Como",
+          "odd": 3.2,
+          "book": "betfair"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Manchester United – Ipswich Town",
+      "marginPct": 0.04,
+      "profit": 0.04,
+      "legs": [
+        {
+          "pick": "Gana Manchester United",
+          "odd": 1.45,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 5.2,
+          "book": "winamax"
+        },
+        {
+          "pick": "Gana Ipswich Town",
+          "odd": 8.5,
+          "book": "unibet"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Chelsea – Brighton",
+      "marginPct": 0.66,
+      "profit": 0.66,
+      "legs": [
+        {
+          "pick": "Gana Chelsea",
+          "odd": 1.9,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.17,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Brighton",
+          "odd": 4.4,
+          "book": "unibet"
+        }
+      ]
+    },
+    {
+      "date": "30 AGO",
+      "match": "Real Madrid – Málaga",
+      "marginPct": 0.12,
+      "profit": 0.12,
+      "legs": [
+        {
+          "pick": "Gana Real Madrid",
+          "odd": 1.15,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 10.85,
+          "book": "betonlineag"
+        },
+        {
+          "pick": "Gana Málaga",
+          "odd": 27,
+          "book": "matchbook"
+        }
+      ]
+    },
     {
       "date": "29 AGO",
       "match": "Bournemouth – Everton",
@@ -3513,802 +3569,17 @@
           "book": "betfair"
         }
       ]
-    },
-    {
-      "date": "26 AGO",
-      "match": "Real Madrid – Real Sociedad",
-      "marginPct": 1.18,
-      "profit": 1.19,
-      "legs": [
-        {
-          "pick": "Gana Real Madrid",
-          "odd": 1.37,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 6.4,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Real Sociedad",
-          "odd": 9.8,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "24 AGO",
-      "match": "Málaga – Deportivo La Coruña",
-      "marginPct": 0.12,
-      "profit": 0.12,
-      "legs": [
-        {
-          "pick": "Gana Málaga",
-          "odd": 2.51,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.1,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Deportivo La Coruña",
-          "odd": 3.6,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "24 AGO",
-      "match": "Bologna – Lazio",
-      "marginPct": 0.5,
-      "profit": 0.5,
-      "legs": [
-        {
-          "pick": "Gana Bologna",
-          "odd": 2.36,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.33,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Lazio",
-          "odd": 3.69,
-          "book": "betonlineag"
-        }
-      ]
-    },
-    {
-      "date": "24 AGO",
-      "match": "CA Osasuna – Levante",
-      "marginPct": 0.5,
-      "profit": 0.5,
-      "legs": [
-        {
-          "pick": "Gana CA Osasuna",
-          "odd": 1.95,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.75,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Levante",
-          "odd": 4.64,
-          "book": "betonlineag"
-        }
-      ]
-    },
-    {
-      "date": "24 AGO",
-      "match": "Roma – Fiorentina",
-      "marginPct": 0.79,
-      "profit": 0.79,
-      "legs": [
-        {
-          "pick": "Gana Roma",
-          "odd": 1.7,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.1,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Fiorentina",
-          "odd": 6.25,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Brighton – Aston Villa",
-      "marginPct": 0.13,
-      "profit": 0.13,
-      "legs": [
-        {
-          "pick": "Gana Brighton",
-          "odd": 2.28,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.7,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Aston Villa",
-          "odd": 3.45,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Elche CF – Barcelona",
-      "marginPct": 0.29,
-      "profit": 0.29,
-      "legs": [
-        {
-          "pick": "Gana Elche CF",
-          "odd": 9.5,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5.8,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Barcelona",
-          "odd": 1.39,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Rennes – PSG",
-      "marginPct": 0.44,
-      "profit": 0.44,
-      "legs": [
-        {
-          "pick": "Gana Rennes",
-          "odd": 6,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana PSG",
-          "odd": 1.59,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Angers – Lille",
-      "marginPct": 0.23,
-      "profit": 0.24,
-      "legs": [
-        {
-          "pick": "Gana Angers",
-          "odd": 5.4,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.94,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Lille",
-          "odd": 1.79,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Venezia – Lecce",
-      "marginPct": 0.38,
-      "profit": 0.38,
-      "legs": [
-        {
-          "pick": "Gana Venezia",
-          "odd": 2.36,
-          "book": "gtbets"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.27,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Lecce",
-          "odd": 3.75,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Frosinone – Juventus",
-      "marginPct": 0.3,
-      "profit": 0.3,
-      "legs": [
-        {
-          "pick": "Gana Frosinone",
-          "odd": 8.2,
-          "book": "matchbook"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.7,
-          "book": "winamax"
-        },
-        {
-          "pick": "Gana Juventus",
-          "odd": 1.51,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Manchester City – Bournemouth",
-      "marginPct": 0.16,
-      "profit": 0.17,
-      "legs": [
-        {
-          "pick": "Gana Manchester City",
-          "odd": 1.52,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5.2,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Bournemouth",
-          "odd": 6.75,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "date": "23 AGO",
-      "match": "Getafe – Real Racing Club de Santander",
-      "marginPct": 0.83,
-      "profit": 0.84,
-      "legs": [
-        {
-          "pick": "Gana Getafe",
-          "odd": 2.32,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.1,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Real Racing Club de Santander",
-          "odd": 4.2,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "22 AGO",
-      "match": "Nice – Lorient",
-      "marginPct": 0.04,
-      "profit": 0.04,
-      "legs": [
-        {
-          "pick": "Gana Nice",
-          "odd": 2.26,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.58,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Lorient",
-          "odd": 3.6,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "22 AGO",
-      "match": "Le Mans FC – Brest",
-      "marginPct": 0.05,
-      "profit": 0.05,
-      "legs": [
-        {
-          "pick": "Gana Le Mans FC",
-          "odd": 2.6,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.58,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Brest",
-          "odd": 2.98,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "date": "22 AGO",
-      "match": "Parma – Cagliari",
-      "marginPct": 0.96,
-      "profit": 0.97,
-      "legs": [
-        {
-          "pick": "Gana Parma",
-          "odd": 2.7,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.11,
-          "book": "gtbets"
-        },
-        {
-          "pick": "Gana Cagliari",
-          "odd": 3.35,
-          "book": "unibet"
-        }
-      ]
     }
   ],
-  "ARB_PENDING": [
-    {
-      "id": "6ff0ed06ec6e70d249bf0e5dbd4067f2",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1788102000000,
-      "date": "30 AGO",
-      "match": "Real Madrid – Málaga",
-      "marginPct": 0.12,
-      "profit": 0.12,
-      "legs": [
-        {
-          "pick": "Gana Real Madrid",
-          "odd": 1.15,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 10.85,
-          "book": "betonlineag"
-        },
-        {
-          "pick": "Gana Málaga",
-          "odd": 27,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "6a4c946a61ddb5ef4703eb4528ccdef1",
-      "sport": "soccer_epl",
-      "ts": 1788094800000,
-      "date": "30 AGO",
-      "match": "Chelsea – Brighton",
-      "marginPct": 0.66,
-      "profit": 0.66,
-      "legs": [
-        {
-          "pick": "Gana Chelsea",
-          "odd": 1.9,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.17,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Brighton",
-          "odd": 4.4,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "5759167055d94ba38e145ab92188abbf",
-      "sport": "soccer_epl",
-      "ts": 1788103800000,
-      "date": "30 AGO",
-      "match": "Manchester United – Ipswich Town",
-      "marginPct": 0.04,
-      "profit": 0.04,
-      "legs": [
-        {
-          "pick": "Gana Manchester United",
-          "odd": 1.45,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5.2,
-          "book": "winamax"
-        },
-        {
-          "pick": "Gana Ipswich Town",
-          "odd": 8.5,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "c57fd532ff733bb6face677a55f41f09",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1788107400000,
-      "date": "30 AGO",
-      "match": "Napoli – Como",
-      "marginPct": 0.1,
-      "profit": 0.1,
-      "legs": [
-        {
-          "pick": "Gana Napoli",
-          "odd": 2.64,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.25,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Como",
-          "odd": 3.2,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "3e8cb1ccc68725b086d8e0af6bbc72ce",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1788115500000,
-      "date": "30 AGO",
-      "match": "Cagliari – Inter",
-      "marginPct": 0.24,
-      "profit": 0.24,
-      "legs": [
-        {
-          "pick": "Gana Cagliari",
-          "odd": 8.8,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.8,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Inter",
-          "odd": 1.48,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "b920af3ced7e753c821036f7282edb55",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1788115500000,
-      "date": "30 AGO",
-      "match": "Lazio – Genoa",
-      "marginPct": 0.71,
-      "profit": 0.72,
-      "legs": [
-        {
-          "pick": "Gana Lazio",
-          "odd": 2.16,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.2,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Genoa",
-          "odd": 4.6,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "5d3afd8c18aec6fac47b3c1244bd9002",
-      "sport": "soccer_germany_bundesliga",
-      "ts": 1788096600000,
-      "date": "30 AGO",
-      "match": "SC Freiburg – Werder Bremen",
-      "marginPct": 0.47,
-      "profit": 0.47,
-      "legs": [
-        {
-          "pick": "Gana SC Freiburg",
-          "odd": 2.01,
-          "book": "gtbets"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.85,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Werder Bremen",
-          "odd": 4.2,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "41d50199bc21a00a53f3e0bd2a149ff2",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1788118200000,
-      "date": "30 AGO",
-      "match": "Celta Vigo – Athletic Club",
-      "marginPct": 0.02,
-      "profit": 0.02,
-      "legs": [
-        {
-          "pick": "Gana Celta Vigo",
-          "odd": 2.76,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.35,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Athletic Club",
-          "odd": 2.95,
-          "book": "coolbet"
-        }
-      ]
-    },
-    {
-      "id": "5ab1a5278538ef69d7a84dfe2030facf",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1788204600000,
-      "date": "31 AGO",
-      "match": "Barcelona – Rayo Vallecano",
-      "marginPct": 0.08,
-      "profit": 0.08,
-      "legs": [
-        {
-          "pick": "Gana Barcelona",
-          "odd": 1.18,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 9.6,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Rayo Vallecano",
-          "odd": 21,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "29ac78994462bce061f8d01e93c7b3f0",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1788193800000,
-      "date": "31 AGO",
-      "match": "Lecce – Roma",
-      "marginPct": 6.03,
-      "profit": 6.41,
-      "legs": [
-        {
-          "pick": "Gana Lecce",
-          "odd": 8.6,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.6,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Roma",
-          "odd": 1.65,
-          "book": "betanysports"
-        }
-      ]
-    },
-    {
-      "id": "78ab183499784117d62a40821294d9fa",
-      "sport": "soccer_germany_bundesliga",
-      "ts": 1788103800000,
-      "date": "30 AGO",
-      "match": "Augsburg – FC Schalke 04",
-      "marginPct": 0.44,
-      "profit": 0.45,
-      "legs": [
-        {
-          "pick": "Gana Augsburg",
-          "odd": 2.3,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.75,
-          "book": "coolbet"
-        },
-        {
-          "pick": "Gana FC Schalke 04",
-          "odd": 3.4,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "7c2ad8552e286ff88f69ce39ca49541a",
-      "sport": "soccer_france_ligue_one",
-      "ts": 1788115500000,
-      "date": "30 AGO",
-      "match": "Monaco – Marseille",
-      "marginPct": 0.77,
-      "profit": 0.77,
-      "legs": [
-        {
-          "pick": "Gana Monaco",
-          "odd": 2.4,
-          "book": "coolbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.8,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Marseille",
-          "odd": 3.2,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "bbb9408b2825a8699540fe6f53325e17",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1788197400000,
-      "date": "31 AGO",
-      "match": "CA Osasuna – Getafe",
-      "marginPct": 0.43,
-      "profit": 0.44,
-      "legs": [
-        {
-          "pick": "Gana CA Osasuna",
-          "odd": 2.27,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.1,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Getafe",
-          "odd": 4.3,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "e479c08421b8549c6959c2b84f6f3f79",
-      "sport": "soccer_epl",
-      "ts": 1788094800000,
-      "date": "30 AGO",
-      "match": "Leeds United – Brentford",
-      "marginPct": 0.62,
-      "profit": 0.62,
-      "legs": [
-        {
-          "pick": "Gana Leeds United",
-          "odd": 3,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.55,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Brentford",
-          "odd": 2.64,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "9becb395ad634de55caec620f9d713fa",
-      "sport": "soccer_epl",
-      "ts": 1788094800000,
-      "date": "30 AGO",
-      "match": "Sunderland – Fulham",
-      "marginPct": 0.01,
-      "profit": 0.01,
-      "legs": [
-        {
-          "pick": "Gana Sunderland",
-          "odd": 2.38,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.45,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Fulham",
-          "odd": 3.45,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "507dca3c3b3ca18f79ed39f4803401d7",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1788201900000,
-      "date": "31 AGO",
-      "match": "Atalanta – Bologna",
-      "marginPct": 0.08,
-      "profit": 0.08,
-      "legs": [
-        {
-          "pick": "Gana Atalanta",
-          "odd": 2,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.75,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Bologna",
-          "odd": 4.3,
-          "book": "unibet"
-        }
-      ]
-    }
-  ],
+  "ARB_PENDING": [],
   "LADDER": {
     "id": "Lmrel6b07",
     "start": 10,
     "target": 250,
     "steps": 10,
-    "current": 8,
+    "current": 9,
     "status": "live",
-    "bank": 133.01,
+    "bank": 156.95,
     "rungs": [
       {
         "n": 1,
@@ -4397,7 +3668,7 @@
         "odd": 1.18,
         "book": "onexbet",
         "bank": 156.95,
-        "result": "today",
+        "result": "W",
         "date": "30 AGO"
       },
       {
