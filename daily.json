@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-09-02T07:00:25.219Z",
+    "updatedAt": "2026-09-02T11:57:56.774Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 20,
     "stale": false,
     "credits": {
-      "remaining": 457,
-      "used": 43
+      "remaining": 446,
+      "used": 54
     }
   },
   "TEAMS": {
@@ -189,17 +189,17 @@
       "away": "celtav",
       "odds": {
         "home": {
-          "onexbet": 2.04,
+          "onexbet": 2.03,
           "betfair": 2,
           "matchbook": 2,
-          "nordicbet": 1.98,
-          "betsson": 1.98,
+          "nordicbet": 1.95,
+          "betsson": 1.95,
           "unibet": 1.95,
-          "betclic": 1.95,
-          "codere": 1.99,
+          "betclic": 1.93,
+          "codere": 1.97,
           "winamax": 1.92,
           "tipico": 1.9,
-          "everygame": 1.9,
+          "everygame": 1.85,
           "pinnacle": 1.95,
           "williamhill": 1.95,
           "leovegas": 1.87,
@@ -209,17 +209,17 @@
         },
         "draw": {
           "onexbet": 3.7,
-          "betfair": 3.75,
-          "matchbook": 3.75,
-          "nordicbet": 3.45,
-          "betsson": 3.45,
+          "betfair": 3.8,
+          "matchbook": 3.8,
+          "nordicbet": 3.4,
+          "betsson": 3.4,
           "unibet": 3.7,
-          "betclic": 3.53,
+          "betclic": 3.55,
           "codere": 3.55,
           "winamax": 3.65,
           "tipico": 3.6,
           "everygame": 3.4,
-          "pinnacle": 3.64,
+          "pinnacle": 3.65,
           "williamhill": 3.4,
           "leovegas": 3.45,
           "pmu": 3.5,
@@ -227,18 +227,18 @@
           "coolbet": 3.6
         },
         "away": {
-          "onexbet": 3.91,
+          "onexbet": 3.94,
           "betfair": 4.1,
           "matchbook": 4.1,
-          "nordicbet": 3.7,
-          "betsson": 3.7,
+          "nordicbet": 3.95,
+          "betsson": 3.95,
           "unibet": 4.1,
-          "betclic": 3.78,
-          "codere": 3.8,
+          "betclic": 3.83,
+          "codere": 3.85,
           "winamax": 3.7,
           "tipico": 3.9,
           "everygame": 3.75,
-          "pinnacle": 4.03,
+          "pinnacle": 4.04,
           "williamhill": 3.7,
           "leovegas": 3.8,
           "pmu": 3.9,
@@ -247,9 +247,9 @@
         }
       },
       "model": {
-        "home": 0.4876961798992718,
-        "draw": 0.2666484814760898,
-        "away": 0.24565533862463834,
+        "home": 0.4901339021484137,
+        "draw": 0.2666295985466746,
+        "away": 0.24323649930491184,
         "fromMarket": true
       }
     },
@@ -261,17 +261,17 @@
       "away": "lil",
       "odds": {
         "home": {
-          "winamax": 3.25,
-          "coolbet": 3.55,
+          "winamax": 3.3,
+          "coolbet": 3.5,
           "onexbet": 3.54,
           "gtbets": 3.39,
-          "codere": 3.35,
+          "codere": 3.4,
           "suprabets": 3.26,
           "unibet": 3.55,
-          "betclic": 3.35,
+          "betclic": 3.38,
           "sport888": 3.25,
           "williamhill": 3.3,
-          "tipico": 3.4,
+          "tipico": 3.5,
           "betfair": 3.6,
           "pinnacle": 3.46,
           "pmu": 3.4,
@@ -282,41 +282,41 @@
           "betsson": 3.35
         },
         "draw": {
-          "winamax": 3.35,
+          "winamax": 3.4,
           "coolbet": 3.4,
           "onexbet": 3.5,
           "gtbets": 3.39,
           "codere": 3.3,
           "suprabets": 3.23,
-          "unibet": 3.4,
+          "unibet": 3.45,
           "betclic": 3.3,
           "sport888": 3.2,
           "williamhill": 3.25,
-          "tipico": 3.3,
+          "tipico": 3.4,
           "betfair": 3.5,
           "pinnacle": 3.42,
-          "pmu": 3.25,
-          "leovegas": 3.4,
+          "pmu": 3.3,
+          "leovegas": 3.45,
           "betonlineag": 3.4,
           "everygame": 3.25,
-          "nordicbet": 3.4,
-          "betsson": 3.4
+          "nordicbet": 3.3,
+          "betsson": 3.3
         },
         "away": {
           "winamax": 2.1,
-          "coolbet": 2.18,
+          "coolbet": 2.21,
           "onexbet": 2.24,
           "gtbets": 2.17,
-          "codere": 2.22,
+          "codere": 2.21,
           "suprabets": 2.11,
           "unibet": 2.2,
-          "betclic": 2.18,
+          "betclic": 2.17,
           "sport888": 2.15,
           "williamhill": 2.15,
-          "tipico": 2.1,
-          "betfair": 2.24,
+          "tipico": 2.05,
+          "betfair": 2.26,
           "pinnacle": 2.21,
-          "pmu": 2.14,
+          "pmu": 2.12,
           "leovegas": 2.2,
           "betonlineag": 2.2,
           "everygame": 2.1,
@@ -325,9 +325,9 @@
         }
       },
       "model": {
-        "home": 0.27902844828773044,
-        "draw": 0.28332697119109,
-        "away": 0.4376445805211796,
+        "home": 0.2784307590726031,
+        "draw": 0.28310289408307987,
+        "away": 0.438466346844317,
         "fromMarket": true
       }
     }
@@ -3258,7 +3258,34 @@
       ]
     }
   ],
-  "ARB_PENDING": [],
+  "ARB_PENDING": [
+    {
+      "id": "5a4aaa142d12a350f302f2fb62fef0b3",
+      "sport": "soccer_spain_la_liga",
+      "ts": 1788462000000,
+      "date": "03 SEPT",
+      "match": "Real Sociedad – Celta Vigo",
+      "marginPct": 0.03,
+      "profit": 0.03,
+      "legs": [
+        {
+          "pick": "Gana Real Sociedad",
+          "odd": 2.03,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.8,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Celta Vigo",
+          "odd": 4.1,
+          "book": "betfair"
+        }
+      ]
+    }
+  ],
   "LADDER": {
     "id": "Lmrel6b07",
     "start": 10,
