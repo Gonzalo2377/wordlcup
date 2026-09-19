@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-09-18T12:04:58.846Z",
+    "updatedAt": "2026-09-19T07:01:02.750Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -5056,84 +5056,6 @@
   ],
   "ARB_PENDING": [
     {
-      "id": "aa0e2541144928205ab6d870953d42c2",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1789412400000,
-      "date": "14 SEPT",
-      "match": "Villarreal – Real Betis",
-      "marginPct": 0.1,
-      "profit": 0.1,
-      "legs": [
-        {
-          "pick": "Gana Villarreal",
-          "odd": 1.98,
-          "book": "coolbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.1,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Real Betis",
-          "odd": 4,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "17a081148b714450797ef8d6a29d16e6",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1789403400000,
-      "date": "14 SEPT",
-      "match": "Torino – Roma",
-      "marginPct": 0.66,
-      "profit": 0.67,
-      "legs": [
-        {
-          "pick": "Gana Torino",
-          "odd": 6.5,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.5,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Roma",
-          "odd": 1.62,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "9da3aa4b46166eb4ccd1e600d67080a6",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1789403400000,
-      "date": "14 SEPT",
-      "match": "Como – Parma",
-      "marginPct": 0.79,
-      "profit": 0.8,
-      "legs": [
-        {
-          "pick": "Gana Como",
-          "odd": 1.26,
-          "book": "gtbets"
-        },
-        {
-          "pick": "Empate",
-          "odd": 7,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Parma",
-          "odd": 18,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
       "id": "0b57607f4a514ee24df31b0c2db9ddc5",
       "sport": "soccer_spain_la_liga",
       "ts": 1789500600000,
@@ -5156,32 +5078,6 @@
           "pick": "Gana Real Madrid",
           "odd": 1.3,
           "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "7ea3ea9925ae0f1d149965fb9769c7dc",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1789411500000,
-      "date": "14 SEPT",
-      "match": "Inter – Udinese",
-      "marginPct": 0.19,
-      "profit": 0.19,
-      "legs": [
-        {
-          "pick": "Gana Inter",
-          "odd": 1.29,
-          "book": "gtbets"
-        },
-        {
-          "pick": "Empate",
-          "odd": 6.6,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Udinese",
-          "odd": 14,
-          "book": "betfair"
         }
       ]
     },
