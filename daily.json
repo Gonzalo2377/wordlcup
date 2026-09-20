@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-09-19T11:47:37.515Z",
+    "updatedAt": "2026-09-20T07:01:06.577Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -5055,84 +5055,6 @@
     }
   ],
   "ARB_PENDING": [
-    {
-      "id": "0b57607f4a514ee24df31b0c2db9ddc5",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1789500600000,
-      "date": "15 SEPT",
-      "match": "Elche CF – Real Madrid",
-      "marginPct": 0.46,
-      "profit": 0.46,
-      "legs": [
-        {
-          "pick": "Gana Elche CF",
-          "odd": 12,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 7,
-          "book": "betonlineag"
-        },
-        {
-          "pick": "Gana Real Madrid",
-          "odd": 1.3,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "b9a6e597fd597637efa24b92d51dda62",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1789491600000,
-      "date": "15 SEPT",
-      "match": "Rayo Vallecano – Espanyol",
-      "marginPct": 0.08,
-      "profit": 0.08,
-      "legs": [
-        {
-          "pick": "Gana Rayo Vallecano",
-          "odd": 2.32,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.54,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Espanyol",
-          "odd": 3.5,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "d6474326396cdd0e300afd0193c7c93d",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1789495200000,
-      "date": "15 SEPT",
-      "match": "Alavés – Valencia",
-      "marginPct": 0.24,
-      "profit": 0.24,
-      "legs": [
-        {
-          "pick": "Gana Alavés",
-          "odd": 1.94,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.45,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Valencia",
-          "odd": 5.2,
-          "book": "betfair"
-        }
-      ]
-    },
     {
       "id": "923b87c9f2ccf67f9db1897dd6d71415",
       "sport": "soccer_uefa_europa_league",
