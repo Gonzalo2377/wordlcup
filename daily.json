@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-09-20T12:01:43.344Z",
+    "updatedAt": "2026-09-21T07:00:45.811Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -5054,86 +5054,7 @@
       ]
     }
   ],
-  "ARB_PENDING": [
-    {
-      "id": "923b87c9f2ccf67f9db1897dd6d71415",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1789585200000,
-      "date": "16 SEPT",
-      "match": "AC Milan – Benfica",
-      "marginPct": 0.76,
-      "profit": 0.76,
-      "legs": [
-        {
-          "pick": "Gana AC Milan",
-          "odd": 2.18,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.85,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Benfica",
-          "odd": 3.65,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "a27b797083a501de082340d98ada3c8b",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1789585200000,
-      "date": "16 SEPT",
-      "match": "Bayer Leverkusen – NK Celje",
-      "marginPct": 0.05,
-      "profit": 0.05,
-      "legs": [
-        {
-          "pick": "Gana Bayer Leverkusen",
-          "odd": 1.18,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 9.8,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana NK Celje",
-          "odd": 20,
-          "book": "matchbook"
-        }
-      ]
-    },
-    {
-      "id": "32e9c1d63aed0abb71f90e02f91f4e10",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1789578000000,
-      "date": "16 SEPT",
-      "match": "Atlético Madrid – CA Osasuna",
-      "marginPct": 0.32,
-      "profit": 0.32,
-      "legs": [
-        {
-          "pick": "Gana Atlético Madrid",
-          "odd": 1.45,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5.1,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana CA Osasuna",
-          "odd": 9,
-          "book": "betfair"
-        }
-      ]
-    }
-  ],
+  "ARB_PENDING": [],
   "LADDER": {
     "id": "Lmto19u7j",
     "start": 10,
