@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-10-02T13:35:47.203Z",
+    "updatedAt": "2026-10-03T07:01:31.549Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -10,8 +10,8 @@
     "books": 18,
     "stale": true,
     "credits": {
-      "remaining": 416,
-      "used": 84
+      "remaining": 395,
+      "used": 105
     }
   },
   "TEAMS": {
