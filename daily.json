@@ -1,17 +1,17 @@
 {
   "meta": {
-    "updatedAt": "2026-10-12T16:30:42.026Z",
+    "updatedAt": "2026-10-13T07:00:54.635Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
     "market": "h2h",
     "matches": 10,
-    "valuePicks": 3,
+    "valuePicks": 0,
     "books": 20,
-    "stale": false,
+    "stale": true,
     "credits": {
-      "remaining": 0,
-      "used": 500
+      "remaining": null,
+      "used": null
     }
   },
   "TEAMS": {
