@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-10-14T07:01:17.784Z",
+    "updatedAt": "2026-10-14T12:39:23.509Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -4847,32 +4847,6 @@
     }
   ],
   "ARB_PENDING": [
-    {
-      "id": "349c47668fdd909039a9408c14cad8bc",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1791633600000,
-      "date": "10 OCT",
-      "match": "Rayo Vallecano – Athletic Club",
-      "marginPct": 0.31,
-      "profit": 0.31,
-      "legs": [
-        {
-          "pick": "Gana Rayo Vallecano",
-          "odd": 2.88,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.48,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Athletic Club",
-          "odd": 2.76,
-          "book": "betfair"
-        }
-      ]
-    },
     {
       "id": "acd5bd945dd953ad1e300df5bfe696f9",
       "sport": "soccer_epl",
