@@ -1,6 +1,6 @@
 {
   "meta": {
-    "updatedAt": "2026-10-16T12:06:25.075Z",
+    "updatedAt": "2026-10-17T07:00:42.593Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -4848,58 +4848,6 @@
   ],
   "ARB_PENDING": [
     {
-      "id": "acd5bd945dd953ad1e300df5bfe696f9",
-      "sport": "soccer_epl",
-      "ts": 1791831600000,
-      "date": "12 OCT",
-      "match": "Coventry City – Newcastle",
-      "marginPct": 0.79,
-      "profit": 0.8,
-      "legs": [
-        {
-          "pick": "Gana Coventry City",
-          "odd": 3.4,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.8,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Newcastle",
-          "odd": 2.3,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "f4a28510bb0c835280a2aca709c19d50",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1791830700000,
-      "date": "12 OCT",
-      "match": "Torino – Udinese",
-      "marginPct": 0.09,
-      "profit": 0.09,
-      "legs": [
-        {
-          "pick": "Gana Torino",
-          "odd": 2.46,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.35,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Udinese",
-          "odd": 3.4,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
       "id": "2b0a946cac613732fcbf57ce931490a1",
       "sport": "soccer_uefa_champs_league",
       "ts": 1791909900000,
@@ -5129,58 +5077,6 @@
         {
           "pick": "Gana PSV",
           "odd": 4.2,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "529fc26c7774d5b469932e275c668921",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1791831600000,
-      "date": "12 OCT",
-      "match": "Levante – Sevilla",
-      "marginPct": 1.04,
-      "profit": 1.05,
-      "legs": [
-        {
-          "pick": "Gana Levante",
-          "odd": 2.87,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.43,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Sevilla",
-          "odd": 2.86,
-          "book": "coolbet"
-        }
-      ]
-    },
-    {
-      "id": "0f2e7ff90b994f31d5cd48a9680943e1",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1791822600000,
-      "date": "12 OCT",
-      "match": "Atalanta – Venezia",
-      "marginPct": 0.28,
-      "profit": 0.28,
-      "legs": [
-        {
-          "pick": "Gana Atalanta",
-          "odd": 1.6,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.63,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Venezia",
-          "odd": 6.4,
           "book": "betfair"
         }
       ]
