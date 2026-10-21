@@ -268,7 +268,7 @@ window.COMBOS = [
 window.comboOdds = function (c) { return c.legs.reduce((p,l)=>p*l.odd, 1); };
 
 /* ---- TRACK RECORD (our picks ledger vs the books) ---------- */
-/* result: 'W' won, 'L' lost, 'P' push/void · stake in units (1u flat) */
+/* result: 'W' won, 'L' lost, 'P' push, 'V' void/anulado (con `reason`) · stake in units (1u flat) */
 window.RECORD = [
     { date:'18 JUN', pick:'Gana Alemania', match:'Alemania – Escocia', odd:1.55, book:'pinnacle', stake:1, result:'W' },
     { date:'18 JUN', pick:'Empate', match:'México – Polonia', odd:3.40, book:'betfair', stake:1, result:'W' },
@@ -316,7 +316,7 @@ window.recordSummary = function () {
         const stake = num(x.stake, 1), odd = num(x.odd, 0);
         staked += stake;
         if (x.result === 'W') { ret += stake * odd; w++; }
-        else if (x.result === 'P') { ret += stake; p++; }
+        else if (x.result === 'P' || x.result === 'V') { ret += stake; p++; }   // nula/anulada: se devuelve la apuesta
         else { l++; }
     });
     const denom = (w + l) || 1;

@@ -41,11 +41,26 @@ ODDS_API_KEY=tu_clave node fetch-daily.js
 ## Variables de entorno
 | Variable | Por defecto | Para qué |
 |---|---|---|
-| `ODDS_API_KEY` | — (obligatoria) | Tu clave de The Odds API |
-| `ODDS_SPORT` | `soccer_fifa_world_cup` | Clave del deporte/competición |
-| `ODDS_REGIONS` | `eu` | Casas por región: `eu`, `uk`, `us`, `au` (separadas por coma). **Cada región gasta 1 crédito** por llamada |
+| `ODDS_API_KEY` | — (obligatoria para cuotas) | Tu clave de The Odds API. **Una clave por web**: si dos webs comparten clave, se comen los créditos la una a la otra |
+| `ODDS_SPORT` | Champions, Europa League, 5 grandes ligas, Mundial | Competiciones (separadas por coma) o `auto` |
+| `ODDS_REGIONS` | `eu` | Casas por región: `eu`, `uk`, `us`, `au` (separadas por coma). **Cada región gasta 1 crédito** por competición |
+| `ODDS_MAX` | `8` | Máximo de competiciones (= créditos) por día |
+| `ODDS_MIN_HOURS` | `20` | Horas mínimas entre dos peticiones de cuotas; si se lanza antes, solo liquida (gratis) |
+| `ODDS_MODE` | — | `scores` = solo liquidar resultados (no necesita clave) |
 
-Con el plan **Starter (500 créditos/mes)** y 1 región, una llamada diaria gasta ~30 créditos/mes. Tienes margen de sobra para llamar varias veces al día o añadir regiones.
+**Créditos** (plan gratis: 500/mes, se renuevan el día 1). Pedir cuotas cuesta 1 crédito **por competición** (×regiones).
+`/sports` y `/events` son gratis, así que el robot primero mira qué competiciones tienen partidos en la ventana y
+solo pide cuotas de esas, una vez al día, sin pasarse del cupo que queda hasta fin de mes. Lo normal: 2-8 créditos/día.
+Antes (oct-2026) gastaba ~21 créditos por ejecución × 2 ejecuciones/día → los 500 se acababan el día 12.
+
+## Liquidación (récord)
+- Fuente principal: **ESPN** (gratis): competición + fecha/hora + los dos equipos (`robot/espn-football.js`).
+  Respaldo: The Odds API `/scores` por ID de evento (solo partidos de los últimos 3 días).
+- **Nunca se borra un pick**: acaba como `W`, `L` o `V` (anulado, con `reason`): aplazado/suspendido/cancelado,
+  o sin resultado 7 días después del partido. El historial no se recorta (la web enseña lo que quiera).
+- El 1X2 se liquida a **90 minutos**: si hubo prórroga o penaltis, cuenta como empate.
+- Combinadas: una pierna anulada cuenta como cuota 1 (como en las casas); si fallan una, fallada.
+- `node robot/recover-history.js` (se usó una vez, oct-2026) recupera de git lo que las versiones antiguas borraron.
 
 ## Editar las selecciones / el modelo
 - **Selecciones** (ranking FIFA, colores, forma): edita `TEAMS_DB` arriba en `fetch-daily.js`.
@@ -54,7 +69,4 @@ Con el plan **Starter (500 créditos/mes)** y 1 región, una llamada diaria gast
   Si tocas una, toca la otra para que web y robot coincidan.
 
 ## Pendiente (siguiente nivel)
-- **Liquidación automática del récord**: ahora el `RECORD` se conserva entre días pero los resultados
-  (ganada/fallada) se marcan a mano. Para automatizarlo se usa el **Scores API** de The Odds API
-  (`/v4/sports/{sport}/scores/`), que devuelve el resultado final de cada partido.
 - **Cobro Premium (3,99 € / 14,99 €)**: requiere Stripe. La interfaz de planes ya está; falta enchufar el pago.

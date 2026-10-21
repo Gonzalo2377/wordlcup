@@ -50,7 +50,8 @@ const OUT = path.join(__dirname, '..', 'daily.json');
 // running tally of API credits (filled from response headers on every odds/scores call)
 const CREDITS = { remaining:null, used:null, lastCall:null };
 
-if (!API_KEY) { console.error('✗ Missing ODDS_API_KEY env var'); process.exit(1); }
+// sin clave solo se puede liquidar (con ESPN, gratis); para cuotas hace falta
+if (!API_KEY && (process.env.ODDS_MODE||'').toLowerCase()!=='scores') { console.error('✗ Missing ODDS_API_KEY env var'); process.exit(1); }
 
 /* ---------------- national-team database ----------------
    The Odds API gives team NAMES only → map to id / FIFA rank /
@@ -299,46 +300,83 @@ const SPORT_PRIORITY = [
     'soccer_austria_bundesliga', 'soccer_greece_super_league', 'soccer_poland_ekstraklasa',
 ];
 
-// Pull one sport key. A 422/404 (competition out of season) is not fatal:
-// we just skip it and keep the others.
-async function fetchOne(sportKey){
-    const url = `https://api.the-odds-api.com/v4/sports/${sportKey}/odds/?apiKey=${API_KEY}&regions=${REGIONS}&markets=${MARKET}&oddsFormat=decimal`;
-    const res = await fetch(url);
-    if (res.status === 422 || res.status === 404) { console.log(`  - ${sportKey}: sin eventos (fuera de temporada)`); return []; }
-    if (!res.ok) { console.log(`  - ${sportKey}: API ${res.status} (omitido)`); return []; }
+// Créditos de The Odds API: /sports y /events son GRATIS; /odds cuesta regiones × mercados
+// por competición; /scores cuesta 2 (con daysFrom). Plan gratis = 500/mes, se renueva el día 1.
+function trackCredits(res){
     const rem = res.headers.get('x-requests-remaining'), used = res.headers.get('x-requests-used');
     if (rem != null)  CREDITS.remaining = +rem;
     if (used != null) CREDITS.used = +used;
+}
+const isoNoMs = (ms) => new Date(ms).toISOString().replace(/\.\d{3}Z$/, 'Z');
+// Pull one sport key. A 422/404 (competition out of season) is not fatal:
+// we just skip it and keep the others.
+async function fetchOne(sportKey, fromIso, toIso){
+    const url = `https://api.the-odds-api.com/v4/sports/${sportKey}/odds/?apiKey=${API_KEY}&regions=${REGIONS}&markets=${MARKET}&oddsFormat=decimal&commenceTimeFrom=${fromIso}&commenceTimeTo=${toIso}`;
+    const res = await fetch(url);
+    if (res.status === 422 || res.status === 404) { console.log(`  - ${sportKey}: sin eventos (fuera de temporada)`); return []; }
+    if (!res.ok) { console.log(`  - ${sportKey}: API ${res.status} (omitido)`); return []; }
+    trackCredits(res);
     CREDITS.lastCall = sportKey;
-    console.log(`  - ${sportKey}: ok · creditos restantes ${rem} · usados ${used}`);
+    console.log(`  - ${sportKey}: ok · creditos restantes ${CREDITS.remaining} · usados ${CREDITS.used}`);
     return res.json();
 }
-async function fetchOdds(){
+/* cuántas competiciones podemos pedir HOY sin pasarnos del cupo mensual */
+function dailyAllowance(remaining){
+    const now = new Date();
+    const nextReset = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1);
+    const daysLeft = Math.max(1, Math.ceil((nextReset - now.getTime()) / 86400000));   // hoy incluido
+    const perCall = REGIONS.split(',').filter(Boolean).length;                            // × 1 mercado (h2h)
+    const RESERVE = 20;                                                                   // para /scores de respaldo
+    return { calls: Math.floor(Math.max(0, remaining - RESERVE) / daysLeft / perCall), daysLeft };
+}
+async function fetchOdds(prevMeta){
     let keys = SPORT.split(',').map(s => s.trim()).filter(Boolean);
+    const auto = keys.length === 1 && keys[0].toLowerCase() === 'auto';
+    const MAX = parseInt(process.env.ODDS_MAX || '8', 10);
+    const rank = (k) => { const i = SPORT_PRIORITY.indexOf(k); return i === -1 ? 999 : i; };
 
-    // AUTO mode: discover which soccer leagues are in season right now and keep the
-    // most relevant ones by SPORT_PRIORITY (not just the first ones the API returns).
-    // The /sports list is FREE (0 credits); odds are pulled only for the chosen leagues.
-    if (keys.length === 1 && keys[0].toLowerCase() === 'auto') {
-        try {
-            const res = await fetch(`https://api.the-odds-api.com/v4/sports/?apiKey=${API_KEY}`);
-            const list = res.ok ? await res.json() : [];
-            const MAX = parseInt(process.env.ODDS_MAX || '12', 10);
-            const active = list
-                .filter(s => s.active && !s.has_outrights && /^soccer_/.test(s.key))
-                .map(s => s.key);
-            const rank = (k) => { const i = SPORT_PRIORITY.indexOf(k); return i === -1 ? 999 : i; };
-            keys = active.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b)).slice(0, MAX);
-            console.log(`· AUTO: ${active.length} ligas activas → elijo top ${keys.length} por relevancia:\n  ${keys.join(', ')}`);
-        } catch (e) {
-            console.log('· AUTO falló, uso lista por defecto:', e.message);
-            keys = ['soccer_uefa_champs_league','soccer_uefa_europa_league'];
-        }
+    // 1) /sports (GRATIS): qué competiciones están en temporada + créditos que quedan
+    try {
+        const res = await fetch(`https://api.the-odds-api.com/v4/sports/?apiKey=${API_KEY}`);
+        trackCredits(res);
+        const list = res.ok ? await res.json() : [];
+        const active = new Set(list.filter(s => s.active && !s.has_outrights && /^soccer_/.test(s.key)).map(s => s.key));
+        if (auto) keys = [...active];
+        else if (active.size) { const off = keys.filter(k => !active.has(k)); if (off.length) console.log(`· fuera de temporada (0 créditos): ${off.join(', ')}`); keys = keys.filter(k => active.has(k)); }
+    } catch (e) {
+        console.log('· /sports falló:', e.message);
+        if (auto) keys = ['soccer_uefa_champs_league','soccer_uefa_europa_league'];
     }
+    keys.sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
+
+    // 2) /events (GRATIS): solo pedimos cuotas de competiciones con partidos en la ventana
+    const fromIso = isoNoMs(Date.now() + 5*60*1000), toIso = isoNoMs(Date.now() + WINDOW_HOURS*3600*1000);
+    const withGames = [];
+    for (const k of keys) {
+        try {
+            const res = await fetch(`https://api.the-odds-api.com/v4/sports/${k}/events?apiKey=${API_KEY}&commenceTimeFrom=${fromIso}&commenceTimeTo=${toIso}`);
+            trackCredits(res);
+            const evs = res.ok ? await res.json() : [];
+            if (Array.isArray(evs) && evs.length) withGames.push(k);
+        } catch (e) { console.log(`  - ${k}: /events error ${e.message}`); }
+    }
+    if (!withGames.length) { console.log(`· ninguna competición tiene partidos en las próximas ${WINDOW_HOURS} h → 0 créditos gastados`); return []; }
+
+    // 3) presupuesto: no gastar más de lo que toca por día hasta la renovación del día 1
+    const remaining = CREDITS.remaining != null ? CREDITS.remaining : (prevMeta && prevMeta.credits && prevMeta.credits.remaining != null ? prevMeta.credits.remaining : null);
+    let limit = MAX;
+    if (remaining != null) {
+        const a = dailyAllowance(remaining);
+        limit = Math.min(MAX, a.calls);
+        console.log(`· créditos: quedan ${remaining} para ${a.daysLeft} días → hoy como mucho ${a.calls} competiciones (tope ODDS_MAX ${MAX})`);
+    }
+    const chosen = withGames.slice(0, limit);
+    const skipped = withGames.slice(limit);
+    console.log(`· con partidos: ${withGames.length} → pido cuotas de ${chosen.length}: ${chosen.join(', ') || '—'}${skipped.length ? `\n  (sin presupuesto hoy: ${skipped.join(', ')})` : ''}`);
 
     let all = [];
-    for (const k of keys) {
-        try { const part = await fetchOne(k); if (Array.isArray(part)) all = all.concat(part); }
+    for (const k of chosen) {
+        try { const part = await fetchOne(k, fromIso, toIso); if (Array.isArray(part)) all = all.concat(part); }
         catch (e) { console.log(`  - ${k}: error ${e.message} (omitido)`); }
     }
     return all;
@@ -347,16 +385,25 @@ const fmtGroup = (iso)=> new Date(iso).toLocaleDateString('es-ES',{weekday:'shor
 const fmtTime  = (iso)=> new Date(iso).toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'});
 const fmtDay   = (iso)=> new Date(iso||Date.now()).toLocaleDateString('es-ES',{day:'2-digit',month:'short',timeZone:'Europe/Madrid'}).toUpperCase();
 
-/* ---------------- SCORES (auto-settlement) -------------------
-   The Odds API /scores returns finished games with their score, so
-   the robot can mark each tracked pick as WON/LOST by itself. */
+/* ---------------- LIQUIDACIÓN (auto-settlement) -------------------
+   Regla de oro: NUNCA se borra un pick. Cada uno acaba como
+     W (acertado) · L (fallado) · V (anulado, con motivo).
+   Fuentes, por orden:
+     1) ESPN (gratis): competición + fecha/hora + los dos equipos.
+     2) The Odds API /scores por ID de evento (cuesta créditos; solo
+        partidos de los últimos 3 días que ESPN no haya resuelto).
+   Aplazado / cancelado / suspendido → V. Sin resultado 7 días
+   después del partido → V ("sin resultado"). 1X2 a 90 minutos:
+   si hubo prórroga o penaltis, cuenta como empate. */
+const espn = require('./espn-football.js');
+const DAY = 24*3600*1000;
+const VOID_AFTER = 7*DAY;
+
 async function fetchScoresOne(sportKey){
     const url = `https://api.the-odds-api.com/v4/sports/${sportKey}/scores/?apiKey=${API_KEY}&daysFrom=3`;
     const res = await fetch(url);
     if (!res.ok) { console.log(`  scores ${sportKey}: API ${res.status} (omitido)`); return []; }
-    const rem = res.headers.get('x-requests-remaining'), used = res.headers.get('x-requests-used');
-    if (rem != null)  CREDITS.remaining = +rem;
-    if (used != null) CREDITS.used = +used;
+    trackCredits(res);
     return res.json();
 }
 async function fetchScores(keys){
@@ -374,39 +421,202 @@ function winnerOf(ev){
     if (Number.isNaN(hs) || Number.isNaN(as)) return null;
     return hs > as ? 'home' : (hs < as ? 'away' : 'draw');
 }
-/* settle PENDING picks against finished scores → append results to RECORD */
-function settle(pending, scores, RECORD){
-    const byId = {}; scores.forEach(s => { if (s && s.id) byId[s.id] = s; });
-    const stillPending = [];
-    let settled = 0;
-    for (const p of pending) {
-        const ev = byId[p.id];
-        const w = winnerOf(ev);
-        if (!w) { stillPending.push(p); continue; }    // not finished yet → keep waiting
-        const result = (w === p.pickKey) ? 'W' : 'L';
-        RECORD.unshift({ id: p.id, date: p.date, pick: p.pickLabel, match: p.match, odd: p.odd, book: p.book, stake: 1, result });
-        settled++;
-    }
-    if (settled) console.log(`· liquidados ${settled} picks (resultado real)`);
-    return { stillPending, RECORD };
+/* todos los nombres que conocemos de un equipo (español, inglés, alias) para emparejar con ESPN */
+const NAME_GROUPS = (() => {
+    const byId = {};
+    const put = (id, names) => { byId[id] = byId[id] || new Set(); names.filter(Boolean).forEach(n => byId[id].add(n)); };
+    [...TEAMS_DB, ...CLUBS_DB].forEach(t => put(t.id, [t.name, ...(t.aliases||[])]));
+    Object.entries(TEAMS_EXTRA).forEach(([k, X]) => put(X.id, [k, X.name]));
+    const map = {};
+    Object.values(byId).forEach(set => { const arr = [...set]; arr.forEach(n => { map[norm(n)] = arr; }); });
+    return map;
+})();
+const nameVariants = (n) => [n, ...(NAME_GROUPS[norm(n)] || [])];
+const splitMatch = (m) => { const p = (m||'').split(/\s+[–—-]\s+/); return p.length === 2 ? p.map(s => s.trim()) : null; };
+const MONTHS = { ENE:0, JAN:0, FEB:1, MAR:2, ABR:3, APR:3, MAY:4, JUN:5, JUL:6, AGO:7, AUG:7, SEP:8, SEPT:8, OCT:9, NOV:10, DIC:11, DEC:11 };
+/* "13 OCT" → ms (año: el más reciente que no quede en el futuro) */
+function dayLabelToMs(label, now = Date.now()){
+    const m = /^(\d{1,2})\s+([A-Z]+)/.exec(norm(label).toUpperCase());
+    if (!m || MONTHS[m[2]] == null) return null;
+    const y = new Date(now).getUTCFullYear();
+    let t = Date.UTC(y, MONTHS[m[2]], +m[1]);
+    if (t > now + 2*DAY) t = Date.UTC(y - 1, MONTHS[m[2]], +m[1]);
+    return t;
+}
+/* "Gana Bayern Múnich" → 'home'/'away' según el partido; "Empate" → 'draw' */
+function sideFromPick(match, pick){
+    const p = (pick||'').trim();
+    if (/^empate$/i.test(p)) return 'draw';
+    const who = p.replace(/^Gana\s+/i, '').trim();
+    const t = splitMatch(match); if (!t) return null;
+    if (norm(t[0]) === norm(who)) return 'home';
+    if (norm(t[1]) === norm(who)) return 'away';
+    return null;
 }
 
-/* settle pending COMBOS: a combo wins only if ALL its legs win. Once every leg
-   has a final score, move it from COMBO_PENDING to COMBO_RECORD (W/L). */
-function settleCombos(pending, scores, RECORD){
-    const byId = {}; scores.forEach(s => { if (s && s.id) byId[s.id] = s; });
-    const still = [];
-    let settled = 0;
-    for (const c of pending) {
-        const results = c.legs.map(l => winnerOf(byId[l.id]));   // null until that match is final
-        if (results.some(r => !r)) { still.push(c); continue; }  // at least one leg unfinished
-        const won = c.legs.every((l,i) => results[i] === l.side);
-        const totalOdd = +c.legs.reduce((p,l)=>p*l.odd,1).toFixed(2);
-        RECORD.unshift({ dayId:c.dayId, date:c.date, name:c.name, tier:c.tier, legs:c.legs.map(l=>({ match:l.match, pick:l.pick, odd:l.odd, win:(null) })).map((o,i)=>({ ...o, win: results[i]===c.legs[i].side })), totalOdd, result: won ? 'W' : 'L' });
-        settled++;
+/* lo que hace falta para buscar un partido: ID, competición, hora (o ventana) y nombres */
+function legQuery(l, kind, dateLabel){
+    const q = { id: l.id, sport: l.sport, ts: l.ts || null, match: l.match, homeName: l.homeName, awayName: l.awayName };
+    if (!q.ts) {
+        const base = dayLabelToMs(dateLabel || l.date);
+        if (base != null) {
+            q.from = base - 12*3600*1000;
+            // pick suelto: la fecha es la del partido; combinada/escalera: la del día en que se publicó
+            // (el partido puede ser días después: en junio la ventana de cuotas llegó a ser de una semana)
+            q.to = base + (kind === 'pick' ? 36 : 8*24) * 3600*1000;
+        }
     }
-    if (settled) console.log(`· liquidadas ${settled} combinadas (resultado real)`);
-    return { still, RECORD };
+    q.kick = q.ts || q.to || null;
+    q.key = q.id || `${q.sport||''}|${q.match}|${q.from||''}`;
+    return q;
+}
+
+async function resolveQuery(q, byId){
+    const now = Date.now();
+    if (q.ts && q.ts > now - 110*60*1000) return { state:'pending', why:'aún no ha terminado' };
+    const names = (q.homeName && q.awayName) ? [q.homeName, q.awayName] : splitMatch(q.match);
+    let r = { state:'notfound', why:'sin nombres de equipos' };
+    if (names && (q.ts || q.from)) {
+        try { r = await espn.findResult({ sport: q.sport, ts: q.ts, from: q.from, to: q.to, home: nameVariants(names[0]), away: nameVariants(names[1]) }); }
+        catch (e) { r = { state:'notfound', why:'ESPN error ' + e.message, retry:true }; }
+    }
+    if (r.state !== 'final' && r.state !== 'void' && q.id && byId && byId[q.id]) {
+        const ev = byId[q.id], w = winnerOf(ev);
+        if (w) { const sc = n => (ev.scores.find(s => s.name === n) || {}).score; r = { state:'final', side:w, score:`${sc(ev.home_team)}-${sc(ev.away_team)}`, source:'the-odds-api' }; }
+    }
+    if (r.state === 'final' || r.state === 'void') return r;
+    if (r.retry) return { state:'pending', why: r.why };   // fallo de red: se reintenta en la próxima ejecución, nunca se anula por esto
+    if (q.kick && now - q.kick > VOID_AFTER) return { state:'void', reason:`sin resultado 7 días después del partido (${r.why || 'sin terminar'})`, source:'robot' };
+    if (!q.kick) return { state:'void', reason:'pick sin fecha ni hora: imposible de liquidar', source:'robot' };
+    return { state:'pending', why: r.why };
+}
+
+/* liquida TODO lo pendiente (picks, combinadas, surebets y el peldaño del reto). Modifica S. */
+async function settleAll(S, opts = {}){
+    const now = Date.now();
+    const rung = S.LADDER && Array.isArray(S.LADDER.rungs) ? S.LADDER.rungs.find(r => r.result === 'today') : null;
+    const qs = new Map();
+    const add = (l, kind, dateLabel) => { const q = legQuery(l, kind, dateLabel); if (!qs.has(q.key)) qs.set(q.key, q); return q.key; };
+    const pickKeys  = S.PENDING.map(p => add(p, 'pick'));
+    const comboKeys = S.COMBO_PENDING.map(c => c.legs.map(l => add(l, 'combo', c.date)));
+    const arbKeys   = S.ARB_PENDING.map(a => add(a, 'pick'));
+    const rungKey   = rung ? add(rung, 'rung', rung.date) : null;
+    if (!qs.size) { console.log('· liquidación: no hay nada pendiente'); return; }
+
+    // pasada 1: ESPN (gratis)
+    const res = {};
+    for (const [k, q] of qs) res[k] = await resolveQuery(q, null);
+    // pasada 2: The Odds API por ID, solo lo reciente (≤3 días) que siga sin resolver
+    const recent = [...qs.values()].filter(q => res[q.key].state === 'pending' && q.id && q.sport && q.ts && now - q.ts < 3*DAY && now - q.ts > 110*60*1000);
+    const sports = [...new Set(recent.map(q => q.sport))];
+    if (sports.length && API_KEY && opts.oddsApi !== false && (CREDITS.remaining == null || CREDITS.remaining > 2*sports.length)) {
+        console.log(`· respaldo The Odds API /scores para ${recent.length} partidos (${sports.length} competiciones, ~${2*sports.length} créditos)`);
+        const scores = await fetchScores(sports);
+        const byId = {}; scores.forEach(s => { if (s && s.id) byId[s.id] = s; });
+        for (const q of recent) res[q.key] = await resolveQuery(q, byId);
+    }
+    const tag = (r) => r.source === 'espn' ? 'ESPN' : r.source === 'the-odds-api' ? 'The Odds API' : 'robot';
+    const stats = { W:0, L:0, V:0 };
+
+    // picks sueltos
+    const stillP = [];
+    S.PENDING.forEach((p, i) => {
+        const r = res[pickKeys[i]];
+        if (r.state === 'pending') { stillP.push(p); return; }
+        const side = p.pickKey || sideFromPick(p.match, p.pickLabel || p.pick);
+        const result = r.state === 'void' || !side ? 'V' : (r.side === side ? 'W' : 'L');
+        const e = { id:p.id, sport:p.sport, ts:p.ts, date:p.date, pick:p.pickLabel || p.pick, match:p.match, odd:p.odd, book:p.book, stake:1, result };
+        if (r.score) e.score = r.score + (r.note ? ` (${r.note})` : '');
+        if (result === 'V') e.reason = r.reason || 'no se pudo leer la selección';
+        e.settledBy = tag(r);
+        S.RECORD.unshift(e); stats[result]++;
+    });
+    S.PENDING = stillP;
+
+    // combinadas: se cierran cuando TODAS las piernas tienen resultado.
+    // Pierna anulada → cuenta como cuota 1 (como en las casas). Todas anuladas → combinada anulada.
+    const stillC = []; let nc = 0;
+    S.COMBO_PENDING.forEach((c, i) => {
+        const rs = comboKeys[i].map(k => res[k]);
+        if (rs.some(r => r.state === 'pending')) { stillC.push(c); return; }
+        const legs = c.legs.map((l, j) => {
+            const r = rs[j];
+            const side = l.side || sideFromPick(l.match, l.pick);
+            const lr = r.state === 'void' || !side ? 'V' : (r.side === side ? 'W' : 'L');
+            const o = { match:l.match, pick:l.pick, odd:l.odd, win: lr === 'W', result: lr };
+            if (r.score) o.score = r.score;
+            if (lr === 'V') o.reason = r.reason || 'no se pudo leer la selección';
+            return o;
+        });
+        const live = legs.filter(l => l.result !== 'V');
+        const result = legs.some(l => l.result === 'L') ? 'L' : (live.length ? 'W' : 'V');
+        const fullOdd = +c.legs.reduce((p, l) => p * l.odd, 1).toFixed(2);
+        const rec = { dayId:c.dayId, date:c.date, name:c.name, tier:c.tier, legs, totalOdd: fullOdd, result };
+        if (live.length < legs.length) {
+            rec.reason = `${legs.length - live.length} pierna(s) anulada(s)`;
+            if (result === 'W') { rec.oddOriginal = fullOdd; rec.totalOdd = +live.reduce((p, l) => p * l.odd, 1).toFixed(2); }
+        }
+        S.COMBO_RECORD.unshift(rec); nc++;
+    });
+    S.COMBO_PENDING = stillC;
+
+    // surebets: el beneficio se fija al apostar; si el partido se anula, se devuelve todo (beneficio 0)
+    const stillA = []; let na = 0;
+    S.ARB_PENDING.forEach((a, i) => {
+        const r = res[arbKeys[i]];
+        if (r.state === 'pending') { stillA.push(a); return; }
+        const rec = { date:a.date, match:a.match, marginPct:a.marginPct, profit: r.state === 'void' ? 0 : a.profit, legs:a.legs, result: r.state === 'void' ? 'V' : 'W', settledBy: tag(r) };
+        if (r.state === 'void') rec.reason = r.reason;
+        S.ARB_RECORD.unshift(rec); na++;
+    });
+    S.ARB_PENDING = stillA;
+
+    // reto escalera: peldaño de hoy
+    if (rung) {
+        const r = res[rungKey];
+        const side = rung.side || sideFromPick(rung.match, rung.pick);
+        if (r.state === 'void' || (r.state === 'final' && !side)) {
+            // anulado → el peldaño se vuelve a jugar con otro partido (la banca no cambia)
+            const n = rung.n; Object.keys(rung).forEach(k => delete rung[k]); rung.n = n;
+            console.log(`· reto escalera: peldaño ${n} anulado (${r.reason || 'selección ilegible'}) → se repite`);
+        } else if (r.state === 'final') {
+            const won = r.side === side;
+            rung.score = r.score;
+            if (won) { rung.result = 'W'; S.LADDER.current = (S.LADDER.current||0) + 1; S.LADDER.bank = rung.bank; }
+            else {
+                rung.result = 'L';
+                S.LADDER_HISTORY.unshift({ id:S.LADDER.id, start:S.LADDER.start, target:S.LADDER.target, brokeAt:rung.n, reached:+((S.LADDER.bank)||S.LADDER.start).toFixed(2), result:'broken', date:rung.date||'' });
+                S.LADDER = null;
+            }
+            console.log(`· reto escalera: peldaño ${rung.n} (${rung.match} ${r.score}) → ${won ? 'GANADO' : 'FALLADO'}`);
+            if (S.LADDER && S.LADDER.current >= S.LADDER.steps) {
+                S.LADDER_HISTORY.unshift({ id:S.LADDER.id, start:S.LADDER.start, target:S.LADDER.target, reached:+S.LADDER.bank.toFixed(2), result:'completed', date:rung.date||'' });
+                S.LADDER = null;
+            }
+        }
+    }
+    const left = S.PENDING.length + S.COMBO_PENDING.length + S.ARB_PENDING.length;
+    console.log(`· liquidados: picks ${stats.W}W/${stats.L}L/${stats.V}V · combinadas ${nc} · surebets ${na} · siguen pendientes ${left}`);
+    [...qs.values()].filter(q => res[q.key].state === 'pending' && res[q.key].why && res[q.key].why !== 'aún no ha terminado')
+        .forEach(q => console.log(`  … esperando: ${q.match} (${res[q.key].why})`));
+}
+
+/* historial del más reciente al más antiguo (orden estable dentro del mismo día) */
+function sortByDateDesc(arr){
+    const t = (x) => x.ts || dayLabelToMs(x.date) || 0;
+    return arr.map((x, i) => [x, i]).sort((a, b) => (t(b[0]) - t(a[0])) || (a[1] - b[1])).map(p => p[0]);
+}
+function readState(d){
+    const S = {};
+    ['RECORD','PENDING','COMBO_RECORD','COMBO_PENDING','ARB_RECORD','ARB_PENDING'].forEach(k => { S[k] = Array.isArray(d && d[k]) ? d[k] : []; });
+    S.LADDER = (d && d.LADDER) || null;
+    S.LADDER_HISTORY = (d && d.LADDER_HISTORY) || [];
+    return S;
+}
+function finishState(S){
+    S.RECORD = sortByDateDesc(S.RECORD);
+    S.COMBO_RECORD = sortByDateDesc(S.COMBO_RECORD);
+    S.ARB_RECORD = sortByDateDesc(S.ARB_RECORD);
 }
 
 /* ---------------- build daily.json --------------------------- */
@@ -417,43 +627,28 @@ const fetchFriendlies = require('./friendlies.js');
 async function scoresOnly(){
     let d;
     try { d = JSON.parse(fs.readFileSync(OUT,'utf8')); } catch(e){ console.log('· scores-only: no hay daily.json, nada que liquidar'); return; }
-    let RECORD=d.RECORD||[], PENDING=d.PENDING||[], COMBO_RECORD=d.COMBO_RECORD||[], COMBO_PENDING=d.COMBO_PENDING||[], ARB_RECORD=d.ARB_RECORD||[], ARB_PENDING=d.ARB_PENDING||[];
-    const ladderRung = d.LADDER && Array.isArray(d.LADDER.rungs) ? d.LADDER.rungs.find(r=>r.result==='today') : null;
-    const need=[...new Set([...PENDING.map(p=>p.sport), ...COMBO_PENDING.flatMap(c=>c.legs.map(l=>l.sport)), ...ARB_PENDING.map(p=>p.sport), (ladderRung?(ladderRung.sport||'soccer_fifa_world_cup'):null)].filter(Boolean))];
-    if(!need.length){ console.log('· scores-only: no hay nada pendiente'); return; }
-    let settled=0;
-    try {
-        const scores=await fetchScores(need);
-        const o=settle(PENDING,scores,RECORD); PENDING=o.stillPending; RECORD=o.RECORD;
-        const c=settleCombos(COMBO_PENDING,scores,COMBO_RECORD); COMBO_PENDING=c.still; COMBO_RECORD=c.RECORD;
-        const byId={}; scores.forEach(s=>{ if(s&&s.id) byId[s.id]=s; });
-        const aStill=[]; ARB_PENDING.forEach(a=>{ if(!winnerOf(byId[a.id])){ aStill.push(a); return; } ARB_RECORD.unshift({date:a.date,match:a.match,marginPct:a.marginPct,profit:a.profit,legs:a.legs}); settled++; }); ARB_PENDING=aStill;
-        // RETO ESCALERA: liquidar SOLO el peldaño de hoy (no genera el siguiente — eso lo hace el run de cuotas)
-        if (ladderRung && d.LADDER){
-            const _sk2={};
-            const fin=[]; scores.forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) fin.push({a:resolveTeam(s.home_team,_sk2),b:resolveTeam(s.away_team,_sk2),w:resolveTeam(side==='home'?s.home_team:s.away_team,_sk2)}); });
-            const nm=(ladderRung.match||'').split('–').map(x=>resolveTeam(x.trim(),_sk2));
-            const f=nm.length>=2?fin.find(v=>(v.a===nm[0]&&v.b===nm[1])||(v.a===nm[1]&&v.b===nm[0])):null;
-            if(f){
-                const won=f.w===resolveTeam((ladderRung.pick||'').replace(/^Gana\s+/i,'').trim(),_sk2);
-                const LH=d.LADDER_HISTORY||[];
-                if(won){ ladderRung.result='W'; d.LADDER.current=(d.LADDER.current||0)+1; d.LADDER.bank=ladderRung.bank; }
-                else { ladderRung.result='L'; LH.unshift({id:d.LADDER.id,start:d.LADDER.start,target:d.LADDER.target,brokeAt:ladderRung.n,reached:+((d.LADDER.bank)||d.LADDER.start).toFixed(2),result:'broken',date:ladderRung.date||''}); d.LADDER=null; }
-                d.LADDER_HISTORY=LH.slice(0,12);
-                console.log('· reto escalera (scores): peldaño '+ladderRung.n+' → '+(won?'GANADO':'FALLADO'));
-                if(d.LADDER && d.LADDER.current>=d.LADDER.steps){ LH.unshift({id:d.LADDER.id,start:d.LADDER.start,target:d.LADDER.target,reached:+d.LADDER.bank.toFixed(2),result:'completed',date:''}); d.LADDER=null; d.LADDER_HISTORY=LH.slice(0,12); }
-            }
-        }
-    } catch(e){ console.log('· scores-only: error', e.message); }
-    d.RECORD=RECORD.slice(0,60); d.PENDING=PENDING; d.COMBO_RECORD=COMBO_RECORD.slice(0,40); d.COMBO_PENDING=COMBO_PENDING; d.ARB_RECORD=ARB_RECORD.slice(0,40); d.ARB_PENDING=ARB_PENDING;
-    if(d.meta) d.meta.updatedAt=new Date().toISOString();
+    const S = readState(d);
+    try { await settleAll(S); } catch(e){ console.log('· scores-only: error', e.message); }
+    finishState(S);
+    Object.assign(d, S);
+    if (d.meta) { d.meta.settledAt = new Date().toISOString(); if (CREDITS.remaining != null) d.meta.credits = { remaining: CREDITS.remaining, used: CREDITS.used }; }
     fs.writeFileSync(OUT, JSON.stringify(d,null,2));
-    console.log(`✓ scores-only: ${RECORD.length} en récord · ${PENDING.length} pendientes · ${ARB_RECORD.length} surebets resueltos`);
+    console.log(`✓ scores-only: ${S.RECORD.length} en récord · ${S.PENDING.length} pendientes · ${S.COMBO_RECORD.length} combis resueltas · ${S.COMBO_PENDING.length} combis en juego · ${S.ARB_RECORD.length} surebets`);
 }
 
 async function main(){
     if ((process.env.ODDS_MODE||'').toLowerCase()==='scores'){ await scoresOnly(); return; }
-    const events = await fetchOdds();
+    // Cuotas como mucho UNA vez cada ODDS_MIN_HOURS (por defecto 20 h). El Worker de Cloudflare
+    // y el cron de GitHub disparan el robot los dos cada día: la 2.ª ejecución solo liquida (gratis).
+    let prevMeta = null;
+    try { prevMeta = JSON.parse(fs.readFileSync(OUT,'utf8')).meta || null; } catch(e){}
+    const MIN_H = parseFloat(process.env.ODDS_MIN_HOURS || '20');
+    const lastOdds = prevMeta && prevMeta.oddsAt ? Date.parse(prevMeta.oddsAt) : NaN;
+    if (process.env.ODDS_FORCE !== 'true' && !Number.isNaN(lastOdds) && Date.now() - lastOdds < MIN_H*3600*1000) {
+        console.log(`· cuotas ya pedidas hace ${((Date.now()-lastOdds)/3600000).toFixed(1)} h (< ${MIN_H} h) → esta ejecución solo liquida resultados (0 créditos)`);
+        await scoresOnly(); return;
+    }
+    const events = await fetchOdds(prevMeta);
     console.log(`· ${events.length} events returned`);
 
     // extra source: international friendlies via API-Football (national-team friendlies
@@ -501,7 +696,7 @@ async function main(){
         }
         if (!Object.keys(odds.home).length || !Object.keys(odds.draw).length || !Object.keys(odds.away).length) continue;
 
-        MATCHES.push({ id: ev.id || `${homeId}-${awayId}`, group: fmtGroup(ev.commence_time), time: fmtTime(ev.commence_time), home: homeId, away: awayId, odds, _commence: ev.commence_time, _sport: ev.sport_key });
+        MATCHES.push({ id: ev.id || `${homeId}-${awayId}`, group: fmtGroup(ev.commence_time), time: fmtTime(ev.commence_time), ts: ko, home: homeId, away: awayId, odds, _commence: ev.commence_time, _sport: ev.sport_key, _homeName: ev.home_team, _awayName: ev.away_team });
         if (ev._logos) { if (ev._logos.home && TEAMS[homeId]) TEAMS[homeId].logo = ev._logos.home; if (ev._logos.away && TEAMS[awayId]) TEAMS[awayId].logo = ev._logos.away; }
     }
 
@@ -528,7 +723,7 @@ async function main(){
 
     // ---- auto-build the day's accumulators ----
     const label = (m,k) => k==='draw' ? 'Empate' : (k==='home' ? `Gana ${TEAMS[m.home].name}` : `Gana ${TEAMS[m.away].name}`);
-    const legOf = (x) => ({ id:x.m.id, sport:x.m._sport, ts:new Date(x.m._commence).getTime(), side:x.v.pick.k, match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
+    const legOf = (x) => ({ id:x.m.id, sport:x.m._sport, ts:new Date(x.m._commence).getTime(), homeName:x.m._homeName, awayName:x.m._awayName, side:x.v.pick.k, match:`${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`, pick:label(x.m,x.v.pick.k), odd:+x.v.pick.best.price.toFixed(2), book:x.v.pick.best.book });
     const confOf = (arr) => Math.round(arr.reduce((p,x)=>p*x.v.pick.modelP,1)*100);
     // elige la casa que da la cuota COMBINADA más alta teniendo TODAS las selecciones,
     // y reescribe cada pierna en esa misma casa (combi de una sola casa, fácil de apostar).
@@ -617,55 +812,20 @@ async function main(){
     COMBO_PENDING = dedupBy(COMBO_PENDING, comboKey);
     ARB_RECORD    = dedupBy(ARB_RECORD, arbKey);
     ARB_PENDING   = dedupBy(ARB_PENDING, arbKey);
-    let ladderScores = [];
-    try {
-        // query scores for any competition with a pending single pick OR combo leg (saves credits)
-        const need = [...new Set([
-            ...PENDING.map(p => p.sport),
-            ...COMBO_PENDING.flatMap(c => c.legs.map(l => l.sport)),
-            ...ARB_PENDING.map(p => p.sport),
-        ].filter(Boolean))];
-        if (need.length) {
-            const scores = await fetchScores(need);
-            ladderScores = scores;
-            const out = settle(PENDING, scores, RECORD);
-            PENDING = out.stillPending; RECORD = out.RECORD;
-            const cout = settleCombos(COMBO_PENDING, scores, COMBO_RECORD);
-            COMBO_PENDING = cout.still; COMBO_RECORD = cout.RECORD;
-            // settle surebets: profit locked when bet; once the match is final → realized history
-            const byId = {}; scores.forEach(s => { if (s && s.id) byId[s.id] = s; });
-            const aStill = [];
-            ARB_PENDING.forEach(a => {
-                if (!winnerOf(byId[a.id])) { aStill.push(a); return; }   // not finished yet
-                ARB_RECORD.unshift({ date:a.date, match:a.match, marginPct:a.marginPct, profit:a.profit, legs:a.legs });
-            });
-            ARB_PENDING = aStill;
-        }
-    } catch (e) { console.log('· scores no disponibles:', e.message); }
+    // ---- liquidar todo lo pendiente (ESPN gratis + The Odds API de respaldo); nunca se borra nada ----
+    {
+        const S = { RECORD, PENDING, COMBO_RECORD, COMBO_PENDING, ARB_RECORD, ARB_PENDING, LADDER, LADDER_HISTORY };
+        try { await settleAll(S); } catch (e) { console.log('· liquidación con error:', e.message); }
+        ({ RECORD, PENDING, COMBO_RECORD, COMBO_PENDING, ARB_RECORD, ARB_PENDING, LADDER, LADDER_HISTORY } = S);
+    }
 
     // ---- snapshot TODAY's combos so we can settle them later (once per day per combo) ----
     const today = fmtDay(new Date().toISOString());
 
-    // ---- RETO ESCALERA: liquida el peldaño de hoy y genera el siguiente ----
+    // ---- RETO ESCALERA: el peldaño de hoy ya se liquidó arriba; aquí se genera el siguiente ----
     try {
         const LAD_START=10, LAD_TARGET=250, LAD_STEPS=10;
-        const sk=(s)=>(s||'').trim().split(/\s+/).pop().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/gi,'').toLowerCase();
-        // pares de partidos terminados con su ganador (de las puntuaciones liquidadas en este run)
-        const finishedPairs=[];
-        const _sk={};
-        try { (ladderScores||[]).forEach(s=>{ const side=winnerOf&&winnerOf(s); if(side&&side!=='draw'&&s&&s.home_team&&s.away_team) finishedPairs.push({a:resolveTeam(s.home_team,_sk),b:resolveTeam(s.away_team,_sk),w:resolveTeam(side==='home'?s.home_team:s.away_team,_sk)}); }); } catch(e){}
-        const resolvePick=(matchStr,pickName)=>{
-            const nm=(matchStr||'').split('–').map(s=>resolveTeam(s.trim(),_sk)); if(nm.length<2) return null;
-            const f=finishedPairs.find(v=>(v.a===nm[0]&&v.b===nm[1])||(v.a===nm[1]&&v.b===nm[0]));
-            if(!f) return null; return f.w===resolveTeam((pickName||'').replace(/^Gana\s+/i,'').trim(),_sk);
-        };
         if(!LADDER) LADDER={ id:'L'+Date.now().toString(36), start:LAD_START, target:LAD_TARGET, steps:LAD_STEPS, current:0, status:'live', bank:LAD_START, rungs:[] };
-        const todayRung=LADDER.rungs.find(r=>r.result==='today');
-        if(todayRung){
-            const res=resolvePick(todayRung.match, todayRung.pick);
-            if(res===true){ todayRung.result='W'; LADDER.current++; LADDER.bank=todayRung.bank; }
-            else if(res===false){ todayRung.result='L'; LADDER_HISTORY.unshift({ id:LADDER.id, start:LADDER.start, target:LADDER.target, brokeAt:todayRung.n, reached:+((LADDER.bank)||LADDER.start).toFixed(2), result:'broken', date:todayRung.date||today }); LADDER=null; }
-        }
         if(LADDER && LADDER.current>=LADDER.steps){ LADDER_HISTORY.unshift({ id:LADDER.id, start:LADDER.start, target:LADDER.target, reached:+LADDER.bank.toFixed(2), result:'completed', date:today }); LADDER=null; }
         if(!LADDER) LADDER={ id:'L'+Date.now().toString(36), start:LAD_START, target:LAD_TARGET, steps:LAD_STEPS, current:0, status:'live', bank:LAD_START, rungs:[] };
         // genera el peldaño de HOY: el pick MÁS CLARO (favorito del modelo, cuota baja). Si no hay → esperamos a mañana.
@@ -678,11 +838,11 @@ async function main(){
             if(pick){
                 const stepN=LADDER.current+1; const newBank=+((LADDER.bank||LADDER.start)*pick.odd).toFixed(2);
                 LADDER.rungs=LADDER.rungs.filter(r=>r.result==='W'||r.result==='L');
-                LADDER.rungs.push({ n:stepN, match:`${TEAMS[pick.m.home].name} – ${TEAMS[pick.m.away].name}`, pick:`Gana ${TEAMS[pick.k==='home'?pick.m.home:pick.m.away].name}`, odd:+pick.odd.toFixed(2), book:pick.book, bank:newBank, result:'today', date:today });
+                LADDER.rungs.push({ n:stepN, match:`${TEAMS[pick.m.home].name} – ${TEAMS[pick.m.away].name}`, pick:`Gana ${TEAMS[pick.k==='home'?pick.m.home:pick.m.away].name}`, odd:+pick.odd.toFixed(2), book:pick.book, bank:newBank, result:'today', date:today,
+                    id:pick.m.id, sport:pick.m._sport, ts:pick.m.ts, side:pick.k, homeName:pick.m._homeName, awayName:pick.m._awayName });
                 for(let i=stepN+1;i<=LADDER.steps;i++) LADDER.rungs.push({ n:i });
             } else { console.log('· reto escalera: sin pick claro hoy, esperamos a mañana'); }
         }
-        LADDER_HISTORY=LADDER_HISTORY.slice(0,12);
         console.log(`· reto escalera: peldaño ${LADDER.current}/${LADDER.steps} · banca ${(LADDER.bank||LADDER.start).toFixed(2)}€`);
     } catch(e){ console.log('· reto escalera error:', e.message); }
 
@@ -692,7 +852,7 @@ async function main(){
         const dayId = today + '·' + c.id;
         // only snapshot combos whose legs are all near-term (real, settle-able) matches
         const settleable = c.legs.every(l => l.id && l.sport);
-        const snap = { dayId, date: today, name: c.name, tier: c.tier, legs: c.legs.map(l=>({ id:l.id, sport:l.sport, side:l.side, match:l.match, pick:l.pick, odd:l.odd })) };
+        const snap = { dayId, date: today, name: c.name, tier: c.tier, legs: c.legs.map(l=>({ id:l.id, sport:l.sport, ts:l.ts, homeName:l.homeName, awayName:l.awayName, side:l.side, match:l.match, pick:l.pick, odd:l.odd })) };
         // skip if same id OR same set of legs+date already tracked (FIREWALL #3)
         if (!settleable || haveCombo.has(dayId) || haveComboSig.has(comboKey(snap))) return;
         COMBO_PENDING.push(snap);
@@ -709,6 +869,7 @@ async function main(){
             ts: new Date(x.m._commence).getTime(),
             date: fmtDay(x.m._commence),
             match: `${TEAMS[x.m.home].name} – ${TEAMS[x.m.away].name}`,
+            homeName: x.m._homeName, awayName: x.m._awayName,   // nombres originales (para buscar el resultado)
             pickKey: x.v.pick.k,
             pickLabel: label(x.m, x.v.pick.k),
             odd: +x.v.pick.best.price.toFixed(2),
@@ -727,29 +888,21 @@ async function main(){
         const a = arbOf(m); if (!a.hasArb) return;
         const inv = a.legs.reduce((s,l)=> s + 1/l.price, 0);
         const profit = +((REF/inv) - REF).toFixed(2);
-        const rec = { id:m.id, sport:m._sport, ts:new Date(m._commence).getTime(), date: fmtDay(m._commence),
+        const rec = { id:m.id, sport:m._sport, ts:new Date(m._commence).getTime(), date: fmtDay(m._commence), homeName:m._homeName, awayName:m._awayName,
             match:`${TEAMS[m.home].name} – ${TEAMS[m.away].name}`, marginPct:+a.marginPct.toFixed(2), profit,
             legs:a.legs.map(l=>({ pick:label(m,l.k), odd:+l.price.toFixed(2), book:l.book })) };
         if (haveArb.has(arbKey(rec))) return;
         ARB_PENDING.push(rec); haveArb.add(arbKey(rec));
     });
-    // Clean the pending list:
-    //  · drop legacy entries with no timestamp (old junk),
-    //  · drop picks registered too far in the future (odds not final yet — e.g. World Cup weeks away),
-    //  · drop stale picks >4 days past kickoff that never settled.
-    const EXPIRY = 4*24*3600*1000;
-    const AHEAD  = WINDOW_HOURS*3600*1000 + 6*3600*1000;
-    PENDING = PENDING.filter(p => p.ts && (p.ts - Date.now()) < AHEAD && (Date.now() - p.ts) < EXPIRY);
-    RECORD = RECORD.slice(0, 60);   // keep the ledger tidy
-    // same housekeeping for combos: drop ones whose last leg is >5 days past and never settled
-    const COMBO_EXPIRY = 5*24*3600*1000;
-    COMBO_PENDING = COMBO_PENDING.filter(c => c.legs.some(l => l.ts && (Date.now() - l.ts) < COMBO_EXPIRY) || c.legs.every(l => !l.ts));
-    COMBO_RECORD = COMBO_RECORD.slice(0, 40);
-    // surebets housekeeping: drop pendings whose match is >4 days past & never settled
-    ARB_PENDING = ARB_PENDING.filter(a => a.ts && (Date.now() - a.ts) < EXPIRY);
-    ARB_RECORD = ARB_RECORD.slice(0, 40);
+    // Historial: NO se borra ni se recorta nada. Lo pendiente se queda en PENDING hasta tener
+    // resultado (W/L) o pasar a anulado (V) con motivo — ver settleAll(). La web decide qué enseña.
+    {
+        const S = { RECORD, COMBO_RECORD, ARB_RECORD };
+        finishState(S);
+        ({ RECORD, COMBO_RECORD, ARB_RECORD } = S);
+    }
     // strip internal fields from matches before writing
-    MATCHES.forEach(m => { delete m._commence; delete m._sport; });
+    MATCHES.forEach(m => { delete m._commence; delete m._sport; delete m._homeName; delete m._awayName; });
 
     // SAFETY NET: if this run found NO upcoming matches (dead season — e.g. early June
     // before the World Cup), do NOT blank the board. Reuse the previous day's matches,
@@ -762,7 +915,8 @@ async function main(){
             const prev = JSON.parse(fs.readFileSync(OUT, 'utf8'));
             if (prev.MATCHES && prev.MATCHES.length) {
                 keepTeams = prev.TEAMS || TEAMS; keepBooks = prev.BOOKS || BOOKS;
-                keepMatches = prev.MATCHES; keepCombos = prev.COMBOS || [];
+                // fuera los que ya han empezado (los que tienen hora); así no se anuncian partidos jugados
+                keepMatches = prev.MATCHES.filter(m => !m.ts || m.ts > Date.now()); keepCombos = prev.COMBOS || [];
                 stale = true;
                 console.log(`  ⚠ sin partidos nuevos → conservo ${keepMatches.length} del día anterior (no vacío el tablero)`);
             }
@@ -771,9 +925,10 @@ async function main(){
 
     const daily = {
         meta: {
-            updatedAt:new Date().toISOString(), source:'the-odds-api', sport:SPORT, regions:REGIONS, market:MARKET,
+            updatedAt:new Date().toISOString(), oddsAt:new Date().toISOString(), settledAt:new Date().toISOString(),
+            source:'the-odds-api', sport:SPORT, regions:REGIONS, market:MARKET,
             matches:keepMatches.length, valuePicks:valued.length, books:Object.keys(keepBooks).length,
-            stale, credits: { remaining: CREDITS.remaining, used: CREDITS.used },
+            stale, credits: CREDITS.remaining != null ? { remaining: CREDITS.remaining, used: CREDITS.used } : ((prevMeta && prevMeta.credits) || { remaining: null, used: null }),
         },
         TEAMS:keepTeams, BOOKS:keepBooks, MATCHES:keepMatches, COMBOS:keepCombos, RECORD, PENDING, COMBO_PENDING, COMBO_RECORD, ARB_RECORD, ARB_PENDING, LADDER, LADDER_HISTORY,
     };

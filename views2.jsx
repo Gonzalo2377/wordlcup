@@ -232,7 +232,7 @@ function Record({ t, go }) {
                                             <td className="l" style={{ color:'var(--text-2)' }}>{x.match}</td>
                                             <td>{odd.toFixed(2)}</td>
                                             <td><Book id={x.book} showName={false} size={20} /></td>
-                                            <td><span className={'res-pill ' + resCls}>{resLbl}</span></td>
+                                            <td><span className={'res-pill ' + resCls} title={x.reason || x.score || ''}>{resLbl}</span></td>
                                             <td className={'profit ' + (p>=0?'pos':'neg')}>{p>=0?'+':''}{p.toFixed(2)}</td>
                                         </tr>
                                     );
@@ -254,31 +254,31 @@ function Record({ t, go }) {
                               </div>
                             ); })()}
                             <div className="grid grid--3">
-                                {window.COMBO_RECORD.map((c,i)=>{
-                                    const won = c.result==='W';
+                                {window.COMBO_RECORD.slice(0, 30).map((c,i)=>{   /* el historial completo está en daily.json; aquí las 30 más recientes */
+                                    const won = c.result==='W', isVoid = c.result==='V';
                                     return (
-                                        <div className="panel" key={i} style={{ borderColor: won?'rgba(39,215,150,.4)':'rgba(255,107,94,.4)', overflow:'hidden' }}>
+                                        <div className="panel" key={i} style={{ borderColor: isVoid?'var(--line)':won?'rgba(39,215,150,.4)':'rgba(255,107,94,.4)', overflow:'hidden' }}>
                                             <div className="combo__head" style={{ borderBottom:'1px solid var(--line)' }}>
                                                 <div>
                                                     <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', letterSpacing:'.1em' }}>{c.date}</div>
                                                     <div style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.05rem' }}>{c.name}</div>
                                                 </div>
-                                                <span className={'res-pill ' + (won?'w':'l')}>{won?t.resW:t.resL}</span>
+                                                <span className={'res-pill ' + (isVoid?'p':won?'w':'l')} title={c.reason || ''}>{isVoid?t.resP:won?t.resW:t.resL}</span>
                                             </div>
                                             <div style={{ padding:'4px 16px' }}>
-                                                {(c.legs||[]).map((l,j)=>(
-                                                    <div key={j} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'9px 0', borderBottom: j<c.legs.length-1?'1px solid var(--line)':'none' }}>
+                                                {(c.legs||[]).map((l,j)=>{ const lv = l.result==='V'; return (
+                                                    <div key={j} title={l.reason || l.score || ''} style={{ display:'flex', alignItems:'center', justifyContent:'space-between', gap:10, padding:'9px 0', borderBottom: j<c.legs.length-1?'1px solid var(--line)':'none' }}>
                                                         <div style={{ minWidth:0 }}>
-                                                            <div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.88rem', color: l.win?'var(--text)':'var(--muted)', textDecoration: l.win?'none':'line-through' }}>{l.pick}</div>
-                                                            <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{l.match}</div>
+                                                            <div style={{ fontFamily:'var(--font-head)', fontWeight:700, fontSize:'.88rem', color: l.win?'var(--text)':'var(--muted)', textDecoration: l.win||lv?'none':'line-through' }}>{l.pick}</div>
+                                                            <div style={{ fontFamily:'var(--font-mono)', fontSize:'.66rem', color:'var(--muted)', whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis' }}>{l.match}{l.score?` · ${l.score}`:''}</div>
                                                         </div>
-                                                        <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.82rem', color: l.win?'var(--green)':'var(--red)' }}>{l.win?'✓':'✗'} {((+l.odd)||0).toFixed(2)}</span>
+                                                        <span style={{ fontFamily:'var(--font-mono)', fontWeight:700, fontSize:'.82rem', color: lv?'var(--muted)':l.win?'var(--green)':'var(--red)' }}>{lv?'–':l.win?'✓':'✗'} {((+l.odd)||0).toFixed(2)}</span>
                                                     </div>
-                                                ))}
+                                                ); })}
                                             </div>
                                             <div className="combo__foot">
                                                 <span style={{ fontFamily:'var(--font-mono)', fontSize:'.72rem', color:'var(--muted)' }}>{t.comboTotal}</span>
-                                                <span style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.1rem', color: won?'var(--green)':'var(--red)' }}>{((+c.totalOdd)||0).toFixed(2)}</span>
+                                                <span style={{ fontFamily:'var(--font-head)', fontWeight:800, fontSize:'1.1rem', color: isVoid?'var(--muted)':won?'var(--green)':'var(--red)' }}>{((+c.totalOdd)||0).toFixed(2)}</span>
                                             </div>
                                         </div>
                                     );
@@ -300,7 +300,7 @@ function Record({ t, go }) {
                                 <table className="vboard">
                                     <thead><tr><th>{t.colDate}</th><th className="l">{t.colMatch}</th><th className="l">{t.colPick}</th><th>{t.arbRecMargin}</th><th>{t.colProfit}</th></tr></thead>
                                     <tbody>
-                                        {window.ARB_RECORD.map((a,i)=>(
+                                        {window.ARB_RECORD.slice(0, 40).map((a,i)=>(
                                             <tr key={i} style={{ cursor:'default' }}>
                                                 <td><span className="vb-time">{a.date}</span></td>
                                                 <td className="l"><span className="vb-match">{a.match}</span></td>

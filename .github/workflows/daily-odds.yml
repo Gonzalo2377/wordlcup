@@ -7,14 +7,31 @@ name: Daily odds robot
 # Si en cambio subes el proyecto con la carpeta "mundial/" dentro, usa el workflow
 # de ../../.github/workflows/daily-odds.yml (rutas con prefijo mundial/).
 
+# CRÉDITOS (plan gratis de The Odds API = 500/mes, se renuevan el día 1):
+#   · cuotas como mucho UNA vez cada 20 h (ODDS_MIN_HOURS). El Worker de Cloudflare
+#     lanza el robot a las 07:00 y este cron también: la ejecución que llegue
+#     después solo liquida resultados con ESPN (0 créditos).
+#   · solo se piden cuotas de competiciones con partidos en la ventana (comprobarlo es gratis)
+#   · 1 crédito por competición (región eu × mercado 1X2); nunca más del cupo diario
+#     que queda hasta fin de mes. Normalmente 2-8 créditos/día ≈ 60-250/mes.
 on:
   schedule:
-    - cron: '00 7 * * *'   # 07:00 UTC (~09:00 Madrid). Minuto "raro" a propósito:
-                            # las horas en punto van saturadas y GitHub retrasa más.
-  workflow_dispatch: {}
+    - cron: '00 7 * * *'   # 07:00 UTC (~09:00 Madrid): cuotas del día (si el Worker no lo ha hecho ya)
+    - cron: '40 22 * * *'  # 22:40 UTC: solo liquidar los partidos del día (gratis)
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Pedir cuotas aunque ya se pidieran hoy (gasta créditos)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
+
+# dos disparos a la vez (Worker + cron) se ponen en cola: el 2.º ve las cuotas del 1.º y no gasta
+concurrency:
+  group: daily-odds
+  cancel-in-progress: false
 
 jobs:
   refresh:
@@ -29,12 +46,17 @@ jobs:
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           # amistosos de selecciones (api-sports.io) — opcional. Si no lo pones, se omiten.
           APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
-          # auto = el robot coge las 12 competiciones ACTIVAS más relevantes
-          # (según el ranking SPORT_PRIORITY del robot: Champions, grandes ligas,
-          # selecciones, Sudamérica...). Cambia ODDS_MAX para coger más o menos.
+          # vacío = lista del robot (Champions, Europa League, 5 grandes ligas, Mundial).
+          # auto = las competiciones ACTIVAS más relevantes (ranking SPORT_PRIORITY).
           # Para fijar competiciones a mano: ODDS_SPORT: soccer_uefa_champs_league,soccer_brazil_campeonato
-          ODDS_SPORT: 
-          ODDS_MAX: '16'
+          ODDS_SPORT:
+          # máximo de competiciones (= créditos) por día. El robot además lo baja solo si
+          # el saldo no llega a fin de mes.
+          ODDS_MAX: '8'
+          ODDS_MIN_HOURS: '20'
+          ODDS_FORCE: ${{ github.event.inputs.force }}
+          # la ejecución de la noche solo liquida
+          ODDS_MODE: ${{ github.event.schedule == '40 22 * * *' && 'scores' || '' }}
           ODDS_REGIONS: eu
           # Ventana de días hacia delante. En temporada normal 48-72h sobra; en
           # temporada muerta (junio, antes del Mundial) súbelo para captar más
