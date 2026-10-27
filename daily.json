@@ -1,8 +1,8 @@
 {
   "meta": {
-    "updatedAt": "2026-10-26T13:54:23.336Z",
-    "oddsAt": "2026-10-26T13:54:23.336Z",
-    "settledAt": "2026-10-27T07:00:33.393Z",
+    "updatedAt": "2026-10-27T12:59:06.237Z",
+    "oddsAt": "2026-10-27T12:59:06.237Z",
+    "settledAt": "2026-10-27T12:59:06.237Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
