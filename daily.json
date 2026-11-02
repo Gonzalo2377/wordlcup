@@ -2,7 +2,7 @@
   "meta": {
     "updatedAt": "2026-11-01T14:03:15.354Z",
     "oddsAt": "2026-11-01T14:03:15.354Z",
-    "settledAt": "2026-11-01T14:03:15.354Z",
+    "settledAt": "2026-11-02T01:48:04.935Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -12,8 +12,8 @@
     "books": 20,
     "stale": false,
     "credits": {
-      "remaining": 495,
-      "used": 5
+      "remaining": 493,
+      "used": 7
     }
   },
   "TEAMS": {
@@ -1887,6 +1887,20 @@
   ],
   "RECORD": [
     {
+      "id": "6a3819cdbe2ba2fe5a3d8f9b4b459965",
+      "sport": "soccer_epl",
+      "ts": 1793550600000,
+      "date": "01 NOV",
+      "pick": "Gana Liverpool",
+      "match": "Liverpool – Arsenal",
+      "odd": 2.98,
+      "book": "betfair",
+      "stake": 1,
+      "result": "L",
+      "score": "0-1",
+      "settledBy": "ESPN"
+    },
+    {
       "id": "09e41b63d1d59bd4d971c54ffce154d3",
       "sport": "soccer_uefa_champs_league",
       "ts": 1791918000000,
@@ -3048,21 +3062,7 @@
       "result": "L"
     }
   ],
-  "PENDING": [
-    {
-      "id": "6a3819cdbe2ba2fe5a3d8f9b4b459965",
-      "sport": "soccer_epl",
-      "ts": 1793550600000,
-      "date": "01 NOV",
-      "match": "Liverpool – Arsenal",
-      "homeName": "Liverpool",
-      "awayName": "Arsenal",
-      "pickKey": "home",
-      "pickLabel": "Gana Liverpool",
-      "odd": 2.98,
-      "book": "betfair"
-    }
-  ],
+  "PENDING": [],
   "COMBO_PENDING": [
     {
       "dayId": "01 NOV·c1",
@@ -9094,6 +9094,206 @@
     }
   ],
   "ARB_RECORD": [
+    {
+      "date": "01 NOV",
+      "match": "Marseille – Toulouse",
+      "marginPct": 0.61,
+      "profit": 0.61,
+      "legs": [
+        {
+          "pick": "Gana Marseille",
+          "odd": 2,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.21,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Toulouse",
+          "odd": 3.9,
+          "book": "onexbet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "01 NOV",
+      "match": "Lyon – Angers",
+      "marginPct": 0.27,
+      "profit": 0.27,
+      "legs": [
+        {
+          "pick": "Gana Lyon",
+          "odd": 1.46,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 5.1,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Angers",
+          "odd": 8.6,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "01 NOV",
+      "match": "Paris FC – Monaco",
+      "marginPct": 0.39,
+      "profit": 0.39,
+      "legs": [
+        {
+          "pick": "Gana Paris FC",
+          "odd": 2.6,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.75,
+          "book": "coolbet"
+        },
+        {
+          "pick": "Gana Monaco",
+          "odd": 2.9,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "01 NOV",
+      "match": "Eintracht Frankfurt – Hamburger SV",
+      "marginPct": 0.55,
+      "profit": 0.55,
+      "legs": [
+        {
+          "pick": "Gana Eintracht Frankfurt",
+          "odd": 1.6,
+          "book": "gtbets"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.93,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Hamburger SV",
+          "odd": 6,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "01 NOV",
+      "match": "Union Berlin – 1. FC Köln",
+      "marginPct": 1.3,
+      "profit": 1.31,
+      "legs": [
+        {
+          "pick": "Gana Union Berlin",
+          "odd": 2.84,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.78,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana 1. FC Köln",
+          "odd": 2.7,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "The Odds API"
+    },
+    {
+      "date": "01 NOV",
+      "match": "Lecce – Genoa",
+      "marginPct": 1.33,
+      "profit": 1.35,
+      "legs": [
+        {
+          "pick": "Gana Lecce",
+          "odd": 3.45,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.13,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Genoa",
+          "odd": 2.65,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "01 NOV",
+      "match": "Elche CF – Valencia",
+      "marginPct": 0.8,
+      "profit": 0.81,
+      "legs": [
+        {
+          "pick": "Gana Elche CF",
+          "odd": 2.48,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.5,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Valencia",
+          "odd": 3.3,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "01 NOV",
+      "match": "Real Racing Club de Santander – Real Madrid",
+      "marginPct": 1.6,
+      "profit": 1.63,
+      "legs": [
+        {
+          "pick": "Gana Real Racing Club de Santander",
+          "odd": 13.5,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 8.6,
+          "book": "matchbook"
+        },
+        {
+          "pick": "Gana Real Madrid",
+          "odd": 1.26,
+          "book": "onexbet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
     {
       "date": "13 OCT",
       "match": "RB Leipzig – PSV",
@@ -16738,62 +16938,6 @@
       ]
     },
     {
-      "id": "6c520ed959578ca3aebe351ee3765d53",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1793546100000,
-      "date": "01 NOV",
-      "homeName": "Real Racing Club de Santander",
-      "awayName": "Real Madrid",
-      "match": "Real Racing Club de Santander – Real Madrid",
-      "marginPct": 1.6,
-      "profit": 1.63,
-      "legs": [
-        {
-          "pick": "Gana Real Racing Club de Santander",
-          "odd": 13.5,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 8.6,
-          "book": "matchbook"
-        },
-        {
-          "pick": "Gana Real Madrid",
-          "odd": 1.26,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "5262991e389930615bec34b642428c93",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1793554200000,
-      "date": "01 NOV",
-      "homeName": "Elche CF",
-      "awayName": "Valencia",
-      "match": "Elche CF – Valencia",
-      "marginPct": 0.8,
-      "profit": 0.81,
-      "legs": [
-        {
-          "pick": "Gana Elche CF",
-          "odd": 2.48,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.5,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Valencia",
-          "odd": 3.3,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
       "id": "7a2cd2744fdf15ea675423a6c23df46b",
       "sport": "soccer_spain_la_liga",
       "ts": 1793649600000,
@@ -16818,34 +16962,6 @@
           "pick": "Gana CA Osasuna",
           "odd": 3.85,
           "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "940b9e69539033539039f9af694e2925",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1793552400000,
-      "date": "01 NOV",
-      "homeName": "Lecce",
-      "awayName": "Genoa",
-      "match": "Lecce – Genoa",
-      "marginPct": 1.33,
-      "profit": 1.35,
-      "legs": [
-        {
-          "pick": "Gana Lecce",
-          "odd": 3.45,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.13,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Genoa",
-          "odd": 2.65,
-          "book": "unibet"
         }
       ]
     },
@@ -16876,146 +16992,6 @@
           "book": "unibet"
         }
       ]
-    },
-    {
-      "id": "60eaeb599578cd5c951f917c4fef06ff",
-      "sport": "soccer_germany_bundesliga",
-      "ts": 1793543400000,
-      "date": "01 NOV",
-      "homeName": "Union Berlin",
-      "awayName": "1. FC Köln",
-      "match": "Union Berlin – 1. FC Köln",
-      "marginPct": 1.3,
-      "profit": 1.31,
-      "legs": [
-        {
-          "pick": "Gana Union Berlin",
-          "odd": 2.84,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.78,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana 1. FC Köln",
-          "odd": 2.7,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "1eb5e1a69ae9dd9edd92fde344308a4e",
-      "sport": "soccer_germany_bundesliga",
-      "ts": 1793550600000,
-      "date": "01 NOV",
-      "homeName": "Eintracht Frankfurt",
-      "awayName": "Hamburger SV",
-      "match": "Eintracht Frankfurt – Hamburger SV",
-      "marginPct": 0.55,
-      "profit": 0.55,
-      "legs": [
-        {
-          "pick": "Gana Eintracht Frankfurt",
-          "odd": 1.6,
-          "book": "gtbets"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.93,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Hamburger SV",
-          "odd": 6,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "cf3a2e2b4a4e9815d1d0be8dcef916da",
-      "sport": "soccer_france_ligue_one",
-      "ts": 1793549700000,
-      "date": "01 NOV",
-      "homeName": "Paris FC",
-      "awayName": "AS Monaco",
-      "match": "Paris FC – Monaco",
-      "marginPct": 0.39,
-      "profit": 0.39,
-      "legs": [
-        {
-          "pick": "Gana Paris FC",
-          "odd": 2.6,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.75,
-          "book": "coolbet"
-        },
-        {
-          "pick": "Gana Monaco",
-          "odd": 2.9,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "961df571fad52d969150e9ced52b16f7",
-      "sport": "soccer_france_ligue_one",
-      "ts": 1793549700000,
-      "date": "01 NOV",
-      "homeName": "Lyon",
-      "awayName": "Angers",
-      "match": "Lyon – Angers",
-      "marginPct": 0.27,
-      "profit": 0.27,
-      "legs": [
-        {
-          "pick": "Gana Lyon",
-          "odd": 1.46,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5.1,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Angers",
-          "odd": 8.6,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "df1e1589c51bbcac432125567d1f7c58",
-      "sport": "soccer_france_ligue_one",
-      "ts": 1793562300000,
-      "date": "01 NOV",
-      "homeName": "Marseille",
-      "awayName": "Toulouse",
-      "match": "Marseille – Toulouse",
-      "marginPct": 0.61,
-      "profit": 0.61,
-      "legs": [
-        {
-          "pick": "Gana Marseille",
-          "odd": 2,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.21,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Toulouse",
-          "odd": 3.9,
-          "book": "onexbet"
-        }
-      ]
     }
   ],
   "LADDER": {
@@ -17023,9 +16999,9 @@
     "start": 10,
     "target": 250,
     "steps": 10,
-    "current": 7,
+    "current": 8,
     "status": "live",
-    "bank": 55.19,
+    "bank": 69.54,
     "rungs": [
       {
         "n": 1,
@@ -17105,14 +17081,15 @@
         "odd": 1.26,
         "book": "onexbet",
         "bank": 69.54,
-        "result": "today",
+        "result": "W",
         "date": "01 NOV",
         "id": "6c520ed959578ca3aebe351ee3765d53",
         "sport": "soccer_spain_la_liga",
         "ts": 1793546100000,
         "side": "away",
         "homeName": "Real Racing Club de Santander",
-        "awayName": "Real Madrid"
+        "awayName": "Real Madrid",
+        "score": "0-3"
       },
       {
         "n": 9
