@@ -2,7 +2,7 @@
   "meta": {
     "updatedAt": "2026-11-02T16:50:20.021Z",
     "oddsAt": "2026-11-02T16:50:20.021Z",
-    "settledAt": "2026-11-02T16:50:20.021Z",
+    "settledAt": "2026-11-03T03:41:57.391Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -3026,181 +3026,6 @@
   ],
   "COMBO_PENDING": [
     {
-      "dayId": "01 NOV·c1",
-      "date": "01 NOV",
-      "name": "Combinada del Día",
-      "tier": "single",
-      "legs": [
-        {
-          "id": "6c520ed959578ca3aebe351ee3765d53",
-          "sport": "soccer_spain_la_liga",
-          "ts": 1793546100000,
-          "homeName": "Real Racing Club de Santander",
-          "awayName": "Real Madrid",
-          "side": "away",
-          "match": "Real Racing Club de Santander – Real Madrid",
-          "pick": "Gana Real Madrid",
-          "odd": 1.26
-        },
-        {
-          "id": "961df571fad52d969150e9ced52b16f7",
-          "sport": "soccer_france_ligue_one",
-          "ts": 1793549700000,
-          "homeName": "Lyon",
-          "awayName": "Angers",
-          "side": "home",
-          "match": "Lyon – Angers",
-          "pick": "Gana Lyon",
-          "odd": 1.46
-        },
-        {
-          "id": "2e488800d615a94e5377c195810303c0",
-          "sport": "soccer_italy_serie_a",
-          "ts": 1793648700000,
-          "homeName": "Atalanta BC",
-          "awayName": "Parma",
-          "side": "home",
-          "match": "Atalanta – Parma",
-          "pick": "Gana Atalanta",
-          "odd": 1.51
-        }
-      ]
-    },
-    {
-      "dayId": "01 NOV·c2",
-      "date": "01 NOV",
-      "name": "Combinada Segura",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "961df571fad52d969150e9ced52b16f7",
-          "sport": "soccer_france_ligue_one",
-          "ts": 1793549700000,
-          "homeName": "Lyon",
-          "awayName": "Angers",
-          "side": "home",
-          "match": "Lyon – Angers",
-          "pick": "Gana Lyon",
-          "odd": 1.46
-        },
-        {
-          "id": "2e488800d615a94e5377c195810303c0",
-          "sport": "soccer_italy_serie_a",
-          "ts": 1793648700000,
-          "homeName": "Atalanta BC",
-          "awayName": "Parma",
-          "side": "home",
-          "match": "Atalanta – Parma",
-          "pick": "Gana Atalanta",
-          "odd": 1.51
-        },
-        {
-          "id": "1eb5e1a69ae9dd9edd92fde344308a4e",
-          "sport": "soccer_germany_bundesliga",
-          "ts": 1793550600000,
-          "homeName": "Eintracht Frankfurt",
-          "awayName": "Hamburger SV",
-          "side": "home",
-          "match": "Eintracht Frankfurt – Hamburger SV",
-          "pick": "Gana Eintracht Frankfurt",
-          "odd": 1.59
-        }
-      ]
-    },
-    {
-      "dayId": "01 NOV·c3",
-      "date": "01 NOV",
-      "name": "Combinada Valor",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "2e488800d615a94e5377c195810303c0",
-          "sport": "soccer_italy_serie_a",
-          "ts": 1793648700000,
-          "homeName": "Atalanta BC",
-          "awayName": "Parma",
-          "side": "home",
-          "match": "Atalanta – Parma",
-          "pick": "Gana Atalanta",
-          "odd": 1.55
-        },
-        {
-          "id": "1eb5e1a69ae9dd9edd92fde344308a4e",
-          "sport": "soccer_germany_bundesliga",
-          "ts": 1793550600000,
-          "homeName": "Eintracht Frankfurt",
-          "awayName": "Hamburger SV",
-          "side": "home",
-          "match": "Eintracht Frankfurt – Hamburger SV",
-          "pick": "Gana Eintracht Frankfurt",
-          "odd": 1.57
-        },
-        {
-          "id": "df1e1589c51bbcac432125567d1f7c58",
-          "sport": "soccer_france_ligue_one",
-          "ts": 1793562300000,
-          "homeName": "Marseille",
-          "awayName": "Toulouse",
-          "side": "home",
-          "match": "Marseille – Toulouse",
-          "pick": "Gana Marseille",
-          "odd": 2
-        }
-      ]
-    },
-    {
-      "dayId": "01 NOV·c4",
-      "date": "01 NOV",
-      "name": "Combinada Larga",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "6c520ed959578ca3aebe351ee3765d53",
-          "sport": "soccer_spain_la_liga",
-          "ts": 1793546100000,
-          "homeName": "Real Racing Club de Santander",
-          "awayName": "Real Madrid",
-          "side": "away",
-          "match": "Real Racing Club de Santander – Real Madrid",
-          "pick": "Gana Real Madrid",
-          "odd": 1.26
-        },
-        {
-          "id": "961df571fad52d969150e9ced52b16f7",
-          "sport": "soccer_france_ligue_one",
-          "ts": 1793549700000,
-          "homeName": "Lyon",
-          "awayName": "Angers",
-          "side": "home",
-          "match": "Lyon – Angers",
-          "pick": "Gana Lyon",
-          "odd": 1.46
-        },
-        {
-          "id": "2e488800d615a94e5377c195810303c0",
-          "sport": "soccer_italy_serie_a",
-          "ts": 1793648700000,
-          "homeName": "Atalanta BC",
-          "awayName": "Parma",
-          "side": "home",
-          "match": "Atalanta – Parma",
-          "pick": "Gana Atalanta",
-          "odd": 1.51
-        },
-        {
-          "id": "1eb5e1a69ae9dd9edd92fde344308a4e",
-          "sport": "soccer_germany_bundesliga",
-          "ts": 1793550600000,
-          "homeName": "Eintracht Frankfurt",
-          "awayName": "Hamburger SV",
-          "side": "home",
-          "match": "Eintracht Frankfurt – Hamburger SV",
-          "pick": "Gana Eintracht Frankfurt",
-          "odd": 1.59
-        }
-      ]
-    },
-    {
       "dayId": "02 NOV·c1",
       "date": "02 NOV",
       "name": "Combinada del Día",
@@ -3377,6 +3202,150 @@
     }
   ],
   "COMBO_RECORD": [
+    {
+      "dayId": "01 NOV·c4",
+      "date": "01 NOV",
+      "name": "Combinada Larga",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Real Racing Club de Santander – Real Madrid",
+          "pick": "Gana Real Madrid",
+          "odd": 1.26,
+          "win": true,
+          "result": "W",
+          "score": "0-3"
+        },
+        {
+          "match": "Lyon – Angers",
+          "pick": "Gana Lyon",
+          "odd": 1.46,
+          "win": true,
+          "result": "W",
+          "score": "2-0"
+        },
+        {
+          "match": "Atalanta – Parma",
+          "pick": "Gana Atalanta",
+          "odd": 1.51,
+          "win": false,
+          "result": "L",
+          "score": "0-3"
+        },
+        {
+          "match": "Eintracht Frankfurt – Hamburger SV",
+          "pick": "Gana Eintracht Frankfurt",
+          "odd": 1.59,
+          "win": true,
+          "result": "W",
+          "score": "3-1"
+        }
+      ],
+      "totalOdd": 4.42,
+      "result": "L"
+    },
+    {
+      "dayId": "01 NOV·c3",
+      "date": "01 NOV",
+      "name": "Combinada Valor",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Atalanta – Parma",
+          "pick": "Gana Atalanta",
+          "odd": 1.55,
+          "win": false,
+          "result": "L",
+          "score": "0-3"
+        },
+        {
+          "match": "Eintracht Frankfurt – Hamburger SV",
+          "pick": "Gana Eintracht Frankfurt",
+          "odd": 1.57,
+          "win": true,
+          "result": "W",
+          "score": "3-1"
+        },
+        {
+          "match": "Marseille – Toulouse",
+          "pick": "Gana Marseille",
+          "odd": 2,
+          "win": true,
+          "result": "W",
+          "score": "2-0"
+        }
+      ],
+      "totalOdd": 4.87,
+      "result": "L"
+    },
+    {
+      "dayId": "01 NOV·c2",
+      "date": "01 NOV",
+      "name": "Combinada Segura",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Lyon – Angers",
+          "pick": "Gana Lyon",
+          "odd": 1.46,
+          "win": true,
+          "result": "W",
+          "score": "2-0"
+        },
+        {
+          "match": "Atalanta – Parma",
+          "pick": "Gana Atalanta",
+          "odd": 1.51,
+          "win": false,
+          "result": "L",
+          "score": "0-3"
+        },
+        {
+          "match": "Eintracht Frankfurt – Hamburger SV",
+          "pick": "Gana Eintracht Frankfurt",
+          "odd": 1.59,
+          "win": true,
+          "result": "W",
+          "score": "3-1"
+        }
+      ],
+      "totalOdd": 3.51,
+      "result": "L"
+    },
+    {
+      "dayId": "01 NOV·c1",
+      "date": "01 NOV",
+      "name": "Combinada del Día",
+      "tier": "single",
+      "legs": [
+        {
+          "match": "Real Racing Club de Santander – Real Madrid",
+          "pick": "Gana Real Madrid",
+          "odd": 1.26,
+          "win": true,
+          "result": "W",
+          "score": "0-3"
+        },
+        {
+          "match": "Lyon – Angers",
+          "pick": "Gana Lyon",
+          "odd": 1.46,
+          "win": true,
+          "result": "W",
+          "score": "2-0"
+        },
+        {
+          "match": "Atalanta – Parma",
+          "pick": "Gana Atalanta",
+          "odd": 1.51,
+          "win": false,
+          "result": "L",
+          "score": "0-3"
+        }
+      ],
+      "totalOdd": 2.78,
+      "result": "L"
+    },
     {
       "dayId": "12 OCT·c4",
       "date": "12 OCT",
@@ -9230,6 +9199,131 @@
     }
   ],
   "ARB_RECORD": [
+    {
+      "date": "02 NOV",
+      "match": "Lorient – Brest",
+      "marginPct": 0.36,
+      "profit": 0.36,
+      "legs": [
+        {
+          "pick": "Gana Lorient",
+          "odd": 2.66,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.3,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Brest",
+          "odd": 3.15,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "02 NOV",
+      "match": "Sassuolo – Fiorentina",
+      "marginPct": 0.76,
+      "profit": 0.76,
+      "legs": [
+        {
+          "pick": "Gana Sassuolo",
+          "odd": 3.05,
+          "book": "matchbook"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.9,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Fiorentina",
+          "odd": 2.45,
+          "book": "onexbet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "02 NOV",
+      "match": "Atalanta – Parma",
+      "marginPct": 0.01,
+      "profit": 0.01,
+      "legs": [
+        {
+          "pick": "Gana Atalanta",
+          "odd": 1.55,
+          "book": "matchbook"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.72,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Parma",
+          "odd": 7,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "02 NOV",
+      "match": "Deportivo La Coruña – CA Osasuna",
+      "marginPct": 0.99,
+      "profit": 1,
+      "legs": [
+        {
+          "pick": "Gana Deportivo La Coruña",
+          "odd": 2.27,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.45,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana CA Osasuna",
+          "odd": 3.85,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "02 NOV",
+      "match": "Newcastle – Everton",
+      "marginPct": 0.35,
+      "profit": 0.35,
+      "legs": [
+        {
+          "pick": "Gana Newcastle",
+          "odd": 2.46,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.74,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Everton",
+          "odd": 3.1,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
     {
       "date": "01 NOV",
       "match": "Marseille – Toulouse",
@@ -17046,90 +17140,6 @@
   ],
   "ARB_PENDING": [
     {
-      "id": "0f552d9c6990c69474f50ff2fb54e9a3",
-      "sport": "soccer_epl",
-      "ts": 1793649600000,
-      "date": "02 NOV",
-      "homeName": "Newcastle United",
-      "awayName": "Everton",
-      "match": "Newcastle – Everton",
-      "marginPct": 0.35,
-      "profit": 0.35,
-      "legs": [
-        {
-          "pick": "Gana Newcastle",
-          "odd": 2.46,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.74,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Everton",
-          "odd": 3.1,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "7a2cd2744fdf15ea675423a6c23df46b",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1793649600000,
-      "date": "02 NOV",
-      "homeName": "Deportivo La Coruña",
-      "awayName": "CA Osasuna",
-      "match": "Deportivo La Coruña – CA Osasuna",
-      "marginPct": 0.99,
-      "profit": 1,
-      "legs": [
-        {
-          "pick": "Gana Deportivo La Coruña",
-          "odd": 2.27,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.45,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana CA Osasuna",
-          "odd": 3.85,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "2e488800d615a94e5377c195810303c0",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1793648700000,
-      "date": "02 NOV",
-      "homeName": "Atalanta BC",
-      "awayName": "Parma",
-      "match": "Atalanta – Parma",
-      "marginPct": 0.01,
-      "profit": 0.01,
-      "legs": [
-        {
-          "pick": "Gana Atalanta",
-          "odd": 1.55,
-          "book": "matchbook"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.72,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Parma",
-          "odd": 7,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
       "id": "9b8076d3ffa027df6f6cb3189de46706",
       "sport": "soccer_uefa_champs_league",
       "ts": 1793727900000,
@@ -17266,62 +17276,6 @@
           "pick": "Gana ŠK Slovan Bratislava",
           "odd": 7.6,
           "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "66608b64d462d1d3deabe573c8456d86",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1793640600000,
-      "date": "02 NOV",
-      "homeName": "Sassuolo",
-      "awayName": "Fiorentina",
-      "match": "Sassuolo – Fiorentina",
-      "marginPct": 0.76,
-      "profit": 0.76,
-      "legs": [
-        {
-          "pick": "Gana Sassuolo",
-          "odd": 3.05,
-          "book": "matchbook"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.9,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Fiorentina",
-          "odd": 2.45,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "5118966f484adf525196d196a61bc5d6",
-      "sport": "soccer_france_ligue_one",
-      "ts": 1793648700000,
-      "date": "02 NOV",
-      "homeName": "Lorient",
-      "awayName": "Brest",
-      "match": "Lorient – Brest",
-      "marginPct": 0.36,
-      "profit": 0.36,
-      "legs": [
-        {
-          "pick": "Gana Lorient",
-          "odd": 2.66,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.3,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Brest",
-          "odd": 3.15,
-          "book": "unibet"
         }
       ]
     }
