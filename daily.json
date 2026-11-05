@@ -2,7 +2,7 @@
   "meta": {
     "updatedAt": "2026-11-04T15:07:21.173Z",
     "oddsAt": "2026-11-04T15:07:21.173Z",
-    "settledAt": "2026-11-04T15:07:21.173Z",
+    "settledAt": "2026-11-05T02:45:03.170Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -2865,6 +2865,48 @@
   ],
   "RECORD": [
     {
+      "id": "6d386ed81fabf67aa19fbd442c0d8c60",
+      "sport": "soccer_uefa_champs_league",
+      "ts": 1793822400000,
+      "date": "04 NOV",
+      "pick": "Gana Borussia Dortmund",
+      "match": "Borussia Dortmund – Real Betis",
+      "odd": 1.81,
+      "book": "betfair",
+      "stake": 1,
+      "result": "W",
+      "score": "2-1",
+      "settledBy": "ESPN"
+    },
+    {
+      "id": "df7d2d81b9e2f3f11c6aeddaee6b7085",
+      "sport": "soccer_uefa_champs_league",
+      "ts": 1793822400000,
+      "date": "04 NOV",
+      "pick": "Gana Manchester City",
+      "match": "RB Leipzig – Manchester City",
+      "odd": 1.58,
+      "book": "onexbet",
+      "stake": 1,
+      "result": "W",
+      "score": "2-3",
+      "settledBy": "ESPN"
+    },
+    {
+      "id": "e901dbcdd6e2255fb24d84032b9d437a",
+      "sport": "soccer_uefa_champs_league",
+      "ts": 1793814300000,
+      "date": "04 NOV",
+      "pick": "Gana Liverpool",
+      "match": "Fenerbahce – Liverpool",
+      "odd": 1.59,
+      "book": "gtbets",
+      "stake": 1,
+      "result": "L",
+      "score": "3-2",
+      "settledBy": "ESPN"
+    },
+    {
       "id": "61b42fd619617a7a2a3770c2444e8a40",
       "sport": "soccer_uefa_champs_league",
       "ts": 1793736000000,
@@ -4084,45 +4126,6 @@
   ],
   "PENDING": [
     {
-      "id": "e901dbcdd6e2255fb24d84032b9d437a",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793814300000,
-      "date": "04 NOV",
-      "match": "Fenerbahce – Liverpool",
-      "homeName": "Fenerbahce",
-      "awayName": "Liverpool",
-      "pickKey": "away",
-      "pickLabel": "Gana Liverpool",
-      "odd": 1.59,
-      "book": "gtbets"
-    },
-    {
-      "id": "df7d2d81b9e2f3f11c6aeddaee6b7085",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793822400000,
-      "date": "04 NOV",
-      "match": "RB Leipzig – Manchester City",
-      "homeName": "RB Leipzig",
-      "awayName": "Manchester City",
-      "pickKey": "away",
-      "pickLabel": "Gana Manchester City",
-      "odd": 1.58,
-      "book": "onexbet"
-    },
-    {
-      "id": "6d386ed81fabf67aa19fbd442c0d8c60",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793822400000,
-      "date": "04 NOV",
-      "match": "Borussia Dortmund – Real Betis",
-      "homeName": "Borussia Dortmund",
-      "awayName": "Real Betis",
-      "pickKey": "home",
-      "pickLabel": "Gana Borussia Dortmund",
-      "odd": 1.81,
-      "book": "betfair"
-    },
-    {
       "id": "e1c3625feeebcd65317e17a4e9a38c4f",
       "sport": "soccer_uefa_europa_league",
       "ts": 1793908800000,
@@ -4150,181 +4153,6 @@
     }
   ],
   "COMBO_PENDING": [
-    {
-      "dayId": "03 NOV·c1",
-      "date": "03 NOV",
-      "name": "Combinada del Día",
-      "tier": "single",
-      "legs": [
-        {
-          "id": "f43ef699c987e112e115f7035114854e",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "AEK Athens",
-          "awayName": "Real Madrid",
-          "side": "away",
-          "match": "AEK Athens – Real Madrid",
-          "pick": "Gana Real Madrid",
-          "odd": 1.29
-        },
-        {
-          "id": "a5910ae3b314876faea7f5c03b8aeaad",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Slavia Praha",
-          "awayName": "Arsenal",
-          "side": "away",
-          "match": "Slavia Praha – Arsenal",
-          "pick": "Gana Arsenal",
-          "odd": 1.32
-        },
-        {
-          "id": "e901dbcdd6e2255fb24d84032b9d437a",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "Fenerbahce",
-          "awayName": "Liverpool",
-          "side": "away",
-          "match": "Fenerbahce – Liverpool",
-          "pick": "Gana Liverpool",
-          "odd": 1.59
-        }
-      ]
-    },
-    {
-      "dayId": "03 NOV·c2",
-      "date": "03 NOV",
-      "name": "Combinada Segura",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "a5910ae3b314876faea7f5c03b8aeaad",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Slavia Praha",
-          "awayName": "Arsenal",
-          "side": "away",
-          "match": "Slavia Praha – Arsenal",
-          "pick": "Gana Arsenal",
-          "odd": 1.32
-        },
-        {
-          "id": "e901dbcdd6e2255fb24d84032b9d437a",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "Fenerbahce",
-          "awayName": "Liverpool",
-          "side": "away",
-          "match": "Fenerbahce – Liverpool",
-          "pick": "Gana Liverpool",
-          "odd": 1.59
-        },
-        {
-          "id": "adf608a0e9be02eb1d8b0a6f464a12b1",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793736000000,
-          "homeName": "LASK",
-          "awayName": "ŠK Slovan Bratislava",
-          "side": "home",
-          "match": "LASK – ŠK Slovan Bratislava",
-          "pick": "Gana LASK",
-          "odd": 1.38
-        }
-      ]
-    },
-    {
-      "dayId": "03 NOV·c3",
-      "date": "03 NOV",
-      "name": "Combinada Valor",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "f6f3cf01c2b20b7f746b5a06097a0569",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793736000000,
-          "homeName": "Feyenoord",
-          "awayName": "Inter Milan",
-          "side": "away",
-          "match": "Feyenoord – Inter",
-          "pick": "Gana Inter",
-          "odd": 1.97
-        },
-        {
-          "id": "a341241606cb5b1b59e425d00be64883",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793736000000,
-          "homeName": "Villarreal",
-          "awayName": "Paris Saint Germain",
-          "side": "away",
-          "match": "Villarreal – PSG",
-          "pick": "Gana PSG",
-          "odd": 1.78
-        },
-        {
-          "id": "6d386ed81fabf67aa19fbd442c0d8c60",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Borussia Dortmund",
-          "awayName": "Real Betis",
-          "side": "home",
-          "match": "Borussia Dortmund – Real Betis",
-          "pick": "Gana Borussia Dortmund",
-          "odd": 1.8
-        }
-      ]
-    },
-    {
-      "dayId": "03 NOV·c4",
-      "date": "03 NOV",
-      "name": "Combinada Larga",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "f43ef699c987e112e115f7035114854e",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "AEK Athens",
-          "awayName": "Real Madrid",
-          "side": "away",
-          "match": "AEK Athens – Real Madrid",
-          "pick": "Gana Real Madrid",
-          "odd": 1.29
-        },
-        {
-          "id": "a5910ae3b314876faea7f5c03b8aeaad",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Slavia Praha",
-          "awayName": "Arsenal",
-          "side": "away",
-          "match": "Slavia Praha – Arsenal",
-          "pick": "Gana Arsenal",
-          "odd": 1.32
-        },
-        {
-          "id": "e901dbcdd6e2255fb24d84032b9d437a",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "Fenerbahce",
-          "awayName": "Liverpool",
-          "side": "away",
-          "match": "Fenerbahce – Liverpool",
-          "pick": "Gana Liverpool",
-          "odd": 1.59
-        },
-        {
-          "id": "adf608a0e9be02eb1d8b0a6f464a12b1",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793736000000,
-          "homeName": "LASK",
-          "awayName": "ŠK Slovan Bratislava",
-          "side": "home",
-          "match": "LASK – ŠK Slovan Bratislava",
-          "pick": "Gana LASK",
-          "odd": 1.38
-        }
-      ]
-    },
     {
       "dayId": "04 NOV·c1",
       "date": "04 NOV",
@@ -4363,88 +4191,6 @@
           "match": "Slavia Praha – Arsenal",
           "pick": "Gana Arsenal",
           "odd": 1.26
-        }
-      ]
-    },
-    {
-      "dayId": "04 NOV·c2",
-      "date": "04 NOV",
-      "name": "Combinada Segura",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "f43ef699c987e112e115f7035114854e",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "AEK Athens",
-          "awayName": "Real Madrid",
-          "side": "away",
-          "match": "AEK Athens – Real Madrid",
-          "pick": "Gana Real Madrid",
-          "odd": 1.27
-        },
-        {
-          "id": "a5910ae3b314876faea7f5c03b8aeaad",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Slavia Praha",
-          "awayName": "Arsenal",
-          "side": "away",
-          "match": "Slavia Praha – Arsenal",
-          "pick": "Gana Arsenal",
-          "odd": 1.26
-        },
-        {
-          "id": "e901dbcdd6e2255fb24d84032b9d437a",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "Fenerbahce",
-          "awayName": "Liverpool",
-          "side": "away",
-          "match": "Fenerbahce – Liverpool",
-          "pick": "Gana Liverpool",
-          "odd": 1.51
-        }
-      ]
-    },
-    {
-      "dayId": "04 NOV·c3",
-      "date": "04 NOV",
-      "name": "Combinada Valor",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "6d386ed81fabf67aa19fbd442c0d8c60",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Borussia Dortmund",
-          "awayName": "Real Betis",
-          "side": "home",
-          "match": "Borussia Dortmund – Real Betis",
-          "pick": "Gana Borussia Dortmund",
-          "odd": 1.75
-        },
-        {
-          "id": "e901dbcdd6e2255fb24d84032b9d437a",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "Fenerbahce",
-          "awayName": "Liverpool",
-          "side": "away",
-          "match": "Fenerbahce – Liverpool",
-          "pick": "Gana Liverpool",
-          "odd": 1.51
-        },
-        {
-          "id": "df7d2d81b9e2f3f11c6aeddaee6b7085",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "RB Leipzig",
-          "awayName": "Manchester City",
-          "side": "away",
-          "match": "RB Leipzig – Manchester City",
-          "pick": "Gana Manchester City",
-          "odd": 1.54
         }
       ]
     },
@@ -4502,6 +4248,218 @@
     }
   ],
   "COMBO_RECORD": [
+    {
+      "dayId": "04 NOV·c3",
+      "date": "04 NOV",
+      "name": "Combinada Valor",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Borussia Dortmund – Real Betis",
+          "pick": "Gana Borussia Dortmund",
+          "odd": 1.75,
+          "win": true,
+          "result": "W",
+          "score": "2-1"
+        },
+        {
+          "match": "Fenerbahce – Liverpool",
+          "pick": "Gana Liverpool",
+          "odd": 1.51,
+          "win": false,
+          "result": "L",
+          "score": "3-2"
+        },
+        {
+          "match": "RB Leipzig – Manchester City",
+          "pick": "Gana Manchester City",
+          "odd": 1.54,
+          "win": true,
+          "result": "W",
+          "score": "2-3"
+        }
+      ],
+      "totalOdd": 4.07,
+      "result": "L"
+    },
+    {
+      "dayId": "04 NOV·c2",
+      "date": "04 NOV",
+      "name": "Combinada Segura",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "AEK Athens – Real Madrid",
+          "pick": "Gana Real Madrid",
+          "odd": 1.27,
+          "win": true,
+          "result": "W",
+          "score": "2-3"
+        },
+        {
+          "match": "Slavia Praha – Arsenal",
+          "pick": "Gana Arsenal",
+          "odd": 1.26,
+          "win": true,
+          "result": "W",
+          "score": "1-2"
+        },
+        {
+          "match": "Fenerbahce – Liverpool",
+          "pick": "Gana Liverpool",
+          "odd": 1.51,
+          "win": false,
+          "result": "L",
+          "score": "3-2"
+        }
+      ],
+      "totalOdd": 2.42,
+      "result": "L"
+    },
+    {
+      "dayId": "03 NOV·c4",
+      "date": "03 NOV",
+      "name": "Combinada Larga",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "AEK Athens – Real Madrid",
+          "pick": "Gana Real Madrid",
+          "odd": 1.29,
+          "win": true,
+          "result": "W",
+          "score": "2-3"
+        },
+        {
+          "match": "Slavia Praha – Arsenal",
+          "pick": "Gana Arsenal",
+          "odd": 1.32,
+          "win": true,
+          "result": "W",
+          "score": "1-2"
+        },
+        {
+          "match": "Fenerbahce – Liverpool",
+          "pick": "Gana Liverpool",
+          "odd": 1.59,
+          "win": false,
+          "result": "L",
+          "score": "3-2"
+        },
+        {
+          "match": "LASK – ŠK Slovan Bratislava",
+          "pick": "Gana LASK",
+          "odd": 1.38,
+          "win": true,
+          "result": "W",
+          "score": "4-0"
+        }
+      ],
+      "totalOdd": 3.74,
+      "result": "L"
+    },
+    {
+      "dayId": "03 NOV·c3",
+      "date": "03 NOV",
+      "name": "Combinada Valor",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Feyenoord – Inter",
+          "pick": "Gana Inter",
+          "odd": 1.97,
+          "win": true,
+          "result": "W",
+          "score": "0-3"
+        },
+        {
+          "match": "Villarreal – PSG",
+          "pick": "Gana PSG",
+          "odd": 1.78,
+          "win": true,
+          "result": "W",
+          "score": "0-6"
+        },
+        {
+          "match": "Borussia Dortmund – Real Betis",
+          "pick": "Gana Borussia Dortmund",
+          "odd": 1.8,
+          "win": true,
+          "result": "W",
+          "score": "2-1"
+        }
+      ],
+      "totalOdd": 6.31,
+      "result": "W"
+    },
+    {
+      "dayId": "03 NOV·c2",
+      "date": "03 NOV",
+      "name": "Combinada Segura",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Slavia Praha – Arsenal",
+          "pick": "Gana Arsenal",
+          "odd": 1.32,
+          "win": true,
+          "result": "W",
+          "score": "1-2"
+        },
+        {
+          "match": "Fenerbahce – Liverpool",
+          "pick": "Gana Liverpool",
+          "odd": 1.59,
+          "win": false,
+          "result": "L",
+          "score": "3-2"
+        },
+        {
+          "match": "LASK – ŠK Slovan Bratislava",
+          "pick": "Gana LASK",
+          "odd": 1.38,
+          "win": true,
+          "result": "W",
+          "score": "4-0"
+        }
+      ],
+      "totalOdd": 2.9,
+      "result": "L"
+    },
+    {
+      "dayId": "03 NOV·c1",
+      "date": "03 NOV",
+      "name": "Combinada del Día",
+      "tier": "single",
+      "legs": [
+        {
+          "match": "AEK Athens – Real Madrid",
+          "pick": "Gana Real Madrid",
+          "odd": 1.29,
+          "win": true,
+          "result": "W",
+          "score": "2-3"
+        },
+        {
+          "match": "Slavia Praha – Arsenal",
+          "pick": "Gana Arsenal",
+          "odd": 1.32,
+          "win": true,
+          "result": "W",
+          "score": "1-2"
+        },
+        {
+          "match": "Fenerbahce – Liverpool",
+          "pick": "Gana Liverpool",
+          "odd": 1.59,
+          "win": false,
+          "result": "L",
+          "score": "3-2"
+        }
+      ],
+      "totalOdd": 2.71,
+      "result": "L"
+    },
     {
       "dayId": "02 NOV·c4",
       "date": "02 NOV",
@@ -10643,6 +10601,206 @@
     }
   ],
   "ARB_RECORD": [
+    {
+      "date": "04 NOV",
+      "match": "Rennes – Olympiakos Piraeus",
+      "marginPct": 1.01,
+      "profit": 1.02,
+      "legs": [
+        {
+          "pick": "Gana Rennes",
+          "odd": 2.25,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.85,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Olympiakos Piraeus",
+          "odd": 3.5,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "04 NOV",
+      "match": "Viking FK – Sabah FK",
+      "marginPct": 0.29,
+      "profit": 0.29,
+      "legs": [
+        {
+          "pick": "Gana Viking FK",
+          "odd": 1.48,
+          "book": "betanysports"
+        },
+        {
+          "pick": "Empate",
+          "odd": 5.6,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Sabah FK",
+          "odd": 7,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "04 NOV",
+      "match": "Porto – Napoli",
+      "marginPct": 1.77,
+      "profit": 1.8,
+      "legs": [
+        {
+          "pick": "Gana Porto",
+          "odd": 2.05,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.9,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Napoli",
+          "odd": 4.2,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "04 NOV",
+      "match": "RC Lens – Como",
+      "marginPct": 0.95,
+      "profit": 0.96,
+      "legs": [
+        {
+          "pick": "Gana RC Lens",
+          "odd": 3.3,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.05,
+          "book": "coolbet"
+        },
+        {
+          "pick": "Gana Como",
+          "odd": 2.27,
+          "book": "onexbet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "04 NOV",
+      "match": "Borussia Dortmund – Real Betis",
+      "marginPct": 1.5,
+      "profit": 1.52,
+      "legs": [
+        {
+          "pick": "Gana Borussia Dortmund",
+          "odd": 1.81,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.3,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Real Betis",
+          "odd": 5,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "04 NOV",
+      "match": "Slavia Praha – Arsenal",
+      "marginPct": 1.75,
+      "profit": 1.78,
+      "legs": [
+        {
+          "pick": "Gana Slavia Praha",
+          "odd": 12.5,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 6.9,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Arsenal",
+          "odd": 1.32,
+          "book": "gtbets"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "04 NOV",
+      "match": "Fenerbahce – Liverpool",
+      "marginPct": 1.72,
+      "profit": 1.75,
+      "legs": [
+        {
+          "pick": "Gana Fenerbahce",
+          "odd": 6.5,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 5,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Liverpool",
+          "odd": 1.59,
+          "book": "gtbets"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "04 NOV",
+      "match": "AEK Athens – Real Madrid",
+      "marginPct": 0.69,
+      "profit": 0.69,
+      "legs": [
+        {
+          "pick": "Gana AEK Athens",
+          "odd": 12.5,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 7.25,
+          "book": "winamax"
+        },
+        {
+          "pick": "Gana Real Madrid",
+          "odd": 1.29,
+          "book": "gtbets"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
     {
       "date": "03 NOV",
       "match": "Villarreal – PSG",
@@ -18758,230 +18916,6 @@
     }
   ],
   "ARB_PENDING": [
-    {
-      "id": "f43ef699c987e112e115f7035114854e",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793814300000,
-      "date": "04 NOV",
-      "homeName": "AEK Athens",
-      "awayName": "Real Madrid",
-      "match": "AEK Athens – Real Madrid",
-      "marginPct": 0.69,
-      "profit": 0.69,
-      "legs": [
-        {
-          "pick": "Gana AEK Athens",
-          "odd": 12.5,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 7.25,
-          "book": "winamax"
-        },
-        {
-          "pick": "Gana Real Madrid",
-          "odd": 1.29,
-          "book": "gtbets"
-        }
-      ]
-    },
-    {
-      "id": "e901dbcdd6e2255fb24d84032b9d437a",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793814300000,
-      "date": "04 NOV",
-      "homeName": "Fenerbahce",
-      "awayName": "Liverpool",
-      "match": "Fenerbahce – Liverpool",
-      "marginPct": 1.72,
-      "profit": 1.75,
-      "legs": [
-        {
-          "pick": "Gana Fenerbahce",
-          "odd": 6.5,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Liverpool",
-          "odd": 1.59,
-          "book": "gtbets"
-        }
-      ]
-    },
-    {
-      "id": "a5910ae3b314876faea7f5c03b8aeaad",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793822400000,
-      "date": "04 NOV",
-      "homeName": "Slavia Praha",
-      "awayName": "Arsenal",
-      "match": "Slavia Praha – Arsenal",
-      "marginPct": 1.75,
-      "profit": 1.78,
-      "legs": [
-        {
-          "pick": "Gana Slavia Praha",
-          "odd": 12.5,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 6.9,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Arsenal",
-          "odd": 1.32,
-          "book": "gtbets"
-        }
-      ]
-    },
-    {
-      "id": "6d386ed81fabf67aa19fbd442c0d8c60",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793822400000,
-      "date": "04 NOV",
-      "homeName": "Borussia Dortmund",
-      "awayName": "Real Betis",
-      "match": "Borussia Dortmund – Real Betis",
-      "marginPct": 1.5,
-      "profit": 1.52,
-      "legs": [
-        {
-          "pick": "Gana Borussia Dortmund",
-          "odd": 1.81,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.3,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Real Betis",
-          "odd": 5,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "013cecbf40f5b4530342632a80f35b00",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793822400000,
-      "date": "04 NOV",
-      "homeName": "RC Lens",
-      "awayName": "Como",
-      "match": "RC Lens – Como",
-      "marginPct": 0.95,
-      "profit": 0.96,
-      "legs": [
-        {
-          "pick": "Gana RC Lens",
-          "odd": 3.3,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.05,
-          "book": "coolbet"
-        },
-        {
-          "pick": "Gana Como",
-          "odd": 2.27,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "ba82ee37f64a66a30d85f8b90082ec2f",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793822400000,
-      "date": "04 NOV",
-      "homeName": "Porto",
-      "awayName": "Napoli",
-      "match": "Porto – Napoli",
-      "marginPct": 1.77,
-      "profit": 1.8,
-      "legs": [
-        {
-          "pick": "Gana Porto",
-          "odd": 2.05,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.9,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Napoli",
-          "odd": 4.2,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "6277e639c064e641265fcb98a0e200b9",
-      "sport": "soccer_uefa_champs_league",
-      "ts": 1793822400000,
-      "date": "04 NOV",
-      "homeName": "Viking FK",
-      "awayName": "Sabah FK",
-      "match": "Viking FK – Sabah FK",
-      "marginPct": 0.29,
-      "profit": 0.29,
-      "legs": [
-        {
-          "pick": "Gana Viking FK",
-          "odd": 1.48,
-          "book": "betanysports"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5.6,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Sabah FK",
-          "odd": 7,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "29ebc4d234c1c6e86ebea07ab9174818",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793806200000,
-      "date": "04 NOV",
-      "homeName": "Rennes",
-      "awayName": "Olympiakos Piraeus",
-      "match": "Rennes – Olympiakos Piraeus",
-      "marginPct": 1.01,
-      "profit": 1.02,
-      "legs": [
-        {
-          "pick": "Gana Rennes",
-          "odd": 2.25,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.85,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Olympiakos Piraeus",
-          "odd": 3.5,
-          "book": "betfair"
-        }
-      ]
-    },
     {
       "id": "cb7170b1b0e68a09be62b7a0fcb8d268",
       "sport": "soccer_uefa_europa_league",
