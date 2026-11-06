@@ -2,7 +2,7 @@
   "meta": {
     "updatedAt": "2026-11-05T15:11:05.069Z",
     "oddsAt": "2026-11-05T15:11:05.070Z",
-    "settledAt": "2026-11-05T15:11:05.070Z",
+    "settledAt": "2026-11-06T02:48:48.200Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -12,8 +12,8 @@
     "books": 21,
     "stale": false,
     "credits": {
-      "remaining": 477,
-      "used": 23
+      "remaining": 475,
+      "used": 25
     }
   },
   "TEAMS": {
@@ -3429,6 +3429,34 @@
   ],
   "RECORD": [
     {
+      "id": "c91f4c9744f6ca502b7986a564e858df",
+      "sport": "soccer_uefa_europa_league",
+      "ts": 1793908800000,
+      "date": "05 NOV",
+      "pick": "Gana Juventus",
+      "match": "AZ Alkmaar – Juventus",
+      "odd": 2.16,
+      "book": "betfair",
+      "stake": 1,
+      "result": "W",
+      "score": "1-2",
+      "settledBy": "ESPN"
+    },
+    {
+      "id": "e1c3625feeebcd65317e17a4e9a38c4f",
+      "sport": "soccer_uefa_europa_league",
+      "ts": 1793908800000,
+      "date": "05 NOV",
+      "pick": "Gana Bayer Leverkusen",
+      "match": "Bayer Leverkusen – Marseille",
+      "odd": 1.41,
+      "book": "onexbet",
+      "stake": 1,
+      "result": "L",
+      "score": "0-1",
+      "settledBy": "ESPN"
+    },
+    {
       "id": "6d386ed81fabf67aa19fbd442c0d8c60",
       "sport": "soccer_uefa_champs_league",
       "ts": 1793822400000,
@@ -4688,128 +4716,8 @@
       "result": "L"
     }
   ],
-  "PENDING": [
-    {
-      "id": "e1c3625feeebcd65317e17a4e9a38c4f",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793908800000,
-      "date": "05 NOV",
-      "match": "Bayer Leverkusen – Marseille",
-      "homeName": "Bayer Leverkusen",
-      "awayName": "Marseille",
-      "pickKey": "home",
-      "pickLabel": "Gana Bayer Leverkusen",
-      "odd": 1.41,
-      "book": "onexbet"
-    },
-    {
-      "id": "c91f4c9744f6ca502b7986a564e858df",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793908800000,
-      "date": "05 NOV",
-      "match": "AZ Alkmaar – Juventus",
-      "homeName": "AZ Alkmaar",
-      "awayName": "Juventus",
-      "pickKey": "away",
-      "pickLabel": "Gana Juventus",
-      "odd": 2.16,
-      "book": "betfair"
-    }
-  ],
+  "PENDING": [],
   "COMBO_PENDING": [
-    {
-      "dayId": "04 NOV·c1",
-      "date": "04 NOV",
-      "name": "Combinada del Día",
-      "tier": "single",
-      "legs": [
-        {
-          "id": "bc4a4cc34a2219d9564b7b0c17ba2934",
-          "sport": "soccer_uefa_europa_league",
-          "ts": 1793908800000,
-          "homeName": "Benfica",
-          "awayName": "Lech Poznań",
-          "side": "home",
-          "match": "Benfica – Lech Poznań",
-          "pick": "Gana Benfica",
-          "odd": 1.17
-        },
-        {
-          "id": "f43ef699c987e112e115f7035114854e",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "AEK Athens",
-          "awayName": "Real Madrid",
-          "side": "away",
-          "match": "AEK Athens – Real Madrid",
-          "pick": "Gana Real Madrid",
-          "odd": 1.27
-        },
-        {
-          "id": "a5910ae3b314876faea7f5c03b8aeaad",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Slavia Praha",
-          "awayName": "Arsenal",
-          "side": "away",
-          "match": "Slavia Praha – Arsenal",
-          "pick": "Gana Arsenal",
-          "odd": 1.26
-        }
-      ]
-    },
-    {
-      "dayId": "04 NOV·c4",
-      "date": "04 NOV",
-      "name": "Combinada Larga",
-      "tier": "all",
-      "legs": [
-        {
-          "id": "bc4a4cc34a2219d9564b7b0c17ba2934",
-          "sport": "soccer_uefa_europa_league",
-          "ts": 1793908800000,
-          "homeName": "Benfica",
-          "awayName": "Lech Poznań",
-          "side": "home",
-          "match": "Benfica – Lech Poznań",
-          "pick": "Gana Benfica",
-          "odd": 1.17
-        },
-        {
-          "id": "f43ef699c987e112e115f7035114854e",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "AEK Athens",
-          "awayName": "Real Madrid",
-          "side": "away",
-          "match": "AEK Athens – Real Madrid",
-          "pick": "Gana Real Madrid",
-          "odd": 1.27
-        },
-        {
-          "id": "a5910ae3b314876faea7f5c03b8aeaad",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793822400000,
-          "homeName": "Slavia Praha",
-          "awayName": "Arsenal",
-          "side": "away",
-          "match": "Slavia Praha – Arsenal",
-          "pick": "Gana Arsenal",
-          "odd": 1.26
-        },
-        {
-          "id": "e901dbcdd6e2255fb24d84032b9d437a",
-          "sport": "soccer_uefa_champs_league",
-          "ts": 1793814300000,
-          "homeName": "Fenerbahce",
-          "awayName": "Liverpool",
-          "side": "away",
-          "match": "Fenerbahce – Liverpool",
-          "pick": "Gana Liverpool",
-          "odd": 1.51
-        }
-      ]
-    },
     {
       "dayId": "05 NOV·c1",
       "date": "05 NOV",
@@ -4987,6 +4895,82 @@
     }
   ],
   "COMBO_RECORD": [
+    {
+      "dayId": "04 NOV·c4",
+      "date": "04 NOV",
+      "name": "Combinada Larga",
+      "tier": "all",
+      "legs": [
+        {
+          "match": "Benfica – Lech Poznań",
+          "pick": "Gana Benfica",
+          "odd": 1.17,
+          "win": true,
+          "result": "W",
+          "score": "3-1"
+        },
+        {
+          "match": "AEK Athens – Real Madrid",
+          "pick": "Gana Real Madrid",
+          "odd": 1.27,
+          "win": true,
+          "result": "W",
+          "score": "2-3"
+        },
+        {
+          "match": "Slavia Praha – Arsenal",
+          "pick": "Gana Arsenal",
+          "odd": 1.26,
+          "win": true,
+          "result": "W",
+          "score": "1-2"
+        },
+        {
+          "match": "Fenerbahce – Liverpool",
+          "pick": "Gana Liverpool",
+          "odd": 1.51,
+          "win": false,
+          "result": "L",
+          "score": "3-2"
+        }
+      ],
+      "totalOdd": 2.83,
+      "result": "L"
+    },
+    {
+      "dayId": "04 NOV·c1",
+      "date": "04 NOV",
+      "name": "Combinada del Día",
+      "tier": "single",
+      "legs": [
+        {
+          "match": "Benfica – Lech Poznań",
+          "pick": "Gana Benfica",
+          "odd": 1.17,
+          "win": true,
+          "result": "W",
+          "score": "3-1"
+        },
+        {
+          "match": "AEK Athens – Real Madrid",
+          "pick": "Gana Real Madrid",
+          "odd": 1.27,
+          "win": true,
+          "result": "W",
+          "score": "2-3"
+        },
+        {
+          "match": "Slavia Praha – Arsenal",
+          "pick": "Gana Arsenal",
+          "odd": 1.26,
+          "win": true,
+          "result": "W",
+          "score": "1-2"
+        }
+      ],
+      "totalOdd": 1.87,
+      "result": "W"
+    },
     {
       "dayId": "04 NOV·c3",
       "date": "04 NOV",
@@ -11340,6 +11324,281 @@
     }
   ],
   "ARB_RECORD": [
+    {
+      "date": "05 NOV",
+      "match": "Torreense – FC Ararat-Armenia",
+      "marginPct": 1.51,
+      "profit": 1.53,
+      "legs": [
+        {
+          "pick": "Gana Torreense",
+          "odd": 1.81,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.99,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana FC Ararat-Armenia",
+          "odd": 5.5,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "Benfica – Lech Poznań",
+      "marginPct": 0.75,
+      "profit": 0.76,
+      "legs": [
+        {
+          "pick": "Gana Benfica",
+          "odd": 1.16,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 11.5,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Lech Poznań",
+          "odd": 23,
+          "book": "nordicbet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "NEC Nijmegen – Omonoia FC",
+      "marginPct": 0.52,
+      "profit": 0.53,
+      "legs": [
+        {
+          "pick": "Gana NEC Nijmegen",
+          "odd": 1.82,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.3,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Omonoia FC",
+          "odd": 4.7,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "The Odds API"
+    },
+    {
+      "date": "05 NOV",
+      "match": "Celta Vigo – Union Saint-Gilloise",
+      "marginPct": 0.07,
+      "profit": 0.07,
+      "legs": [
+        {
+          "pick": "Gana Celta Vigo",
+          "odd": 2.32,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.77,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Union Saint-Gilloise",
+          "odd": 3.3,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "AZ Alkmaar – Juventus",
+      "marginPct": 0.93,
+      "profit": 0.94,
+      "legs": [
+        {
+          "pick": "Gana AZ Alkmaar",
+          "odd": 3.8,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.78,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Juventus",
+          "odd": 2.16,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "Real Sociedad – Lyon",
+      "marginPct": 0.47,
+      "profit": 0.47,
+      "legs": [
+        {
+          "pick": "Gana Real Sociedad",
+          "odd": 1.85,
+          "book": "unibet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.3,
+          "book": "betfair"
+        },
+        {
+          "pick": "Gana Lyon",
+          "odd": 4.5,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "PFC Levski Sofia – Jagiellonia Białystok",
+      "marginPct": 0.07,
+      "profit": 0.07,
+      "legs": [
+        {
+          "pick": "Gana PFC Levski Sofia",
+          "odd": 2.1,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.75,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Jagiellonia Białystok",
+          "odd": 3.9,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "Crystal Palace – TSG Hoffenheim",
+      "marginPct": 0.16,
+      "profit": 0.16,
+      "legs": [
+        {
+          "pick": "Gana Crystal Palace",
+          "odd": 2.02,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.05,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana TSG Hoffenheim",
+          "odd": 3.9,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "Sparta Prague – Bournemouth",
+      "marginPct": 0.36,
+      "profit": 0.36,
+      "legs": [
+        {
+          "pick": "Gana Sparta Prague",
+          "odd": 6.8,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.8,
+          "book": "winamax"
+        },
+        {
+          "pick": "Gana Bournemouth",
+          "odd": 1.56,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "Anderlecht – Salzburg",
+      "marginPct": 0.14,
+      "profit": 0.14,
+      "legs": [
+        {
+          "pick": "Gana Anderlecht",
+          "odd": 2.06,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4,
+          "book": "coolbet"
+        },
+        {
+          "pick": "Gana Salzburg",
+          "odd": 3.8,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "05 NOV",
+      "match": "AC Milan – Ferencváros TC",
+      "marginPct": 2.03,
+      "profit": 2.07,
+      "legs": [
+        {
+          "pick": "Gana AC Milan",
+          "odd": 1.41,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 5.8,
+          "book": "unibet"
+        },
+        {
+          "pick": "Gana Ferencváros TC",
+          "odd": 10.2,
+          "book": "onexbet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
     {
       "date": "04 NOV",
       "match": "Rennes – Olympiakos Piraeus",
@@ -19656,314 +19915,6 @@
   ],
   "ARB_PENDING": [
     {
-      "id": "cb7170b1b0e68a09be62b7a0fcb8d268",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793900700000,
-      "date": "05 NOV",
-      "homeName": "AC Milan",
-      "awayName": "Ferencváros TC",
-      "match": "AC Milan – Ferencváros TC",
-      "marginPct": 2.03,
-      "profit": 2.07,
-      "legs": [
-        {
-          "pick": "Gana AC Milan",
-          "odd": 1.41,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 5.8,
-          "book": "unibet"
-        },
-        {
-          "pick": "Gana Ferencváros TC",
-          "odd": 10.2,
-          "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "9604c5b1c465435911e038db95ab2a7b",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793900700000,
-      "date": "05 NOV",
-      "homeName": "Anderlecht",
-      "awayName": "Salzburg",
-      "match": "Anderlecht – Salzburg",
-      "marginPct": 0.14,
-      "profit": 0.14,
-      "legs": [
-        {
-          "pick": "Gana Anderlecht",
-          "odd": 2.06,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4,
-          "book": "coolbet"
-        },
-        {
-          "pick": "Gana Salzburg",
-          "odd": 3.8,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "d437cbfcee6b57ec58d464e6b459c56e",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793900700000,
-      "date": "05 NOV",
-      "homeName": "Sparta Prague",
-      "awayName": "Bournemouth",
-      "match": "Sparta Prague – Bournemouth",
-      "marginPct": 0.36,
-      "profit": 0.36,
-      "legs": [
-        {
-          "pick": "Gana Sparta Prague",
-          "odd": 6.8,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.8,
-          "book": "winamax"
-        },
-        {
-          "pick": "Gana Bournemouth",
-          "odd": 1.56,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "2347e0e7725940f6a14d5a80601390a5",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793900700000,
-      "date": "05 NOV",
-      "homeName": "Crystal Palace",
-      "awayName": "TSG Hoffenheim",
-      "match": "Crystal Palace – TSG Hoffenheim",
-      "marginPct": 0.16,
-      "profit": 0.16,
-      "legs": [
-        {
-          "pick": "Gana Crystal Palace",
-          "odd": 2.02,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.05,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana TSG Hoffenheim",
-          "odd": 3.9,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "3493023efb0aadbdffe37e74e528177c",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793900700000,
-      "date": "05 NOV",
-      "homeName": "PFC Levski Sofia",
-      "awayName": "Jagiellonia Białystok",
-      "match": "PFC Levski Sofia – Jagiellonia Białystok",
-      "marginPct": 0.07,
-      "profit": 0.07,
-      "legs": [
-        {
-          "pick": "Gana PFC Levski Sofia",
-          "odd": 2.1,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.75,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Jagiellonia Białystok",
-          "odd": 3.9,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "d6ef4964addd663baed90f8f19fda1d3",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793900700000,
-      "date": "05 NOV",
-      "homeName": "Real Sociedad",
-      "awayName": "Lyon",
-      "match": "Real Sociedad – Lyon",
-      "marginPct": 0.47,
-      "profit": 0.47,
-      "legs": [
-        {
-          "pick": "Gana Real Sociedad",
-          "odd": 1.85,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.3,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Lyon",
-          "odd": 4.5,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "c91f4c9744f6ca502b7986a564e858df",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793908800000,
-      "date": "05 NOV",
-      "homeName": "AZ Alkmaar",
-      "awayName": "Juventus",
-      "match": "AZ Alkmaar – Juventus",
-      "marginPct": 0.93,
-      "profit": 0.94,
-      "legs": [
-        {
-          "pick": "Gana AZ Alkmaar",
-          "odd": 3.8,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.78,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Juventus",
-          "odd": 2.16,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "b828d43ba5fa1c8cdd2e34aabea9d0ce",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793908800000,
-      "date": "05 NOV",
-      "homeName": "Celta Vigo",
-      "awayName": "Union Saint-Gilloise",
-      "match": "Celta Vigo – Union Saint-Gilloise",
-      "marginPct": 0.07,
-      "profit": 0.07,
-      "legs": [
-        {
-          "pick": "Gana Celta Vigo",
-          "odd": 2.32,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.77,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Union Saint-Gilloise",
-          "odd": 3.3,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "02228f9f6863e25c9538d6062932e155",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793900700000,
-      "date": "05 NOV",
-      "homeName": "NEC Nijmegen",
-      "awayName": "Omonoia FC",
-      "match": "NEC Nijmegen – Omonoia FC",
-      "marginPct": 0.52,
-      "profit": 0.53,
-      "legs": [
-        {
-          "pick": "Gana NEC Nijmegen",
-          "odd": 1.82,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.3,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Omonoia FC",
-          "odd": 4.7,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
-      "id": "bc4a4cc34a2219d9564b7b0c17ba2934",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793908800000,
-      "date": "05 NOV",
-      "homeName": "Benfica",
-      "awayName": "Lech Poznań",
-      "match": "Benfica – Lech Poznań",
-      "marginPct": 0.75,
-      "profit": 0.76,
-      "legs": [
-        {
-          "pick": "Gana Benfica",
-          "odd": 1.16,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 11.5,
-          "book": "betfair"
-        },
-        {
-          "pick": "Gana Lech Poznań",
-          "odd": 23,
-          "book": "nordicbet"
-        }
-      ]
-    },
-    {
-      "id": "402e102fa845ed84ab7e59b3b17f8c29",
-      "sport": "soccer_uefa_europa_league",
-      "ts": 1793908800000,
-      "date": "05 NOV",
-      "homeName": "Torreense",
-      "awayName": "FC Ararat-Armenia",
-      "match": "Torreense – FC Ararat-Armenia",
-      "marginPct": 1.51,
-      "profit": 1.53,
-      "legs": [
-        {
-          "pick": "Gana Torreense",
-          "odd": 1.81,
-          "book": "unibet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.99,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana FC Ararat-Armenia",
-          "odd": 5.5,
-          "book": "betfair"
-        }
-      ]
-    },
-    {
       "id": "5c87852253fd11eea5d34ad723356607",
       "sport": "soccer_epl",
       "ts": 1794054600000,
@@ -20216,139 +20167,16 @@
       ]
     }
   ],
-  "LADDER": {
-    "id": "Lmto19u7j",
-    "start": 10,
-    "target": 250,
-    "steps": 10,
-    "current": 9,
-    "status": "live",
-    "bank": 89.71,
-    "rungs": [
-      {
-        "n": 1,
-        "match": "Manchester City – Coventry City",
-        "pick": "Gana Manchester City",
-        "odd": 1.18,
-        "book": "onexbet",
-        "bank": 11.8,
-        "result": "W",
-        "date": "05 SEPT"
-      },
-      {
-        "n": 2,
-        "match": "Valencia – Barcelona",
-        "pick": "Gana Barcelona",
-        "odd": 1.31,
-        "book": "betfair",
-        "bank": 15.46,
-        "result": "W",
-        "date": "06 SEPT"
-      },
-      {
-        "n": 3,
-        "match": "Porto – Manchester City",
-        "pick": "Gana Manchester City",
-        "odd": 1.8,
-        "book": "gtbets",
-        "bank": 27.83,
-        "result": "W",
-        "date": "07 SEPT"
-      },
-      {
-        "n": 4,
-        "match": "Bayern Múnich – Bodø/Glimt",
-        "pick": "Gana Bayern Múnich",
-        "odd": 1.16,
-        "book": "gtbets",
-        "bank": 32.28,
-        "result": "W",
-        "date": "09 SEPT"
-      },
-      {
-        "n": 5,
-        "match": "Real Madrid – Rayo Vallecano",
-        "pick": "Gana Real Madrid",
-        "odd": 1.15,
-        "book": "onexbet",
-        "bank": 37.12,
-        "result": "W",
-        "date": "11 SEPT"
-      },
-      {
-        "n": 6,
-        "match": "Elversberg – Bayern Múnich",
-        "pick": "Gana Bayern Múnich",
-        "odd": 1.18,
-        "book": "onexbet",
-        "bank": 43.8,
-        "result": "W",
-        "date": "13 SEPT"
-      },
-      {
-        "n": 7,
-        "match": "Como – Parma",
-        "pick": "Gana Como",
-        "odd": 1.26,
-        "book": "onexbet",
-        "bank": 55.19,
-        "result": "W",
-        "date": "14 SEPT",
-        "score": "2-1"
-      },
-      {
-        "n": 8,
-        "match": "Real Racing Club de Santander – Real Madrid",
-        "pick": "Gana Real Madrid",
-        "odd": 1.26,
-        "book": "onexbet",
-        "bank": 69.54,
-        "result": "W",
-        "date": "01 NOV",
-        "id": "6c520ed959578ca3aebe351ee3765d53",
-        "sport": "soccer_spain_la_liga",
-        "ts": 1793546100000,
-        "side": "away",
-        "homeName": "Real Racing Club de Santander",
-        "awayName": "Real Madrid",
-        "score": "0-3"
-      },
-      {
-        "n": 9,
-        "match": "Barcelona – Aston Villa",
-        "pick": "Gana Barcelona",
-        "odd": 1.29,
-        "book": "gtbets",
-        "bank": 89.71,
-        "result": "W",
-        "date": "02 NOV",
-        "id": "bd680c6ad693dae859030f86e1be2769",
-        "sport": "soccer_uefa_champs_league",
-        "ts": 1793736000000,
-        "side": "home",
-        "homeName": "Barcelona",
-        "awayName": "Aston Villa",
-        "score": "3-0"
-      },
-      {
-        "n": 10,
-        "match": "Benfica – Lech Poznań",
-        "pick": "Gana Benfica",
-        "odd": 1.17,
-        "book": "pinnacle",
-        "bank": 104.96,
-        "result": "today",
-        "date": "04 NOV",
-        "id": "bc4a4cc34a2219d9564b7b0c17ba2934",
-        "sport": "soccer_uefa_europa_league",
-        "ts": 1793908800000,
-        "side": "home",
-        "homeName": "Benfica",
-        "awayName": "Lech Poznań"
-      }
-    ]
-  },
+  "LADDER": null,
   "LADDER_HISTORY": [
+    {
+      "id": "Lmto19u7j",
+      "start": 10,
+      "target": 250,
+      "reached": 104.96,
+      "result": "completed",
+      "date": "04 NOV"
+    },
     {
       "id": "Lmrel6b07",
       "start": 10,
