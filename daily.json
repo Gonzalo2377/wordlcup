@@ -2,7 +2,7 @@
   "meta": {
     "updatedAt": "2026-11-06T14:47:56.692Z",
     "oddsAt": "2026-11-06T14:47:56.692Z",
-    "settledAt": "2026-11-06T14:47:56.692Z",
+    "settledAt": "2026-11-07T02:21:17.742Z",
     "source": "the-odds-api",
     "sport": "soccer_uefa_champs_league,soccer_uefa_europa_league,soccer_spain_la_liga,soccer_epl,soccer_italy_serie_a,soccer_germany_bundesliga,soccer_france_ligue_one,soccer_fifa_world_cup",
     "regions": "eu",
@@ -11885,6 +11885,131 @@
   ],
   "ARB_RECORD": [
     {
+      "date": "06 NOV",
+      "match": "Venezia – Udinese",
+      "marginPct": 1.07,
+      "profit": 1.08,
+      "legs": [
+        {
+          "pick": "Gana Venezia",
+          "odd": 2.37,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.5,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Udinese",
+          "odd": 3.55,
+          "book": "betfair"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "06 NOV",
+      "match": "Everton – Coventry City",
+      "marginPct": 0.92,
+      "profit": 0.93,
+      "legs": [
+        {
+          "pick": "Gana Everton",
+          "odd": 1.74,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4.21,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Coventry City",
+          "odd": 5.6,
+          "book": "matchbook"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "06 NOV",
+      "match": "Toulouse – Strasbourg",
+      "marginPct": 0.53,
+      "profit": 0.54,
+      "legs": [
+        {
+          "pick": "Gana Toulouse",
+          "odd": 2.16,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 4,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Strasbourg",
+          "odd": 3.55,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "06 NOV",
+      "match": "Hamburger SV – Borussia Monchengladbach",
+      "marginPct": 0.55,
+      "profit": 0.55,
+      "legs": [
+        {
+          "pick": "Gana Hamburger SV",
+          "odd": 2.56,
+          "book": "betfair"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.86,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Gana Borussia Monchengladbach",
+          "odd": 2.9,
+          "book": "unibet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
+      "date": "06 NOV",
+      "match": "Sevilla – Alavés",
+      "marginPct": 0.43,
+      "profit": 0.43,
+      "legs": [
+        {
+          "pick": "Gana Sevilla",
+          "odd": 2.05,
+          "book": "onexbet"
+        },
+        {
+          "pick": "Empate",
+          "odd": 3.5,
+          "book": "pinnacle"
+        },
+        {
+          "pick": "Gana Alavés",
+          "odd": 4.5,
+          "book": "coolbet"
+        }
+      ],
+      "result": "W",
+      "settledBy": "ESPN"
+    },
+    {
       "date": "05 NOV",
       "match": "Torreense – FC Ararat-Armenia",
       "marginPct": 1.51,
@@ -20559,62 +20684,6 @@
       ]
     },
     {
-      "id": "9dd0014685fd62d9b2890d7c33a8c9ab",
-      "sport": "soccer_spain_la_liga",
-      "ts": 1793995200000,
-      "date": "06 NOV",
-      "homeName": "Sevilla",
-      "awayName": "Alavés",
-      "match": "Sevilla – Alavés",
-      "marginPct": 0.43,
-      "profit": 0.43,
-      "legs": [
-        {
-          "pick": "Gana Sevilla",
-          "odd": 2.05,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.5,
-          "book": "pinnacle"
-        },
-        {
-          "pick": "Gana Alavés",
-          "odd": 4.5,
-          "book": "coolbet"
-        }
-      ]
-    },
-    {
-      "id": "295076c39e49863cb54db085ac3cd340",
-      "sport": "soccer_germany_bundesliga",
-      "ts": 1793993400000,
-      "date": "06 NOV",
-      "homeName": "Hamburger SV",
-      "awayName": "Borussia Monchengladbach",
-      "match": "Hamburger SV – Borussia Monchengladbach",
-      "marginPct": 0.55,
-      "profit": 0.55,
-      "legs": [
-        {
-          "pick": "Gana Hamburger SV",
-          "odd": 2.56,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.86,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Borussia Monchengladbach",
-          "odd": 2.9,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
       "id": "cdb5f9dd39e79db69659c76cd96d0bbe",
       "sport": "soccer_germany_bundesliga",
       "ts": 1794061800000,
@@ -20695,62 +20764,6 @@
           "pick": "Gana Eintracht Frankfurt",
           "odd": 2.3,
           "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "5e7d141f719835de18877ed95bedcb32",
-      "sport": "soccer_france_ligue_one",
-      "ts": 1793994300000,
-      "date": "06 NOV",
-      "homeName": "Toulouse",
-      "awayName": "Strasbourg",
-      "match": "Toulouse – Strasbourg",
-      "marginPct": 0.53,
-      "profit": 0.54,
-      "legs": [
-        {
-          "pick": "Gana Toulouse",
-          "odd": 2.16,
-          "book": "betfair"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Strasbourg",
-          "odd": 3.55,
-          "book": "unibet"
-        }
-      ]
-    },
-    {
-      "id": "586bec023ee8ac2f0645d963bd2c9d25",
-      "sport": "soccer_epl",
-      "ts": 1793995200000,
-      "date": "06 NOV",
-      "homeName": "Everton",
-      "awayName": "Coventry City",
-      "match": "Everton – Coventry City",
-      "marginPct": 0.92,
-      "profit": 0.93,
-      "legs": [
-        {
-          "pick": "Gana Everton",
-          "odd": 1.74,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 4.21,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Coventry City",
-          "odd": 5.6,
-          "book": "matchbook"
         }
       ]
     },
@@ -20919,34 +20932,6 @@
           "pick": "Gana Real Betis",
           "odd": 2.19,
           "book": "onexbet"
-        }
-      ]
-    },
-    {
-      "id": "fa069801a5c9b49143447a1a1d173fd1",
-      "sport": "soccer_italy_serie_a",
-      "ts": 1793994300000,
-      "date": "06 NOV",
-      "homeName": "Venezia",
-      "awayName": "Udinese",
-      "match": "Venezia – Udinese",
-      "marginPct": 1.07,
-      "profit": 1.08,
-      "legs": [
-        {
-          "pick": "Gana Venezia",
-          "odd": 2.37,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Empate",
-          "odd": 3.5,
-          "book": "onexbet"
-        },
-        {
-          "pick": "Gana Udinese",
-          "odd": 3.55,
-          "book": "betfair"
         }
       ]
     },
